@@ -17,5 +17,15 @@ namespace Environments.Compare
         {
             InitializeComponent();
         }
+
+        private void tsbClose_Click(object sender, EventArgs e)
+        {
+            base.CloseToolPrompt();
+        }
+
+        private void tsbCompare_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
