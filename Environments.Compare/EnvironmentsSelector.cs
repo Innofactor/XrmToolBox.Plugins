@@ -27,12 +27,12 @@
 
             foreach (var connection in new ConnectionManager().ConnectionsList.Connections)
             {
-                var item = new ListViewItem(
+                lvOrganizations.Items.Add(new ListViewItem(
                     new string[] {
                     connection.OrganizationFriendlyName,
                     connection.OrganizationServiceUrl,
                     connection.OrganizationVersion
-                    });
+                }));
             }
         }
 
