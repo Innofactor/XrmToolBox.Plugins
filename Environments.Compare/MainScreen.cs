@@ -7,11 +7,11 @@
     using System.Windows.Forms;
     using XrmToolBox;
 
-    public partial class StartingPoint : PluginBase
+    public partial class MainScreen : PluginBase
     {
         #region Public Constructors
 
-        public StartingPoint()
+        public MainScreen()
         {
             InitializeComponent();
         }
@@ -27,33 +27,33 @@
 
         private void FillOrganizations()
         {
-            lvOrganizations.Items.Clear();
+            //lvOrganizations.Items.Clear();
 
-            foreach (var connection in new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != this.ConnectionDetail.ConnectionId))
-            {
-                var item = new ListViewItem(
-                    new string[] {
-                    connection.OrganizationFriendlyName,
-                    connection.OrganizationServiceUrl,
-                    connection.OrganizationVersion
-                });
-                item.Tag = connection;
+            //foreach (var connection in new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != this.ConnectionDetail.ConnectionId))
+            //{
+            //    var item = new ListViewItem(
+            //        new string[] {
+            //        connection.OrganizationFriendlyName,
+            //        connection.OrganizationServiceUrl,
+            //        connection.OrganizationVersion
+            //    });
+            //    item.Tag = connection;
 
-                lvOrganizations.Items.Add(item);
-            }
+            //    lvOrganizations.Items.Add(item);
+            //}
         }
 
         private void FillReference()
         {
-            if (this.ConnectionDetail != null)
-            {
-                lvReference.Items.Add(new ListViewItem(
-                    new string[] {
-                    this.ConnectionDetail.OrganizationFriendlyName,
-                    this.ConnectionDetail.OrganizationServiceUrl,
-                    this.ConnectionDetail.OrganizationVersion
-                }));
-            }
+            //if (this.ConnectionDetail != null)
+            //{
+            //    lvReference.Items.Add(new ListViewItem(
+            //        new string[] {
+            //        this.ConnectionDetail.OrganizationFriendlyName,
+            //        this.ConnectionDetail.OrganizationServiceUrl,
+            //        this.ConnectionDetail.OrganizationVersion
+            //    }));
+            //}
         }
 
         private void InitializeControls()
@@ -98,8 +98,8 @@
 
         private void ShowOrganizationSelector(bool status)
         {
-            this.gbReference.Visible = status;
-            this.gbOrganizations.Visible = status;
+            //this.gbReference.Visible = status;
+            //this.gbOrganizations.Visible = status;
         }
 
         private void tsbClose_Click(object sender, EventArgs e)
