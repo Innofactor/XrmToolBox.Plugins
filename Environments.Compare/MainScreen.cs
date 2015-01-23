@@ -1,49 +1,39 @@
 ﻿namespace Environments.Compare
 {
+    using McTools.Xrm.Connection;
+    using Microsoft.Xrm.Client;
+    using Microsoft.Xrm.Client.Services;
+    using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Query;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using System.Windows.Forms;
     using XrmToolBox;
 
     public partial class MainScreen : PluginBase
     {
-        #region Public Constructors
-
-        public MainScreen()
-        {
-            InitializeComponent();
-        }
-
-        #endregion Public Constructors
-
         #region Private Methods
 
         private void AddSubControl(Control control)
         {
-            // Removing controls with `true` tag 
-            var controls = this.Controls.Cast<Control>().Where(x => 
-                {
-                    if (x.Tag == null)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        return (bool)x.Tag;
-                    }
-                });
-
-            foreach (var item in controls)
-            {
-                this.Controls.Remove(item);
-            }
+            this.Controls.Remove(this.SubControl);
 
             control.Size = this.Size;
             control.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
-            // SubControls are marked with `true` tag
-            control.Tag = true;
             this.Controls.Add(control);
+
+            this.SubControl = control;
+        }
+
+        private QueryExpression CreateSolutionsQuery()
+        {
+            var query = new QueryExpression("solution");
+            query.Criteria = new FilterExpression();
+            query.Criteria.AddCondition("isvisible", ConditionOperator.Equal, true);
+            query.ColumnSet = new ColumnSet(new string[] { "friendlyname", "version", "ismanaged" });
+            return query;
         }
 
         private void EnvironmentsSelector_Load(object sender, EventArgs e)
@@ -60,20 +50,42 @@
 
         private void LoadSolutionMatrix()
         {
-            this.WorkAsync("Retrieving your user id...",
+            var query = this.CreateSolutionsQuery();
+            var matrix = new Dictionary<string, List<Entity>>();
+            var services = new Dictionary<string, OrganizationService>();
+            services.Add(string.Empty, (OrganizationService)this.Service);
+
+            var result = this.SubControl.Controls.Find("lvOrganizations", true);
+
+            if (result.Length > 0)
+            {
+                var selected = ((ListView)result[0]).Items.Cast<ListViewItem>().Where(x => x.Selected == true).Select(x => (ConnectionDetail)x.Tag).ToList();
+
+                WebRequest.GetSystemWebProxy();
+
+                foreach (var connection in selected)
+                {
+                    services.Add(connection.ConnectionName, new OrganizationService(CrmConnection.Parse(connection.GetOrganizationCrmConnectionString())));
+                }
+            }
+
+            this.WorkAsync("Getting solutions information from environments...",
                 (e) => // Work To Do Asynchronously
                 {
-                    var query = new QueryExpression("solution");
-                    query.Criteria = new FilterExpression();
-                    query.Criteria.AddCondition("isvisible", ConditionOperator.Equal, true);
-                    query.ColumnSet = new ColumnSet(new string[] { "friendlyname", "version", "ismanaged" });
+                    foreach (var service in services)
+                    {
+                        matrix.Add(service.Key, service.Value.RetrieveMultiple(query).Entities.ToList<Entity>());
+                    }
 
-                    e.Result = this.Service.RetrieveMultiple(query).Entities;
+                    e.Result = matrix;
                 },
-                e =>  // Cleanup when work has completed
+                (e) =>  // Cleanup when work has completed
                 {
-                    this.AddSubControl(new CompareSolutions());
+                    var control = new CompareSolutions();
+                    // Execution order is important here, due to rewriting status of tool strip of
+                    // plugin main window
                     this.ShowBackButton(true);
+                    this.AddSubControl(control);
                 }
             );
         }
@@ -102,10 +114,27 @@
 
         private void tsbSelectOrganizations_Click(object sender, EventArgs e)
         {
-            this.AddSubControl(new SelectEnvironments());
+            // Execution order is important here, due to rewriting status of tool strip of plugin
+            // main window
             this.ShowBackButton(false);
+            this.AddSubControl(new SelectEnvironments());
         }
 
         #endregion Private Methods
+
+        #region Public Constructors
+
+        public MainScreen()
+        {
+            InitializeComponent();
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public Control SubControl { get; set; }
+
+        #endregion Public Properties
     }
 }

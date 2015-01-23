@@ -40,6 +40,8 @@
             // 
             // tsMenu
             // 
+            this.tsMenu.AccessibleName = "Menu";
+            this.tsMenu.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuBar;
             this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbClose,
             this.toolStripSeparator1,

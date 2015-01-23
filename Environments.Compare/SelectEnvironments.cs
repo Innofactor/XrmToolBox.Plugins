@@ -45,8 +45,37 @@
                         item.Tag = connection;
                         lvOrganizations.Items.Add(item);
                     }
+
+                    lvOrganizations_ItemSelectionChanged(lvOrganizations, null);
                 }
             };
+        }
+
+        private void lvOrganizations_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            var result1 = this.Parent.Controls.Find("tsMenu", true);
+
+            if (result1.Length > 0)
+            {
+                var menu = (ToolStrip)result1[0];
+                var result2 = menu.Items.Find("tsbCompareSolutions", true);
+
+                if (result2.Length > 0)
+                {
+                    var listView = (ListView)sender;
+
+                    var selected = listView.Items.Cast<ListViewItem>().Where(x => x.Selected == true);
+
+                    if (selected.Count() > 0)
+                    {
+                        result2[0].Enabled = true;
+                    }
+                    else
+                    {
+                        result2[0].Enabled = false;
+                    }
+                }
+            }
         }
     }
 }
