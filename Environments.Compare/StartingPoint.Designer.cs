@@ -1,6 +1,6 @@
 ﻿namespace Environments.Compare
 {
-    partial class SelectEnvironments
+    partial class StartingPoint
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectEnvironments));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartingPoint));
             this.gbReference = new System.Windows.Forms.GroupBox();
             this.lvReference = new System.Windows.Forms.ListView();
             this.chRefOrgName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -41,10 +41,10 @@
             this.chOrgVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
-            this.tsbCompareSolutions = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbSelectOrganizations = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbCompareSolutions = new System.Windows.Forms.ToolStripButton();
             this.gbReference.SuspendLayout();
             this.gbOrganizations.SuspendLayout();
             this.tsMenu.SuspendLayout();
@@ -162,15 +162,6 @@
             this.tsbClose.Text = "Close this tool";
             this.tsbClose.Click += new System.EventHandler(this.tsbClose_Click);
             // 
-            // tsbCompareSolutions
-            // 
-            this.tsbCompareSolutions.Image = ((System.Drawing.Image)(resources.GetObject("tsbCompareSolutions.Image")));
-            this.tsbCompareSolutions.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbCompareSolutions.Name = "tsbCompareSolutions";
-            this.tsbCompareSolutions.Size = new System.Drawing.Size(127, 22);
-            this.tsbCompareSolutions.Text = "Compare solutions";
-            this.tsbCompareSolutions.Click += new System.EventHandler(this.tsbCompareSolutions_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -191,14 +182,23 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // SelectEnvironments
+            // tsbCompareSolutions
+            // 
+            this.tsbCompareSolutions.Image = ((System.Drawing.Image)(resources.GetObject("tsbCompareSolutions.Image")));
+            this.tsbCompareSolutions.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbCompareSolutions.Name = "tsbCompareSolutions";
+            this.tsbCompareSolutions.Size = new System.Drawing.Size(127, 22);
+            this.tsbCompareSolutions.Text = "Compare solutions";
+            this.tsbCompareSolutions.Click += new System.EventHandler(this.tsbCompareSolutions_Click);
+            // 
+            // StartingPoint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tsMenu);
             this.Controls.Add(this.gbOrganizations);
             this.Controls.Add(this.gbReference);
-            this.Name = "SelectEnvironments";
+            this.Name = "StartingPoint";
             this.Size = new System.Drawing.Size(496, 439);
             this.Load += new System.EventHandler(this.EnvironmentsSelector_Load);
             this.gbReference.ResumeLayout(false);

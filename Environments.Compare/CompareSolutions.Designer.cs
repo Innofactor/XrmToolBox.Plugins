@@ -33,9 +33,12 @@
             // 
             // gbCompareSolutions
             // 
+            this.gbCompareSolutions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbCompareSolutions.Location = new System.Drawing.Point(4, 4);
             this.gbCompareSolutions.Name = "gbCompareSolutions";
-            this.gbCompareSolutions.Size = new System.Drawing.Size(761, 471);
+            this.gbCompareSolutions.Size = new System.Drawing.Size(593, 393);
             this.gbCompareSolutions.TabIndex = 0;
             this.gbCompareSolutions.TabStop = false;
             this.gbCompareSolutions.Text = "Compare solutions";
@@ -44,9 +47,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.gbCompareSolutions);
             this.Name = "CompareSolutions";
-            this.Size = new System.Drawing.Size(768, 478);
+            this.Size = new System.Drawing.Size(600, 400);
             this.ResumeLayout(false);
 
         }

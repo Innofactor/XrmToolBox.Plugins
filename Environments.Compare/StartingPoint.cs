@@ -7,11 +7,11 @@
     using System.Windows.Forms;
     using XrmToolBox;
 
-    public partial class SelectEnvironments : PluginBase
+    public partial class StartingPoint : PluginBase
     {
         #region Public Constructors
 
-        public SelectEnvironments()
+        public StartingPoint()
         {
             InitializeComponent();
         }
