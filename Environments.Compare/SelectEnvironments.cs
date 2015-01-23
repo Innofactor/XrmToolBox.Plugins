@@ -41,7 +41,7 @@
             }
         }
 
-        private void LoadRefereceSolutions()
+        private void LoadSolutionMatrix()
         {
             this.WorkAsync("Retrieving your user id...",
                 (e) => // Work To Do Asynchronously
@@ -67,7 +67,7 @@
 
         private void tsbCompare_Click(object sender, EventArgs e)
         {
-            this.LoadRefereceSolutions();
+            this.LoadSolutionMatrix();
         }
 
         #endregion Private Methods

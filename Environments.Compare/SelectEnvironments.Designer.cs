@@ -55,7 +55,7 @@
             this.gbReference.Controls.Add(this.lvReference);
             this.gbReference.Location = new System.Drawing.Point(7, 34);
             this.gbReference.Name = "gbReference";
-            this.gbReference.Size = new System.Drawing.Size(475, 89);
+            this.gbReference.Size = new System.Drawing.Size(486, 89);
             this.gbReference.TabIndex = 8;
             this.gbReference.TabStop = false;
             this.gbReference.Text = "Reference organization";
@@ -71,7 +71,7 @@
             this.chRefVersion});
             this.lvReference.Location = new System.Drawing.Point(7, 20);
             this.lvReference.Name = "lvReference";
-            this.lvReference.Size = new System.Drawing.Size(462, 63);
+            this.lvReference.Size = new System.Drawing.Size(473, 63);
             this.lvReference.TabIndex = 0;
             this.lvReference.UseCompatibleStateImageBehavior = false;
             this.lvReference.View = System.Windows.Forms.View.Details;
@@ -99,7 +99,7 @@
             this.gbOrganizations.Controls.Add(this.lvOrganizations);
             this.gbOrganizations.Location = new System.Drawing.Point(7, 129);
             this.gbOrganizations.Name = "gbOrganizations";
-            this.gbOrganizations.Size = new System.Drawing.Size(475, 290);
+            this.gbOrganizations.Size = new System.Drawing.Size(486, 307);
             this.gbOrganizations.TabIndex = 9;
             this.gbOrganizations.TabStop = false;
             this.gbOrganizations.Text = "Organizations to compare";
@@ -116,7 +116,7 @@
             this.lvOrganizations.FullRowSelect = true;
             this.lvOrganizations.Location = new System.Drawing.Point(6, 19);
             this.lvOrganizations.Name = "lvOrganizations";
-            this.lvOrganizations.Size = new System.Drawing.Size(462, 265);
+            this.lvOrganizations.Size = new System.Drawing.Size(473, 282);
             this.lvOrganizations.TabIndex = 2;
             this.lvOrganizations.UseCompatibleStateImageBehavior = false;
             this.lvOrganizations.View = System.Windows.Forms.View.Details;
