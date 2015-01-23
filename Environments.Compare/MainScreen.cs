@@ -21,6 +21,7 @@
 
         private void AddSubControl(Control control)
         {
+            // Removing controls with `true` tag 
             var controls = this.Controls.Cast<Control>().Where(x => 
                 {
                     if (x.Tag == null)

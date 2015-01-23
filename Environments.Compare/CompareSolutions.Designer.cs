@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.gbCompareSolutions = new System.Windows.Forms.GroupBox();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.gbCompareSolutions.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbCompareSolutions
@@ -36,12 +38,24 @@
             this.gbCompareSolutions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbCompareSolutions.Location = new System.Drawing.Point(4, 4);
+            this.gbCompareSolutions.Controls.Add(this.listView1);
+            this.gbCompareSolutions.Location = new System.Drawing.Point(0, 34);
             this.gbCompareSolutions.Name = "gbCompareSolutions";
-            this.gbCompareSolutions.Size = new System.Drawing.Size(593, 393);
+            this.gbCompareSolutions.Size = new System.Drawing.Size(597, 363);
             this.gbCompareSolutions.TabIndex = 0;
             this.gbCompareSolutions.TabStop = false;
             this.gbCompareSolutions.Text = "Compare solutions";
+            // 
+            // listView1
+            // 
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listView1.Location = new System.Drawing.Point(7, 20);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(584, 337);
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // CompareSolutions
             // 
@@ -51,6 +65,7 @@
             this.Controls.Add(this.gbCompareSolutions);
             this.Name = "CompareSolutions";
             this.Size = new System.Drawing.Size(600, 400);
+            this.gbCompareSolutions.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -58,5 +73,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gbCompareSolutions;
+        private System.Windows.Forms.ListView listView1;
     }
 }

@@ -83,6 +83,7 @@
             // 
             // tsbCompareSolutions
             // 
+            this.tsbCompareSolutions.Enabled = false;
             this.tsbCompareSolutions.Image = ((System.Drawing.Image)(resources.GetObject("tsbCompareSolutions.Image")));
             this.tsbCompareSolutions.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbCompareSolutions.Name = "tsbCompareSolutions";
@@ -90,12 +91,12 @@
             this.tsbCompareSolutions.Text = "Compare solutions";
             this.tsbCompareSolutions.Click += new System.EventHandler(this.tsbCompareSolutions_Click);
             // 
-            // StartingPoint
+            // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tsMenu);
-            this.Name = "StartingPoint";
+            this.Name = "MainScreen";
             this.Size = new System.Drawing.Size(600, 400);
             this.Load += new System.EventHandler(this.EnvironmentsSelector_Load);
             this.tsMenu.ResumeLayout(false);

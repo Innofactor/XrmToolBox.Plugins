@@ -48,9 +48,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbOrganizations.Controls.Add(this.lvOrganizations);
-            this.gbOrganizations.Location = new System.Drawing.Point(3, 129);
+            this.gbOrganizations.Location = new System.Drawing.Point(0, 129);
             this.gbOrganizations.Name = "gbOrganizations";
-            this.gbOrganizations.Size = new System.Drawing.Size(590, 268);
+            this.gbOrganizations.Size = new System.Drawing.Size(597, 268);
             this.gbOrganizations.TabIndex = 11;
             this.gbOrganizations.TabStop = false;
             this.gbOrganizations.Text = "Organizations to compare";
@@ -67,7 +67,7 @@
             this.lvOrganizations.FullRowSelect = true;
             this.lvOrganizations.Location = new System.Drawing.Point(6, 19);
             this.lvOrganizations.Name = "lvOrganizations";
-            this.lvOrganizations.Size = new System.Drawing.Size(577, 243);
+            this.lvOrganizations.Size = new System.Drawing.Size(584, 243);
             this.lvOrganizations.TabIndex = 2;
             this.lvOrganizations.UseCompatibleStateImageBehavior = false;
             this.lvOrganizations.View = System.Windows.Forms.View.Details;
@@ -93,9 +93,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbReference.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.gbReference.Controls.Add(this.lvReference);
-            this.gbReference.Location = new System.Drawing.Point(3, 34);
+            this.gbReference.Location = new System.Drawing.Point(0, 34);
             this.gbReference.Name = "gbReference";
-            this.gbReference.Size = new System.Drawing.Size(590, 89);
+            this.gbReference.Size = new System.Drawing.Size(597, 89);
             this.gbReference.TabIndex = 10;
             this.gbReference.TabStop = false;
             this.gbReference.Text = "Reference organization";
@@ -111,7 +111,7 @@
             this.chRefVersion});
             this.lvReference.Location = new System.Drawing.Point(7, 20);
             this.lvReference.Name = "lvReference";
-            this.lvReference.Size = new System.Drawing.Size(577, 63);
+            this.lvReference.Size = new System.Drawing.Size(584, 63);
             this.lvReference.TabIndex = 0;
             this.lvReference.UseCompatibleStateImageBehavior = false;
             this.lvReference.View = System.Windows.Forms.View.Details;
