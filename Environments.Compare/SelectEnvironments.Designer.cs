@@ -1,6 +1,6 @@
 ﻿namespace Environments.Compare
 {
-    partial class EnvironmentsSelector
+    partial class SelectEnvironments
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,37 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnvironmentsSelector));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectEnvironments));
+            this.gbReference = new System.Windows.Forms.GroupBox();
             this.lvReference = new System.Windows.Forms.ListView();
             this.chRefOrgName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chRefOrgUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chRefVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.gbOrganizations = new System.Windows.Forms.GroupBox();
             this.lvOrganizations = new System.Windows.Forms.ListView();
             this.chOrgName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chOrgUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chOrgVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
             this.tsbCompare = new System.Windows.Forms.ToolStripButton();
-            this.chRefVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chOrgVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gbReference.SuspendLayout();
+            this.gbOrganizations.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // gbReference
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.gbReference.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox1.Controls.Add(this.lvReference);
-            this.groupBox1.Location = new System.Drawing.Point(7, 34);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(475, 89);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Reference Organization";
+            this.gbReference.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.gbReference.Controls.Add(this.lvReference);
+            this.gbReference.Location = new System.Drawing.Point(7, 34);
+            this.gbReference.Name = "gbReference";
+            this.gbReference.Size = new System.Drawing.Size(475, 89);
+            this.gbReference.TabIndex = 8;
+            this.gbReference.TabStop = false;
+            this.gbReference.Text = "Reference organization";
             // 
             // lvReference
             // 
@@ -86,18 +86,23 @@
             this.chRefOrgUrl.Text = "URL";
             this.chRefOrgUrl.Width = 500;
             // 
-            // groupBox2
+            // chRefVersion
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.chRefVersion.Text = "Version";
+            this.chRefVersion.Width = 100;
+            // 
+            // gbOrganizations
+            // 
+            this.gbOrganizations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.lvOrganizations);
-            this.groupBox2.Location = new System.Drawing.Point(7, 129);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(475, 290);
-            this.groupBox2.TabIndex = 9;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Organizations to compare";
+            this.gbOrganizations.Controls.Add(this.lvOrganizations);
+            this.gbOrganizations.Location = new System.Drawing.Point(7, 129);
+            this.gbOrganizations.Name = "gbOrganizations";
+            this.gbOrganizations.Size = new System.Drawing.Size(475, 290);
+            this.gbOrganizations.TabIndex = 9;
+            this.gbOrganizations.TabStop = false;
+            this.gbOrganizations.Text = "Organizations to compare";
             // 
             // lvOrganizations
             // 
@@ -108,6 +113,7 @@
             this.chOrgName,
             this.chOrgUrl,
             this.chOrgVersion});
+            this.lvOrganizations.FullRowSelect = true;
             this.lvOrganizations.Location = new System.Drawing.Point(6, 19);
             this.lvOrganizations.Name = "lvOrganizations";
             this.lvOrganizations.Size = new System.Drawing.Size(462, 265);
@@ -124,6 +130,11 @@
             // 
             this.chOrgUrl.Text = "URL";
             this.chOrgUrl.Width = 500;
+            // 
+            // chOrgVersion
+            // 
+            this.chOrgVersion.Text = "Version";
+            this.chOrgVersion.Width = 100;
             // 
             // toolStrip1
             // 
@@ -154,28 +165,18 @@
             this.tsbCompare.Text = "Compare solutions";
             this.tsbCompare.Click += new System.EventHandler(this.tsbCompare_Click);
             // 
-            // chRefVersion
-            // 
-            this.chRefVersion.Text = "Version";
-            this.chRefVersion.Width = 100;
-            // 
-            // chOrgVersion
-            // 
-            this.chOrgVersion.Text = "Version";
-            this.chOrgVersion.Width = 100;
-            // 
-            // EnvironmentsSelector
+            // SelectEnvironments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Name = "EnvironmentsSelector";
+            this.Controls.Add(this.gbOrganizations);
+            this.Controls.Add(this.gbReference);
+            this.Name = "SelectEnvironments";
             this.Size = new System.Drawing.Size(496, 439);
             this.Load += new System.EventHandler(this.EnvironmentsSelector_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
+            this.gbReference.ResumeLayout(false);
+            this.gbOrganizations.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -185,8 +186,8 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbReference;
+        private System.Windows.Forms.GroupBox gbOrganizations;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbClose;
         private System.Windows.Forms.ToolStripButton tsbCompare;

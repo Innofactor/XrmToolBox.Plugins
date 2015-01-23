@@ -60,11 +60,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnvironmentsSelector.cs">
+    <Compile Include="CompareSolutions.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EnvironmentsSelector.Designer.cs">
-      <DependentUpon>EnvironmentsSelector.cs</DependentUpon>
+    <Compile Include="CompareSolutions.Designer.cs">
+      <DependentUpon>CompareSolutions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectEnvironments.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SelectEnvironments.Designer.cs">
+      <DependentUpon>SelectEnvironments.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -74,8 +80,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EnvironmentsSelector.resx">
-      <DependentUpon>EnvironmentsSelector.cs</DependentUpon>
+    <EmbeddedResource Include="CompareSolutions.resx">
+      <DependentUpon>CompareSolutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectEnvironments.resx">
+      <DependentUpon>SelectEnvironments.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

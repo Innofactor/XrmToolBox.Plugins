@@ -3,10 +3,12 @@
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Sdk.Query;
     using System;
+    using System.Collections.Generic;
     using System.Windows.Forms;
     using XrmToolBox;
+    using System.Linq;
 
-    public partial class EnvironmentsSelector : PluginBase
+    public partial class SelectEnvironments : PluginBase
     {
         #region Private Methods
 
@@ -25,14 +27,17 @@
                 }));
             }
 
-            foreach (var connection in new ConnectionManager().ConnectionsList.Connections)
+            foreach (var connection in new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != this.ConnectionDetail.ConnectionId))
             {
-                lvOrganizations.Items.Add(new ListViewItem(
+                var item = new ListViewItem(
                     new string[] {
                     connection.OrganizationFriendlyName,
                     connection.OrganizationServiceUrl,
                     connection.OrganizationVersion
-                }));
+                });
+                item.Tag = connection;
+
+                lvOrganizations.Items.Add(item);
             }
         }
 
@@ -44,7 +49,7 @@
                     var query = new QueryExpression("solution");
                     query.Criteria = new FilterExpression();
                     query.Criteria.AddCondition("isvisible", ConditionOperator.Equal, true);
-                    query.ColumnSet = new ColumnSet(new string[] { "friendlyname", "version" });
+                    query.ColumnSet = new ColumnSet(new string[] { "friendlyname", "version", "ismanaged" });
 
                     e.Result = this.Service.RetrieveMultiple(query).Entities;
                 },
@@ -69,7 +74,7 @@
 
         #region Public Constructors
 
-        public EnvironmentsSelector()
+        public SelectEnvironments()
         {
             InitializeComponent();
         }
