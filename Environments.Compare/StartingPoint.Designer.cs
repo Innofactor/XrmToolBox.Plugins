@@ -58,7 +58,7 @@
             this.gbReference.Controls.Add(this.lvReference);
             this.gbReference.Location = new System.Drawing.Point(7, 34);
             this.gbReference.Name = "gbReference";
-            this.gbReference.Size = new System.Drawing.Size(486, 89);
+            this.gbReference.Size = new System.Drawing.Size(590, 89);
             this.gbReference.TabIndex = 8;
             this.gbReference.TabStop = false;
             this.gbReference.Text = "Reference organization";
@@ -74,7 +74,7 @@
             this.chRefVersion});
             this.lvReference.Location = new System.Drawing.Point(7, 20);
             this.lvReference.Name = "lvReference";
-            this.lvReference.Size = new System.Drawing.Size(473, 63);
+            this.lvReference.Size = new System.Drawing.Size(577, 63);
             this.lvReference.TabIndex = 0;
             this.lvReference.UseCompatibleStateImageBehavior = false;
             this.lvReference.View = System.Windows.Forms.View.Details;
@@ -102,7 +102,7 @@
             this.gbOrganizations.Controls.Add(this.lvOrganizations);
             this.gbOrganizations.Location = new System.Drawing.Point(7, 129);
             this.gbOrganizations.Name = "gbOrganizations";
-            this.gbOrganizations.Size = new System.Drawing.Size(486, 307);
+            this.gbOrganizations.Size = new System.Drawing.Size(590, 268);
             this.gbOrganizations.TabIndex = 9;
             this.gbOrganizations.TabStop = false;
             this.gbOrganizations.Text = "Organizations to compare";
@@ -119,7 +119,7 @@
             this.lvOrganizations.FullRowSelect = true;
             this.lvOrganizations.Location = new System.Drawing.Point(6, 19);
             this.lvOrganizations.Name = "lvOrganizations";
-            this.lvOrganizations.Size = new System.Drawing.Size(473, 282);
+            this.lvOrganizations.Size = new System.Drawing.Size(577, 243);
             this.lvOrganizations.TabIndex = 2;
             this.lvOrganizations.UseCompatibleStateImageBehavior = false;
             this.lvOrganizations.View = System.Windows.Forms.View.Details;
@@ -149,7 +149,7 @@
             this.tsbCompareSolutions});
             this.tsMenu.Location = new System.Drawing.Point(0, 0);
             this.tsMenu.Name = "tsMenu";
-            this.tsMenu.Size = new System.Drawing.Size(496, 25);
+            this.tsMenu.Size = new System.Drawing.Size(600, 25);
             this.tsMenu.TabIndex = 10;
             this.tsMenu.Text = "toolStrip1";
             // 
@@ -199,7 +199,7 @@
             this.Controls.Add(this.gbOrganizations);
             this.Controls.Add(this.gbReference);
             this.Name = "StartingPoint";
-            this.Size = new System.Drawing.Size(496, 439);
+            this.Size = new System.Drawing.Size(600, 400);
             this.Load += new System.EventHandler(this.EnvironmentsSelector_Load);
             this.gbReference.ResumeLayout(false);
             this.gbOrganizations.ResumeLayout(false);
