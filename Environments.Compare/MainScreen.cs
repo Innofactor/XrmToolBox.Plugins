@@ -9,6 +9,7 @@
 
     public partial class MainScreen : PluginBase
     {
+
         #region Public Constructors
 
         public MainScreen()
@@ -20,48 +21,23 @@
 
         #region Private Methods
 
+        private void AddSubControl(Control control)
+        {
+            control.Size = this.Size;
+            control.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
+            this.Controls.Add(control);
+        }
+
         private void EnvironmentsSelector_Load(object sender, EventArgs e)
         {
             this.InitializeControls();
-        }
-
-        private void FillOrganizations()
-        {
-            //lvOrganizations.Items.Clear();
-
-            //foreach (var connection in new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != this.ConnectionDetail.ConnectionId))
-            //{
-            //    var item = new ListViewItem(
-            //        new string[] {
-            //        connection.OrganizationFriendlyName,
-            //        connection.OrganizationServiceUrl,
-            //        connection.OrganizationVersion
-            //    });
-            //    item.Tag = connection;
-
-            //    lvOrganizations.Items.Add(item);
-            //}
-        }
-
-        private void FillReference()
-        {
-            //if (this.ConnectionDetail != null)
-            //{
-            //    lvReference.Items.Add(new ListViewItem(
-            //        new string[] {
-            //        this.ConnectionDetail.OrganizationFriendlyName,
-            //        this.ConnectionDetail.OrganizationServiceUrl,
-            //        this.ConnectionDetail.OrganizationVersion
-            //    }));
-            //}
         }
 
         private void InitializeControls()
         {
             this.MinimumSize = new System.Drawing.Size(600, 400);
 
-            this.FillReference();
-            this.FillOrganizations();
+            this.AddSubControl(new SelectEnvironments());
         }
 
         private void LoadSolutionMatrix()
@@ -119,5 +95,6 @@
         }
 
         #endregion Private Methods
+
     }
 }
