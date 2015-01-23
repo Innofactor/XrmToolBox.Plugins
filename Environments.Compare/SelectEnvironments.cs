@@ -16,16 +16,13 @@
         {
             this.MinimumSize = new System.Drawing.Size(600, 400);
 
-            // base.ConnectionDetail.
-            if (base.ConnectionDetail != null)
-            {
-                lvReference.Items.Add(new ListViewItem(
-                    new string[] {
-                    this.ConnectionDetail.OrganizationFriendlyName,
-                    this.ConnectionDetail.OrganizationServiceUrl,
-                    this.ConnectionDetail.OrganizationVersion
-                }));
-            }
+            this.FillReference();
+            this.FillOrganizations();
+        }
+
+        private void FillOrganizations()
+        {
+            lvOrganizations.Items.Clear();
 
             foreach (var connection in new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != this.ConnectionDetail.ConnectionId))
             {
@@ -39,6 +36,49 @@
 
                 lvOrganizations.Items.Add(item);
             }
+        }
+
+        private void FillReference()
+        {
+            if (this.ConnectionDetail != null)
+            {
+                lvReference.Items.Add(new ListViewItem(
+                    new string[] {
+                    this.ConnectionDetail.OrganizationFriendlyName,
+                    this.ConnectionDetail.OrganizationServiceUrl,
+                    this.ConnectionDetail.OrganizationVersion
+                }));
+            }
+        }
+
+        private void EnableBack()
+        {
+            var items = this.tsMenu.Items.Cast<ToolStripItem>().Where(x => (x != tsbClose) & (x != tsbSelectOrganizations) & (!x.GetType().Equals(typeof(ToolStripSeparator))));
+
+            foreach (var item in items)
+            {
+                item.Enabled = false;
+            }
+
+            this.tsbSelectOrganizations.Enabled = true;
+        }
+
+        private void DisableBack()
+        {
+            this.tsbSelectOrganizations.Enabled = false;
+            this.tsbCompareSolutions.Enabled = true;
+        }
+
+        private void HideSelector()
+        {
+            this.gbReference.Hide();
+            this.gbOrganizations.Hide();
+        }
+
+        private void ShowSelector()
+        {
+            this.gbReference.Show();
+            this.gbOrganizations.Show();
         }
 
         private void LoadSolutionMatrix()
@@ -55,7 +95,8 @@
                 },
                 e =>  // Cleanup when work has completed
                 {
-                    // MessageBox.Show(string.Format("You are {0}", (Guid)e.Result));
+                    this.HideSelector();
+                    this.EnableBack();
                 }
             );
         }
@@ -65,7 +106,7 @@
             base.CloseToolPrompt();
         }
 
-        private void tsbCompare_Click(object sender, EventArgs e)
+        private void tsbCompareSolutions_Click(object sender, EventArgs e)
         {
             this.LoadSolutionMatrix();
         }
@@ -84,6 +125,11 @@
         private void EnvironmentsSelector_Load(object sender, EventArgs e)
         {
             this.InitializeControls();
+        }
+
+        private void tsbSelectOrganizations_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
