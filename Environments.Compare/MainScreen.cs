@@ -1,6 +1,5 @@
 ﻿namespace Environments.Compare
 {
-    using McTools.Xrm.Connection;
     using Microsoft.Xrm.Sdk.Query;
     using System;
     using System.Linq;
@@ -9,7 +8,6 @@
 
     public partial class MainScreen : PluginBase
     {
-
         #region Public Constructors
 
         public MainScreen()
@@ -23,8 +21,27 @@
 
         private void AddSubControl(Control control)
         {
+            var controls = this.Controls.Cast<Control>().Where(x => 
+                {
+                    if (x.Tag == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return (bool)x.Tag;
+                    }
+                });
+
+            foreach (var item in controls)
+            {
+                this.Controls.Remove(item);
+            }
+
             control.Size = this.Size;
             control.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
+            // SubControls are marked with `true` tag
+            control.Tag = true;
             this.Controls.Add(control);
         }
 
@@ -54,7 +71,7 @@
                 },
                 e =>  // Cleanup when work has completed
                 {
-                    this.ShowOrganizationSelector(false);
+                    this.AddSubControl(new CompareSolutions());
                     this.ShowBackButton(true);
                 }
             );
@@ -72,12 +89,6 @@
             this.tsbSelectOrganizations.Enabled = status;
         }
 
-        private void ShowOrganizationSelector(bool status)
-        {
-            //this.gbReference.Visible = status;
-            //this.gbOrganizations.Visible = status;
-        }
-
         private void tsbClose_Click(object sender, EventArgs e)
         {
             base.CloseToolPrompt();
@@ -90,11 +101,10 @@
 
         private void tsbSelectOrganizations_Click(object sender, EventArgs e)
         {
-            this.ShowOrganizationSelector(true);
+            this.AddSubControl(new SelectEnvironments());
             this.ShowBackButton(false);
         }
 
         #endregion Private Methods
-
     }
 }

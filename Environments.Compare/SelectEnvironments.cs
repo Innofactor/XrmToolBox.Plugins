@@ -21,24 +21,26 @@
 
                     if (parent.ConnectionDetail != null)
                     {
-                        lvReference.Items.Add(new ListViewItem(
-                            new string[] {
-                        parent.ConnectionDetail.OrganizationFriendlyName,
-                        parent.ConnectionDetail.OrganizationServiceUrl,
-                        parent.ConnectionDetail.OrganizationVersion
-                    }));
+                        var row = new string[] {
+                            parent.ConnectionDetail.OrganizationFriendlyName,
+                            parent.ConnectionDetail.OrganizationServiceUrl,
+                            parent.ConnectionDetail.OrganizationVersion
+                        };
+
+                        lvReference.Items.Add(new ListViewItem(row));
                     }
 
                     lvOrganizations.Items.Clear();
 
                     foreach (var connection in new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId))
                     {
-                        var item = new ListViewItem(
-                            new string[] {
-                        connection.OrganizationFriendlyName,
-                        connection.OrganizationServiceUrl,
-                        connection.OrganizationVersion
-                    });
+                        var row = new string[] {
+                            connection.OrganizationFriendlyName,
+                            connection.OrganizationServiceUrl,
+                            connection.OrganizationVersion
+                        };
+
+                        var item = new ListViewItem(row);
 
                         item.Tag = connection;
                         lvOrganizations.Items.Add(item);
