@@ -1,6 +1,6 @@
 ﻿namespace Environments.Compare
 {
-    partial class SelectEnvironments
+    partial class SelectOrganizations
     {
         /// <summary> 
         /// Required designer variable.

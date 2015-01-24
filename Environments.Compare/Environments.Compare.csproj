@@ -66,11 +66,11 @@
     <Compile Include="CompareSolutions.Designer.cs">
       <DependentUpon>CompareSolutions.cs</DependentUpon>
     </Compile>
-    <Compile Include="SelectEnvironments.cs">
+    <Compile Include="SelectOrganizations.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SelectEnvironments.Designer.cs">
-      <DependentUpon>SelectEnvironments.cs</DependentUpon>
+    <Compile Include="SelectOrganizations.Designer.cs">
+      <DependentUpon>SelectOrganizations.cs</DependentUpon>
     </Compile>
     <Compile Include="MainScreen.cs">
       <SubType>UserControl</SubType>
@@ -89,8 +89,8 @@
     <EmbeddedResource Include="CompareSolutions.resx">
       <DependentUpon>CompareSolutions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SelectEnvironments.resx">
-      <DependentUpon>SelectEnvironments.cs</DependentUpon>
+    <EmbeddedResource Include="SelectOrganizations.resx">
+      <DependentUpon>SelectOrganizations.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>

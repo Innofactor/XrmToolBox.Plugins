@@ -64,7 +64,7 @@
         {
             this.MinimumSize = new System.Drawing.Size(600, 400);
 
-            this.AddSubControl(new SelectEnvironments());
+            this.AddSubControl(new SelectOrganizations());
         }
 
         private void LoadSolutionMatrix()
@@ -137,7 +137,7 @@
             // Execution order is important here, due to rewriting status of tool strip of plugin
             // main window
             this.ShowBackButton(false);
-            this.AddSubControl(new SelectEnvironments());
+            this.AddSubControl(new SelectOrganizations());
         }
 
         #endregion Private Methods

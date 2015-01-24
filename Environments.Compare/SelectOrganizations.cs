@@ -5,11 +5,11 @@
     using System.Linq;
     using System.Windows.Forms;
 
-    public partial class SelectEnvironments : UserControl
+    public partial class SelectOrganizations : UserControl
     {
         #region Public Constructors
 
-        public SelectEnvironments()
+        public SelectOrganizations()
         {
             InitializeComponent();
 
