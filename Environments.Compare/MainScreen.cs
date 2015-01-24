@@ -31,6 +31,10 @@
 
         #region Private Methods
 
+        /// <summary>
+        /// Adds subcontrol to the main plugin form
+        /// </summary>
+        /// <param name="control">Control to add</param>
         private void AddSubControl(Control control)
         {
             this.Controls.Remove(this.SubControl);
