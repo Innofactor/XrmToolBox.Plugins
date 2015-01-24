@@ -2,8 +2,8 @@
 {
     using Microsoft.Xrm.Sdk;
     using System.Collections.Generic;
-    using System.Windows.Forms;
     using System.Linq;
+    using System.Windows.Forms;
 
     public partial class CompareSolutions : UserControl
     {
@@ -18,27 +18,26 @@
 
         #region Public Methods
 
-        public void FillWithData(Dictionary<string, List<Entity>> matrix)
+        public void Set(Dictionary<string, Entity[]> matrix)
         {
-            var reference = matrix.First();
-
-            string[] solutions = new string[reference.Value.Count];
-            string[] versions = new string[reference.Value.Count];
-            string[] headers = new string[matrix.Keys.Count + 1];
-            int[] sizes = new int [matrix.Keys.Count + 1];
-
             this.AddListViewHeaders(matrix);
 
-            foreach (var value in reference.Value)
+            foreach (var solution in matrix.First().Value.ToArray<Entity>().Select(x => (string)x.Attributes["friendlyname"]).ToArray<string>())
             {
-                var item = new ListViewItem((string)value.Attributes["friendlyname"]);
-                item.SubItems.Add((string)value.Attributes["version"]);
-                this.lvSolutions.Items.Add(item);
+                var row = new ListViewItem(solution);
+                foreach (var item in matrix)
+                {
+                    row.SubItems.Add(item.Value.Where(x => solution.Equals((string)x.Attributes["friendlyname"])).Select(x => (string)x.Attributes["version"]).FirstOrDefault());
+                }
+                this.lvSolutions.Items.Add(row);
             }
-
         }
 
-        private void AddListViewHeaders(Dictionary<string, List<Entity>> matrix)
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void AddListViewHeaders(Dictionary<string, Entity[]> matrix)
         {
             var header = new ColumnHeader();
             header.Text = "Solution Name / Organization";
@@ -54,6 +53,6 @@
             }
         }
 
-        #endregion Public Methods
+        #endregion Private Methods
     }
 }

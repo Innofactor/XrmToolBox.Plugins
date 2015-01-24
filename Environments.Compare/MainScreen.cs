@@ -57,20 +57,13 @@
 
         private void EnvironmentsSelector_Load(object sender, EventArgs e)
         {
-            this.InitializeControls();
-        }
-
-        private void InitializeControls()
-        {
-            this.MinimumSize = new System.Drawing.Size(600, 400);
-
             this.AddSubControl(new SelectOrganizations());
         }
 
         private void LoadSolutionMatrix()
         {
             var query = this.CreateSolutionsQuery();
-            var matrix = new Dictionary<string, List<Entity>>();
+            var matrix = new Dictionary<string, Entity[]>();
             var services = new Dictionary<string, OrganizationService>();
             services.Add(this.ConnectionDetail.OrganizationFriendlyName, (OrganizationService)this.Service);
 
@@ -93,7 +86,7 @@
                 {
                     foreach (var service in services)
                     {
-                        matrix.Add(service.Key, service.Value.RetrieveMultiple(query).Entities.ToList<Entity>());
+                        matrix.Add(service.Key, service.Value.RetrieveMultiple(query).Entities.ToArray<Entity>());
                     }
 
                     e.Result = matrix;
@@ -101,9 +94,8 @@
                 (e) =>  // Cleanup when work has completed
                 {
                     var control = new CompareSolutions();
-                    control.FillWithData(matrix);
-                    // Execution order is important here, due to rewriting status of tool strip of
-                    // plugin main window
+                    control.Set(matrix);
+                    // Execution order is important here, due to rewriting status of tool strip of plugin main window
                     this.ShowBackButton(true);
                     this.AddSubControl(control);
                 }
@@ -134,8 +126,7 @@
 
         private void tsbSelectOrganizations_Click(object sender, EventArgs e)
         {
-            // Execution order is important here, due to rewriting status of tool strip of plugin
-            // main window
+            // Execution order is important here, due to rewriting status of tool strip of plugin main window
             this.ShowBackButton(false);
             this.AddSubControl(new SelectOrganizations());
         }
