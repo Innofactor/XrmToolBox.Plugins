@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.gbCompareSolutions = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lvSolutions = new System.Windows.Forms.ListView();
             this.gbCompareSolutions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -38,7 +38,7 @@
             this.gbCompareSolutions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbCompareSolutions.Controls.Add(this.listView1);
+            this.gbCompareSolutions.Controls.Add(this.lvSolutions);
             this.gbCompareSolutions.Location = new System.Drawing.Point(0, 34);
             this.gbCompareSolutions.Name = "gbCompareSolutions";
             this.gbCompareSolutions.Size = new System.Drawing.Size(597, 363);
@@ -46,16 +46,17 @@
             this.gbCompareSolutions.TabStop = false;
             this.gbCompareSolutions.Text = "Compare solutions";
             // 
-            // listView1
+            // lvSolutions
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvSolutions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.Location = new System.Drawing.Point(7, 20);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(584, 337);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.lvSolutions.Location = new System.Drawing.Point(7, 20);
+            this.lvSolutions.Name = "lvSolutions";
+            this.lvSolutions.Size = new System.Drawing.Size(584, 337);
+            this.lvSolutions.TabIndex = 0;
+            this.lvSolutions.UseCompatibleStateImageBehavior = false;
+            this.lvSolutions.View = System.Windows.Forms.View.Details;
             // 
             // CompareSolutions
             // 
@@ -73,6 +74,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gbCompareSolutions;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lvSolutions;
     }
 }

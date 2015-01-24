@@ -14,6 +14,21 @@
 
     public partial class MainScreen : PluginBase
     {
+        #region Public Constructors
+
+        public MainScreen()
+        {
+            InitializeComponent();
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public Control SubControl { get; set; }
+
+        #endregion Public Properties
+
         #region Private Methods
 
         private void AddSubControl(Control control)
@@ -53,7 +68,7 @@
             var query = this.CreateSolutionsQuery();
             var matrix = new Dictionary<string, List<Entity>>();
             var services = new Dictionary<string, OrganizationService>();
-            services.Add(string.Empty, (OrganizationService)this.Service);
+            services.Add(this.ConnectionDetail.OrganizationFriendlyName, (OrganizationService)this.Service);
 
             var result = this.SubControl.Controls.Find("lvOrganizations", true);
 
@@ -65,7 +80,7 @@
 
                 foreach (var connection in selected)
                 {
-                    services.Add(connection.ConnectionName, new OrganizationService(CrmConnection.Parse(connection.GetOrganizationCrmConnectionString())));
+                    services.Add(connection.OrganizationFriendlyName, new OrganizationService(CrmConnection.Parse(connection.GetOrganizationCrmConnectionString())));
                 }
             }
 
@@ -82,6 +97,7 @@
                 (e) =>  // Cleanup when work has completed
                 {
                     var control = new CompareSolutions();
+                    control.FillWithData(matrix);
                     // Execution order is important here, due to rewriting status of tool strip of
                     // plugin main window
                     this.ShowBackButton(true);
@@ -121,20 +137,5 @@
         }
 
         #endregion Private Methods
-
-        #region Public Constructors
-
-        public MainScreen()
-        {
-            InitializeComponent();
-        }
-
-        #endregion Public Constructors
-
-        #region Public Properties
-
-        public Control SubControl { get; set; }
-
-        #endregion Public Properties
     }
 }

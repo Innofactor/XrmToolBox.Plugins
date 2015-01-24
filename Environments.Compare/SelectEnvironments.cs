@@ -11,30 +11,32 @@
         {
             InitializeComponent();
 
-            this.ParentChanged += delegate(object sender, EventArgs e)
+            this.ParentChanged += SelectEnvironments_ParentChanged;
+        }
+
+        void SelectEnvironments_ParentChanged(object sender, EventArgs e)
+        {
+            var parent = (MainScreen)this.Parent;
+
+            if (parent != null)
             {
-                var parent = (MainScreen)this.Parent;
+                lvReference.Items.Clear();
 
-                if (parent != null)
+                if (parent.ConnectionDetail != null)
                 {
-                    lvReference.Items.Clear();
+                    var row = new string[] {
+                        parent.ConnectionDetail.OrganizationFriendlyName,
+                        parent.ConnectionDetail.OrganizationServiceUrl,
+                        parent.ConnectionDetail.OrganizationVersion
+                    };
 
-                    if (parent.ConnectionDetail != null)
-                    {
-                        var row = new string[] {
-                            parent.ConnectionDetail.OrganizationFriendlyName,
-                            parent.ConnectionDetail.OrganizationServiceUrl,
-                            parent.ConnectionDetail.OrganizationVersion
-                        };
-
-                        lvReference.Items.Add(new ListViewItem(row));
-                    }
+                    lvReference.Items.Add(new ListViewItem(row));
 
                     lvOrganizations.Items.Clear();
 
                     foreach (var connection in new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId))
                     {
-                        var row = new string[] {
+                        row = new string[] {
                             connection.OrganizationFriendlyName,
                             connection.OrganizationServiceUrl,
                             connection.OrganizationVersion
@@ -45,10 +47,10 @@
                         item.Tag = connection;
                         lvOrganizations.Items.Add(item);
                     }
-
-                    lvOrganizations_ItemSelectionChanged(lvOrganizations, null);
                 }
-            };
+
+                lvOrganizations_ItemSelectionChanged(lvOrganizations, null);
+            }
         }
 
         private void lvOrganizations_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
