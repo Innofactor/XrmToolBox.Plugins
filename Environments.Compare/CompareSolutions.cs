@@ -38,34 +38,46 @@
                     if (i++ == 0)
                     {
                         reference.Add(solution, new Version(version));
+                        row.SubItems.Add(this.CreateCell(null, version));
                     }
-
-                    row.SubItems.Add(this.CreateCell(row, reference[solution], version));
+                    else
+                    {
+                        row.SubItems.Add(this.CreateCell(reference[solution], version));
+                    }
                 }
                 this.lvSolutions.Items.Add(row);
             }
         }
 
-        private ListViewItem.ListViewSubItem CreateCell(ListViewItem row, Version reference, string version)
+        private ListViewItem.ListViewSubItem CreateCell(Version reference, string version)
         {
-            var cell = new ListViewItem.ListViewSubItem(row, version);
+            var cell = new ListViewItem.ListViewSubItem();
+            cell.Text = version;
 
-            if (version != null)
+            // Reference solution
+            if (reference == null)
             {
-                if (reference != new Version(version))
-                {
-                    cell.BackColor = Color.Red;
-                }
-                else
-                {
-                    cell.BackColor = Color.YellowGreen;
-                }
+                cell.BackColor = Color.Orange;
             }
             else
             {
-                cell.BackColor = Color.Gainsboro;
+                // Solution is not present on target system
+                if (version == null)
+                {
+                    cell.BackColor = Color.Gainsboro;
+                }
+                else
+                {
+                    if (reference != new Version(version))
+                    {
+                        cell.BackColor = Color.YellowGreen;
+                    }
+                    else
+                    {
+                        cell.BackColor = Color.Salmon;
+                    }
+                }
             }
-
             return cell;
         }
 

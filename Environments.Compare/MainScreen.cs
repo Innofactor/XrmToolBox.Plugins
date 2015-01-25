@@ -87,7 +87,13 @@
                 {
                     foreach (var service in services)
                     {
-                        matrix.Add(service.Key, service.Value.RetrieveMultiple(query).Entities.ToArray<Entity>());
+                        try
+                        {
+                            matrix.Add(service.Key, service.Value.RetrieveMultiple(query).Entities.ToArray<Entity>());
+                        }
+                        catch (InvalidOperationException ex)
+                        {
+                        }
                     }
 
                     e.Result = matrix;
