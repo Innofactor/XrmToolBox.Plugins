@@ -51,6 +51,7 @@
             var query = new QueryExpression("solution");
             query.Criteria = new FilterExpression();
             query.Criteria.AddCondition("isvisible", ConditionOperator.Equal, true);
+            query.Criteria.AddCondition("uniquename", ConditionOperator.NotEqual, "Default");
             query.ColumnSet = new ColumnSet(new string[] { "friendlyname", "version", "ismanaged" });
             return query;
         }
