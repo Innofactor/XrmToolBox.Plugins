@@ -3,6 +3,7 @@
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Query;
     using System;
+    using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
@@ -17,7 +18,7 @@
         /// <param name="reference"></param>
         /// <param name="version"></param>
         /// <returns></returns>
-        public static ListViewItem.ListViewSubItem CreateCell(Version reference, Version version)
+        public static ListViewItem.ListViewSubItem CreateCell(List<Solution> reference, Solution version)
         {
             var cell = new ListViewItem.ListViewSubItem();
 
@@ -26,23 +27,27 @@
             {
                 cell.Text = version.ToString();
                 cell.BackColor = Color.White;
+                cell.Tag = "Reference version";
             }
             else
             {
+                
                 // Solution is not present on target system
                 if (version == null)
                 {
                     cell.Text = Constants.SOLUTION_NA;
                     cell.ForeColor = Color.LightGray;
                     cell.BackColor = Color.White;
+                    cell.Tag = "Solution is unavailable on the target organization";
                 }
                 else
                 {
                     cell.Text = version.ToString();
                     // Solutioin is the same on both systems
-                    if (reference == version)
+                    if (reference.Exists(x => x.Equals(version)))
                     {
                         cell.BackColor = Color.YellowGreen;
+                        cell.Tag = "Solution is unavailable on the target organization";
                     }
                     else
                     {
@@ -62,33 +67,6 @@
             query.ColumnSet = new ColumnSet(new string[] { Constants.A_UNIQUENAME, Constants.A_FRIENDLYNAME, Constants.A_VERSION, Constants.A_ISMANAGED });
 
             return query;
-        }
-
-        /// <summary>
-        /// Searches for given solution in the collection of solutions in given system
-        /// </summary>
-        /// <param name="solution"></param>
-        /// <param name="collection"></param>
-        /// <returns>Instance of .NET version class</returns>
-        public static Version CreateVersion(string solution, Entity[] collection)
-        {
-            Version version = null;
-
-            try
-            {
-                var text = collection.Where(x => solution.Equals((string)x.Attributes[Constants.A_FRIENDLYNAME])).Select(x => (string)x.Attributes[Constants.A_VERSION]).FirstOrDefault();
-
-                if (text != null)
-                {
-                    version = new Version(text);
-                }
-            }
-            catch (ArgumentException ex)
-            {
-                // Hiding exception, in this case null will be returned
-            }
-
-            return version;
         }
 
         #endregion Public Methods

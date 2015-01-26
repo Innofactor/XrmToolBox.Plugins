@@ -87,6 +87,7 @@
     </Compile>
     <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\Helpers.cs" />
+    <Compile Include="Utils\Solution.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CompareSolutions.resx">

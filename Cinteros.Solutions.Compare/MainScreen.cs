@@ -83,7 +83,7 @@
                         }
                         catch (InvalidOperationException ex)
                         {
-                            // Hiding exception, 
+                            // Hiding exception,
                         }
                     }
 

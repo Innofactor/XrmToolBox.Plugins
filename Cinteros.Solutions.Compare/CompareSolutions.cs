@@ -24,27 +24,28 @@
         {
             this.AddListViewHeaders(matrix);
 
-            foreach (var solution in matrix.First().Value.ToArray<Entity>().Select(x => (string)x.Attributes[Constants.A_FRIENDLYNAME]).ToArray<string>())
+            foreach (var solution in matrix.First().Value.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>())
             {
-                var row = new ListViewItem(solution);
+                var row = new ListViewItem(solution.FriendlyName);
                 row.UseItemStyleForSubItems = false;
 
-                var reference = new Dictionary<string, Version>();
+                var reference = new List<Solution>();
                 var i = 0;
 
                 foreach (var item in matrix)
                 {
-                    var version = Helpers.CreateVersion(solution, item.Value);
+                    var version = item.Value.Where(x => solution.Id.Equals((Guid)x.Attributes[Constants.A_SOLUTIONID])).Select(x => new Solution(x)).FirstOrDefault<Solution>();
 
                     if (i++ == 0)
                     {
-                        reference.Add(solution, version);
-                        row.SubItems.Add(Helpers.CreateCell(null, version));
+                        reference.Add(solution);
+                        row.SubItems.Add(Helpers.CreateCell(null, solution));
                     }
                     else
                     {
-                        row.SubItems.Add(Helpers.CreateCell(reference[solution], version));
+                        row.SubItems.Add(Helpers.CreateCell(reference, solution));
                     }
+                    
                 }
                 this.lvSolutions.Items.Add(row);
             }

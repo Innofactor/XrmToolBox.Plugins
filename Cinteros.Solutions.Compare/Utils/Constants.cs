@@ -7,6 +7,7 @@
         public const string A_FRIENDLYNAME = "friendlyname";
         public const string A_ISMANAGED = "ismanaged";
         public const string A_ISVISIBLE = "isvisible";
+        public const string A_SOLUTIONID = "solutionid";
         public const string A_UNIQUENAME = "uniquename";
         public const string A_VERSION = "version";
         public const string E_SOLUTION = "solution";
