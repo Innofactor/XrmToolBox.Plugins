@@ -2,7 +2,6 @@
 {
     using Cinteros.Solutions.Compare.Utils;
     using McTools.Xrm.Connection;
-    using Microsoft.Xrm.Sdk;
     using System;
     using System.Linq;
     using System.Windows.Forms;
@@ -60,29 +59,35 @@
 
             if (parent != null)
             {
-                parent.WorkAsync(string.Format("Getting solutions information from '{0}'...", parent.ConnectionDetail.OrganizationFriendlyName),
-                    (a) => // Work To Do Asynchronously
-                    {
-                        a.Result = parent.Service.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
-                    },
-                    (a) =>  // Cleanup when work has completed
-                    {
-                        foreach (var solution in (Solution[])a.Result)
-                        {
-                            var row = new string[] {
-                                solution.FriendlyName,
-                                solution.Version.ToString(),
-                            };
-
-                            lvSolutions.Items.Add(new ListViewItem(row));
-                        }
-                    }
-                );
-
-
                 if (parent.ConnectionDetail != null)
                 {
-                    var row = new string[] {
+                    string[] row;
+                    ListViewItem item;
+
+                    parent.WorkAsync(string.Format("Getting solutions information from '{0}'...", parent.ConnectionDetail.OrganizationFriendlyName),
+                        (a) => // Work To Do Asynchronously
+                        {
+                            a.Result = parent.Service.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
+                        },
+                        (a) =>  // Cleanup when work has completed
+                        {
+                            lvSolutions.Items.Clear();
+                            foreach (var solution in (Solution[])a.Result)
+                            {
+                                row = new string[] {
+                                    solution.FriendlyName,
+                                    solution.Version.ToString(),
+                                };
+
+                                item = new ListViewItem(row);
+                                item.Tag = solution;
+
+                                lvSolutions.Items.Add(item);
+                            }
+                        }
+                    );
+
+                    row = new string[] {
                         parent.ConnectionDetail.OrganizationFriendlyName,
                         parent.ConnectionDetail.ServerName,
                     };
@@ -99,7 +104,7 @@
                             connection.ServerName,
                         };
 
-                        var item = new ListViewItem(row);
+                        item = new ListViewItem(row);
                         item.Tag = connection;
 
                         lvOrganizations.Items.Add(item);

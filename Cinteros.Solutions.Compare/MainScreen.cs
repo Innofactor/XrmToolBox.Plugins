@@ -53,20 +53,26 @@
 
         private void LoadSolutionMatrix()
         {
-            var query = Helpers.CreateSolutionsQuery();
-            var matrix = new Dictionary<string, Entity[]>();
+            Solution[] solutions = null;
             var services = new Dictionary<string, OrganizationService>();
             services.Add(this.ConnectionDetail.OrganizationFriendlyName, (OrganizationService)this.Service);
 
-            var result = this.SubControl.Controls.Find("lvOrganizations", true);
+            var result = this.SubControl.Controls.Find("lvSolutions", true);
 
             if (result.Length > 0)
             {
-                var selected = ((ListView)result[0]).Items.Cast<ListViewItem>().Where(x => x.Selected == true).Select(x => (ConnectionDetail)x.Tag).ToList();
+                solutions = ((ListView)result[0]).Items.Cast<ListViewItem>().Where(x => x.Checked == true).Select(x => (Solution)x.Tag).ToArray();
+            }
+
+            result = this.SubControl.Controls.Find("lvOrganizations", true);
+
+            if (result.Length > 0)
+            {
+                var connections = ((ListView)result[0]).Items.Cast<ListViewItem>().Where(x => x.Checked == true).Select(x => (ConnectionDetail)x.Tag).ToList();
 
                 WebRequest.GetSystemWebProxy();
 
-                foreach (var connection in selected)
+                foreach (var connection in connections)
                 {
                     services.Add(connection.OrganizationFriendlyName, new OrganizationService(CrmConnection.Parse(connection.GetOrganizationCrmConnectionString())));
                 }
@@ -75,11 +81,19 @@
             this.WorkAsync("Getting solutions information from organizations...",
                 (e) => // Work To Do Asynchronously
                 {
+                    var query = Helpers.CreateSolutionsQuery();
+                    var matrix = new Dictionary<string, Solution[]>();
+
                     foreach (var service in services)
                     {
                         try
                         {
-                            matrix.Add(service.Key, service.Value.RetrieveMultiple(query).Entities.ToArray<Entity>());
+                            var entities = service.Value.RetrieveMultiple(query).Entities;
+                            var response = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
+                            response = response.Where(x => solutions.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
+                            var res = response.Intersect(solutions).ToArray<Solution>();
+
+                            matrix.Add(service.Key, response);
                         }
                         catch (InvalidOperationException ex)
                         {
@@ -91,12 +105,15 @@
                 },
                 (e) =>  // Cleanup when work has completed
                 {
-                    var control = new CompareSolutions();
-                    control.Set(matrix);
-                    // Execution order is important here, due to rewriting status of tool strip of
-                    // plugin main window
-                    this.ShowBackButton(true);
-                    this.AddSubControl(control);
+                    if (e.Result != null)
+                    {
+                        var control = new CompareSolutions();
+                        control.Set((Dictionary<string, Solution[]>)e.Result);
+                        // Execution order is important here, due to rewriting status of tool strip of
+                        // plugin main window
+                        this.ShowBackButton(true);
+                        this.AddSubControl(control);
+                    }
                 }
             );
         }

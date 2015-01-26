@@ -58,7 +58,7 @@
         {
             if (obj.GetType() == typeof(Solution))
             {
-                return this.Id.Equals(((Solution)obj).Id);
+                return this.UniqueName.Equals(((Solution)obj).UniqueName);
             }
             else
             {

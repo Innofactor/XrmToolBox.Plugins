@@ -20,11 +20,11 @@
 
         #region Public Methods
 
-        public void Set(Dictionary<string, Entity[]> matrix)
+        public void Set(Dictionary<string, Solution[]> matrix)
         {
-            this.AddListViewHeaders(matrix);
+            this.AddListViewHeaders(matrix.Keys.ToArray<string>());
 
-            foreach (var solution in matrix.First().Value.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>())
+            foreach (var solution in matrix.First().Value)
             {
                 var row = new ListViewItem(solution.FriendlyName);
                 row.UseItemStyleForSubItems = false;
@@ -34,7 +34,7 @@
 
                 foreach (var item in matrix)
                 {
-                    var current = item.Value.Where(x => solution.UniqueName.Equals((string)x.Attributes[Constants.A_UNIQUENAME])).Select(x => new Solution(x)).FirstOrDefault<Solution>();
+                    var current = item.Value.Where(x => solution.UniqueName.Equals(x.UniqueName)).FirstOrDefault<Solution>();
 
                     if (i++ == 0)
                     {
@@ -55,17 +55,17 @@
 
         #region Private Methods
 
-        private void AddListViewHeaders(Dictionary<string, Entity[]> matrix)
+        private void AddListViewHeaders(string[] headers)
         {
             var header = new ColumnHeader();
             header.Text = Constants.HEADER_MAINTEXT;
             header.Width = Constants.HEADER_MAINWIDTH;
             this.lvSolutions.Columns.Add(header);
 
-            foreach (var key in matrix.Keys)
+            foreach (var text in headers)
             {
                 header = new ColumnHeader();
-                header.Text = key;
+                header.Text = text;
                 header.Width = 150;
                 this.lvSolutions.Columns.Add(header);
             }
