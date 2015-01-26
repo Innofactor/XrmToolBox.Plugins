@@ -34,10 +34,11 @@
 
                 foreach (var item in matrix)
                 {
-                    var version = item.Value.Where(x => solution.Equals((string)x.Attributes["friendlyname"])).Select(x => (string)x.Attributes["version"]).FirstOrDefault();
+                    Version version = this.CreateVersion(solution, item.Value);
+
                     if (i++ == 0)
                     {
-                        reference.Add(solution, new Version(version));
+                        reference.Add(solution, version);
                         row.SubItems.Add(this.CreateCell(null, version));
                     }
                     else
@@ -49,15 +50,42 @@
             }
         }
 
-        private ListViewItem.ListViewSubItem CreateCell(Version reference, string version)
+        /// <summary>
+        /// Searches for given solution in the collection of solutions in given system
+        /// </summary>
+        /// <param name="solution"></param>
+        /// <param name="collection"></param>
+        /// <returns>Instance of .NET version class</returns>
+        private Version CreateVersion(string solution, Entity[] collection)
+        {
+            Version version = null;
+
+            try
+            {
+                var text = collection.Where(x => solution.Equals((string)x.Attributes["friendlyname"])).Select(x => (string)x.Attributes["version"]).FirstOrDefault();
+
+                if (text != null)
+                {
+                    version = new Version(text);
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                // Hiding exception, in this case null will be returned
+            }
+
+            return version;
+        }
+
+        private ListViewItem.ListViewSubItem CreateCell(Version reference, Version version)
         {
             var cell = new ListViewItem.ListViewSubItem();
-            cell.Text = version;
+            cell.Text = version.ToString();
 
             // Reference solution
             if (reference == null)
             {
-                cell.BackColor = Color.Orange;
+                cell.BackColor = Color.White;
             }
             else
             {
@@ -68,13 +96,20 @@
                 }
                 else
                 {
-                    if (reference != new Version(version))
+                    // Solutioin is the same on both systems
+                    if (reference == version)
                     {
                         cell.BackColor = Color.YellowGreen;
                     }
-                    else
+                    // Solution on target system is older
+                    else if (reference > version)
                     {
                         cell.BackColor = Color.Salmon;
+                    }
+                    // Solution on target system is 
+                    else if (reference < version)
+                    {
+                        cell.BackColor = Color.Orange;
                     }
                 }
             }
