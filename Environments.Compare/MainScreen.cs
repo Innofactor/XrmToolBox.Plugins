@@ -1,10 +1,10 @@
 ﻿namespace Environments.Compare
 {
+    using Environments.Compare.Utils;
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Client;
     using Microsoft.Xrm.Client.Services;
     using Microsoft.Xrm.Sdk;
-    using Microsoft.Xrm.Sdk.Query;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -46,16 +46,6 @@
             this.SubControl = control;
         }
 
-        private QueryExpression CreateSolutionsQuery()
-        {
-            var query = new QueryExpression("solution");
-            query.Criteria = new FilterExpression();
-            query.Criteria.AddCondition("isvisible", ConditionOperator.Equal, true);
-            query.Criteria.AddCondition("uniquename", ConditionOperator.NotEqual, "Default");
-            query.ColumnSet = new ColumnSet(new string[] { "friendlyname", "version", "ismanaged" });
-            return query;
-        }
-
         private void EnvironmentsSelector_Load(object sender, EventArgs e)
         {
             this.AddSubControl(new SelectOrganizations());
@@ -63,7 +53,7 @@
 
         private void LoadSolutionMatrix()
         {
-            var query = this.CreateSolutionsQuery();
+            var query = Helpers.CreateSolutionsQuery();
             var matrix = new Dictionary<string, Entity[]>();
             var services = new Dictionary<string, OrganizationService>();
             services.Add(this.ConnectionDetail.OrganizationFriendlyName, (OrganizationService)this.Service);
@@ -82,7 +72,7 @@
                 }
             }
 
-            this.WorkAsync("Getting solutions information from environments...",
+            this.WorkAsync("Getting solutions information from organizations...",
                 (e) => // Work To Do Asynchronously
                 {
                     foreach (var service in services)
@@ -93,6 +83,7 @@
                         }
                         catch (InvalidOperationException ex)
                         {
+                            // Hiding exception, 
                         }
                     }
 
@@ -102,7 +93,8 @@
                 {
                     var control = new CompareSolutions();
                     control.Set(matrix);
-                    // Execution order is important here, due to rewriting status of tool strip of plugin main window
+                    // Execution order is important here, due to rewriting status of tool strip of
+                    // plugin main window
                     this.ShowBackButton(true);
                     this.AddSubControl(control);
                 }
@@ -133,7 +125,8 @@
 
         private void tsbSelectOrganizations_Click(object sender, EventArgs e)
         {
-            // Execution order is important here, due to rewriting status of tool strip of plugin main window
+            // Execution order is important here, due to rewriting status of tool strip of plugin
+            // main window
             this.ShowBackButton(false);
             this.AddSubControl(new SelectOrganizations());
         }
