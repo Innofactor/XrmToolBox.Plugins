@@ -22,7 +22,7 @@
 
         #region Private Methods
 
-        private void lvOrganizations_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        private void onItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             var result1 = this.Parent.Controls.Find("tsMenu", true);
 
@@ -36,6 +36,12 @@
                     var listView = (ListView)sender;
 
                     var selected = listView.Items.Cast<ListViewItem>().Where(x => x.Selected == true);
+
+
+                    foreach (var item in selected)
+                    {
+                        item.Checked = !item.Checked;
+                    }
 
                     if (selected.Count() > 0)
                     {
@@ -98,7 +104,7 @@
                     }
                 }
 
-                lvOrganizations_ItemSelectionChanged(lvOrganizations, null);
+                onItemSelectionChanged(lvOrganizations, null);
             }
         }
 
