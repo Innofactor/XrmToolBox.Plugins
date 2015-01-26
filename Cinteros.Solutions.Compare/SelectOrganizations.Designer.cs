@@ -68,6 +68,7 @@
             this.lvReference.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chRefOrgName,
             this.chRefServer});
+            this.lvReference.Enabled = false;
             this.lvReference.Location = new System.Drawing.Point(7, 20);
             this.lvReference.Name = "lvReference";
             this.lvReference.Size = new System.Drawing.Size(584, 63);

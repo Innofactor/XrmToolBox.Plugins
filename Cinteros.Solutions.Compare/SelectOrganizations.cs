@@ -1,6 +1,8 @@
 ﻿namespace Cinteros.Solutions.Compare
 {
+    using Cinteros.Solutions.Compare.Utils;
     using McTools.Xrm.Connection;
+    using Microsoft.Xrm.Sdk;
     using System;
     using System.Linq;
     using System.Windows.Forms;
@@ -53,6 +55,25 @@
 
             if (parent != null)
             {
+                parent.WorkAsync("Getting solutions information from organizations...",
+                    (a) => // Work To Do Asynchronously
+                    {
+                        a.Result = parent.Service.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
+                    },
+                    (a) =>  // Cleanup when work has completed
+                    {
+                        foreach (var solution in (Solution[])a.Result)
+                        {
+                            var row = new string[] {
+                                solution.FriendlyName,
+                                solution.Version.ToString(),
+                            };
+
+                            lvSolutions.Items.Add(new ListViewItem(row));
+                        }
+                    }
+                );
+
 
                 if (parent.ConnectionDetail != null)
                 {
