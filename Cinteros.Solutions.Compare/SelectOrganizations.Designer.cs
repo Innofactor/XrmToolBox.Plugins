@@ -41,6 +41,8 @@
             this.lvSolutions = new System.Windows.Forms.ListView();
             this.chSolutionName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSolutionVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cbToggleSolutions = new System.Windows.Forms.CheckBox();
+            this.cbToggleOrganizations = new System.Windows.Forms.CheckBox();
             this.gbReference.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.gbOrganizations.SuspendLayout();
@@ -108,6 +110,7 @@
             this.gbOrganizations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbOrganizations.Controls.Add(this.cbToggleOrganizations);
             this.gbOrganizations.Controls.Add(this.lvOrganizations);
             this.gbOrganizations.Location = new System.Drawing.Point(301, 3);
             this.gbOrganizations.Name = "gbOrganizations";
@@ -126,9 +129,9 @@
             this.chOrgName,
             this.chOrgService});
             this.lvOrganizations.FullRowSelect = true;
-            this.lvOrganizations.Location = new System.Drawing.Point(6, 19);
+            this.lvOrganizations.Location = new System.Drawing.Point(6, 42);
             this.lvOrganizations.Name = "lvOrganizations";
-            this.lvOrganizations.Size = new System.Drawing.Size(280, 243);
+            this.lvOrganizations.Size = new System.Drawing.Size(280, 220);
             this.lvOrganizations.TabIndex = 2;
             this.lvOrganizations.UseCompatibleStateImageBehavior = false;
             this.lvOrganizations.View = System.Windows.Forms.View.Details;
@@ -149,6 +152,7 @@
             this.gbSolutions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbSolutions.Controls.Add(this.cbToggleSolutions);
             this.gbSolutions.Controls.Add(this.lvSolutions);
             this.gbSolutions.Location = new System.Drawing.Point(3, 3);
             this.gbSolutions.Name = "gbSolutions";
@@ -167,9 +171,9 @@
             this.chSolutionName,
             this.chSolutionVersion});
             this.lvSolutions.FullRowSelect = true;
-            this.lvSolutions.Location = new System.Drawing.Point(6, 19);
+            this.lvSolutions.Location = new System.Drawing.Point(6, 42);
             this.lvSolutions.Name = "lvSolutions";
-            this.lvSolutions.Size = new System.Drawing.Size(279, 243);
+            this.lvSolutions.Size = new System.Drawing.Size(279, 220);
             this.lvSolutions.TabIndex = 2;
             this.lvSolutions.UseCompatibleStateImageBehavior = false;
             this.lvSolutions.View = System.Windows.Forms.View.Details;
@@ -185,6 +189,28 @@
             this.chSolutionVersion.Text = "Version";
             this.chSolutionVersion.Width = 200;
             // 
+            // cbToggleSolutions
+            // 
+            this.cbToggleSolutions.AutoSize = true;
+            this.cbToggleSolutions.Location = new System.Drawing.Point(6, 19);
+            this.cbToggleSolutions.Name = "cbToggleSolutions";
+            this.cbToggleSolutions.Size = new System.Drawing.Size(69, 17);
+            this.cbToggleSolutions.TabIndex = 3;
+            this.cbToggleSolutions.Text = "Select all";
+            this.cbToggleSolutions.UseVisualStyleBackColor = true;
+            this.cbToggleSolutions.CheckedChanged += new System.EventHandler(this.cbToggleSolutions_CheckedChanged);
+            // 
+            // cbToggleOrganizations
+            // 
+            this.cbToggleOrganizations.AutoSize = true;
+            this.cbToggleOrganizations.Location = new System.Drawing.Point(6, 19);
+            this.cbToggleOrganizations.Name = "cbToggleOrganizations";
+            this.cbToggleOrganizations.Size = new System.Drawing.Size(69, 17);
+            this.cbToggleOrganizations.TabIndex = 4;
+            this.cbToggleOrganizations.Text = "Select all";
+            this.cbToggleOrganizations.UseVisualStyleBackColor = true;
+            this.cbToggleOrganizations.CheckedChanged += new System.EventHandler(this.cbToggleOrganizations_CheckedChanged);
+            // 
             // SelectOrganizations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -196,7 +222,9 @@
             this.gbReference.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.gbOrganizations.ResumeLayout(false);
+            this.gbOrganizations.PerformLayout();
             this.gbSolutions.ResumeLayout(false);
+            this.gbSolutions.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -216,6 +244,8 @@
         private System.Windows.Forms.ListView lvSolutions;
         private System.Windows.Forms.ColumnHeader chSolutionName;
         private System.Windows.Forms.ColumnHeader chSolutionVersion;
+        private System.Windows.Forms.CheckBox cbToggleOrganizations;
+        private System.Windows.Forms.CheckBox cbToggleSolutions;
 
     }
 }

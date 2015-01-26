@@ -116,5 +116,29 @@
         }
 
         #endregion Private Methods
+
+        private void cbToggleSolutions_CheckedChanged(object sender, EventArgs e)
+        {
+            var cb = (CheckBox)sender;
+
+            foreach (var item in this.lvSolutions.Items.Cast<ListViewItem>().ToArray())
+            {
+                item.Checked = cb.Checked;
+            }
+
+            onItemSelectionChanged(this.lvSolutions, null);
+        }
+
+        private void cbToggleOrganizations_CheckedChanged(object sender, EventArgs e)
+        {
+            var cb = (CheckBox)sender;
+
+            foreach (var item in this.lvOrganizations.Items.Cast<ListViewItem>().ToArray())
+            {
+                item.Checked = cb.Checked;
+            }
+
+            onItemSelectionChanged(this.lvOrganizations, null);
+        }
     }
 }
