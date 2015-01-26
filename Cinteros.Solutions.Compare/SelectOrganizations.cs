@@ -29,27 +29,26 @@
             if (result1.Length > 0)
             {
                 var menu = (ToolStrip)result1[0];
-                var result2 = menu.Items.Find("tsbCompareSolutions", true);
+                var button = menu.Items.Find("tsbCompareSolutions", true).FirstOrDefault();
 
-                if (result2.Length > 0)
+                if (button != null)
                 {
                     var listView = (ListView)sender;
 
                     var selected = listView.Items.Cast<ListViewItem>().Where(x => x.Selected == true);
-
 
                     foreach (var item in selected)
                     {
                         item.Checked = !item.Checked;
                     }
 
-                    if (selected.Count() > 0)
+                    if (this.lvSolutions.CheckedItems.Count > 0 && this.lvOrganizations.CheckedItems.Count > 0)
                     {
-                        result2[0].Enabled = true;
+                        button.Enabled = true;
                     }
                     else
                     {
-                        result2[0].Enabled = false;
+                        button.Enabled = false;
                     }
                 }
             }
