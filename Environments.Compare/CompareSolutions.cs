@@ -1,6 +1,6 @@
-﻿namespace Environments.Compare
+﻿namespace Cinteros.Solutions.Compare
 {
-    using Environments.Compare.Utils;
+    using Cinteros.Solutions.Compare.Utils;
     using Microsoft.Xrm.Sdk;
     using System;
     using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿namespace Environments.Compare
+﻿namespace Cinteros.Solutions.Compare
 {
     partial class SelectOrganizations
     {

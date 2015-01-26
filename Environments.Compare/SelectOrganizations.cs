@@ -1,4 +1,4 @@
-﻿namespace Environments.Compare
+﻿namespace Cinteros.Solutions.Compare
 {
     using McTools.Xrm.Connection;
     using System;

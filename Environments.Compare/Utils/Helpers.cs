@@ -1,4 +1,4 @@
-﻿namespace Environments.Compare.Utils
+﻿namespace Cinteros.Solutions.Compare.Utils
 {
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Query;

@@ -1,4 +1,4 @@
-﻿namespace Environments.Compare.Utils
+﻿namespace Cinteros.Solutions.Compare.Utils
 {
     internal static class Constants
     {
