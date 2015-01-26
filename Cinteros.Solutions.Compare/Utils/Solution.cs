@@ -58,9 +58,7 @@
         {
             if (obj.GetType() == typeof(Solution))
             {
-                var solution = (Solution)obj;
-
-                return this.Id.Equals(solution.Id);
+                return this.Id.Equals(((Solution)obj).Id);
             }
             else
             {

@@ -34,16 +34,16 @@
 
                 foreach (var item in matrix)
                 {
-                    var version = item.Value.Where(x => solution.Id.Equals((Guid)x.Attributes[Constants.A_SOLUTIONID])).Select(x => new Solution(x)).FirstOrDefault<Solution>();
+                    var current = item.Value.Where(x => solution.UniqueName.Equals((string)x.Attributes[Constants.A_UNIQUENAME])).Select(x => new Solution(x)).FirstOrDefault<Solution>();
 
                     if (i++ == 0)
                     {
-                        reference.Add(solution);
-                        row.SubItems.Add(Helpers.CreateCell(null, solution));
+                        reference.Add(current);
+                        row.SubItems.Add(Helpers.CreateCell(null, current));
                     }
                     else
                     {
-                        row.SubItems.Add(Helpers.CreateCell(reference, solution));
+                        row.SubItems.Add(Helpers.CreateCell(reference, current));
                     }
                     
                 }

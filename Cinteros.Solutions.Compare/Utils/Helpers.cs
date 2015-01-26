@@ -16,16 +16,16 @@
         /// Creates cell in resulting grid
         /// </summary>
         /// <param name="reference"></param>
-        /// <param name="version"></param>
+        /// <param name="current"></param>
         /// <returns></returns>
-        public static ListViewItem.ListViewSubItem CreateCell(List<Solution> reference, Solution version)
+        public static ListViewItem.ListViewSubItem CreateCell(List<Solution> reference, Solution current)
         {
             var cell = new ListViewItem.ListViewSubItem();
 
             // Reference solution
             if (reference == null)
             {
-                cell.Text = version.ToString();
+                cell.Text = current.Version.ToString();
                 cell.BackColor = Color.White;
                 cell.Tag = "Reference version";
             }
@@ -33,7 +33,7 @@
             {
                 
                 // Solution is not present on target system
-                if (version == null)
+                if (current == null)
                 {
                     cell.Text = Constants.SOLUTION_NA;
                     cell.ForeColor = Color.LightGray;
@@ -42,9 +42,9 @@
                 }
                 else
                 {
-                    cell.Text = version.ToString();
+                    cell.Text = current.Version.ToString();
                     // Solutioin is the same on both systems
-                    if (reference.Exists(x => x.Equals(version)))
+                    if (reference.Exists(x => x.Equals(current)))
                     {
                         cell.BackColor = Color.YellowGreen;
                         cell.Tag = "Solution is unavailable on the target organization";
