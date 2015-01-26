@@ -51,21 +51,5 @@
         }
 
         #endregion Public Properties
-
-        #region Public Methods
-
-        public override bool Equals(object obj)
-        {
-            if (obj.GetType() == typeof(Solution))
-            {
-                return this.UniqueName.Equals(((Solution)obj).UniqueName);
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        #endregion Public Methods
     }
 }

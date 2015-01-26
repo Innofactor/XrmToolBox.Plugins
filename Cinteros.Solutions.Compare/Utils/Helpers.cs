@@ -44,7 +44,7 @@
                 {
                     cell.Text = current.Version.ToString();
                     // Solutioin is the same on both systems
-                    if (reference.Exists(x => x.Equals(current)))
+                    if (reference.Exists(x => x.Version == current.Version))
                     {
                         cell.BackColor = Color.YellowGreen;
                         cell.Tag = "Solution is unavailable on the target organization";
@@ -58,6 +58,10 @@
             return cell;
         }
 
+        /// <summary>
+        /// Creates query expression that will get information about all solutions in the system
+        /// </summary>
+        /// <returns></returns>
         public static QueryExpression CreateSolutionsQuery()
         {
             var query = new QueryExpression(Constants.E_SOLUTION);
