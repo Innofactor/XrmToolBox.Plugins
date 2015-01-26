@@ -99,7 +99,10 @@
                             connection.ServerName,
                         };
 
-                        lvOrganizations.Items.Add(new ListViewItem(row));
+                        var item = new ListViewItem(row);
+                        item.Tag = connection;
+
+                        lvOrganizations.Items.Add(item);
                     }
                 }
 
