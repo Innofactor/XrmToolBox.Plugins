@@ -55,7 +55,7 @@
 
             if (parent != null)
             {
-                parent.WorkAsync("Getting solutions information from organizations...",
+                parent.WorkAsync(string.Format("Getting solutions information from '{0}'...", parent.ConnectionDetail.OrganizationFriendlyName),
                     (a) => // Work To Do Asynchronously
                     {
                         a.Result = parent.Service.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
