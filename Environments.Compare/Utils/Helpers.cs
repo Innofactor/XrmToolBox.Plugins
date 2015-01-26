@@ -11,14 +11,20 @@
     {
         #region Public Methods
 
+        /// <summary>
+        /// Creates cell in resulting grid
+        /// </summary>
+        /// <param name="reference"></param>
+        /// <param name="version"></param>
+        /// <returns></returns>
         public static ListViewItem.ListViewSubItem CreateCell(Version reference, Version version)
         {
             var cell = new ListViewItem.ListViewSubItem();
-            cell.Text = version.ToString();
 
             // Reference solution
             if (reference == null)
             {
+                cell.Text = version.ToString();
                 cell.BackColor = Color.White;
             }
             else
@@ -26,22 +32,19 @@
                 // Solution is not present on target system
                 if (version == null)
                 {
-                    cell.BackColor = Color.Gainsboro;
+                    cell.Text = Constants.SOLUTION_NA;
+                    cell.ForeColor = Color.LightGray;
+                    cell.BackColor = Color.White;
                 }
                 else
                 {
+                    cell.Text = version.ToString();
                     // Solutioin is the same on both systems
                     if (reference == version)
                     {
                         cell.BackColor = Color.YellowGreen;
                     }
-                    // Solution on target system is older
-                    else if (reference > version)
-                    {
-                        cell.BackColor = Color.Salmon;
-                    }
-                    // Solution on target system is
-                    else if (reference < version)
+                    else
                     {
                         cell.BackColor = Color.Orange;
                     }
@@ -57,6 +60,7 @@
             query.Criteria.AddCondition(Constants.A_ISVISIBLE, ConditionOperator.Equal, true);
             query.Criteria.AddCondition(Constants.A_UNIQUENAME, ConditionOperator.NotEqual, Constants.SOLUTION_DEFAULT);
             query.ColumnSet = new ColumnSet(new string[] { Constants.A_UNIQUENAME, Constants.A_FRIENDLYNAME, Constants.A_VERSION, Constants.A_ISMANAGED });
+
             return query;
         }
 
