@@ -31,13 +31,11 @@
             this.gbOrganizations = new System.Windows.Forms.GroupBox();
             this.lvOrganizations = new System.Windows.Forms.ListView();
             this.chOrgName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chOrgUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chOrgVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chOrgService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbReference = new System.Windows.Forms.GroupBox();
             this.lvReference = new System.Windows.Forms.ListView();
             this.chRefOrgName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chRefOrgUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chRefVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chRefServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbOrganizations.SuspendLayout();
             this.gbReference.SuspendLayout();
             this.SuspendLayout();
@@ -62,8 +60,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvOrganizations.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chOrgName,
-            this.chOrgUrl,
-            this.chOrgVersion});
+            this.chOrgService});
             this.lvOrganizations.FullRowSelect = true;
             this.lvOrganizations.Location = new System.Drawing.Point(6, 19);
             this.lvOrganizations.Name = "lvOrganizations";
@@ -78,15 +75,10 @@
             this.chOrgName.Text = "Organization";
             this.chOrgName.Width = 200;
             // 
-            // chOrgUrl
+            // chOrgService
             // 
-            this.chOrgUrl.Text = "URL";
-            this.chOrgUrl.Width = 500;
-            // 
-            // chOrgVersion
-            // 
-            this.chOrgVersion.Text = "Version";
-            this.chOrgVersion.Width = 100;
+            this.chOrgService.Text = "Server";
+            this.chOrgService.Width = 400;
             // 
             // gbReference
             // 
@@ -108,8 +100,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvReference.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chRefOrgName,
-            this.chRefOrgUrl,
-            this.chRefVersion});
+            this.chRefServer});
             this.lvReference.Location = new System.Drawing.Point(7, 20);
             this.lvReference.Name = "lvReference";
             this.lvReference.Size = new System.Drawing.Size(584, 63);
@@ -122,23 +113,18 @@
             this.chRefOrgName.Text = "Organization";
             this.chRefOrgName.Width = 200;
             // 
-            // chRefOrgUrl
+            // chRefServer
             // 
-            this.chRefOrgUrl.Text = "URL";
-            this.chRefOrgUrl.Width = 500;
+            this.chRefServer.Text = "Server";
+            this.chRefServer.Width = 400;
             // 
-            // chRefVersion
-            // 
-            this.chRefVersion.Text = "Version";
-            this.chRefVersion.Width = 100;
-            // 
-            // SelectEnvironments
+            // SelectOrganizations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gbOrganizations);
             this.Controls.Add(this.gbReference);
-            this.Name = "SelectEnvironments";
+            this.Name = "SelectOrganizations";
             this.Size = new System.Drawing.Size(600, 400);
             this.gbOrganizations.ResumeLayout(false);
             this.gbReference.ResumeLayout(false);
@@ -151,13 +137,11 @@
         private System.Windows.Forms.GroupBox gbOrganizations;
         private System.Windows.Forms.ListView lvOrganizations;
         private System.Windows.Forms.ColumnHeader chOrgName;
-        private System.Windows.Forms.ColumnHeader chOrgUrl;
-        private System.Windows.Forms.ColumnHeader chOrgVersion;
+        private System.Windows.Forms.ColumnHeader chOrgService;
         private System.Windows.Forms.GroupBox gbReference;
         private System.Windows.Forms.ListView lvReference;
         private System.Windows.Forms.ColumnHeader chRefOrgName;
-        private System.Windows.Forms.ColumnHeader chRefOrgUrl;
-        private System.Windows.Forms.ColumnHeader chRefVersion;
+        private System.Windows.Forms.ColumnHeader chRefServer;
 
     }
 }

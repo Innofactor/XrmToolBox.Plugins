@@ -59,8 +59,7 @@
                 {
                     var row = new string[] {
                         parent.ConnectionDetail.OrganizationFriendlyName,
-                        parent.ConnectionDetail.OrganizationServiceUrl,
-                        parent.ConnectionDetail.OrganizationVersion
+                        parent.ConnectionDetail.ServerName,
                     };
 
                     lvReference.Items.Add(new ListViewItem(row));
@@ -71,8 +70,7 @@
                     {
                         row = new string[] {
                             connection.OrganizationFriendlyName,
-                            connection.OrganizationServiceUrl,
-                            connection.OrganizationVersion
+                            connection.ServerName,
                         };
 
                         var item = new ListViewItem(row);
