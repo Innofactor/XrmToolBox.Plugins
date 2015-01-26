@@ -53,7 +53,6 @@
 
             if (parent != null)
             {
-                lvReference.Items.Clear();
 
                 if (parent.ConnectionDetail != null)
                 {
@@ -62,6 +61,7 @@
                         parent.ConnectionDetail.ServerName,
                     };
 
+                    lvReference.Items.Clear();
                     lvReference.Items.Add(new ListViewItem(row));
 
                     lvOrganizations.Items.Clear();
@@ -73,10 +73,7 @@
                             connection.ServerName,
                         };
 
-                        var item = new ListViewItem(row);
-
-                        item.Tag = connection;
-                        lvOrganizations.Items.Add(item);
+                        lvOrganizations.Items.Add(new ListViewItem(row));
                     }
                 }
 
