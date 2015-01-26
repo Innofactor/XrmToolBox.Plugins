@@ -28,57 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gbOrganizations = new System.Windows.Forms.GroupBox();
-            this.lvOrganizations = new System.Windows.Forms.ListView();
-            this.chOrgName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chOrgService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbReference = new System.Windows.Forms.GroupBox();
             this.lvReference = new System.Windows.Forms.ListView();
             this.chRefOrgName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chRefServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.gbOrganizations.SuspendLayout();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.gbSolutions = new System.Windows.Forms.GroupBox();
+            this.lvSolutions = new System.Windows.Forms.ListView();
+            this.chSolutionName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chSolutionVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.gbOrganizations = new System.Windows.Forms.GroupBox();
+            this.lvOrganizations = new System.Windows.Forms.ListView();
+            this.chOrgName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chOrgService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbReference.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.gbSolutions.SuspendLayout();
+            this.gbOrganizations.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // gbOrganizations
-            // 
-            this.gbOrganizations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbOrganizations.Controls.Add(this.lvOrganizations);
-            this.gbOrganizations.Location = new System.Drawing.Point(0, 129);
-            this.gbOrganizations.Name = "gbOrganizations";
-            this.gbOrganizations.Size = new System.Drawing.Size(597, 268);
-            this.gbOrganizations.TabIndex = 11;
-            this.gbOrganizations.TabStop = false;
-            this.gbOrganizations.Text = "Organizations to compare";
-            // 
-            // lvOrganizations
-            // 
-            this.lvOrganizations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvOrganizations.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chOrgName,
-            this.chOrgService});
-            this.lvOrganizations.FullRowSelect = true;
-            this.lvOrganizations.Location = new System.Drawing.Point(6, 19);
-            this.lvOrganizations.Name = "lvOrganizations";
-            this.lvOrganizations.Size = new System.Drawing.Size(584, 243);
-            this.lvOrganizations.TabIndex = 2;
-            this.lvOrganizations.UseCompatibleStateImageBehavior = false;
-            this.lvOrganizations.View = System.Windows.Forms.View.Details;
-            this.lvOrganizations.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvOrganizations_ItemSelectionChanged);
-            // 
-            // chOrgName
-            // 
-            this.chOrgName.Text = "Organization";
-            this.chOrgName.Width = 200;
-            // 
-            // chOrgService
-            // 
-            this.chOrgService.Text = "Server";
-            this.chOrgService.Width = 400;
             // 
             // gbReference
             // 
@@ -118,30 +85,133 @@
             this.chRefServer.Text = "Server";
             this.chRefServer.Width = 400;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.gbOrganizations, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.gbSolutions, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 123);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(597, 274);
+            this.tableLayoutPanel1.TabIndex = 14;
+            // 
+            // gbSolutions
+            // 
+            this.gbSolutions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbSolutions.Controls.Add(this.lvSolutions);
+            this.gbSolutions.Location = new System.Drawing.Point(3, 3);
+            this.gbSolutions.Name = "gbSolutions";
+            this.gbSolutions.Size = new System.Drawing.Size(292, 268);
+            this.gbSolutions.TabIndex = 13;
+            this.gbSolutions.TabStop = false;
+            this.gbSolutions.Text = "Solutions to compare";
+            // 
+            // lvSolutions
+            // 
+            this.lvSolutions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvSolutions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chSolutionName,
+            this.chSolutionVersion});
+            this.lvSolutions.FullRowSelect = true;
+            this.lvSolutions.Location = new System.Drawing.Point(6, 19);
+            this.lvSolutions.Name = "lvSolutions";
+            this.lvSolutions.Size = new System.Drawing.Size(279, 243);
+            this.lvSolutions.TabIndex = 2;
+            this.lvSolutions.UseCompatibleStateImageBehavior = false;
+            this.lvSolutions.View = System.Windows.Forms.View.Details;
+            // 
+            // chSolutionName
+            // 
+            this.chSolutionName.Text = "Solution";
+            this.chSolutionName.Width = 200;
+            // 
+            // chSolutionVersion
+            // 
+            this.chSolutionVersion.Text = "Version";
+            this.chSolutionVersion.Width = 400;
+            // 
+            // gbOrganizations
+            // 
+            this.gbOrganizations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbOrganizations.Controls.Add(this.lvOrganizations);
+            this.gbOrganizations.Location = new System.Drawing.Point(301, 3);
+            this.gbOrganizations.Name = "gbOrganizations";
+            this.gbOrganizations.Size = new System.Drawing.Size(293, 268);
+            this.gbOrganizations.TabIndex = 14;
+            this.gbOrganizations.TabStop = false;
+            this.gbOrganizations.Text = "Organizations to compare";
+            // 
+            // lvOrganizations
+            // 
+            this.lvOrganizations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvOrganizations.CheckBoxes = true;
+            this.lvOrganizations.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chOrgName,
+            this.chOrgService});
+            this.lvOrganizations.FullRowSelect = true;
+            this.lvOrganizations.Location = new System.Drawing.Point(6, 19);
+            this.lvOrganizations.Name = "lvOrganizations";
+            this.lvOrganizations.Size = new System.Drawing.Size(280, 243);
+            this.lvOrganizations.TabIndex = 2;
+            this.lvOrganizations.UseCompatibleStateImageBehavior = false;
+            this.lvOrganizations.View = System.Windows.Forms.View.Details;
+            // 
+            // chOrgName
+            // 
+            this.chOrgName.Text = "Organization";
+            this.chOrgName.Width = 200;
+            // 
+            // chOrgService
+            // 
+            this.chOrgService.Text = "Server";
+            this.chOrgService.Width = 400;
+            // 
             // SelectOrganizations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.gbOrganizations);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.gbReference);
             this.Name = "SelectOrganizations";
             this.Size = new System.Drawing.Size(600, 400);
-            this.gbOrganizations.ResumeLayout(false);
             this.gbReference.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.gbSolutions.ResumeLayout(false);
+            this.gbOrganizations.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox gbOrganizations;
-        private System.Windows.Forms.ListView lvOrganizations;
-        private System.Windows.Forms.ColumnHeader chOrgName;
-        private System.Windows.Forms.ColumnHeader chOrgService;
         private System.Windows.Forms.GroupBox gbReference;
         private System.Windows.Forms.ListView lvReference;
         private System.Windows.Forms.ColumnHeader chRefOrgName;
         private System.Windows.Forms.ColumnHeader chRefServer;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.GroupBox gbOrganizations;
+        private System.Windows.Forms.ListView lvOrganizations;
+        private System.Windows.Forms.ColumnHeader chOrgName;
+        private System.Windows.Forms.ColumnHeader chOrgService;
+        private System.Windows.Forms.GroupBox gbSolutions;
+        private System.Windows.Forms.ListView lvSolutions;
+        private System.Windows.Forms.ColumnHeader chSolutionName;
+        private System.Windows.Forms.ColumnHeader chSolutionVersion;
 
     }
 }
