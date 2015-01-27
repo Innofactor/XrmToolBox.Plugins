@@ -1,6 +1,6 @@
 ﻿namespace Cinteros.Solutions.Compare
 {
-    partial class CompareSolutions
+    partial class ViewResults
     {
         /// <summary> 
         /// Required designer variable.

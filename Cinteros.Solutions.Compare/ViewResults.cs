@@ -7,12 +7,12 @@
     using System.Linq;
     using System.Windows.Forms;
 
-    public partial class CompareSolutions : UserControl
+    public partial class ViewResults : UserControl
     {
 
         #region Public Constructors
 
-        public CompareSolutions()
+        public ViewResults()
         {
             InitializeComponent();
         }

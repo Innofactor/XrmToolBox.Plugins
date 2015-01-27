@@ -107,7 +107,7 @@
                 {
                     if (e.Result != null)
                     {
-                        var control = new CompareSolutions();
+                        var control = new ViewResults();
                         control.Set((Dictionary<string, Solution[]>)e.Result);
                         // Execution order is important here, due to rewriting status of tool strip
                         // of plugin main window
