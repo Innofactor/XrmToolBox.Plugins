@@ -29,7 +29,6 @@
             }
             else
             {
-                
                 // Solution is not present on target system
                 if (current == null)
                 {

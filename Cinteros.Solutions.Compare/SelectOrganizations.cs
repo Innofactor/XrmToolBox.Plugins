@@ -8,6 +8,7 @@
 
     public partial class SelectOrganizations : UserControl
     {
+
         #region Public Constructors
 
         public SelectOrganizations()
@@ -77,21 +78,6 @@
             this.cbToggleSolutions.CheckedChanged += this.cbToggleSolutions_CheckedChanged;
 
             this.UpdateCompareSolutionsButton();
-        }
-
-        private void UpdateSwitcher(ListView list, CheckBox switcher, bool status)
-        {
-            if (!status)
-            {
-                switcher.Checked = false;
-            }
-            else
-            {
-                if (list.CheckedItems.Count == list.Items.Count)
-                {
-                    switcher.Checked = true;
-                }
-            }
         }
 
         private void lvSolutions_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -186,6 +172,22 @@
             }
         }
 
+        private void UpdateSwitcher(ListView list, CheckBox switcher, bool status)
+        {
+            if (!status)
+            {
+                switcher.Checked = false;
+            }
+            else
+            {
+                if (list.CheckedItems.Count == list.Items.Count)
+                {
+                    switcher.Checked = true;
+                }
+            }
+        }
+
         #endregion Private Methods
+
     }
 }

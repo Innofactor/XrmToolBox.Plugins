@@ -109,8 +109,8 @@
                     {
                         var control = new CompareSolutions();
                         control.Set((Dictionary<string, Solution[]>)e.Result);
-                        // Execution order is important here, due to rewriting status of tool strip of
-                        // plugin main window
+                        // Execution order is important here, due to rewriting status of tool strip
+                        // of plugin main window
                         this.ShowBackButton(true);
                         this.AddSubControl(control);
                     }

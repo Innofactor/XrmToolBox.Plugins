@@ -9,6 +9,7 @@
 
     public partial class CompareSolutions : UserControl
     {
+
         #region Public Constructors
 
         public CompareSolutions()
@@ -72,5 +73,6 @@
         }
 
         #endregion Private Methods
+
     }
 }
