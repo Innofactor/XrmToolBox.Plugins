@@ -34,15 +34,15 @@
             this.chRefServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.gbOrganizations = new System.Windows.Forms.GroupBox();
+            this.cbToggleOrganizations = new System.Windows.Forms.CheckBox();
             this.lvOrganizations = new System.Windows.Forms.ListView();
             this.chOrgName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chOrgService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbSolutions = new System.Windows.Forms.GroupBox();
+            this.cbToggleSolutions = new System.Windows.Forms.CheckBox();
             this.lvSolutions = new System.Windows.Forms.ListView();
             this.chSolutionName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSolutionVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.cbToggleSolutions = new System.Windows.Forms.CheckBox();
-            this.cbToggleOrganizations = new System.Windows.Forms.CheckBox();
             this.gbReference.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.gbOrganizations.SuspendLayout();
@@ -57,7 +57,7 @@
             this.gbReference.Controls.Add(this.lvReference);
             this.gbReference.Location = new System.Drawing.Point(0, 34);
             this.gbReference.Name = "gbReference";
-            this.gbReference.Size = new System.Drawing.Size(597, 89);
+            this.gbReference.Size = new System.Drawing.Size(597, 76);
             this.gbReference.TabIndex = 10;
             this.gbReference.TabStop = false;
             this.gbReference.Text = "Reference organization";
@@ -73,7 +73,7 @@
             this.lvReference.Enabled = false;
             this.lvReference.Location = new System.Drawing.Point(7, 20);
             this.lvReference.Name = "lvReference";
-            this.lvReference.Size = new System.Drawing.Size(584, 63);
+            this.lvReference.Size = new System.Drawing.Size(584, 50);
             this.lvReference.TabIndex = 0;
             this.lvReference.UseCompatibleStateImageBehavior = false;
             this.lvReference.View = System.Windows.Forms.View.Details;
@@ -86,7 +86,7 @@
             // chRefServer
             // 
             this.chRefServer.Text = "Server";
-            this.chRefServer.Width = 400;
+            this.chRefServer.Width = 200;
             // 
             // tableLayoutPanel1
             // 
@@ -98,11 +98,11 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.gbOrganizations, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.gbSolutions, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 123);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 113);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(597, 274);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(597, 284);
             this.tableLayoutPanel1.TabIndex = 14;
             // 
             // gbOrganizations
@@ -114,10 +114,21 @@
             this.gbOrganizations.Controls.Add(this.lvOrganizations);
             this.gbOrganizations.Location = new System.Drawing.Point(301, 3);
             this.gbOrganizations.Name = "gbOrganizations";
-            this.gbOrganizations.Size = new System.Drawing.Size(293, 268);
+            this.gbOrganizations.Size = new System.Drawing.Size(293, 278);
             this.gbOrganizations.TabIndex = 14;
             this.gbOrganizations.TabStop = false;
             this.gbOrganizations.Text = "Organizations to compare";
+            // 
+            // cbToggleOrganizations
+            // 
+            this.cbToggleOrganizations.AutoSize = true;
+            this.cbToggleOrganizations.Location = new System.Drawing.Point(6, 19);
+            this.cbToggleOrganizations.Name = "cbToggleOrganizations";
+            this.cbToggleOrganizations.Size = new System.Drawing.Size(69, 17);
+            this.cbToggleOrganizations.TabIndex = 4;
+            this.cbToggleOrganizations.Text = "Select all";
+            this.cbToggleOrganizations.UseVisualStyleBackColor = true;
+            this.cbToggleOrganizations.CheckedChanged += new System.EventHandler(this.cbToggleOrganizations_CheckedChanged);
             // 
             // lvOrganizations
             // 
@@ -131,11 +142,12 @@
             this.lvOrganizations.FullRowSelect = true;
             this.lvOrganizations.Location = new System.Drawing.Point(6, 42);
             this.lvOrganizations.Name = "lvOrganizations";
-            this.lvOrganizations.Size = new System.Drawing.Size(280, 220);
+            this.lvOrganizations.Size = new System.Drawing.Size(280, 230);
             this.lvOrganizations.TabIndex = 2;
             this.lvOrganizations.UseCompatibleStateImageBehavior = false;
             this.lvOrganizations.View = System.Windows.Forms.View.Details;
-            this.lvOrganizations.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.onItemSelectionChanged);
+            this.lvOrganizations.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvOrganizations_ItemChecked);
+            this.lvOrganizations.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvOrganizations_ItemSelectionChanged);
             // 
             // chOrgName
             // 
@@ -156,10 +168,21 @@
             this.gbSolutions.Controls.Add(this.lvSolutions);
             this.gbSolutions.Location = new System.Drawing.Point(3, 3);
             this.gbSolutions.Name = "gbSolutions";
-            this.gbSolutions.Size = new System.Drawing.Size(292, 268);
+            this.gbSolutions.Size = new System.Drawing.Size(292, 278);
             this.gbSolutions.TabIndex = 13;
             this.gbSolutions.TabStop = false;
             this.gbSolutions.Text = "Solutions to compare";
+            // 
+            // cbToggleSolutions
+            // 
+            this.cbToggleSolutions.AutoSize = true;
+            this.cbToggleSolutions.Location = new System.Drawing.Point(6, 19);
+            this.cbToggleSolutions.Name = "cbToggleSolutions";
+            this.cbToggleSolutions.Size = new System.Drawing.Size(69, 17);
+            this.cbToggleSolutions.TabIndex = 3;
+            this.cbToggleSolutions.Text = "Select all";
+            this.cbToggleSolutions.UseVisualStyleBackColor = true;
+            this.cbToggleSolutions.CheckedChanged += new System.EventHandler(this.cbToggleSolutions_CheckedChanged);
             // 
             // lvSolutions
             // 
@@ -173,11 +196,12 @@
             this.lvSolutions.FullRowSelect = true;
             this.lvSolutions.Location = new System.Drawing.Point(6, 42);
             this.lvSolutions.Name = "lvSolutions";
-            this.lvSolutions.Size = new System.Drawing.Size(279, 220);
+            this.lvSolutions.Size = new System.Drawing.Size(279, 230);
             this.lvSolutions.TabIndex = 2;
             this.lvSolutions.UseCompatibleStateImageBehavior = false;
             this.lvSolutions.View = System.Windows.Forms.View.Details;
-            this.lvSolutions.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.onItemSelectionChanged);
+            this.lvSolutions.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvSolutions_ItemChecked);
+            this.lvSolutions.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvSolutions_ItemSelectionChanged);
             // 
             // chSolutionName
             // 
@@ -188,28 +212,6 @@
             // 
             this.chSolutionVersion.Text = "Version";
             this.chSolutionVersion.Width = 200;
-            // 
-            // cbToggleSolutions
-            // 
-            this.cbToggleSolutions.AutoSize = true;
-            this.cbToggleSolutions.Location = new System.Drawing.Point(6, 19);
-            this.cbToggleSolutions.Name = "cbToggleSolutions";
-            this.cbToggleSolutions.Size = new System.Drawing.Size(69, 17);
-            this.cbToggleSolutions.TabIndex = 3;
-            this.cbToggleSolutions.Text = "Select all";
-            this.cbToggleSolutions.UseVisualStyleBackColor = true;
-            this.cbToggleSolutions.CheckedChanged += new System.EventHandler(this.cbToggleSolutions_CheckedChanged);
-            // 
-            // cbToggleOrganizations
-            // 
-            this.cbToggleOrganizations.AutoSize = true;
-            this.cbToggleOrganizations.Location = new System.Drawing.Point(6, 19);
-            this.cbToggleOrganizations.Name = "cbToggleOrganizations";
-            this.cbToggleOrganizations.Size = new System.Drawing.Size(69, 17);
-            this.cbToggleOrganizations.TabIndex = 4;
-            this.cbToggleOrganizations.Text = "Select all";
-            this.cbToggleOrganizations.UseVisualStyleBackColor = true;
-            this.cbToggleOrganizations.CheckedChanged += new System.EventHandler(this.cbToggleOrganizations_CheckedChanged);
             // 
             // SelectOrganizations
             // 
