@@ -30,7 +30,7 @@
                 item.Checked = cb.Checked;
             }
 
-            this.lvOrganizations_ItemSelectionChanged(null, null);
+            this.UpdateCompareSolutionsButton();
         }
 
         private void cbToggleSolutions_CheckedChanged(object sender, EventArgs e)
@@ -42,7 +42,7 @@
                 item.Checked = cb.Checked;
             }
 
-            this.lvSolutions_ItemSelectionChanged(null, null);
+            this.UpdateCompareSolutionsButton();
         }
 
         private void lvOrganizations_ItemChecked(object sender, ItemCheckedEventArgs e)
@@ -59,11 +59,13 @@
 
         private void lvOrganizations_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            foreach (var item in this.lvSolutions.Items.Cast<ListViewItem>().Where(x => x.Selected == true))
+            var list = (ListView)sender;
+
+            foreach (var item in list.Items.Cast<ListViewItem>().Where(x => x.Selected == true))
             {
-                this.lvOrganizations.ItemChecked -= this.lvOrganizations_ItemChecked;
+                list.ItemChecked -= this.lvOrganizations_ItemChecked;
                 item.Checked = !item.Checked;
-                this.lvOrganizations.ItemChecked += this.lvOrganizations_ItemChecked;
+                list.ItemChecked += this.lvOrganizations_ItemChecked;
             }
 
             this.UpdateCompareSolutionsButton();
@@ -83,32 +85,16 @@
 
         private void lvSolutions_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            foreach (var item in this.lvSolutions.Items.Cast<ListViewItem>().Where(x => x.Selected == true))
+            var list = (ListView)sender;
+
+            foreach (var item in list.Items.Cast<ListViewItem>().Where(x => x.Selected == true))
             {
-                this.lvSolutions.ItemChecked -= this.lvSolutions_ItemChecked;
+                list.ItemChecked -= this.lvSolutions_ItemChecked;
                 item.Checked = !item.Checked;
-                this.lvSolutions.ItemChecked += this.lvSolutions_ItemChecked;
+                list.ItemChecked += this.lvSolutions_ItemChecked;
             }
 
             this.UpdateCompareSolutionsButton();
-        }
-
-        private void UpdateCompareSolutionsButton()
-        {
-            var button = Helpers.GetCompareSolutionButton(this);
-
-            if (button != null)
-            {
-
-                if (this.lvSolutions.CheckedItems.Count > 0 && this.lvOrganizations.CheckedItems.Count > 0)
-                {
-                    button.Enabled = true;
-                }
-                else
-                {
-                    button.Enabled = false;
-                }
-            }
         }
 
         private void SelectEnvironments_ParentChanged(object sender, EventArgs e)
@@ -169,8 +155,25 @@
                     }
                 }
 
-                this.lvOrganizations_ItemSelectionChanged(null, null);
-                this.lvSolutions_ItemSelectionChanged(null, null);
+                this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
+                this.lvSolutions_ItemSelectionChanged(this.lvSolutions, null);
+            }
+        }
+
+        private void UpdateCompareSolutionsButton()
+        {
+            var button = Helpers.GetCompareSolutionButton(this);
+
+            if (button != null)
+            {
+                if (this.lvSolutions.CheckedItems.Count > 0 && this.lvOrganizations.CheckedItems.Count > 0)
+                {
+                    button.Enabled = true;
+                }
+                else
+                {
+                    button.Enabled = false;
+                }
             }
         }
 
