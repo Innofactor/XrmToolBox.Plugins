@@ -25,10 +25,12 @@
         {
             var cb = (CheckBox)sender;
 
+            this.lvOrganizations.ItemChecked -= lvOrganizations_ItemChecked;
             foreach (var item in this.lvOrganizations.Items.Cast<ListViewItem>().ToArray())
             {
                 item.Checked = cb.Checked;
             }
+            this.lvOrganizations.ItemChecked += lvOrganizations_ItemChecked;
 
             this.UpdateCompareSolutionsButton();
         }
@@ -37,10 +39,12 @@
         {
             var cb = (CheckBox)sender;
 
+            this.lvSolutions.ItemChecked -= lvSolutions_ItemChecked;
             foreach (var item in this.lvSolutions.Items.Cast<ListViewItem>().ToArray())
             {
                 item.Checked = cb.Checked;
             }
+            this.lvSolutions.ItemChecked += lvSolutions_ItemChecked;
 
             this.UpdateCompareSolutionsButton();
         }
