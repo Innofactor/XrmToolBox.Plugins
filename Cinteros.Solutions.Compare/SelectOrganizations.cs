@@ -64,9 +64,7 @@
 
             foreach (var item in list.Items.Cast<ListViewItem>().Where(x => x.Selected == true))
             {
-                list.ItemChecked -= this.lvOrganizations_ItemChecked;
                 item.Checked = !item.Checked;
-                list.ItemChecked += this.lvOrganizations_ItemChecked;
             }
 
             this.UpdateCompareSolutionsButton();
@@ -85,7 +83,7 @@
         {
             if (!status)
             {
-                this.cbToggleSolutions.Checked = false;
+                switcher.Checked = false;
             }
             else
             {
@@ -102,9 +100,7 @@
 
             foreach (var item in list.Items.Cast<ListViewItem>().Where(x => x.Selected == true))
             {
-                list.ItemChecked -= this.lvSolutions_ItemChecked;
                 item.Checked = !item.Checked;
-                list.ItemChecked += this.lvSolutions_ItemChecked;
             }
 
             this.UpdateCompareSolutionsButton();
