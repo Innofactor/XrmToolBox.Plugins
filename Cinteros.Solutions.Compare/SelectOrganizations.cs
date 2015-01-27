@@ -52,18 +52,7 @@
         private void lvOrganizations_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             this.cbToggleOrganizations.CheckedChanged -= this.cbToggleOrganizations_CheckedChanged;
-            if (!e.Item.Checked)
-            {
-                this.cbToggleOrganizations.Checked = false;
-            }
-            else
-            {
-                var list = (ListView)sender;
-                if (list.CheckedItems.Count == list.Items.Count)
-                {
-                    this.cbToggleOrganizations.Checked = true;
-                }
-            }
+            this.UpdateSwitcher((ListView)sender, this.cbToggleOrganizations, e.Item.Checked);
             this.cbToggleOrganizations.CheckedChanged += this.cbToggleOrganizations_CheckedChanged;
 
             this.UpdateCompareSolutionsButton();
@@ -86,21 +75,25 @@
         private void lvSolutions_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             this.cbToggleSolutions.CheckedChanged -= this.cbToggleSolutions_CheckedChanged;
-            if (!e.Item.Checked)
+            this.UpdateSwitcher((ListView)sender, this.cbToggleSolutions, e.Item.Checked);
+            this.cbToggleSolutions.CheckedChanged += this.cbToggleSolutions_CheckedChanged;
+
+            this.UpdateCompareSolutionsButton();
+        }
+
+        private void UpdateSwitcher(ListView list, CheckBox switcher, bool status)
+        {
+            if (!status)
             {
                 this.cbToggleSolutions.Checked = false;
             }
             else
             {
-                var list = (ListView)sender;
                 if (list.CheckedItems.Count == list.Items.Count)
                 {
-                    this.cbToggleSolutions.Checked = true;
+                    switcher.Checked = true;
                 }
             }
-            this.cbToggleSolutions.CheckedChanged += this.cbToggleSolutions_CheckedChanged;
-
-            this.UpdateCompareSolutionsButton();
         }
 
         private void lvSolutions_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
