@@ -51,12 +51,20 @@
 
         private void lvOrganizations_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
+            this.cbToggleOrganizations.CheckedChanged -= this.cbToggleOrganizations_CheckedChanged;
             if (!e.Item.Checked)
             {
-                this.cbToggleOrganizations.CheckedChanged -= this.cbToggleOrganizations_CheckedChanged;
                 this.cbToggleOrganizations.Checked = false;
-                this.cbToggleOrganizations.CheckedChanged += this.cbToggleOrganizations_CheckedChanged;
             }
+            else
+            {
+                var list = (ListView)sender;
+                if (list.CheckedItems.Count == list.Items.Count)
+                {
+                    this.cbToggleOrganizations.Checked = true;
+                }
+            }
+            this.cbToggleOrganizations.CheckedChanged += this.cbToggleOrganizations_CheckedChanged;
 
             this.UpdateCompareSolutionsButton();
         }
@@ -77,12 +85,20 @@
 
         private void lvSolutions_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
+            this.cbToggleSolutions.CheckedChanged -= this.cbToggleSolutions_CheckedChanged;
             if (!e.Item.Checked)
             {
-                this.cbToggleSolutions.CheckedChanged -= this.cbToggleSolutions_CheckedChanged;
                 this.cbToggleSolutions.Checked = false;
-                this.cbToggleSolutions.CheckedChanged += this.cbToggleSolutions_CheckedChanged;
             }
+            else
+            {
+                var list = (ListView)sender;
+                if (list.CheckedItems.Count == list.Items.Count)
+                {
+                    this.cbToggleSolutions.Checked = true;
+                }
+            }
+            this.cbToggleSolutions.CheckedChanged += this.cbToggleSolutions_CheckedChanged;
 
             this.UpdateCompareSolutionsButton();
         }
