@@ -8,7 +8,108 @@
 
     public partial class SelectOrganizations : UserControl
     {
+        #region Public Constructors
+
+        public SelectOrganizations()
+        {
+            InitializeComponent();
+
+            this.ParentChanged += this.SelectEnvironments_ParentChanged;
+        }
+
+        #endregion Public Constructors
+
         #region Private Methods
+
+        private void cbToggleOrganizations_CheckedChanged(object sender, EventArgs e)
+        {
+            var cb = (CheckBox)sender;
+
+            foreach (var item in this.lvOrganizations.Items.Cast<ListViewItem>().ToArray())
+            {
+                item.Checked = cb.Checked;
+            }
+
+            this.lvOrganizations_ItemSelectionChanged(null, null);
+        }
+
+        private void cbToggleSolutions_CheckedChanged(object sender, EventArgs e)
+        {
+            var cb = (CheckBox)sender;
+
+            foreach (var item in this.lvSolutions.Items.Cast<ListViewItem>().ToArray())
+            {
+                item.Checked = cb.Checked;
+            }
+
+            this.lvSolutions_ItemSelectionChanged(null, null);
+        }
+
+        private void lvOrganizations_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            if (!e.Item.Checked)
+            {
+                this.cbToggleOrganizations.CheckedChanged -= this.cbToggleOrganizations_CheckedChanged;
+                this.cbToggleOrganizations.Checked = false;
+                this.cbToggleOrganizations.CheckedChanged += this.cbToggleOrganizations_CheckedChanged;
+            }
+
+            this.UpdateCompareSolutionsButton();
+        }
+
+        private void lvOrganizations_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            foreach (var item in this.lvSolutions.Items.Cast<ListViewItem>().Where(x => x.Selected == true))
+            {
+                this.lvOrganizations.ItemChecked -= this.lvOrganizations_ItemChecked;
+                item.Checked = !item.Checked;
+                this.lvOrganizations.ItemChecked += this.lvOrganizations_ItemChecked;
+            }
+
+            this.UpdateCompareSolutionsButton();
+        }
+
+        private void lvSolutions_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            if (!e.Item.Checked)
+            {
+                this.cbToggleSolutions.CheckedChanged -= this.cbToggleSolutions_CheckedChanged;
+                this.cbToggleSolutions.Checked = false;
+                this.cbToggleSolutions.CheckedChanged += this.cbToggleSolutions_CheckedChanged;
+            }
+
+            this.UpdateCompareSolutionsButton();
+        }
+
+        private void lvSolutions_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            foreach (var item in this.lvSolutions.Items.Cast<ListViewItem>().Where(x => x.Selected == true))
+            {
+                this.lvSolutions.ItemChecked -= this.lvSolutions_ItemChecked;
+                item.Checked = !item.Checked;
+                this.lvSolutions.ItemChecked += this.lvSolutions_ItemChecked;
+            }
+
+            this.UpdateCompareSolutionsButton();
+        }
+
+        private void UpdateCompareSolutionsButton()
+        {
+            var button = Helpers.GetCompareSolutionButton(this);
+
+            if (button != null)
+            {
+
+                if (this.lvSolutions.CheckedItems.Count > 0 && this.lvOrganizations.CheckedItems.Count > 0)
+                {
+                    button.Enabled = true;
+                }
+                else
+                {
+                    button.Enabled = false;
+                }
+            }
+        }
 
         private void SelectEnvironments_ParentChanged(object sender, EventArgs e)
         {
@@ -74,124 +175,5 @@
         }
 
         #endregion Private Methods
-
-        #region Public Constructors
-
-        public SelectOrganizations()
-        {
-            InitializeComponent();
-
-            this.ParentChanged += SelectEnvironments_ParentChanged;
-        }
-
-        #endregion Public Constructors
-
-        private void cbToggleOrganizations_CheckedChanged(object sender, EventArgs e)
-        {
-            var cb = (CheckBox)sender;
-
-            foreach (var item in this.lvOrganizations.Items.Cast<ListViewItem>().ToArray())
-            {
-                item.Checked = cb.Checked;
-            }
-
-            lvOrganizations_ItemSelectionChanged(null, null);
-        }
-
-        private void cbToggleSolutions_CheckedChanged(object sender, EventArgs e)
-        {
-            var cb = (CheckBox)sender;
-
-            foreach (var item in this.lvSolutions.Items.Cast<ListViewItem>().ToArray())
-            {
-                item.Checked = cb.Checked;
-            }
-
-            lvSolutions_ItemSelectionChanged(null, null);
-        }
-
-        private void lvOrganizations_ItemChecked(object sender, ItemCheckedEventArgs e)
-        {
-            if (!e.Item.Checked)
-            {
-                this.cbToggleOrganizations.CheckedChanged -= this.cbToggleOrganizations_CheckedChanged;
-                this.cbToggleOrganizations.Checked = false;
-                this.cbToggleOrganizations.CheckedChanged += this.cbToggleOrganizations_CheckedChanged;
-            }
-
-            lvOrganizations_ItemSelectionChanged(null, null);
-        }
-
-        private void lvOrganizations_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-            var result1 = this.Parent.Controls.Find("tsMenu", true);
-
-            if (result1.Length > 0)
-            {
-                var menu = (ToolStrip)result1[0];
-                var button = menu.Items.Find("tsbCompareSolutions", true).FirstOrDefault();
-
-                if (button != null)
-                {
-                    foreach (var item in this.lvSolutions.Items.Cast<ListViewItem>().Where(x => x.Selected == true))
-                    {
-                        this.lvOrganizations.ItemChecked -= this.lvOrganizations_ItemChecked;
-                        item.Checked = !item.Checked;
-                        this.lvOrganizations.ItemChecked += this.lvOrganizations_ItemChecked;
-                    }
-
-                    if (this.lvSolutions.CheckedItems.Count > 0 && this.lvOrganizations.CheckedItems.Count > 0)
-                    {
-                        button.Enabled = true;
-                    }
-                    else
-                    {
-                        button.Enabled = false;
-                    }
-                }
-            }
-        }
-
-        private void lvSolutions_ItemChecked(object sender, ItemCheckedEventArgs e)
-        {
-            if (!e.Item.Checked)
-            {
-                this.cbToggleSolutions.CheckedChanged -= this.cbToggleSolutions_CheckedChanged;
-                this.cbToggleSolutions.Checked = false;
-                this.cbToggleSolutions.CheckedChanged += this.cbToggleSolutions_CheckedChanged;
-            }
-
-            lvSolutions_ItemSelectionChanged(null, null);
-        }
-
-        private void lvSolutions_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-            var result1 = this.Parent.Controls.Find("tsMenu", true);
-
-            if (result1.Length > 0)
-            {
-                var menu = (ToolStrip)result1[0];
-                var button = menu.Items.Find("tsbCompareSolutions", true).FirstOrDefault();
-
-                if (button != null)
-                {
-                    foreach (var item in this.lvSolutions.Items.Cast<ListViewItem>().Where(x => x.Selected == true))
-                    {
-                        this.lvSolutions.ItemChecked -= this.lvSolutions_ItemChecked;
-                        item.Checked = !item.Checked;
-                        this.lvSolutions.ItemChecked += this.lvSolutions_ItemChecked;
-                    }
-
-                    if (this.lvSolutions.CheckedItems.Count > 0 && this.lvOrganizations.CheckedItems.Count > 0)
-                    {
-                        button.Enabled = true;
-                    }
-                    else
-                    {
-                        button.Enabled = false;
-                    }
-                }
-            }
-        }
     }
 }
