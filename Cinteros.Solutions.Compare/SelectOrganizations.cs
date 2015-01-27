@@ -50,6 +50,11 @@
             this.UpdateCompareSolutionsButton();
         }
 
+        /// <summary>
+        /// Event handler capturing changes in organization selections
+        /// </summary>
+        /// <param name="sender">Organizations list view</param>
+        /// <param name="e">Event arguments</param>
         private void lvOrganizations_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             this.cbToggleOrganizations.CheckedChanged -= this.cbToggleOrganizations_CheckedChanged;
@@ -59,6 +64,11 @@
             this.UpdateCompareSolutionsButton();
         }
 
+        /// <summary>
+        /// Event handler capturing changes in organization selections
+        /// </summary>
+        /// <param name="sender">Organizations list view</param>
+        /// <param name="e">Event arguments</param>
         private void lvOrganizations_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             var list = (ListView)sender;
@@ -71,6 +81,11 @@
             this.UpdateCompareSolutionsButton();
         }
 
+        /// <summary>
+        /// Event handler capturing changes in solution selections
+        /// </summary>
+        /// <param name="sender">Solutions list view</param>
+        /// <param name="e">Event arguments</param>
         private void lvSolutions_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             this.cbToggleSolutions.CheckedChanged -= this.cbToggleSolutions_CheckedChanged;
@@ -80,6 +95,11 @@
             this.UpdateCompareSolutionsButton();
         }
 
+        /// <summary>
+        /// Event handler capturing changes in solution selections
+        /// </summary>
+        /// <param name="sender">Solutions list view</param>
+        /// <param name="e">Event arguments</param>
         private void lvSolutions_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             var list = (ListView)sender;
@@ -92,6 +112,11 @@
             this.UpdateCompareSolutionsButton();
         }
 
+        /// <summary>
+        /// Event handler capturing when parent control is changed (current conntrol is beeing added to the plugin's main form)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectEnvironments_ParentChanged(object sender, EventArgs e)
         {
             var parent = (MainScreen)this.Parent;
@@ -155,6 +180,9 @@
             }
         }
 
+        /// <summary>
+        /// Updates button on tool depending on currently checked items
+        /// </summary>
         private void UpdateCompareSolutionsButton()
         {
             var button = Helpers.GetCompareSolutionButton(this);
@@ -172,6 +200,12 @@
             }
         }
 
+        /// <summary>
+        /// Updates 'Select all' button, depending on currently checked items 
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="switcher"></param>
+        /// <param name="status"></param>
         private void UpdateSwitcher(ListView list, CheckBox switcher, bool status)
         {
             if (!status)
