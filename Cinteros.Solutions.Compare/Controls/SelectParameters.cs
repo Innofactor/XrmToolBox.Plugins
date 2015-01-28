@@ -55,7 +55,7 @@
             this.UpdateCompareSolutionsButton();
         }
 
-        private void GetOrganizations(ConnectionDetail[] connections)
+        private void SetOrganizations(ConnectionDetail[] connections)
         {
             this.lvOrganizations.Items.Clear();
 
@@ -186,12 +186,12 @@
                     this.lvReference.Items.Add(new ListViewItem(row));
 
                     // All connections except currently connected one
-                    this.GetOrganizations(new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
+                    this.SetOrganizations(new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
                 }
                 else
                 {
                     // All connections
-                    this.GetOrganizations(new ConnectionManager().ConnectionsList.Connections.ToArray<ConnectionDetail>());
+                    this.SetOrganizations(new ConnectionManager().ConnectionsList.Connections.ToArray<ConnectionDetail>());
                 }
 
                 this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
