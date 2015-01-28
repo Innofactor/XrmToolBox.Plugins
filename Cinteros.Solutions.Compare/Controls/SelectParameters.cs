@@ -20,7 +20,7 @@
 
         void SelectParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
         {
-            throw new NotImplementedException();
+            this.SetReference(e.ConnectionDetail);
         }
 
         #endregion Public Constructors
@@ -177,13 +177,7 @@
                         }
                     );
 
-                    row = new string[] {
-                        parent.ConnectionDetail.OrganizationFriendlyName,
-                        parent.ConnectionDetail.ServerName,
-                    };
-
-                    this.lvReference.Items.Clear();
-                    this.lvReference.Items.Add(new ListViewItem(row));
+                    this.SetReference(parent.ConnectionDetail);
 
                     // All connections except currently connected one
                     this.SetOrganizations(new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
@@ -197,6 +191,17 @@
                 this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
                 this.lvSolutions_ItemSelectionChanged(this.lvSolutions, null);
             }
+        }
+
+        private void SetReference(ConnectionDetail connection)
+        {
+            var row = new string[] {
+                        connection.OrganizationFriendlyName,
+                        connection.ServerName,
+                    };
+
+            this.lvReference.Items.Clear();
+            this.lvReference.Items.Add(new ListViewItem(row));
         }
 
         /// <summary>
