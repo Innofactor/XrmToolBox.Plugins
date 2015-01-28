@@ -9,6 +9,45 @@
 
     public partial class SelectParameters : UserControl
     {
+        #region Public Constructors
+
+        public SelectParameters()
+        {
+            InitializeComponent();
+
+            this.ParentChanged += this.SelectEnvironments_ParentChanged;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public Solution[] Solutions
+        {
+            get
+            {
+                return this.lvSolutions.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (Solution)x.Tag).ToArray<Solution>();
+            }
+            set
+            {
+                this.lvSolutions.Items.Clear();
+                foreach (var solution in value)
+                {
+                    var row = new string[] {
+                        solution.FriendlyName,
+                        solution.Version.ToString(),
+                    };
+
+                    var item = new ListViewItem(row);
+                    item.Tag = solution;
+
+                    this.lvSolutions.Items.Add(item);
+                }
+            }
+        }
+
+        #endregion Public Properties
+
         #region Private Methods
 
         private void cbToggleOrganizations_CheckedChanged(object sender, EventArgs e)
@@ -184,19 +223,7 @@
                 },
                 (a) =>  // Cleanup when work has completed
                 {
-                    this.lvSolutions.Items.Clear();
-                    foreach (var solution in (Solution[])a.Result)
-                    {
-                        var row = new string[] {
-                            solution.FriendlyName,
-                            solution.Version.ToString(),
-                        };
-
-                        var item = new ListViewItem(row);
-                        item.Tag = solution;
-
-                        this.lvSolutions.Items.Add(item);
-                    }
+                    this.Solutions = (Solution[])a.Result;
                 }
             );
 
@@ -252,28 +279,5 @@
         }
 
         #endregion Private Methods
-
-        #region Public Constructors
-
-        public SelectParameters()
-        {
-            InitializeComponent();
-
-            this.ParentChanged += this.SelectEnvironments_ParentChanged;
-        }
-
-        #endregion Public Constructors
-
-        #region Public Properties
-
-        public Solution[] Solutions
-        {
-            get
-            {
-                return this.lvSolutions.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (Solution)x.Tag).ToArray<Solution>();
-            }
-        }
-
-        #endregion Public Properties
     }
 }
