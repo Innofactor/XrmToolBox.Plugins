@@ -151,5 +151,12 @@
 
         #endregion Private Methods
 
+        private void tsbSave_Click(object sender, EventArgs e)
+        {
+            var save = new SaveFileDialog();
+            save.FileName = "solutions.ref";
+            save.ShowDialog();
+        }
+
     }
 }

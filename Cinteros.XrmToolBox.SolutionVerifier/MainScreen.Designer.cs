@@ -116,6 +116,7 @@
             this.tsbSave.Name = "tsbSave";
             this.tsbSave.Size = new System.Drawing.Size(145, 22);
             this.tsbSave.Text = "Save to reference file...";
+            this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
             // toolStripSeparator2
             // 
