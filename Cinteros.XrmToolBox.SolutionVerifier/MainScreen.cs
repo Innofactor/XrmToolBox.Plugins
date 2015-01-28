@@ -137,7 +137,7 @@
             {
                 if (this.SubControl.GetType() == typeof(SelectParameters))
                 {
-                    File.WriteAllText(((SaveFileDialog)sender).FileName, ((SelectParameters)this.SubControl).Solutions.CSV());
+                    ((SelectParameters)this.SubControl).Solutions.ToXml().Save(((SaveFileDialog)sender).FileName);
                 }
             }
         }

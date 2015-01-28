@@ -1,26 +1,43 @@
 ﻿namespace Cinteros.XrmToolbox.SolutionVerifier.Utils
 {
-    using System;
-    using System.Text;
+    using System.Xml;
 
     public static class Extensions
     {
         #region Public Methods
 
-        public static string CSV(this Solution[] solutions)
+        public static XmlDocument ToXml(this Solution[] solutions)
         {
-            var builder = new StringBuilder();
+            var document = new XmlDocument();
 
-            builder.Append("FriendlyName,UniqueName,Version");
-            builder.Append(Environment.NewLine);
+            document.AppendChild(document.CreateXmlDeclaration("1.0", "UTF-8", "yes"));
+
+            var root = document.CreateElement("solutions");
+            document.AppendChild(root);
+
+            XmlElement element;
+            XmlAttribute attribute;
 
             foreach (var solution in solutions)
             {
-                builder.Append(string.Format("{0},{1},{2}", solution.FriendlyName, solution.UniqueName, solution.Version.ToString()));
-                builder.Append(Environment.NewLine);
+                element = document.CreateElement("solution");
+
+                attribute = document.CreateAttribute("unique-name");
+                attribute.Value = solution.UniqueName;
+                element.Attributes.Append(attribute);
+
+                attribute = document.CreateAttribute("friendly-name");
+                attribute.Value = solution.FriendlyName;
+                element.Attributes.Append(attribute);
+
+                attribute = document.CreateAttribute("version");
+                attribute.Value = solution.Version.ToString();
+                element.Attributes.Append(attribute);
+
+                root.AppendChild(element);
             }
 
-            return builder.ToString();
+            return document;
         }
 
         #endregion Public Methods
