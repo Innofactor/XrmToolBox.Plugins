@@ -123,11 +123,11 @@
 
             if (parent != null)
             {
+                string[] row;
+                ListViewItem item;
+
                 if (parent.ConnectionDetail != null)
                 {
-                    string[] row;
-                    ListViewItem item;
-
                     parent.WorkAsync(string.Format("Getting solutions information from '{0}'...", parent.ConnectionDetail.OrganizationFriendlyName),
                         (a) => // Work To Do Asynchronously
                         {
@@ -135,7 +135,7 @@
                         },
                         (a) =>  // Cleanup when work has completed
                         {
-                            lvSolutions.Items.Clear();
+                            this.lvSolutions.Items.Clear();
                             foreach (var solution in (Solution[])a.Result)
                             {
                                 row = new string[] {
@@ -146,7 +146,7 @@
                                 item = new ListViewItem(row);
                                 item.Tag = solution;
 
-                                lvSolutions.Items.Add(item);
+                                this.lvSolutions.Items.Add(item);
                             }
                         }
                     );
@@ -156,28 +156,37 @@
                         parent.ConnectionDetail.ServerName,
                     };
 
-                    lvReference.Items.Clear();
-                    lvReference.Items.Add(new ListViewItem(row));
+                    this.lvReference.Items.Clear();
+                    this.lvReference.Items.Add(new ListViewItem(row));
 
-                    lvOrganizations.Items.Clear();
-
-                    foreach (var connection in new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId))
-                    {
-                        row = new string[] {
-                            connection.OrganizationFriendlyName,
-                            connection.ServerName,
-                        };
-
-                        item = new ListViewItem(row);
-                        item.Tag = connection;
-
-                        lvOrganizations.Items.Add(item);
-                    }
+                    this.GetOrganizations(new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
                 }
-
-                this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
-                this.lvSolutions_ItemSelectionChanged(this.lvSolutions, null);
+                else
+                {
+                    this.GetOrganizations(new ConnectionManager().ConnectionsList.Connections.ToArray<ConnectionDetail>());
+                }
             }
+        }
+
+        private void GetOrganizations(ConnectionDetail[] connections)
+        {
+            this.lvOrganizations.Items.Clear();
+
+            foreach (var connection in connections)
+            {
+                var row = new string[] {
+                    connection.OrganizationFriendlyName,
+                    connection.ServerName,
+                };
+
+                var item = new ListViewItem(row);
+                item.Tag = connection;
+
+                lvOrganizations.Items.Add(item);
+            }
+
+            this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
+            this.lvSolutions_ItemSelectionChanged(this.lvSolutions, null);
         }
 
         /// <summary>
