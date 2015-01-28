@@ -39,7 +39,7 @@
             }
             this.lvOrganizations.ItemChecked += lvOrganizations_ItemChecked;
 
-            this.UpdateCompareSolutionsButton();
+            this.UpdateCompareButton();
         }
 
         private void cbToggleSolutions_CheckedChanged(object sender, EventArgs e)
@@ -53,7 +53,7 @@
             }
             this.lvSolutions.ItemChecked += lvSolutions_ItemChecked;
 
-            this.UpdateCompareSolutionsButton();
+            this.UpdateCompareButton();
         }
 
         private void SetOrganizations(ConnectionDetail[] connections)
@@ -85,7 +85,7 @@
             this.UpdateSwitcher((ListView)sender, this.cbToggleOrganizations, e.Item.Checked);
             this.cbToggleOrganizations.CheckedChanged += this.cbToggleOrganizations_CheckedChanged;
 
-            this.UpdateCompareSolutionsButton();
+            this.UpdateCompareButton();
         }
 
         /// <summary>
@@ -102,7 +102,7 @@
                 item.Checked = !item.Checked;
             }
 
-            this.UpdateCompareSolutionsButton();
+            this.UpdateCompareButton();
         }
 
         /// <summary>
@@ -116,7 +116,7 @@
             this.UpdateSwitcher((ListView)sender, this.cbToggleSolutions, e.Item.Checked);
             this.cbToggleSolutions.CheckedChanged += this.cbToggleSolutions_CheckedChanged;
 
-            this.UpdateCompareSolutionsButton();
+            this.UpdateCompareButton();
         }
 
         /// <summary>
@@ -133,7 +133,7 @@
                 item.Checked = !item.Checked;
             }
 
-            this.UpdateCompareSolutionsButton();
+            this.UpdateCompareButton();
         }
 
         /// <summary>
@@ -153,6 +153,9 @@
                 if (parent.ConnectionDetail != null)
                 {
                     this.SetSolutions(parent);
+
+                    // All connections except currently connected one
+                    this.SetOrganizations(new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
                 }
                 else
                 {
@@ -182,9 +185,9 @@
                     foreach (var solution in (Solution[])a.Result)
                     {
                         var row = new string[] {
-                                    solution.FriendlyName,
-                                    solution.Version.ToString(),
-                                };
+                            solution.FriendlyName,
+                            solution.Version.ToString(),
+                        };
 
                         var item = new ListViewItem(row);
                         item.Tag = solution;
@@ -195,9 +198,6 @@
             );
 
             this.SetReference(plugin.ConnectionDetail);
-
-            // All connections except currently connected one
-            this.SetOrganizations(new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != plugin.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
         }
 
         /// <summary>
@@ -207,9 +207,9 @@
         private void SetReference(ConnectionDetail connection)
         {
             var row = new string[] {
-                        connection.OrganizationFriendlyName,
-                        connection.ServerName,
-                    };
+                connection.OrganizationFriendlyName,
+                connection.ServerName,
+            };
 
             this.lvReference.Items.Clear();
             this.lvReference.Items.Add(new ListViewItem(row));
@@ -218,7 +218,7 @@
         /// <summary>
         /// Updates button on tool depending on currently checked items
         /// </summary>
-        private void UpdateCompareSolutionsButton()
+        private void UpdateCompareButton()
         {
             ToolStripButton button = null;
 
@@ -226,7 +226,7 @@
 
             if (menu != null)
             {
-                button = menu.Items.Find("tsbCompareSolutions", true).Cast<ToolStripButton>().FirstOrDefault();
+                button = menu.Items.Find("tsbCompare", true).Cast<ToolStripButton>().FirstOrDefault();
             }
 
             if (button != null)
