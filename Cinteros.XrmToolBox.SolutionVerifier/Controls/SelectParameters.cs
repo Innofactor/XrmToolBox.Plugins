@@ -9,23 +9,6 @@
 
     public partial class SelectParameters : UserControl
     {
-        #region Public Constructors
-
-        public SelectParameters()
-        {
-            InitializeComponent();
-
-            this.ParentChanged += this.SelectEnvironments_ParentChanged;
-        }
-
-        void SelectParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
-        {
-            this.SetSolutions((MainScreen)sender);
-
-        }
-
-        #endregion Public Constructors
-
         #region Private Methods
 
         private void cbToggleOrganizations_CheckedChanged(object sender, EventArgs e)
@@ -54,24 +37,6 @@
             this.lvSolutions.ItemChecked += lvSolutions_ItemChecked;
 
             this.UpdateCompareButton();
-        }
-
-        private void SetOrganizations(ConnectionDetail[] connections)
-        {
-            this.lvOrganizations.Items.Clear();
-
-            foreach (var connection in connections)
-            {
-                var row = new string[] {
-                    connection.OrganizationFriendlyName,
-                    connection.ServerName,
-                };
-
-                var item = new ListViewItem(row);
-                item.Tag = connection;
-
-                this.lvOrganizations.Items.Add(item);
-            }
         }
 
         /// <summary>
@@ -145,7 +110,7 @@
         private void SelectEnvironments_ParentChanged(object sender, EventArgs e)
         {
             var parent = (MainScreen)this.Parent;
-            
+
             if (parent != null)
             {
                 parent.ConnectionUpdated += SelectParameters_ConnectionUpdated;
@@ -166,6 +131,44 @@
                 this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
                 this.lvSolutions_ItemSelectionChanged(this.lvSolutions, null);
             }
+        }
+
+        private void SelectParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
+        {
+            this.SetSolutions((MainScreen)sender);
+        }
+
+        private void SetOrganizations(ConnectionDetail[] connections)
+        {
+            this.lvOrganizations.Items.Clear();
+
+            foreach (var connection in connections)
+            {
+                var row = new string[] {
+                    connection.OrganizationFriendlyName,
+                    connection.ServerName,
+                };
+
+                var item = new ListViewItem(row);
+                item.Tag = connection;
+
+                this.lvOrganizations.Items.Add(item);
+            }
+        }
+
+        /// <summary>
+        /// Set reference organization information
+        /// </summary>
+        /// <param name="connection">Current connection</param>
+        private void SetReference(ConnectionDetail connection)
+        {
+            var row = new string[] {
+                connection.OrganizationFriendlyName,
+                connection.ServerName,
+            };
+
+            this.lvReference.Items.Clear();
+            this.lvReference.Items.Add(new ListViewItem(row));
         }
 
         /// <summary>
@@ -198,21 +201,6 @@
             );
 
             this.SetReference(plugin.ConnectionDetail);
-        }
-
-        /// <summary>
-        /// Set reference organization information
-        /// </summary>
-        /// <param name="connection">Current connection</param>
-        private void SetReference(ConnectionDetail connection)
-        {
-            var row = new string[] {
-                connection.OrganizationFriendlyName,
-                connection.ServerName,
-            };
-
-            this.lvReference.Items.Clear();
-            this.lvReference.Items.Add(new ListViewItem(row));
         }
 
         /// <summary>
@@ -265,6 +253,19 @@
 
         #endregion Private Methods
 
+        #region Public Constructors
+
+        public SelectParameters()
+        {
+            InitializeComponent();
+
+            this.ParentChanged += this.SelectEnvironments_ParentChanged;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
         public Solution[] Solutions
         {
             get
@@ -272,5 +273,7 @@
                 return this.lvSolutions.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (Solution)x.Tag).ToArray<Solution>();
             }
         }
+
+        #endregion Public Properties
     }
 }
