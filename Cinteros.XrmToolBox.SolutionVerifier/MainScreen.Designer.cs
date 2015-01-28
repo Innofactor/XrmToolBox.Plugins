@@ -131,7 +131,7 @@
             this.tsbCompare.Name = "tsbCompare";
             this.tsbCompare.Size = new System.Drawing.Size(127, 22);
             this.tsbCompare.Text = "Compare solutions";
-            this.tsbCompare.Click += new System.EventHandler(this.tsbCompareSolutions_Click);
+            this.tsbCompare.Click += new System.EventHandler(this.tsbCompare_Click);
             // 
             // MainScreen
             // 
@@ -140,7 +140,7 @@
             this.Controls.Add(this.tsMenu);
             this.Name = "MainScreen";
             this.Size = new System.Drawing.Size(600, 400);
-            this.Load += new System.EventHandler(this.EnvironmentsSelector_Load);
+            this.Load += new System.EventHandler(this.MainScreen_Load);
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.ResumeLayout(false);

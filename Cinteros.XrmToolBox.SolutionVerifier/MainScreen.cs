@@ -59,7 +59,7 @@
             this.SubControl = control;
         }
 
-        private void EnvironmentsSelector_Load(object sender, EventArgs e)
+        private void MainScreen_Load(object sender, EventArgs e)
         {
             this.AddSubControl(new SelectParameters());
         }
@@ -159,7 +159,7 @@
             base.CloseToolPrompt();
         }
 
-        private void tsbCompareSolutions_Click(object sender, EventArgs e)
+        private void tsbCompare_Click(object sender, EventArgs e)
         {
             this.LoadSolutionMatrix();
         }
