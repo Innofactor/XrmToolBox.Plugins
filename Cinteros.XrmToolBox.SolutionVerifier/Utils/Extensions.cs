@@ -11,6 +11,7 @@
             var document = new XmlDocument();
 
             document.AppendChild(document.CreateXmlDeclaration("1.0", "UTF-8", "yes"));
+            document.AppendChild(document.CreateComment("Reference solutions"));
 
             var root = document.CreateElement("solutions");
             document.AppendChild(root);

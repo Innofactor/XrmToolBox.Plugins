@@ -169,7 +169,7 @@
             var save = new SaveFileDialog();
             save.FileOk += save_FileOk;
 
-            save.FileName = "solutions.csv";
+            save.FileName = "reference-solutions.xml";
             save.ShowDialog();
         }
     }
