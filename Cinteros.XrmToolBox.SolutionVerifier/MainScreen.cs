@@ -159,7 +159,7 @@
             var save = new SaveFileDialog();
             save.FileOk += save_FileOk;
 
-            save.FileName = "solutions.ref";
+            save.FileName = "solutions.csv";
             save.ShowDialog();
         }
 
