@@ -8,8 +8,11 @@
     using Microsoft.Xrm.Sdk;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
     using System.Linq;
     using System.Net;
+    using System.Runtime.Serialization;
     using System.Windows.Forms;
     using XrmToolBox;
 
@@ -154,9 +157,33 @@
         private void tsbSave_Click(object sender, EventArgs e)
         {
             var save = new SaveFileDialog();
+            save.FileOk += save_FileOk;
+
             save.FileName = "solutions.ref";
             save.ShowDialog();
         }
 
+        void save_FileOk(object sender, CancelEventArgs e)
+        {
+            if (!e.Cancel)
+            {
+                if (this.SubControl.GetType() == typeof(SelectParameters))
+                {
+                    var solutions = ((SelectParameters)this.SubControl).Solutions;
+
+                    FileStream stream = new FileStream(((SaveFileDialog)sender).FileName, FileMode.Create);
+
+                    var stream1 = new MemoryStream();
+                    var ser = new DataContractSerializer(solutions.GetType());
+                    ser.WriteObject(stream, solutions);
+
+                    //stream1.Position = 0;
+                    //StreamReader sr = new StreamReader(stream1);
+                    //var text = sr.ReadToEnd();
+
+                    //File.WriteAllText(((SaveFileDialog)sender).FileName, text);
+                }
+            }
+        }
     }
 }

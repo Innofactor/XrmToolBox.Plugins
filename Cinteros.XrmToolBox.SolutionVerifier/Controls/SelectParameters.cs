@@ -264,5 +264,13 @@
         }
 
         #endregion Private Methods
+
+        public Solution[] Solutions
+        {
+            get
+            {
+                return this.lvSolutions.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (Solution)x.Tag).ToArray<Solution>();
+            }
+        }
     }
 }
