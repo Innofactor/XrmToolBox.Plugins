@@ -131,7 +131,7 @@
         rOhPXQ4YI2mGAULyYABWhEsSCAjJgwHYyRAmVkBInlTAwAAAGRZmoO4izFMAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="tsbSelectOrganizations.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tsbBack.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJlSURBVDhPrZBdSFMBGIZPw7V0WU3TyX6g6QxpbqXrT5NC
@@ -147,7 +147,7 @@
         4AbwOgnwDfz1w9Fo6yiIqmSIP88Bj+QgzkBAcDIVaoNu9dv/B4L4A1xD6WgkMGbxAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="tsbCompareSolutions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tsbCompare.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJRSURBVDhPjZHta9JRGIZ/9A8kRQTRGLFiWNEHQ4jaItsq

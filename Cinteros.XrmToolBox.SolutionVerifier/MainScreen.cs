@@ -121,14 +121,14 @@
 
         private void ShowBackButton(bool status)
         {
-            var items = this.tsMenu.Items.Cast<ToolStripItem>().Where(x => (x != tsbClose) & (x != tsbSelectOrganizations) & (!x.GetType().Equals(typeof(ToolStripSeparator))));
+            var items = this.tsMenu.Items.Cast<ToolStripItem>().Where(x => (x != tsbClose) & (x != tsbBack) & (!x.GetType().Equals(typeof(ToolStripSeparator))));
 
             foreach (var item in items)
             {
                 item.Enabled = !status;
             }
 
-            this.tsbSelectOrganizations.Enabled = status;
+            this.tsbBack.Enabled = status;
         }
 
         private void tsbClose_Click(object sender, EventArgs e)

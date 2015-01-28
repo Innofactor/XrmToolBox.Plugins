@@ -32,9 +32,9 @@
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbSelectOrganizations = new System.Windows.Forms.ToolStripButton();
+            this.tsbBack = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbCompareSolutions = new System.Windows.Forms.ToolStripButton();
+            this.tsbCompare = new System.Windows.Forms.ToolStripButton();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,9 +45,9 @@
             this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbClose,
             this.toolStripSeparator1,
-            this.tsbSelectOrganizations,
+            this.tsbBack,
             this.toolStripSeparator2,
-            this.tsbCompareSolutions});
+            this.tsbCompare});
             this.tsMenu.Location = new System.Drawing.Point(0, 0);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Size = new System.Drawing.Size(600, 25);
@@ -56,11 +56,12 @@
             // 
             // tsbClose
             // 
+            this.tsbClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbClose.Image = ((System.Drawing.Image)(resources.GetObject("tsbClose.Image")));
             this.tsbClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbClose.Name = "tsbClose";
-            this.tsbClose.Size = new System.Drawing.Size(102, 22);
-            this.tsbClose.Text = "Close this tool";
+            this.tsbClose.Size = new System.Drawing.Size(23, 22);
+            this.tsbClose.Text = "Close";
             this.tsbClose.Click += new System.EventHandler(this.tsbClose_Click);
             // 
             // toolStripSeparator1
@@ -68,30 +69,30 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // tsbSelectOrganizations
+            // tsbBack
             // 
-            this.tsbSelectOrganizations.Enabled = false;
-            this.tsbSelectOrganizations.Image = ((System.Drawing.Image)(resources.GetObject("tsbSelectOrganizations.Image")));
-            this.tsbSelectOrganizations.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSelectOrganizations.Name = "tsbSelectOrganizations";
-            this.tsbSelectOrganizations.Size = new System.Drawing.Size(132, 22);
-            this.tsbSelectOrganizations.Text = "Select organizations";
-            this.tsbSelectOrganizations.Click += new System.EventHandler(this.tsbSelectOrganizations_Click);
+            this.tsbBack.Enabled = false;
+            this.tsbBack.Image = ((System.Drawing.Image)(resources.GetObject("tsbBack.Image")));
+            this.tsbBack.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbBack.Name = "tsbBack";
+            this.tsbBack.Size = new System.Drawing.Size(52, 22);
+            this.tsbBack.Text = "Back";
+            this.tsbBack.Click += new System.EventHandler(this.tsbSelectOrganizations_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // tsbCompareSolutions
+            // tsbCompare
             // 
-            this.tsbCompareSolutions.Enabled = false;
-            this.tsbCompareSolutions.Image = ((System.Drawing.Image)(resources.GetObject("tsbCompareSolutions.Image")));
-            this.tsbCompareSolutions.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbCompareSolutions.Name = "tsbCompareSolutions";
-            this.tsbCompareSolutions.Size = new System.Drawing.Size(127, 22);
-            this.tsbCompareSolutions.Text = "Compare solutions";
-            this.tsbCompareSolutions.Click += new System.EventHandler(this.tsbCompareSolutions_Click);
+            this.tsbCompare.Enabled = false;
+            this.tsbCompare.Image = ((System.Drawing.Image)(resources.GetObject("tsbCompare.Image")));
+            this.tsbCompare.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbCompare.Name = "tsbCompare";
+            this.tsbCompare.Size = new System.Drawing.Size(76, 22);
+            this.tsbCompare.Text = "Compare";
+            this.tsbCompare.Click += new System.EventHandler(this.tsbCompareSolutions_Click);
             // 
             // MainScreen
             // 
@@ -112,9 +113,9 @@
 
         private System.Windows.Forms.ToolStrip tsMenu;
         private System.Windows.Forms.ToolStripButton tsbClose;
-        private System.Windows.Forms.ToolStripButton tsbCompareSolutions;
+        private System.Windows.Forms.ToolStripButton tsbCompare;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton tsbSelectOrganizations;
+        private System.Windows.Forms.ToolStripButton tsbBack;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
