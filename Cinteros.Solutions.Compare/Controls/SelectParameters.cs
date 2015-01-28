@@ -20,7 +20,8 @@
 
         void SelectParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
         {
-            this.SetReference(e.ConnectionDetail);
+            this.SetSolutions((MainScreen)sender);
+
         }
 
         #endregion Public Constructors
@@ -151,36 +152,7 @@
 
                 if (parent.ConnectionDetail != null)
                 {
-                    string[] row;
-                    ListViewItem item;
-
-                    parent.WorkAsync(string.Format("Getting solutions information from '{0}'...", parent.ConnectionDetail.OrganizationFriendlyName),
-                        (a) => // Work To Do Asynchronously
-                        {
-                            a.Result = parent.Service.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
-                        },
-                        (a) =>  // Cleanup when work has completed
-                        {
-                            this.lvSolutions.Items.Clear();
-                            foreach (var solution in (Solution[])a.Result)
-                            {
-                                row = new string[] {
-                                    solution.FriendlyName,
-                                    solution.Version.ToString(),
-                                };
-
-                                item = new ListViewItem(row);
-                                item.Tag = solution;
-
-                                this.lvSolutions.Items.Add(item);
-                            }
-                        }
-                    );
-
-                    this.SetReference(parent.ConnectionDetail);
-
-                    // All connections except currently connected one
-                    this.SetOrganizations(new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
+                    this.SetSolutions(parent);
                 }
                 else
                 {
@@ -191,6 +163,37 @@
                 this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
                 this.lvSolutions_ItemSelectionChanged(this.lvSolutions, null);
             }
+        }
+
+        private void SetSolutions(MainScreen parent)
+        {
+            parent.WorkAsync(string.Format("Getting solutions information from '{0}'...", parent.ConnectionDetail.OrganizationFriendlyName),
+                (a) => // Work To Do Asynchronously
+                {
+                    a.Result = parent.Service.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
+                },
+                (a) =>  // Cleanup when work has completed
+                {
+                    this.lvSolutions.Items.Clear();
+                    foreach (var solution in (Solution[])a.Result)
+                    {
+                        var row = new string[] {
+                                    solution.FriendlyName,
+                                    solution.Version.ToString(),
+                                };
+
+                        var item = new ListViewItem(row);
+                        item.Tag = solution;
+
+                        this.lvSolutions.Items.Add(item);
+                    }
+                }
+            );
+
+            this.SetReference(parent.ConnectionDetail);
+
+            // All connections except currently connected one
+            this.SetOrganizations(new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
         }
 
         private void SetReference(ConnectionDetail connection)
