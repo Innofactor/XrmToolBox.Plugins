@@ -7,6 +7,10 @@
     {
         #region Public Constructors
 
+        public Solution()
+        {
+        }
+
         public Solution(Entity entity)
         {
             this.Id = (Guid)entity.Attributes[Constants.A_SOLUTIONID];
@@ -23,7 +27,7 @@
         public string FriendlyName
         {
             get;
-            private set;
+            set;
         }
 
         public Guid Id
@@ -41,13 +45,13 @@
         public string UniqueName
         {
             get;
-            private set;
+            set;
         }
 
         public Version Version
         {
             get;
-            private set;
+            set;
         }
 
         #endregion Public Properties

@@ -192,10 +192,9 @@
                     document.Load(((OpenFileDialog)sender).FileName);
 
                     ((SelectParameters)this.SubControl).Solutions = document.ToArray();
+                    ((SelectParameters)this.SubControl).Update();
                 }
             }
-
-            throw new NotImplementedException();
         }
     }
 }

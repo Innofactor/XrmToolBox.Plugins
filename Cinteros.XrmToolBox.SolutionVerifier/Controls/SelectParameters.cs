@@ -28,6 +28,23 @@
             {
                 return this.lvOrganizations.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (ConnectionDetail)x.Tag).ToArray<ConnectionDetail>();
             }
+            set
+            {
+                this.lvOrganizations.Items.Clear();
+
+                foreach (var connection in value)
+                {
+                    var row = new string[] {
+                        connection.OrganizationFriendlyName,
+                        connection.ServerName,
+                    };
+
+                    var item = new ListViewItem(row);
+                    item.Tag = connection;
+
+                    this.lvOrganizations.Items.Add(item);
+                }
+            }
         }
 
         public Solution[] Solutions
@@ -168,12 +185,12 @@
                     this.SetSolutions(parent);
 
                     // All connections except currently connected one
-                    this.SetOrganizations(new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
+                    this.Organizations = (new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
                 }
                 else
                 {
                     // All connections
-                    this.SetOrganizations(new ConnectionManager().ConnectionsList.Connections.ToArray<ConnectionDetail>());
+                    this.Organizations = (new ConnectionManager().ConnectionsList.Connections.ToArray<ConnectionDetail>());
                 }
 
                 this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
@@ -184,24 +201,6 @@
         private void SelectParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
         {
             this.SetSolutions((MainScreen)sender);
-        }
-
-        private void SetOrganizations(ConnectionDetail[] connections)
-        {
-            this.lvOrganizations.Items.Clear();
-
-            foreach (var connection in connections)
-            {
-                var row = new string[] {
-                    connection.OrganizationFriendlyName,
-                    connection.ServerName,
-                };
-
-                var item = new ListViewItem(row);
-                item.Tag = connection;
-
-                this.lvOrganizations.Items.Add(item);
-            }
         }
 
         /// <summary>
