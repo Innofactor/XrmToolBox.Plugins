@@ -60,7 +60,7 @@
             this.gbReference.Size = new System.Drawing.Size(597, 76);
             this.gbReference.TabIndex = 10;
             this.gbReference.TabStop = false;
-            this.gbReference.Text = "Reference organization";
+            this.gbReference.Text = "Reference";
             // 
             // lvReference
             // 
@@ -213,13 +213,13 @@
             this.chSolutionVersion.Text = "Version";
             this.chSolutionVersion.Width = 200;
             // 
-            // SelectOrganizations
+            // SelectParameters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.gbReference);
-            this.Name = "SelectOrganizations";
+            this.Name = "SelectParameters";
             this.Size = new System.Drawing.Size(600, 400);
             this.gbReference.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);

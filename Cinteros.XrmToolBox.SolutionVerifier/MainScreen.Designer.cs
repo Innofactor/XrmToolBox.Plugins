@@ -111,11 +111,12 @@
             // 
             // tsbSave
             // 
+            this.tsbSave.Enabled = false;
             this.tsbSave.Image = ((System.Drawing.Image)(resources.GetObject("tsbSave.Image")));
             this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSave.Name = "tsbSave";
-            this.tsbSave.Size = new System.Drawing.Size(145, 22);
-            this.tsbSave.Text = "Save to reference file...";
+            this.tsbSave.Size = new System.Drawing.Size(93, 22);
+            this.tsbSave.Text = "Save to file...";
             this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
             // toolStripSeparator2
