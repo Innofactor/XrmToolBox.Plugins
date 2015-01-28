@@ -13,6 +13,7 @@
     using System.Linq;
     using System.Net;
     using System.Windows.Forms;
+    using System.Xml;
     using XrmToolBox;
 
     public partial class MainScreen : PluginBase
@@ -171,6 +172,30 @@
 
             save.FileName = "reference-solutions.xml";
             save.ShowDialog();
+        }
+
+        private void fromReferenceFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var open = new OpenFileDialog();
+            open.FileOk += open_FileOk;
+
+            open.ShowDialog();
+        }
+
+        void open_FileOk(object sender, CancelEventArgs e)
+        {
+            if (!e.Cancel)
+            {
+                if (this.SubControl.GetType() == typeof(SelectParameters))
+                {
+                    var document = new XmlDocument();
+                    document.Load(((OpenFileDialog)sender).FileName);
+
+                    ((SelectParameters)this.SubControl).Solutions = document.ToArray();
+                }
+            }
+
+            throw new NotImplementedException();
         }
     }
 }

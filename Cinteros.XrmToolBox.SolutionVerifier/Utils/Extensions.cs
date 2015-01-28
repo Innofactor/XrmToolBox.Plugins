@@ -41,6 +41,15 @@
             return document;
         }
 
+        public static Solution[] ToArray(this XmlDocument document)
+        {
+            foreach (var element in document.DocumentElement.ChildNodes)
+            {
+
+            }
+
+            return null;
+        }
         #endregion Public Methods
     }
 }

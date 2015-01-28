@@ -22,19 +22,36 @@
 
         #region Public Properties
 
+        public ConnectionDetail[] Organizations
+        {
+            get
+            {
+                return this.lvOrganizations.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (ConnectionDetail)x.Tag).ToArray<ConnectionDetail>();
+            }
+        }
+
         public Solution[] Solutions
         {
             get
             {
                 return this.lvSolutions.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (Solution)x.Tag).ToArray<Solution>();
             }
-        }
-
-        public ConnectionDetail[] Organizations
-        {
-            get
+            set
             {
-                return this.lvOrganizations.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (ConnectionDetail)x.Tag).ToArray<ConnectionDetail>();
+                this.lvSolutions.Clear();
+
+                foreach (var solution in value)
+                {
+                    var row = new string[] {
+                        solution.FriendlyName,
+                        solution.Version.ToString(),
+                    };
+
+                    var item = new ListViewItem(row);
+                    item.Tag = solution;
+
+                    this.lvSolutions.Items.Add(item);
+                }
             }
         }
 
@@ -215,19 +232,7 @@
                 },
                 (a) =>  // Cleanup when work has completed
                 {
-                    this.lvSolutions.Items.Clear();
-                    foreach (var solution in (Solution[])a.Result)
-                    {
-                        var row = new string[] {
-                        solution.FriendlyName,
-                        solution.Version.ToString(),
-                    };
-
-                        var item = new ListViewItem(row);
-                        item.Tag = solution;
-
-                        this.lvSolutions.Items.Add(item);
-                    }
+                    this.Solutions = (Solution[])a.Result;
                 }
             );
 

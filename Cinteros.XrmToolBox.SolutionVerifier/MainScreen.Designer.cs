@@ -108,6 +108,7 @@
             this.fromReferenceFileToolStripMenuItem.Name = "fromReferenceFileToolStripMenuItem";
             this.fromReferenceFileToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.fromReferenceFileToolStripMenuItem.Text = "Reference file...";
+            this.fromReferenceFileToolStripMenuItem.Click += new System.EventHandler(this.fromReferenceFileToolStripMenuItem_Click);
             // 
             // tsbSave
             // 
