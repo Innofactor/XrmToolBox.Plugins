@@ -5,6 +5,7 @@
     using System;
     using System.Linq;
     using System.Windows.Forms;
+    using XrmToolBox;
 
     public partial class SelectParameters : UserControl
     {
@@ -15,6 +16,11 @@
             InitializeComponent();
 
             this.ParentChanged += this.SelectEnvironments_ParentChanged;
+        }
+
+        void SelectParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion Public Constructors
@@ -138,14 +144,16 @@
         private void SelectEnvironments_ParentChanged(object sender, EventArgs e)
         {
             var parent = (MainScreen)this.Parent;
-
+            
             if (parent != null)
             {
-                string[] row;
-                ListViewItem item;
+                parent.ConnectionUpdated += SelectParameters_ConnectionUpdated;
 
                 if (parent.ConnectionDetail != null)
                 {
+                    string[] row;
+                    ListViewItem item;
+
                     parent.WorkAsync(string.Format("Getting solutions information from '{0}'...", parent.ConnectionDetail.OrganizationFriendlyName),
                         (a) => // Work To Do Asynchronously
                         {
