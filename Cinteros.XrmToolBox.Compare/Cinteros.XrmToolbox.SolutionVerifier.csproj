@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Cinteros.XrmToolbox.SolutionVerifier</RootNamespace>
-    <AssemblyName>Cinteros.XrmToolbox.Compare</AssemblyName>
+    <AssemblyName>Cinteros.XrmToolbox.SolutionVerifier</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
