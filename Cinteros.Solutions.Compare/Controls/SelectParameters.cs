@@ -49,6 +49,24 @@
             this.UpdateCompareSolutionsButton();
         }
 
+        private void GetOrganizations(ConnectionDetail[] connections)
+        {
+            this.lvOrganizations.Items.Clear();
+
+            foreach (var connection in connections)
+            {
+                var row = new string[] {
+                    connection.OrganizationFriendlyName,
+                    connection.ServerName,
+                };
+
+                var item = new ListViewItem(row);
+                item.Tag = connection;
+
+                this.lvOrganizations.Items.Add(item);
+            }
+        }
+
         /// <summary>
         /// Event handler capturing changes in organization selections
         /// </summary>
@@ -159,34 +177,18 @@
                     this.lvReference.Items.Clear();
                     this.lvReference.Items.Add(new ListViewItem(row));
 
+                    // All connections except currently connected one
                     this.GetOrganizations(new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
                 }
                 else
                 {
+                    // All connections
                     this.GetOrganizations(new ConnectionManager().ConnectionsList.Connections.ToArray<ConnectionDetail>());
                 }
+
+                this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
+                this.lvSolutions_ItemSelectionChanged(this.lvSolutions, null);
             }
-        }
-
-        private void GetOrganizations(ConnectionDetail[] connections)
-        {
-            this.lvOrganizations.Items.Clear();
-
-            foreach (var connection in connections)
-            {
-                var row = new string[] {
-                    connection.OrganizationFriendlyName,
-                    connection.ServerName,
-                };
-
-                var item = new ListViewItem(row);
-                item.Tag = connection;
-
-                lvOrganizations.Items.Add(item);
-            }
-
-            this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
-            this.lvSolutions_ItemSelectionChanged(this.lvSolutions, null);
         }
 
         /// <summary>
