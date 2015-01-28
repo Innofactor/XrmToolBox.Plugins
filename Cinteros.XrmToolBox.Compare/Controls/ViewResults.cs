@@ -1,6 +1,6 @@
-﻿namespace Cinteros.XrmToolbox.Compare.Controls
+﻿namespace Cinteros.XrmToolbox.SolutionVerifier.Controls
 {
-    using Cinteros.XrmToolbox.Compare.Utils;
+    using Cinteros.XrmToolbox.SolutionVerifier.Utils;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;

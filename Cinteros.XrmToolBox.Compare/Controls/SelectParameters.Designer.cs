@@ -1,4 +1,4 @@
-﻿namespace Cinteros.XrmToolbox.Compare.Controls
+﻿namespace Cinteros.XrmToolbox.SolutionVerifier.Controls
 {
     partial class SelectParameters
     {

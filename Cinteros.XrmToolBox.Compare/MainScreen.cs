@@ -1,7 +1,7 @@
-﻿namespace Cinteros.XrmToolbox.Compare
+﻿namespace Cinteros.XrmToolbox.SolutionVerifier
 {
-    using Cinteros.XrmToolbox.Compare.Controls;
-    using Cinteros.XrmToolbox.Compare.Utils;
+    using Cinteros.XrmToolbox.SolutionVerifier.Controls;
+    using Cinteros.XrmToolbox.SolutionVerifier.Utils;
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Client;
     using Microsoft.Xrm.Client.Services;

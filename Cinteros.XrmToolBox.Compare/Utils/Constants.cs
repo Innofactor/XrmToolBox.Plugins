@@ -1,4 +1,4 @@
-﻿namespace Cinteros.XrmToolbox.Compare.Utils
+﻿namespace Cinteros.XrmToolbox.SolutionVerifier.Utils
 {
     internal static class Constants
     {
