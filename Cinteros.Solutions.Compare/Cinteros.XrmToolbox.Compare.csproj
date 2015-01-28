@@ -7,8 +7,8 @@
     <ProjectGuid>{2834BDB0-802C-4C6F-AA3B-A344FD21A206}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cinteros.Solutions.Compare</RootNamespace>
-    <AssemblyName>Cinteros.Solutions.Compare</AssemblyName>
+    <RootNamespace>Cinteros.XrmToolbox.Compare</RootNamespace>
+    <AssemblyName>Cinteros.XrmToolbox.Compare</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
