@@ -62,16 +62,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewResults.cs">
+    <Compile Include="Controls\ViewResults.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ViewResults.Designer.cs">
+    <Compile Include="Controls\ViewResults.Designer.cs">
       <DependentUpon>ViewResults.cs</DependentUpon>
     </Compile>
-    <Compile Include="SelectParameters.cs">
+    <Compile Include="Controls\SelectParameters.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SelectParameters.Designer.cs">
+    <Compile Include="Controls\SelectParameters.Designer.cs">
       <DependentUpon>SelectParameters.cs</DependentUpon>
     </Compile>
     <Compile Include="MainScreen.cs">
@@ -91,11 +91,11 @@
     <Compile Include="Utils\Solution.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ViewResults.resx">
+    <EmbeddedResource Include="Controls\ViewResults.resx">
       <DependentUpon>ViewResults.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SelectParameters.resx">
+    <EmbeddedResource Include="Controls\SelectParameters.resx">
       <DependentUpon>SelectParameters.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainScreen.resx">

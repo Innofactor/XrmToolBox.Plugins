@@ -1,6 +1,6 @@
-﻿namespace Cinteros.Solutions.Compare
+﻿namespace Cinteros.Solutions.Compare.Controls
 {
-    partial class SelectOrganizations
+    partial class SelectParameters
     {
         /// <summary> 
         /// Required designer variable.

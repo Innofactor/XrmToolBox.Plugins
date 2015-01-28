@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Solutions.Compare
+﻿namespace Cinteros.Solutions.Compare.Controls
 {
     using Cinteros.Solutions.Compare.Utils;
     using McTools.Xrm.Connection;
@@ -6,11 +6,11 @@
     using System.Linq;
     using System.Windows.Forms;
 
-    public partial class SelectOrganizations : UserControl
+    public partial class SelectParameters : UserControl
     {
         #region Public Constructors
 
-        public SelectOrganizations()
+        public SelectParameters()
         {
             InitializeComponent();
 

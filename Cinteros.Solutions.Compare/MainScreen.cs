@@ -1,5 +1,6 @@
 ﻿namespace Cinteros.Solutions.Compare
 {
+    using Cinteros.Solutions.Compare.Controls;
     using Cinteros.Solutions.Compare.Utils;
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Client;
@@ -48,7 +49,7 @@
 
         private void EnvironmentsSelector_Load(object sender, EventArgs e)
         {
-            this.AddSubControl(new SelectOrganizations());
+            this.AddSubControl(new SelectParameters());
         }
 
         private void LoadSolutionMatrix()
@@ -145,7 +146,7 @@
             // Execution order is important here, due to rewriting status of tool strip of plugin
             // main window
             this.ShowBackButton(false);
-            this.AddSubControl(new SelectOrganizations());
+            this.AddSubControl(new SelectParameters());
         }
 
         #endregion Private Methods

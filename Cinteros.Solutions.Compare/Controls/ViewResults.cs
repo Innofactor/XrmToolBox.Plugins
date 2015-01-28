@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Solutions.Compare
+﻿namespace Cinteros.Solutions.Compare.Controls
 {
     using Cinteros.Solutions.Compare.Utils;
     using System.Collections.Generic;
