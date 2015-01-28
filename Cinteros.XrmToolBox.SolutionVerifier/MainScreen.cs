@@ -169,19 +169,7 @@
             {
                 if (this.SubControl.GetType() == typeof(SelectParameters))
                 {
-                    var solutions = ((SelectParameters)this.SubControl).Solutions;
-
-                    FileStream stream = new FileStream(((SaveFileDialog)sender).FileName, FileMode.Create);
-
-                    var stream1 = new MemoryStream();
-                    var ser = new DataContractSerializer(solutions.GetType());
-                    ser.WriteObject(stream, solutions);
-
-                    //stream1.Position = 0;
-                    //StreamReader sr = new StreamReader(stream1);
-                    //var text = sr.ReadToEnd();
-
-                    //File.WriteAllText(((SaveFileDialog)sender).FileName, text);
+                    File.WriteAllText(((SaveFileDialog)sender).FileName, ((SelectParameters)this.SubControl).Solutions.CSV());
                 }
             }
         }

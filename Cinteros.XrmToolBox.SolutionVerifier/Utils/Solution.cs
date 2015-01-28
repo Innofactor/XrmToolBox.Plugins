@@ -2,9 +2,7 @@
 {
     using Microsoft.Xrm.Sdk;
     using System;
-    using System.Runtime.Serialization;
 
-    [DataContract]
     public class Solution
     {
         #region Public Constructors
@@ -22,7 +20,6 @@
 
         #region Public Properties
 
-        [DataMember]
         public string FriendlyName
         {
             get;
@@ -35,21 +32,18 @@
             private set;
         }
 
-        [DataMember]
         public bool IsManaged
         {
             get;
             private set;
         }
 
-        [DataMember]
         public string UniqueName
         {
             get;
             private set;
         }
 
-        [DataMember]
         public Version Version
         {
             get;

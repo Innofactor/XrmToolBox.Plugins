@@ -87,6 +87,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Utils\Constants.cs" />
+    <Compile Include="Utils\Extensions.cs" />
     <Compile Include="Utils\Helpers.cs" />
     <Compile Include="Utils\Solution.cs" />
   </ItemGroup>
