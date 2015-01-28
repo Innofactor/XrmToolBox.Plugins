@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Cinteros.Solutions.Compare.Properties {
+namespace Cinteros.XrmToolbox.Compare.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Cinteros.Solutions.Compare.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Cinteros.Solutions.Compare.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Cinteros.XrmToolbox.Compare.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

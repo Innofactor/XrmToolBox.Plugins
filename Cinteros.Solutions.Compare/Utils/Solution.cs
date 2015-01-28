@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Solutions.Compare.Utils
+﻿namespace Cinteros.XrmToolbox.Compare.Utils
 {
     using Microsoft.Xrm.Sdk;
     using System;

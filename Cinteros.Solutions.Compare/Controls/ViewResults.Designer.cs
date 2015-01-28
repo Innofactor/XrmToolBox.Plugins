@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Solutions.Compare.Controls
+﻿namespace Cinteros.XrmToolbox.Compare.Controls
 {
     partial class ViewResults
     {
