@@ -165,12 +165,16 @@
             }
         }
 
-        private void SetSolutions(MainScreen parent)
+        /// <summary>
+        /// Updating list of solutions from connection provided by XrmToolBox plugin class
+        /// </summary>
+        /// <param name="plugin">XrmToolBox plugin class</param>
+        private void SetSolutions(MainScreen plugin)
         {
-            parent.WorkAsync(string.Format("Getting solutions information from '{0}'...", parent.ConnectionDetail.OrganizationFriendlyName),
+            plugin.WorkAsync(string.Format("Getting solutions information from '{0}'...", plugin.ConnectionDetail.OrganizationFriendlyName),
                 (a) => // Work To Do Asynchronously
                 {
-                    a.Result = parent.Service.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
+                    a.Result = plugin.Service.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
                 },
                 (a) =>  // Cleanup when work has completed
                 {
@@ -190,12 +194,16 @@
                 }
             );
 
-            this.SetReference(parent.ConnectionDetail);
+            this.SetReference(plugin.ConnectionDetail);
 
             // All connections except currently connected one
-            this.SetOrganizations(new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
+            this.SetOrganizations(new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != plugin.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
         }
 
+        /// <summary>
+        /// Set reference organization information
+        /// </summary>
+        /// <param name="connection">Current connection</param>
         private void SetReference(ConnectionDetail connection)
         {
             var row = new string[] {
