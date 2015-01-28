@@ -28,21 +28,13 @@
             {
                 return this.lvSolutions.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (Solution)x.Tag).ToArray<Solution>();
             }
-            set
+        }
+
+        public ConnectionDetail[] Organizations
+        {
+            get
             {
-                this.lvSolutions.Items.Clear();
-                foreach (var solution in value)
-                {
-                    var row = new string[] {
-                        solution.FriendlyName,
-                        solution.Version.ToString(),
-                    };
-
-                    var item = new ListViewItem(row);
-                    item.Tag = solution;
-
-                    this.lvSolutions.Items.Add(item);
-                }
+                return this.lvOrganizations.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (ConnectionDetail)x.Tag).ToArray<ConnectionDetail>();
             }
         }
 
@@ -223,7 +215,19 @@
                 },
                 (a) =>  // Cleanup when work has completed
                 {
-                    this.Solutions = (Solution[])a.Result;
+                    this.lvSolutions.Items.Clear();
+                    foreach (var solution in (Solution[])a.Result)
+                    {
+                        var row = new string[] {
+                        solution.FriendlyName,
+                        solution.Version.ToString(),
+                    };
+
+                        var item = new ListViewItem(row);
+                        item.Tag = solution;
+
+                        this.lvSolutions.Items.Add(item);
+                    }
                 }
             );
 
@@ -246,7 +250,7 @@
 
             if (button != null)
             {
-                if (this.lvSolutions.CheckedItems.Count > 0 && this.lvOrganizations.CheckedItems.Count > 0)
+                if (this.Solutions.Length > 0 && this.Organizations.Length > 0)
                 {
                     button.Enabled = true;
                 }
