@@ -12,12 +12,23 @@
     using System.IO;
     using System.Linq;
     using System.Net;
-    using System.Runtime.Serialization;
     using System.Windows.Forms;
     using XrmToolBox;
 
     public partial class MainScreen : PluginBase
     {
+        #region Private Methods
+
+        private void tsbSelectOrganizations_Click(object sender, EventArgs e)
+        {
+            // Execution order is important here, due to rewriting status of tool strip of plugin
+            // main window
+            this.ShowBackButton(false);
+            this.AddSubControl(new SelectParameters());
+        }
+
+        #endregion Private Methods
+
         #region Public Constructors
 
         public MainScreen()
@@ -32,8 +43,6 @@
         public Control SubControl { get; set; }
 
         #endregion Public Properties
-
-        #region Private Methods
 
         /// <summary>
         /// Adds subcontrol to the main plugin form
@@ -122,6 +131,17 @@
             );
         }
 
+        private void save_FileOk(object sender, CancelEventArgs e)
+        {
+            if (!e.Cancel)
+            {
+                if (this.SubControl.GetType() == typeof(SelectParameters))
+                {
+                    File.WriteAllText(((SaveFileDialog)sender).FileName, ((SelectParameters)this.SubControl).Solutions.CSV());
+                }
+            }
+        }
+
         private void ShowBackButton(bool status)
         {
             var items = this.tsMenu.Items.Cast<ToolStripItem>().Where(x => (x != tsbClose) & (x != tsbBack) & (!x.GetType().Equals(typeof(ToolStripSeparator))));
@@ -144,16 +164,6 @@
             this.LoadSolutionMatrix();
         }
 
-        private void tsbSelectOrganizations_Click(object sender, EventArgs e)
-        {
-            // Execution order is important here, due to rewriting status of tool strip of plugin
-            // main window
-            this.ShowBackButton(false);
-            this.AddSubControl(new SelectParameters());
-        }
-
-        #endregion Private Methods
-
         private void tsbSave_Click(object sender, EventArgs e)
         {
             var save = new SaveFileDialog();
@@ -161,17 +171,6 @@
 
             save.FileName = "solutions.csv";
             save.ShowDialog();
-        }
-
-        void save_FileOk(object sender, CancelEventArgs e)
-        {
-            if (!e.Cancel)
-            {
-                if (this.SubControl.GetType() == typeof(SelectParameters))
-                {
-                    File.WriteAllText(((SaveFileDialog)sender).FileName, ((SelectParameters)this.SubControl).Solutions.CSV());
-                }
-            }
         }
     }
 }
