@@ -70,18 +70,6 @@
             return query;
         }
 
-        public static ToolStripButton GetCompareSolutionButton(UserControl sender)
-        {
-            var menu = sender.Parent.Controls.Find("tsMenu", true).Cast<ToolStrip>().FirstOrDefault();
-
-            if (menu != null)
-            {
-                return menu.Items.Find("tsbCompareSolutions", true).Cast<ToolStripButton>().FirstOrDefault();
-            }
-
-            return null;
-        }
-
         #endregion Public Methods
     }
 }

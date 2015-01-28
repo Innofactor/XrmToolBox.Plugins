@@ -8,7 +8,6 @@
 
     public partial class SelectOrganizations : UserControl
     {
-
         #region Public Constructors
 
         public SelectOrganizations()
@@ -113,7 +112,8 @@
         }
 
         /// <summary>
-        /// Event handler capturing when parent control is changed (current conntrol is beeing added to the plugin's main form)
+        /// Event handler capturing when parent control is changed (current conntrol is beeing added
+        /// to the plugin's main form)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -185,7 +185,14 @@
         /// </summary>
         private void UpdateCompareSolutionsButton()
         {
-            var button = Helpers.GetCompareSolutionButton(this);
+            ToolStripButton button = null;
+
+            var menu = this.Parent.Controls.Find("tsMenu", true).Cast<ToolStrip>().FirstOrDefault();
+
+            if (menu != null)
+            {
+                button = menu.Items.Find("tsbCompareSolutions", true).Cast<ToolStripButton>().FirstOrDefault();
+            }
 
             if (button != null)
             {
@@ -201,7 +208,7 @@
         }
 
         /// <summary>
-        /// Updates 'Select all' button, depending on currently checked items 
+        /// Updates 'Select all' button, depending on currently checked items
         /// </summary>
         /// <param name="list"></param>
         /// <param name="switcher"></param>
@@ -222,6 +229,5 @@
         }
 
         #endregion Private Methods
-
     }
 }
