@@ -77,7 +77,7 @@
             this.tsbBack.Name = "tsbBack";
             this.tsbBack.Size = new System.Drawing.Size(52, 22);
             this.tsbBack.Text = "Back";
-            this.tsbBack.Click += new System.EventHandler(this.tsbSelectOrganizations_Click);
+            this.tsbBack.Click += new System.EventHandler(this.tsbBack_Click);
             // 
             // toolStripSeparator1
             // 

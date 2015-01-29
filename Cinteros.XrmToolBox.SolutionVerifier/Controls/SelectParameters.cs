@@ -220,21 +220,6 @@
         }
 
         /// <summary>
-        /// Set reference organization information
-        /// </summary>
-        /// <param name="connection">Current connection</param>
-        private void SetReference(ConnectionDetail connection)
-        {
-            var row = new string[] {
-                connection.OrganizationFriendlyName,
-                connection.OrganizationServiceUrl,
-            };
-
-            this.lvReference.Items.Clear();
-            this.lvReference.Items.Add(new ListViewItem(row));
-        }
-
-        /// <summary>
         /// Updating list of solutions from connection provided by XrmToolBox plugin class
         /// </summary>
         /// <param name="plugin">XrmToolBox plugin class</param>

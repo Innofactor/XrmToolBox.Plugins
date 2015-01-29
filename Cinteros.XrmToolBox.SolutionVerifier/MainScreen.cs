@@ -21,7 +21,7 @@
 
         #region Private Methods
 
-        private void tsbSelectOrganizations_Click(object sender, EventArgs e)
+        private void tsbBack_Click(object sender, EventArgs e)
         {
             // Execution order is important here, due to rewriting status of tool strip of plugin
             // main window

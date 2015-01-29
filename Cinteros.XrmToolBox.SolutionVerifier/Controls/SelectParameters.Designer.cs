@@ -86,7 +86,7 @@
             // chRefUrl
             // 
             this.chRefUrl.Text = "Url";
-            this.chRefUrl.Width = 300;
+            this.chRefUrl.Width = 400;
             // 
             // tableLayoutPanel1
             // 
