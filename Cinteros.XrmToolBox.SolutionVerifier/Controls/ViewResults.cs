@@ -1,6 +1,7 @@
 ﻿namespace Cinteros.XrmToolbox.SolutionVerifier.Controls
 {
     using Cinteros.XrmToolbox.SolutionVerifier.Utils;
+    using McTools.Xrm.Connection;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
@@ -19,9 +20,9 @@
 
         #region Public Methods
 
-        public void Set(Dictionary<string, Solution[]> matrix)
+        public void Set(Dictionary<ConnectionDetail, Solution[]> matrix)
         {
-            this.AddListViewHeaders(matrix.Keys.ToArray<string>());
+            this.AddListViewHeaders(matrix.Keys.Select(x => x.OrganizationFriendlyName).ToArray<string>());
 
             foreach (var solution in matrix.First().Value)
             {

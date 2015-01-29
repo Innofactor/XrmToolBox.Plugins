@@ -77,13 +77,13 @@
 
         private void LoadSolutionMatrix()
         {
-            var services = new Dictionary<string, OrganizationService>();
+            var services = new Dictionary<ConnectionDetail, OrganizationService>();
 
             WebRequest.GetSystemWebProxy();
 
             foreach (var organization in ((SelectParameters)this.CurrentPage).Organizations)
             {
-                services.Add(organization.OrganizationFriendlyName, new OrganizationService(CrmConnection.Parse(organization.GetOrganizationCrmConnectionString())));
+                services.Add(organization, new OrganizationService(CrmConnection.Parse(organization.GetOrganizationCrmConnectionString())));
             }
 
             var reference = ((SelectParameters)this.CurrentPage).Solutions;
@@ -92,9 +92,14 @@
                 (e) => // Work To Do Asynchronously
                 {
                     var query = Helpers.CreateSolutionsQuery();
-                    var matrix = new Dictionary<string, Solution[]>();
+                    var matrix = new Dictionary<ConnectionDetail, Solution[]>();
 
-                    matrix.Add("Reference", reference);
+                    var connection = new ConnectionDetail
+                    {
+                        OrganizationFriendlyName = "Reference"
+                    };
+
+                    matrix.Add(connection, reference);
 
                     foreach (var service in services)
                     {
@@ -119,7 +124,7 @@
                     if (e.Result != null)
                     {
                         var control = new ViewResults();
-                        control.Set((Dictionary<string, Solution[]>)e.Result);
+                        control.Set((Dictionary<ConnectionDetail, Solution[]>)e.Result);
                         // Execution order is important here, due to rewriting status of tool strip
                         // of plugin main window
                         this.ShowBackButton(true);
