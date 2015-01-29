@@ -15,7 +15,7 @@
         {
             InitializeComponent();
 
-            this.ParentChanged += this.SelectEnvironments_ParentChanged;
+            this.ParentChanged += this.SelectParameters_ParentChanged;
         }
 
         #endregion Public Constructors
@@ -30,8 +30,9 @@
             }
             set
             {
+                this.lvOrganizations.ItemChecked -= this.lvOrganizations_ItemChecked;
                 this.lvOrganizations.Items.Clear();
-
+                
                 foreach (var connection in value)
                 {
                     var row = new string[] {
@@ -44,6 +45,7 @@
 
                     this.lvOrganizations.Items.Add(item);
                 }
+                this.lvOrganizations.ItemChecked += this.lvOrganizations_ItemChecked;
             }
         }
 
@@ -55,6 +57,7 @@
             }
             set
             {
+                this.lvSolutions.ItemChecked -= this.lvSolutions_ItemChecked;
                 this.lvSolutions.Clear();
 
                 foreach (var solution in value)
@@ -69,6 +72,7 @@
 
                     this.lvSolutions.Items.Add(item);
                 }
+                this.lvSolutions.ItemChecked += this.lvSolutions_ItemChecked;
             }
         }
 
@@ -172,7 +176,7 @@
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SelectEnvironments_ParentChanged(object sender, EventArgs e)
+        private void SelectParameters_ParentChanged(object sender, EventArgs e)
         {
             var parent = (MainScreen)this.Parent;
 
