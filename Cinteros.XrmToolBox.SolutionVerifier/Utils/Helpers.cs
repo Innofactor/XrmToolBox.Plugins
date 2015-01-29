@@ -32,7 +32,6 @@
             return document.ToArray();
         }
 
-
         public static ToolStripButton FindToolStripButton(Control sender, string name)
         {
             var menu = sender.Parent.Controls.Find("tsMenu", true).Cast<ToolStrip>().FirstOrDefault();

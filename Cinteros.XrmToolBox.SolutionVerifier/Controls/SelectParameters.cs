@@ -23,6 +23,28 @@
 
         #region Public Properties
 
+        public ConnectionDetail Reference
+        {
+            get
+            {
+                return this.lvReference.Items.Cast<ListViewItem>().ToArray().Select(x => (ConnectionDetail)x.Tag).FirstOrDefault();
+            }
+            set
+            {
+                this.lvReference.Items.Clear();
+
+                var row = new string[] {
+                    value.OrganizationFriendlyName,
+                    value.OrganizationServiceUrl,
+                };
+
+                var item = new ListViewItem(row);
+                item.Tag = value;
+
+                this.lvReference.Items.Add(item);
+            }
+        }
+
         public ConnectionDetail[] Organizations
         {
             get
@@ -76,6 +98,7 @@
                 this.lvSolutions.ItemChecked += this.lvSolutions_ItemChecked;
             }
         }
+
 
         #endregion Public Properties
 
