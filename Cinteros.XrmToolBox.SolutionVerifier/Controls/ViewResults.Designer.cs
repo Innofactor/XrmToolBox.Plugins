@@ -59,13 +59,14 @@
             this.lvSolutions.UseCompatibleStateImageBehavior = false;
             this.lvSolutions.View = System.Windows.Forms.View.Details;
             // 
-            // CompareSolutions
+            // ViewResults
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.gbCompareSolutions);
-            this.Name = "CompareSolutions";
+            this.DoubleBuffered = true;
+            this.Name = "ViewResults";
             this.Size = new System.Drawing.Size(600, 400);
             this.gbCompareSolutions.ResumeLayout(false);
             this.ResumeLayout(false);

@@ -40,9 +40,9 @@
             this.chOrgService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbSolutions = new System.Windows.Forms.GroupBox();
             this.cbToggleSolutions = new System.Windows.Forms.CheckBox();
+            this.lvSolutions = new System.Windows.Forms.ListView();
             this.chSolutionName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSolutionVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvSolutions = new System.Windows.Forms.ListView();
             this.gbReference.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.gbOrganizations.SuspendLayout();
@@ -184,16 +184,6 @@
             this.cbToggleSolutions.UseVisualStyleBackColor = true;
             this.cbToggleSolutions.CheckedChanged += new System.EventHandler(this.cbToggleSolutions_CheckedChanged);
             // 
-            // chSolutionName
-            // 
-            this.chSolutionName.Text = "Solution";
-            this.chSolutionName.Width = 200;
-            // 
-            // chSolutionVersion
-            // 
-            this.chSolutionVersion.Text = "Version";
-            this.chSolutionVersion.Width = 200;
-            // 
             // lvSolutions
             // 
             this.lvSolutions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -213,12 +203,23 @@
             this.lvSolutions.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvSolutions_ItemChecked);
             this.lvSolutions.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvSolutions_ItemSelectionChanged);
             // 
+            // chSolutionName
+            // 
+            this.chSolutionName.Text = "Solution";
+            this.chSolutionName.Width = 200;
+            // 
+            // chSolutionVersion
+            // 
+            this.chSolutionVersion.Text = "Version";
+            this.chSolutionVersion.Width = 200;
+            // 
             // SelectParameters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.gbReference);
+            this.DoubleBuffered = true;
             this.Name = "SelectParameters";
             this.Size = new System.Drawing.Size(600, 400);
             this.gbReference.ResumeLayout(false);

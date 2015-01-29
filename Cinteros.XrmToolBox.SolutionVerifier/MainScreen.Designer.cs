@@ -139,6 +139,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tsMenu);
+            this.DoubleBuffered = true;
             this.Name = "MainScreen";
             this.Size = new System.Drawing.Size(600, 400);
             this.Load += new System.EventHandler(this.MainScreen_Load);
