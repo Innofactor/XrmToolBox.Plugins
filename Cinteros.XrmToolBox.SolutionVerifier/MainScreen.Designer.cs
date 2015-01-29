@@ -112,7 +112,6 @@
             // 
             // tsbSave
             // 
-            this.tsbSave.Enabled = false;
             this.tsbSave.Image = ((System.Drawing.Image)(resources.GetObject("tsbSave.Image")));
             this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSave.Name = "tsbSave";
