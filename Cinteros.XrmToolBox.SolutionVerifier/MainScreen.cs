@@ -9,7 +9,6 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.IO;
     using System.Linq;
     using System.Net;
     using System.Windows.Forms;
@@ -18,6 +17,7 @@
 
     public partial class MainScreen : PluginBase
     {
+
         #region Private Methods
 
         private void tsbSelectOrganizations_Click(object sender, EventArgs e)
@@ -30,6 +30,12 @@
 
         #endregion Private Methods
 
+        #region Private Fields
+
+        private Control control;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
         public MainScreen()
@@ -41,9 +47,7 @@
 
         #region Public Properties
 
-        private Control control;
-
-        public Control CurrentPage 
+        public Control CurrentPage
         {
             get
             {
@@ -63,9 +67,12 @@
 
         #endregion Public Properties
 
-        private void MainScreen_Load(object sender, EventArgs e)
+        private void fromReferenceFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.CurrentPage = new SelectParameters();
+            var open = new OpenFileDialog();
+            open.FileOk += open_FileOk;
+
+            open.ShowDialog();
         }
 
         private void LoadSolutionMatrix()
@@ -135,6 +142,22 @@
             );
         }
 
+        private void MainScreen_Load(object sender, EventArgs e)
+        {
+            this.CurrentPage = new SelectParameters();
+        }
+
+        private void open_FileOk(object sender, CancelEventArgs e)
+        {
+            if (!e.Cancel)
+            {
+                var document = new XmlDocument();
+                document.Load(((OpenFileDialog)sender).FileName);
+
+                ((SelectParameters)this.CurrentPage).Solutions = document.ToArray();
+            }
+        }
+
         private void save_FileOk(object sender, CancelEventArgs e)
         {
             if (!e.Cancel)
@@ -175,25 +198,6 @@
 
             save.FileName = "reference-solutions.xml";
             save.ShowDialog();
-        }
-
-        private void fromReferenceFileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var open = new OpenFileDialog();
-            open.FileOk += open_FileOk;
-
-            open.ShowDialog();
-        }
-
-        void open_FileOk(object sender, CancelEventArgs e)
-        {
-            if (!e.Cancel)
-            {
-                var document = new XmlDocument();
-                document.Load(((OpenFileDialog)sender).FileName);
-
-                ((SelectParameters)this.CurrentPage).Solutions = document.ToArray();
-            }
         }
     }
 }

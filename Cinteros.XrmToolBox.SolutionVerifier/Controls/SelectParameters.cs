@@ -9,6 +9,7 @@
 
     public partial class SelectParameters : UserControl
     {
+
         #region Public Constructors
 
         public SelectParameters()
@@ -170,6 +171,11 @@
             this.UpdateCompareButton();
         }
 
+        private void SelectParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
+        {
+            this.SetSolutions((MainScreen)sender);
+        }
+
         /// <summary>
         /// Event handler capturing when parent control is changed (current conntrol is beeing added
         /// to the plugin's main form)
@@ -201,12 +207,6 @@
                 this.lvSolutions_ItemSelectionChanged(this.lvSolutions, null);
             }
         }
-
-        private void SelectParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
-        {
-            this.SetSolutions((MainScreen)sender);
-        }
-
         /// <summary>
         /// Set reference organization information
         /// </summary>
@@ -291,5 +291,6 @@
         }
 
         #endregion Private Methods
+
     }
 }
