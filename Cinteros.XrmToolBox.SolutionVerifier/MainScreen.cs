@@ -182,7 +182,7 @@
 
         private void tsbClose_Click(object sender, EventArgs e)
         {
-            base.CloseToolPrompt();
+            base.CloseTool();
         }
 
         private void tsbCompare_Click(object sender, EventArgs e)

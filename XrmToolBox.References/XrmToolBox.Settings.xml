@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Options xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <DisplayLargeIcons>true</DisplayLargeIcons>
-  <DisplayMostUsedFirst>false</DisplayMostUsedFirst>
-  <MostUsedList />
-  <LastAdvertisementDisplay>0001-01-01T00:00:00</LastAdvertisementDisplay>
-  <LastUpdateCheck>2015-01-21T17:12:12.649114+01:00</LastUpdateCheck>
-  <CheckUpdateOnStartup>true</CheckUpdateOnStartup>
-</Options>
