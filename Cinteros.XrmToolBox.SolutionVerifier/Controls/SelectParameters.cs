@@ -9,6 +9,7 @@
 
     public partial class SelectParameters : UserControl
     {
+
         #region Public Constructors
 
         public SelectParameters()
@@ -301,5 +302,6 @@
         }
 
         #endregion Private Methods
+
     }
 }

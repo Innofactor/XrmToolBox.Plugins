@@ -9,6 +9,7 @@
 
     public partial class ViewResults : UserControl
     {
+
         #region Public Constructors
 
         public ViewResults(Dictionary<ConnectionDetail, Solution[]> matrix)
