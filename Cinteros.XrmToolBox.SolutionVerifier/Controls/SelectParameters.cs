@@ -9,7 +9,6 @@
 
     public partial class SelectParameters : UserControl
     {
-
         #region Public Constructors
 
         public SelectParameters()
@@ -22,19 +21,6 @@
         #endregion Public Constructors
 
         #region Public Properties
-
-        public ConnectionDetail Reference
-        {
-            get
-            {
-                return this.lvReference.Items.Cast<ListViewItem>().ToArray().Select(x => (ConnectionDetail)x.Tag).FirstOrDefault();
-            }
-            set
-            {
-                this.lvReference.Items.Clear();
-                this.lvReference.Items.Add(Helpers.LoadItemConnection(value));
-            }
-        }
 
         public ConnectionDetail[] Organizations
         {
@@ -52,6 +38,22 @@
                     this.lvOrganizations.Items.Add(Helpers.LoadItemConnection(connection));
                 }
                 this.lvOrganizations.ItemChecked += this.lvOrganizations_ItemChecked;
+            }
+        }
+
+        /// <summary>
+        /// Reference connection (CRM organization or file)
+        /// </summary>
+        public ConnectionDetail Reference
+        {
+            get
+            {
+                return this.lvReference.Items.Cast<ListViewItem>().ToArray().Select(x => (ConnectionDetail)x.Tag).FirstOrDefault();
+            }
+            set
+            {
+                this.lvReference.Items.Clear();
+                this.lvReference.Items.Add(Helpers.LoadItemConnection(value));
             }
         }
 
@@ -81,7 +83,6 @@
                 this.lvSolutions.ItemChecked += this.lvSolutions_ItemChecked;
             }
         }
-
 
         #endregion Public Properties
 
@@ -305,6 +306,5 @@
         }
 
         #endregion Private Methods
-
     }
 }
