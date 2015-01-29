@@ -58,7 +58,7 @@
             set
             {
                 this.lvSolutions.ItemChecked -= this.lvSolutions_ItemChecked;
-                this.lvSolutions.Clear();
+                this.lvSolutions.Items.Clear();
 
                 foreach (var solution in value)
                 {
