@@ -25,7 +25,7 @@
             // Execution order is important here, due to rewriting status of tool strip of plugin
             // main window
             this.ShowBackButton(false);
-            this.AddSubControl(new SelectParameters());
+            this.CurrentPage = new SelectParameters();
         }
 
         #endregion Private Methods
@@ -63,24 +63,9 @@
 
         #endregion Public Properties
 
-        /// <summary>
-        /// Adds subcontrol to the main plugin form
-        /// </summary>
-        /// <param name="control">Control to add</param>
-        private void AddSubControl(Control control)
-        {
-            this.Controls.Remove(this.CurrentPage);
-
-            control.Size = this.Size;
-            control.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
-            this.Controls.Add(control);
-
-            this.CurrentPage = control;
-        }
-
         private void MainScreen_Load(object sender, EventArgs e)
         {
-            this.AddSubControl(new SelectParameters());
+            this.CurrentPage = new SelectParameters();
         }
 
         private void LoadSolutionMatrix()
@@ -144,7 +129,7 @@
                         // Execution order is important here, due to rewriting status of tool strip
                         // of plugin main window
                         this.ShowBackButton(true);
-                        this.AddSubControl(control);
+                        this.CurrentPage = control;
                     }
                 }
             );
