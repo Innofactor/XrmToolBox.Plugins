@@ -32,16 +32,7 @@
             set
             {
                 this.lvReference.Items.Clear();
-
-                var row = new string[] {
-                    value.OrganizationFriendlyName,
-                    value.OrganizationServiceUrl,
-                };
-
-                var item = new ListViewItem(row);
-                item.Tag = value;
-
-                this.lvReference.Items.Add(item);
+                this.lvReference.Items.Add(Helpers.LoadItemConnection(value));
             }
         }
 
@@ -58,15 +49,7 @@
 
                 foreach (var connection in value)
                 {
-                    var row = new string[] {
-                        connection.OrganizationFriendlyName,
-                        connection.ServerName,
-                    };
-
-                    var item = new ListViewItem(row);
-                    item.Tag = connection;
-
-                    this.lvOrganizations.Items.Add(item);
+                    this.lvOrganizations.Items.Add(Helpers.LoadItemConnection(connection));
                 }
                 this.lvOrganizations.ItemChecked += this.lvOrganizations_ItemChecked;
             }
@@ -275,7 +258,7 @@
                 }
             );
 
-            this.SetReference(plugin.ConnectionDetail);
+            this.Reference = plugin.ConnectionDetail;
         }
 
         /// <summary>

@@ -4,6 +4,7 @@
     using System.Windows.Forms;
     using System.Xml;
     using System.Linq;
+    using McTools.Xrm.Connection;
 
     public static class Helpers
     {
@@ -30,6 +31,19 @@
             document.Load(filename);
 
             return document.ToArray();
+        }
+
+        public static ListViewItem LoadItemConnection(ConnectionDetail connection)
+        {
+            var row = new string[] {
+                connection.OrganizationFriendlyName,
+                connection.OrganizationServiceUrl,
+            };
+
+            var item = new ListViewItem(row);
+            item.Tag = connection;
+
+            return item;
         }
 
         public static ToolStripButton FindToolStripButton(Control sender, string name)
