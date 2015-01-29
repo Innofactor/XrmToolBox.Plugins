@@ -43,7 +43,7 @@
 
         private Control control;
 
-        public Control TopControl 
+        public Control CurrentPage 
         {
             get
             {
@@ -69,13 +69,13 @@
         /// <param name="control">Control to add</param>
         private void AddSubControl(Control control)
         {
-            this.Controls.Remove(this.TopControl);
+            this.Controls.Remove(this.CurrentPage);
 
             control.Size = this.Size;
             control.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
             this.Controls.Add(control);
 
-            this.TopControl = control;
+            this.CurrentPage = control;
         }
 
         private void MainScreen_Load(object sender, EventArgs e)
@@ -89,14 +89,14 @@
             var services = new Dictionary<string, OrganizationService>();
             services.Add(this.ConnectionDetail.OrganizationFriendlyName, (OrganizationService)this.Service);
 
-            var result = this.TopControl.Controls.Find("lvSolutions", true);
+            var result = this.CurrentPage.Controls.Find("lvSolutions", true);
 
             if (result.Length > 0)
             {
                 solutions = ((ListView)result[0]).Items.Cast<ListViewItem>().Where(x => x.Checked == true).Select(x => (Solution)x.Tag).ToArray();
             }
 
-            result = this.TopControl.Controls.Find("lvOrganizations", true);
+            result = this.CurrentPage.Controls.Find("lvOrganizations", true);
 
             if (result.Length > 0)
             {
@@ -154,9 +154,9 @@
         {
             if (!e.Cancel)
             {
-                if (this.TopControl.GetType() == typeof(SelectParameters))
+                if (this.CurrentPage.GetType() == typeof(SelectParameters))
                 {
-                    ((SelectParameters)this.TopControl).Solutions.ToXml().Save(((SaveFileDialog)sender).FileName);
+                    ((SelectParameters)this.CurrentPage).Solutions.ToXml().Save(((SaveFileDialog)sender).FileName);
                 }
             }
         }
@@ -207,7 +207,7 @@
                 var document = new XmlDocument();
                 document.Load(((OpenFileDialog)sender).FileName);
 
-                ((SelectParameters)this.TopControl).Solutions = document.ToArray();
+                ((SelectParameters)this.CurrentPage).Solutions = document.ToArray();
             }
         }
     }
