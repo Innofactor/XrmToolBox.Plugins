@@ -106,6 +106,7 @@
             }
             this.lvSolutions.ItemChecked += lvSolutions_ItemChecked;
 
+            this.UpdateSaveButton();
             this.UpdateCompareButton();
         }
 
@@ -151,6 +152,7 @@
             this.UpdateSwitcher((ListView)sender, this.cbToggleSolutions, e.Item.Checked);
             this.cbToggleSolutions.CheckedChanged += this.cbToggleSolutions_CheckedChanged;
 
+            this.UpdateSaveButton();
             this.UpdateCompareButton();
         }
 
@@ -263,6 +265,23 @@
             if (button != null)
             {
                 if (this.Solutions.Length > 0 && this.Organizations.Length > 0)
+                {
+                    button.Enabled = true;
+                }
+                else
+                {
+                    button.Enabled = false;
+                }
+            }
+        }
+
+        private void UpdateSaveButton()
+        {
+            var button = Helpers.FindToolStripButton(this, "tsbSave");
+
+            if (button != null)
+            {
+                if (this.Solutions.Length > 0)
                 {
                     button.Enabled = true;
                 }
