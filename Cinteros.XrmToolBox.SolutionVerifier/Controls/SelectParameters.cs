@@ -258,14 +258,7 @@
         /// </summary>
         private void UpdateCompareButton()
         {
-            ToolStripButton button = null;
-
-            var menu = this.Parent.Controls.Find("tsMenu", true).Cast<ToolStrip>().FirstOrDefault();
-
-            if (menu != null)
-            {
-                button = menu.Items.Find("tsbCompare", true).Cast<ToolStripButton>().FirstOrDefault();
-            }
+            var button = Helpers.FindToolStripButton(this, "tsbCompare");
 
             if (button != null)
             {

@@ -1,7 +1,9 @@
 ﻿namespace Cinteros.XrmToolbox.SolutionVerifier.Utils
 {
     using Microsoft.Xrm.Sdk.Query;
+    using System.Windows.Forms;
     using System.Xml;
+    using System.Linq;
 
     public static class Helpers
     {
@@ -28,6 +30,14 @@
             document.Load(filename);
 
             return document.ToArray();
+        }
+
+
+        public static ToolStripButton FindToolStripButton(Control sender, string name)
+        {
+            var menu = sender.Parent.Controls.Find("tsMenu", true).Cast<ToolStrip>().FirstOrDefault();
+
+            return (menu != null) ? menu.Items.Find(name, true).Cast<ToolStripButton>().FirstOrDefault() : null;
         }
 
         #endregion Public Methods
