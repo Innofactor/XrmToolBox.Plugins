@@ -172,9 +172,7 @@
 
         private void SelectParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
         {
-            var plugin = (MainScreen)sender;
-
-            if (plugin.ConnectionDetail != null && !string.IsNullOrEmpty(plugin.ConnectionDetail.OrganizationServiceUrl))
+            if (e.ConnectionDetail != null && !string.IsNullOrEmpty(e.ConnectionDetail.OrganizationServiceUrl))
             {
                 this.SetSolutions((MainScreen)sender);
             }
@@ -220,7 +218,7 @@
         {
             var row = new string[] {
                 connection.OrganizationFriendlyName,
-                connection.ServerName,
+                connection.OrganizationServiceUrl,
             };
 
             this.lvReference.Items.Clear();

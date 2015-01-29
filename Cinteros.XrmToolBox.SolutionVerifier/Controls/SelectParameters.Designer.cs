@@ -31,7 +31,7 @@
             this.gbReference = new System.Windows.Forms.GroupBox();
             this.lvReference = new System.Windows.Forms.ListView();
             this.chRefOrgName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chRefServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chRefUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.gbOrganizations = new System.Windows.Forms.GroupBox();
             this.cbToggleOrganizations = new System.Windows.Forms.CheckBox();
@@ -69,7 +69,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvReference.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chRefOrgName,
-            this.chRefServer});
+            this.chRefUrl});
             this.lvReference.Enabled = false;
             this.lvReference.Location = new System.Drawing.Point(7, 20);
             this.lvReference.Name = "lvReference";
@@ -83,10 +83,10 @@
             this.chRefOrgName.Text = "Organization";
             this.chRefOrgName.Width = 200;
             // 
-            // chRefServer
+            // chRefUrl
             // 
-            this.chRefServer.Text = "Server";
-            this.chRefServer.Width = 200;
+            this.chRefUrl.Text = "Url";
+            this.chRefUrl.Width = 300;
             // 
             // tableLayoutPanel1
             // 
@@ -237,7 +237,7 @@
         private System.Windows.Forms.GroupBox gbReference;
         private System.Windows.Forms.ListView lvReference;
         private System.Windows.Forms.ColumnHeader chRefOrgName;
-        private System.Windows.Forms.ColumnHeader chRefServer;
+        private System.Windows.Forms.ColumnHeader chRefUrl;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox gbOrganizations;
         private System.Windows.Forms.ListView lvOrganizations;

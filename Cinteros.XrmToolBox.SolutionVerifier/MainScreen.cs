@@ -92,13 +92,16 @@
 
                 ((SelectParameters)this.CurrentPage).Solutions = Helpers.LoadSolutionFile(dialog.FileName);
 
-                this.ConnectionDetail = new ConnectionDetail
+                var connection = new ConnectionDetail
                 {
-                    Organization = "Reference",
-                    OrganizationFriendlyName = "Reference",
-                    OrganizationUrlName = Path.GetFileName(dialog.FileName),
+                    Organization = "ReferenceFile",
+                    OrganizationFriendlyName = "Reference File",
                     OrganizationServiceUrl = dialog.FileName
                 };
+
+                this.ConnectionDetail = connection;
+
+                this.OnConnectionUpdated(new ConnectionUpdatedEventArgs(null, connection));
             }
         }
 
