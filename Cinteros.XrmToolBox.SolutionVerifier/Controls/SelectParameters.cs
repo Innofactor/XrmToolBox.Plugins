@@ -172,7 +172,12 @@
 
         private void SelectParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
         {
-            this.SetSolutions((MainScreen)sender);
+            var plugin = (MainScreen)sender;
+
+            if (plugin.ConnectionDetail != null && !string.IsNullOrEmpty(plugin.ConnectionDetail.OrganizationServiceUrl))
+            {
+                this.SetSolutions((MainScreen)sender);
+            }
         }
 
         /// <summary>
@@ -231,7 +236,14 @@
             plugin.WorkAsync(string.Format("Getting solutions information from '{0}'...", plugin.ConnectionDetail.OrganizationFriendlyName),
                 (a) => // Work To Do Asynchronously
                 {
-                    a.Result = plugin.Service.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
+                    if (string.IsNullOrEmpty(plugin.ConnectionDetail.ServerName))
+                    {
+                        a.Result = Helpers.LoadSolutionFile(plugin.ConnectionDetail.OrganizationServiceUrl);
+                    }
+                    else
+                    {
+                        a.Result = plugin.Service.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
+                    }
                 },
                 (a) =>  // Cleanup when work has completed
                 {

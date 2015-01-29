@@ -9,6 +9,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.IO;
     using System.Linq;
     using System.Net;
     using System.Windows.Forms;
@@ -82,16 +83,26 @@
 
         private void open_FileOk(object sender, CancelEventArgs e)
         {
+            var dialog = (OpenFileDialog)sender;
+
             if (!e.Cancel)
             {
                 var document = new XmlDocument();
-                document.Load(((OpenFileDialog)sender).FileName);
+                document.Load(dialog.FileName);
 
-                ((SelectParameters)this.CurrentPage).Solutions = document.ToArray();
+                ((SelectParameters)this.CurrentPage).Solutions = Helpers.LoadSolutionFile(dialog.FileName);
+
+                this.ConnectionDetail = new ConnectionDetail
+                {
+                    Organization = "Reference",
+                    OrganizationFriendlyName = "Reference",
+                    OrganizationUrlName = Path.GetFileName(dialog.FileName),
+                    OrganizationServiceUrl = dialog.FileName
+                };
             }
         }
 
-        private void ProcessMatrix()
+        private void Process()
         {
             var services = new Dictionary<ConnectionDetail, OrganizationService>();
 
@@ -110,12 +121,7 @@
                     var query = Helpers.CreateSolutionsQuery();
                     var matrix = new Dictionary<ConnectionDetail, Solution[]>();
 
-                    var connection = new ConnectionDetail
-                    {
-                        OrganizationFriendlyName = "Reference"
-                    };
-
-                    matrix.Add(connection, reference);
+                    matrix.Add(this.ConnectionDetail, reference);
 
                     foreach (var service in services)
                     {
@@ -178,7 +184,7 @@
 
         private void tsbCompare_Click(object sender, EventArgs e)
         {
-            this.ProcessMatrix();
+            this.Process();
         }
 
         private void tsbSave_Click(object sender, EventArgs e)

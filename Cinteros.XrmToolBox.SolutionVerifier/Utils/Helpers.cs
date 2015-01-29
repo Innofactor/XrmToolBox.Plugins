@@ -1,6 +1,7 @@
 ﻿namespace Cinteros.XrmToolbox.SolutionVerifier.Utils
 {
     using Microsoft.Xrm.Sdk.Query;
+    using System.Xml;
 
     public static class Helpers
     {
@@ -19,6 +20,14 @@
             query.ColumnSet = new ColumnSet(new string[] { Constants.A_UNIQUENAME, Constants.A_FRIENDLYNAME, Constants.A_VERSION, Constants.A_ISMANAGED });
 
             return query;
+        }
+
+        public static Solution[] LoadSolutionFile(string filename)
+        {
+            var document = new XmlDocument();
+            document.Load(filename);
+
+            return document.ToArray();
         }
 
         #endregion Public Methods
