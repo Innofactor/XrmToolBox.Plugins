@@ -41,7 +41,25 @@
 
         #region Public Properties
 
-        public Control SubControl { get; set; }
+        private Control control;
+
+        public Control TopControl 
+        {
+            get
+            {
+                return this.control;
+            }
+            set
+            {
+                value.Size = this.Size;
+                value.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
+
+                this.Controls.Remove(this.control);
+                this.Controls.Add(value);
+
+                this.control = value;
+            }
+        }
 
         #endregion Public Properties
 
@@ -51,13 +69,13 @@
         /// <param name="control">Control to add</param>
         private void AddSubControl(Control control)
         {
-            this.Controls.Remove(this.SubControl);
+            this.Controls.Remove(this.TopControl);
 
             control.Size = this.Size;
             control.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
             this.Controls.Add(control);
 
-            this.SubControl = control;
+            this.TopControl = control;
         }
 
         private void MainScreen_Load(object sender, EventArgs e)
@@ -71,14 +89,14 @@
             var services = new Dictionary<string, OrganizationService>();
             services.Add(this.ConnectionDetail.OrganizationFriendlyName, (OrganizationService)this.Service);
 
-            var result = this.SubControl.Controls.Find("lvSolutions", true);
+            var result = this.TopControl.Controls.Find("lvSolutions", true);
 
             if (result.Length > 0)
             {
                 solutions = ((ListView)result[0]).Items.Cast<ListViewItem>().Where(x => x.Checked == true).Select(x => (Solution)x.Tag).ToArray();
             }
 
-            result = this.SubControl.Controls.Find("lvOrganizations", true);
+            result = this.TopControl.Controls.Find("lvOrganizations", true);
 
             if (result.Length > 0)
             {
@@ -136,9 +154,9 @@
         {
             if (!e.Cancel)
             {
-                if (this.SubControl.GetType() == typeof(SelectParameters))
+                if (this.TopControl.GetType() == typeof(SelectParameters))
                 {
-                    ((SelectParameters)this.SubControl).Solutions.ToXml().Save(((SaveFileDialog)sender).FileName);
+                    ((SelectParameters)this.TopControl).Solutions.ToXml().Save(((SaveFileDialog)sender).FileName);
                 }
             }
         }
@@ -186,13 +204,10 @@
         {
             if (!e.Cancel)
             {
-                if (this.SubControl.GetType() == typeof(SelectParameters))
-                {
-                    var document = new XmlDocument();
-                    document.Load(((OpenFileDialog)sender).FileName);
+                var document = new XmlDocument();
+                document.Load(((OpenFileDialog)sender).FileName);
 
-                    ((SelectParameters)this.SubControl).Solutions = document.ToArray();
-                }
+                ((SelectParameters)this.TopControl).Solutions = document.ToArray();
             }
         }
     }
