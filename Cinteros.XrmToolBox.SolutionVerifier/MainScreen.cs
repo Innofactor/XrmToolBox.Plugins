@@ -77,30 +77,16 @@
 
         private void LoadSolutionMatrix()
         {
-            Solution[] solutions = null;
             var services = new Dictionary<string, OrganizationService>();
-            services.Add(this.ConnectionDetail.OrganizationFriendlyName, (OrganizationService)this.Service);
 
-            var result = this.CurrentPage.Controls.Find("lvSolutions", true);
+            WebRequest.GetSystemWebProxy();
 
-            if (result.Length > 0)
+            foreach (var organization in ((SelectParameters)this.CurrentPage).Organizations)
             {
-                solutions = ((ListView)result[0]).Items.Cast<ListViewItem>().Where(x => x.Checked == true).Select(x => (Solution)x.Tag).ToArray();
+                services.Add(organization.OrganizationFriendlyName, new OrganizationService(CrmConnection.Parse(organization.GetOrganizationCrmConnectionString())));
             }
 
-            result = this.CurrentPage.Controls.Find("lvOrganizations", true);
-
-            if (result.Length > 0)
-            {
-                var connections = ((ListView)result[0]).Items.Cast<ListViewItem>().Where(x => x.Checked == true).Select(x => (ConnectionDetail)x.Tag).ToList();
-
-                WebRequest.GetSystemWebProxy();
-
-                foreach (var connection in connections)
-                {
-                    services.Add(connection.OrganizationFriendlyName, new OrganizationService(CrmConnection.Parse(connection.GetOrganizationCrmConnectionString())));
-                }
-            }
+            var reference = ((SelectParameters)this.CurrentPage).Solutions;
 
             this.WorkAsync("Getting solutions information from organizations...",
                 (e) => // Work To Do Asynchronously
@@ -108,14 +94,15 @@
                     var query = Helpers.CreateSolutionsQuery();
                     var matrix = new Dictionary<string, Solution[]>();
 
+                    matrix.Add("Reference", reference);
+
                     foreach (var service in services)
                     {
                         try
                         {
                             var entities = service.Value.RetrieveMultiple(query).Entities;
                             var response = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
-                            response = response.Where(x => solutions.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
-                            var res = response.Intersect(solutions).ToArray<Solution>();
+                            response = response.Where(x => reference.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
 
                             matrix.Add(service.Key, response);
                         }
