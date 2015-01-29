@@ -9,7 +9,6 @@
 
     public partial class SelectParameters : UserControl
     {
-
         #region Public Constructors
 
         public SelectParameters()
@@ -33,7 +32,7 @@
             {
                 this.lvOrganizations.ItemChecked -= this.lvOrganizations_ItemChecked;
                 this.lvOrganizations.Items.Clear();
-                
+
                 foreach (var connection in value)
                 {
                     var row = new string[] {
@@ -207,6 +206,7 @@
                 this.lvSolutions_ItemSelectionChanged(this.lvSolutions, null);
             }
         }
+
         /// <summary>
         /// Set reference organization information
         /// </summary>
@@ -291,6 +291,5 @@
         }
 
         #endregion Private Methods
-
     }
 }

@@ -75,7 +75,23 @@
             open.ShowDialog();
         }
 
-        private void LoadSolutionMatrix()
+        private void MainScreen_Load(object sender, EventArgs e)
+        {
+            this.CurrentPage = new SelectParameters();
+        }
+
+        private void open_FileOk(object sender, CancelEventArgs e)
+        {
+            if (!e.Cancel)
+            {
+                var document = new XmlDocument();
+                document.Load(((OpenFileDialog)sender).FileName);
+
+                ((SelectParameters)this.CurrentPage).Solutions = document.ToArray();
+            }
+        }
+
+        private void ProcessMatrix()
         {
             var services = new Dictionary<ConnectionDetail, OrganizationService>();
 
@@ -123,31 +139,13 @@
                 {
                     if (e.Result != null)
                     {
-                        var control = new ViewResults();
-                        control.Set((Dictionary<ConnectionDetail, Solution[]>)e.Result);
                         // Execution order is important here, due to rewriting status of tool strip
                         // of plugin main window
                         this.ShowBackButton(true);
-                        this.CurrentPage = control;
+                        this.CurrentPage = new ViewResults((Dictionary<ConnectionDetail, Solution[]>)e.Result);
                     }
                 }
             );
-        }
-
-        private void MainScreen_Load(object sender, EventArgs e)
-        {
-            this.CurrentPage = new SelectParameters();
-        }
-
-        private void open_FileOk(object sender, CancelEventArgs e)
-        {
-            if (!e.Cancel)
-            {
-                var document = new XmlDocument();
-                document.Load(((OpenFileDialog)sender).FileName);
-
-                ((SelectParameters)this.CurrentPage).Solutions = document.ToArray();
-            }
         }
 
         private void save_FileOk(object sender, CancelEventArgs e)
@@ -180,7 +178,7 @@
 
         private void tsbCompare_Click(object sender, EventArgs e)
         {
-            this.LoadSolutionMatrix();
+            this.ProcessMatrix();
         }
 
         private void tsbSave_Click(object sender, EventArgs e)

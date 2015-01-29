@@ -11,46 +11,51 @@
     {
         #region Public Constructors
 
-        public ViewResults()
+        public ViewResults(Dictionary<ConnectionDetail, Solution[]> matrix)
         {
             InitializeComponent();
+
+            this.Matrix = matrix;
         }
 
         #endregion Public Constructors
 
-        #region Public Methods
+        #region Public Properties
 
-        public void Set(Dictionary<ConnectionDetail, Solution[]> matrix)
+        public Dictionary<ConnectionDetail, Solution[]> Matrix
         {
-            this.AddListViewHeaders(matrix.Keys.Select(x => x.OrganizationFriendlyName).ToArray<string>());
-
-            foreach (var solution in matrix.First().Value)
+            set
             {
-                var row = new ListViewItem(solution.FriendlyName);
-                row.UseItemStyleForSubItems = false;
+                this.AddListViewHeaders(value.Keys.Select(x => x.OrganizationFriendlyName).ToArray<string>());
 
-                var reference = new List<Solution>();
-                var i = 0;
-
-                foreach (var item in matrix)
+                foreach (var solution in value.First().Value)
                 {
-                    var current = item.Value.Where(x => solution.UniqueName.Equals(x.UniqueName)).FirstOrDefault<Solution>();
+                    var row = new ListViewItem(solution.FriendlyName);
+                    row.UseItemStyleForSubItems = false;
 
-                    if (i++ == 0)
+                    var reference = new List<Solution>();
+                    var i = 0;
+
+                    foreach (var item in value)
                     {
-                        reference.Add(current);
-                        row.SubItems.Add(this.CreateCell(null, current));
+                        var current = item.Value.Where(x => solution.UniqueName.Equals(x.UniqueName)).FirstOrDefault<Solution>();
+
+                        if (i++ == 0)
+                        {
+                            reference.Add(current);
+                            row.SubItems.Add(this.CreateCell(null, current));
+                        }
+                        else
+                        {
+                            row.SubItems.Add(this.CreateCell(reference, current));
+                        }
                     }
-                    else
-                    {
-                        row.SubItems.Add(this.CreateCell(reference, current));
-                    }
+                    this.lvSolutions.Items.Add(row);
                 }
-                this.lvSolutions.Items.Add(row);
             }
         }
 
-        #endregion Public Methods
+        #endregion Public Properties
 
         #region Private Methods
 
@@ -116,5 +121,6 @@
         }
 
         #endregion Private Methods
+
     }
 }
