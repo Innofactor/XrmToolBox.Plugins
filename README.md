@@ -1,13 +1,18 @@
-# Solution verifier for XrmToolbox
+# Solution Verifier for XrmToolbox
 
 This tool is a plugin to the [XrmToolbox](http://xrmtoolbox.codeplex.com/) by [Tanguy Touzard](https://www.codeplex.com/site/users/view/tanguy92).
 
 ### Background
 
+If you have several environments for development, testing, acceptance and your product is split to number of solutions, or dependednt on several third-party solutions, it's hard to keep track on all solution changes.
+
+This might be crusial when hotfix should be released to all customers' environments.
 
 ### Project Description
 
-A tool to compare multiple solution versions over multiple environments. By default, currently connected organization is treated as the source of reference solution infromation.
+A tool to compare multiple solution versions over multiple environments. 
+
+By default, currently connected organization is treated as the source of reference solution infromation.
 
 Tool builds colorful matrix that helps to visually identify which solutions are outdated.
 
