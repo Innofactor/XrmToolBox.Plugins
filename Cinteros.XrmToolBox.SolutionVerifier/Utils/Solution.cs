@@ -8,14 +8,14 @@
         #region Public Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Solution" /> class.
+        /// Initializes a new instance of the <see cref="Solution"/> class.
         /// </summary>
         public Solution()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Solution" /> class.
+        /// Initializes a new instance of the <see cref="Solution"/> class.
         /// </summary>
         /// <param name="entity">Entity from which solution object is initialized</param>
         public Solution(Entity entity)
@@ -32,7 +32,7 @@
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets solution's friendly name 
+        /// Gets or sets solution's friendly name
         /// </summary>
         public string FriendlyName
         {
@@ -41,7 +41,7 @@
         }
 
         /// <summary>
-        /// Gets or sets solution's id
+        /// Gets solution's id
         /// </summary>
         public Guid Id
         {
@@ -50,7 +50,7 @@
         }
 
         /// <summary>
-        /// Gets or sets solution's isManaged flag
+        /// Gets a value indicating whether solution is managed or not
         /// </summary>
         public bool IsManaged
         {
