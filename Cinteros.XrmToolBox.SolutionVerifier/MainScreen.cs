@@ -8,13 +8,22 @@
     using Microsoft.Xrm.Sdk;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Net;
     using System.Windows.Forms;
+    using System.Xml;
     using XrmToolBox;
 
     public partial class MainScreen : PluginBase
     {
+
+        #region Private Fields
+
+        private Control control;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
         public MainScreen()
@@ -26,64 +35,102 @@
 
         #region Public Properties
 
-        public Control SubControl { get; set; }
+        public Control CurrentPage
+        {
+            get
+            {
+                return this.control;
+            }
+            set
+            {
+                value.Size = this.Size;
+                value.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
+
+                this.Controls.Remove(this.control);
+                this.Controls.Add(value);
+
+                ((IUpdateToolStrip)value).UpdateToolStrip += MainScreen_UpdateToolStrip;
+
+                this.control = value;
+            }
+        }
 
         #endregion Public Properties
 
         #region Private Methods
 
-        /// <summary>
-        /// Adds subcontrol to the main plugin form
-        /// </summary>
-        /// <param name="control">Control to add</param>
-        private void AddSubControl(Control control)
+        private void fromReferenceFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Controls.Remove(this.SubControl);
+            var open = new OpenFileDialog();
+            open.FileOk += open_FileOk;
 
-            control.Size = this.Size;
-            control.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
-            this.Controls.Add(control);
-
-            this.SubControl = control;
+            open.ShowDialog();
         }
 
-        private void EnvironmentsSelector_Load(object sender, EventArgs e)
+        private void MainScreen_Load(object sender, EventArgs e)
         {
-            this.AddSubControl(new SelectParameters());
+            this.CurrentPage = new SelectParameters();
         }
 
-        private void LoadSolutionMatrix()
+        private void MainScreen_UpdateToolStrip(object sender, UpdateToolStripEventArgs e)
         {
-            Solution[] solutions = null;
-            var services = new Dictionary<string, OrganizationService>();
-            services.Add(this.ConnectionDetail.OrganizationFriendlyName, (OrganizationService)this.Service);
-
-            var result = this.SubControl.Controls.Find("lvSolutions", true);
-
-            if (result.Length > 0)
+            if (e != null)
             {
-                solutions = ((ListView)result[0]).Items.Cast<ListViewItem>().Where(x => x.Checked == true).Select(x => (Solution)x.Tag).ToArray();
-            }
+                var menu = this.Controls.Find("tsMenu", true).Cast<ToolStrip>().FirstOrDefault();
 
-            result = this.SubControl.Controls.Find("lvOrganizations", true);
+                var button = (menu != null) ? menu.Items.Find(e.ButtonName, true).Cast<ToolStripButton>().FirstOrDefault() : null;
 
-            if (result.Length > 0)
-            {
-                var connections = ((ListView)result[0]).Items.Cast<ListViewItem>().Where(x => x.Checked == true).Select(x => (ConnectionDetail)x.Tag).ToList();
-
-                WebRequest.GetSystemWebProxy();
-
-                foreach (var connection in connections)
+                if (button != null)
                 {
-                    services.Add(connection.OrganizationFriendlyName, new OrganizationService(CrmConnection.Parse(connection.GetOrganizationCrmConnectionString())));
+                    button.Enabled = e.ButtonStatus;
                 }
             }
+        }
+
+        private void open_FileOk(object sender, CancelEventArgs e)
+        {
+            var dialog = (OpenFileDialog)sender;
+
+            if (!e.Cancel)
+            {
+                var document = new XmlDocument();
+                document.Load(dialog.FileName);
+
+                ((SelectParameters)this.CurrentPage).Solutions = Helpers.LoadSolutionFile(dialog.FileName);
+
+                var connection = new ConnectionDetail
+                {
+                    Organization = "ReferenceFile",
+                    OrganizationFriendlyName = "Reference File",
+                    OrganizationServiceUrl = dialog.FileName
+                };
+
+                this.ConnectionDetail = connection;
+
+                this.OnConnectionUpdated(new ConnectionUpdatedEventArgs(null, connection));
+            }
+        }
+
+        private void Process()
+        {
+            var services = new Dictionary<ConnectionDetail, OrganizationService>();
+
+            WebRequest.GetSystemWebProxy();
+
+            foreach (var organization in ((SelectParameters)this.CurrentPage).Organizations)
+            {
+                services.Add(organization, new OrganizationService(CrmConnection.Parse(organization.GetOrganizationCrmConnectionString())));
+            }
+
+            var reference = ((SelectParameters)this.CurrentPage).Solutions;
 
             this.WorkAsync("Getting solutions information from organizations...",
                 (e) => // Work To Do Asynchronously
                 {
                     var query = Helpers.CreateSolutionsQuery();
-                    var matrix = new Dictionary<string, Solution[]>();
+                    var matrix = new Dictionary<ConnectionDetail, Solution[]>();
+
+                    matrix.Add(this.ConnectionDetail, reference);
 
                     foreach (var service in services)
                     {
@@ -91,8 +138,7 @@
                         {
                             var entities = service.Value.RetrieveMultiple(query).Entities;
                             var response = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
-                            response = response.Where(x => solutions.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
-                            var res = response.Intersect(solutions).ToArray<Solution>();
+                            response = response.Where(x => reference.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
 
                             matrix.Add(service.Key, response);
                         }
@@ -108,47 +154,66 @@
                 {
                     if (e.Result != null)
                     {
-                        var control = new ViewResults();
-                        control.Set((Dictionary<string, Solution[]>)e.Result);
                         // Execution order is important here, due to rewriting status of tool strip
                         // of plugin main window
                         this.ShowBackButton(true);
-                        this.AddSubControl(control);
+                        this.CurrentPage = new ViewResults((Dictionary<ConnectionDetail, Solution[]>)e.Result);
                     }
                 }
             );
         }
 
+        private void save_FileOk(object sender, CancelEventArgs e)
+        {
+            if (!e.Cancel)
+            {
+                if (this.CurrentPage.GetType() == typeof(SelectParameters))
+                {
+                    ((SelectParameters)this.CurrentPage).Solutions.ToXml().Save(((SaveFileDialog)sender).FileName);
+                }
+            }
+        }
+
         private void ShowBackButton(bool status)
         {
-            var items = this.tsMenu.Items.Cast<ToolStripItem>().Where(x => (x != tsbClose) & (x != tsbSelectOrganizations) & (!x.GetType().Equals(typeof(ToolStripSeparator))));
+            var items = this.tsMenu.Items.Cast<ToolStripItem>().Where(x => (x != tsbClose) & (x != tsbBack) & (!x.GetType().Equals(typeof(ToolStripSeparator))));
 
             foreach (var item in items)
             {
                 item.Enabled = !status;
             }
 
-            this.tsbSelectOrganizations.Enabled = status;
+            this.tsbBack.Enabled = status;
         }
 
-        private void tsbClose_Click(object sender, EventArgs e)
-        {
-            base.CloseToolPrompt();
-        }
-
-        private void tsbCompareSolutions_Click(object sender, EventArgs e)
-        {
-            this.LoadSolutionMatrix();
-        }
-
-        private void tsbSelectOrganizations_Click(object sender, EventArgs e)
+        private void tsbBack_Click(object sender, EventArgs e)
         {
             // Execution order is important here, due to rewriting status of tool strip of plugin
             // main window
             this.ShowBackButton(false);
-            this.AddSubControl(new SelectParameters());
+            this.CurrentPage = new SelectParameters();
+        }
+
+        private void tsbClose_Click(object sender, EventArgs e)
+        {
+            base.CloseTool();
+        }
+
+        private void tsbCompare_Click(object sender, EventArgs e)
+        {
+            this.Process();
+        }
+
+        private void tsbSave_Click(object sender, EventArgs e)
+        {
+            var save = new SaveFileDialog();
+            save.FileOk += save_FileOk;
+
+            save.FileName = "reference-solutions.xml";
+            save.ShowDialog();
         }
 
         #endregion Private Methods
+
     }
 }

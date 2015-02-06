@@ -1,63 +1,76 @@
 ﻿namespace Cinteros.XrmToolbox.SolutionVerifier.Controls
 {
     using Cinteros.XrmToolbox.SolutionVerifier.Utils;
+    using McTools.Xrm.Connection;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
 
-    public partial class ViewResults : UserControl
+    public partial class ViewResults : UserControl, IUpdateToolStrip
     {
+
         #region Public Constructors
 
-        public ViewResults()
+        public ViewResults(Dictionary<ConnectionDetail, Solution[]> matrix)
         {
             InitializeComponent();
+
+            this.Matrix = matrix;
         }
 
         #endregion Public Constructors
 
-        #region Public Methods
+        #region Public Events
 
-        public void Set(Dictionary<string, Solution[]> matrix)
+        public event System.EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
+
+        #endregion Public Events
+
+        #region Public Properties
+
+        public Dictionary<ConnectionDetail, Solution[]> Matrix
         {
-            this.AddListViewHeaders(matrix.Keys.ToArray<string>());
-
-            foreach (var solution in matrix.First().Value)
+            set
             {
-                var row = new ListViewItem(solution.FriendlyName);
-                row.UseItemStyleForSubItems = false;
+                this.AddListViewHeaders(value.Keys.Select(x => x.OrganizationFriendlyName).ToArray<string>());
 
-                var reference = new List<Solution>();
-                var i = 0;
-
-                foreach (var item in matrix)
+                foreach (var solution in value.First().Value)
                 {
-                    var current = item.Value.Where(x => solution.UniqueName.Equals(x.UniqueName)).FirstOrDefault<Solution>();
+                    var row = new ListViewItem(solution.FriendlyName);
+                    row.UseItemStyleForSubItems = false;
 
-                    if (i++ == 0)
+                    var reference = new List<Solution>();
+                    var i = 0;
+
+                    foreach (var item in value)
                     {
-                        reference.Add(current);
-                        row.SubItems.Add(this.CreateCell(null, current));
+                        var current = item.Value.Where(x => solution.UniqueName.Equals(x.UniqueName)).FirstOrDefault<Solution>();
+
+                        if (i++ == 0)
+                        {
+                            reference.Add(current);
+                            row.SubItems.Add(this.CreateCell(null, current));
+                        }
+                        else
+                        {
+                            row.SubItems.Add(this.CreateCell(reference, current));
+                        }
                     }
-                    else
-                    {
-                        row.SubItems.Add(this.CreateCell(reference, current));
-                    }
+                    this.lvSolutions.Items.Add(row);
                 }
-                this.lvSolutions.Items.Add(row);
             }
         }
 
-        #endregion Public Methods
+        #endregion Public Properties
 
         #region Private Methods
 
         private void AddListViewHeaders(string[] headers)
         {
             var header = new ColumnHeader();
-            header.Text = Constants.HEADER_MAINTEXT;
-            header.Width = Constants.HEADER_MAINWIDTH;
+            header.Text = Constants.U_HEADER_MAINTEXT;
+            header.Width = Constants.U_HEADER_MAINWIDTH;
             this.lvSolutions.Columns.Add(header);
 
             foreach (var text in headers)
@@ -91,7 +104,7 @@
                 // Solution is not present on target system
                 if (current == null)
                 {
-                    cell.Text = Constants.SOLUTION_NA;
+                    cell.Text = Constants.U_SOLUTION_NA;
                     cell.ForeColor = Color.LightGray;
                     cell.BackColor = Color.White;
                     cell.Tag = "Solution is unavailable on the target organization";

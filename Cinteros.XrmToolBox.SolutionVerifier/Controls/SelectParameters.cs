@@ -7,24 +7,94 @@
     using System.Windows.Forms;
     using XrmToolBox;
 
-    public partial class SelectParameters : UserControl
+    public partial class SelectParameters : UserControl, IUpdateToolStrip
     {
+
         #region Public Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SelectParameters"/> class.
+        /// </summary>
         public SelectParameters()
         {
             InitializeComponent();
 
-            this.ParentChanged += this.SelectEnvironments_ParentChanged;
-        }
-
-        void SelectParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
-        {
-            this.SetSolutions((MainScreen)sender);
-
+            this.ParentChanged += this.SelectParameters_ParentChanged;
         }
 
         #endregion Public Constructors
+
+        #region Public Events
+
+        public event EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
+
+        #endregion Public Events
+
+        #region Public Properties
+
+        public ConnectionDetail[] Organizations
+        {
+            get
+            {
+                return this.lvOrganizations.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (ConnectionDetail)x.Tag).ToArray<ConnectionDetail>();
+            }
+            set
+            {
+                this.lvOrganizations.ItemChecked -= this.lvOrganizations_ItemChecked;
+                this.lvOrganizations.Items.Clear();
+
+                foreach (var connection in value)
+                {
+                    this.lvOrganizations.Items.Add(Helpers.LoadItemConnection(connection));
+                }
+                this.lvOrganizations.ItemChecked += this.lvOrganizations_ItemChecked;
+            }
+        }
+
+        /// <summary>
+        /// Reference connection (CRM organization or file)
+        /// </summary>
+        public ConnectionDetail Reference
+        {
+            get
+            {
+                return this.lvReference.Items.Cast<ListViewItem>().ToArray().Select(x => (ConnectionDetail)x.Tag).FirstOrDefault();
+            }
+            set
+            {
+                this.lvReference.Items.Clear();
+                this.lvReference.Items.Add(Helpers.LoadItemConnection(value));
+            }
+        }
+
+        public Solution[] Solutions
+        {
+            get
+            {
+                return this.lvSolutions.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (Solution)x.Tag).ToArray<Solution>();
+            }
+            set
+            {
+                this.lvSolutions.ItemChecked -= this.lvSolutions_ItemChecked;
+                this.lvSolutions.Items.Clear();
+
+                foreach (var solution in value)
+                {
+                    var row = new string[] {
+                        solution.FriendlyName,
+                        solution.Version.ToString(),
+                    };
+
+                    var item = new ListViewItem(row);
+                    item.Tag = solution;
+
+                    this.lvSolutions.Items.Add(item);
+                }
+                this.lvSolutions.ItemChecked += this.lvSolutions_ItemChecked;
+            }
+        }
+
+        #endregion Public Properties
 
         #region Private Methods
 
@@ -39,7 +109,7 @@
             }
             this.lvOrganizations.ItemChecked += lvOrganizations_ItemChecked;
 
-            this.UpdateCompareSolutionsButton();
+            this.UpdateCompareButton();
         }
 
         private void cbToggleSolutions_CheckedChanged(object sender, EventArgs e)
@@ -53,25 +123,8 @@
             }
             this.lvSolutions.ItemChecked += lvSolutions_ItemChecked;
 
-            this.UpdateCompareSolutionsButton();
-        }
-
-        private void SetOrganizations(ConnectionDetail[] connections)
-        {
-            this.lvOrganizations.Items.Clear();
-
-            foreach (var connection in connections)
-            {
-                var row = new string[] {
-                    connection.OrganizationFriendlyName,
-                    connection.ServerName,
-                };
-
-                var item = new ListViewItem(row);
-                item.Tag = connection;
-
-                this.lvOrganizations.Items.Add(item);
-            }
+            this.UpdateSaveButton();
+            this.UpdateCompareButton();
         }
 
         /// <summary>
@@ -85,7 +138,7 @@
             this.UpdateSwitcher((ListView)sender, this.cbToggleOrganizations, e.Item.Checked);
             this.cbToggleOrganizations.CheckedChanged += this.cbToggleOrganizations_CheckedChanged;
 
-            this.UpdateCompareSolutionsButton();
+            this.UpdateCompareButton();
         }
 
         /// <summary>
@@ -102,7 +155,7 @@
                 item.Checked = !item.Checked;
             }
 
-            this.UpdateCompareSolutionsButton();
+            this.UpdateCompareButton();
         }
 
         /// <summary>
@@ -116,7 +169,8 @@
             this.UpdateSwitcher((ListView)sender, this.cbToggleSolutions, e.Item.Checked);
             this.cbToggleSolutions.CheckedChanged += this.cbToggleSolutions_CheckedChanged;
 
-            this.UpdateCompareSolutionsButton();
+            this.UpdateSaveButton();
+            this.UpdateCompareButton();
         }
 
         /// <summary>
@@ -133,7 +187,15 @@
                 item.Checked = !item.Checked;
             }
 
-            this.UpdateCompareSolutionsButton();
+            this.UpdateCompareButton();
+        }
+
+        private void SelectParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
+        {
+            if (e.ConnectionDetail != null && !string.IsNullOrEmpty(e.ConnectionDetail.OrganizationServiceUrl))
+            {
+                this.SetSolutions((MainScreen)sender);
+            }
         }
 
         /// <summary>
@@ -142,10 +204,10 @@
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SelectEnvironments_ParentChanged(object sender, EventArgs e)
+        private void SelectParameters_ParentChanged(object sender, EventArgs e)
         {
             var parent = (MainScreen)this.Parent;
-            
+
             if (parent != null)
             {
                 parent.ConnectionUpdated += SelectParameters_ConnectionUpdated;
@@ -153,11 +215,14 @@
                 if (parent.ConnectionDetail != null)
                 {
                     this.SetSolutions(parent);
+
+                    // All connections except currently connected one
+                    this.Organizations = (new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
                 }
                 else
                 {
                     // All connections
-                    this.SetOrganizations(new ConnectionManager().ConnectionsList.Connections.ToArray<ConnectionDetail>());
+                    this.Organizations = (new ConnectionManager().ConnectionsList.Connections.ToArray<ConnectionDetail>());
                 }
 
                 this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
@@ -174,72 +239,54 @@
             plugin.WorkAsync(string.Format("Getting solutions information from '{0}'...", plugin.ConnectionDetail.OrganizationFriendlyName),
                 (a) => // Work To Do Asynchronously
                 {
-                    a.Result = plugin.Service.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
+                    if (string.IsNullOrEmpty(plugin.ConnectionDetail.ServerName))
+                    {
+                        a.Result = Helpers.LoadSolutionFile(plugin.ConnectionDetail.OrganizationServiceUrl);
+                    }
+                    else
+                    {
+                        a.Result = plugin.Service.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
+                    }
                 },
                 (a) =>  // Cleanup when work has completed
                 {
-                    this.lvSolutions.Items.Clear();
-                    foreach (var solution in (Solution[])a.Result)
-                    {
-                        var row = new string[] {
-                                    solution.FriendlyName,
-                                    solution.Version.ToString(),
-                                };
-
-                        var item = new ListViewItem(row);
-                        item.Tag = solution;
-
-                        this.lvSolutions.Items.Add(item);
-                    }
+                    this.Solutions = (Solution[])a.Result;
                 }
             );
 
-            this.SetReference(plugin.ConnectionDetail);
-
-            // All connections except currently connected one
-            this.SetOrganizations(new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != plugin.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
+            this.Reference = plugin.ConnectionDetail;
         }
 
         /// <summary>
-        /// Set reference organization information
+        /// Sends event that changes enabled status of the given button on plugin toolstrip
         /// </summary>
-        /// <param name="connection">Current connection</param>
-        private void SetReference(ConnectionDetail connection)
+        /// <param name="name"></param>
+        /// <param name="status"></param>
+        private void UpdateButton(string name, bool status)
         {
-            var row = new string[] {
-                        connection.OrganizationFriendlyName,
-                        connection.ServerName,
-                    };
-
-            this.lvReference.Items.Clear();
-            this.lvReference.Items.Add(new ListViewItem(row));
+            if (status)
+            {
+                if (this.UpdateToolStrip != null)
+                {
+                    this.UpdateToolStrip(this, new UpdateToolStripEventArgs(name, status));
+                }
+            }
         }
 
         /// <summary>
-        /// Updates button on tool depending on currently checked items
+        /// Updates Compare button on plugin depending on currently checked items
         /// </summary>
-        private void UpdateCompareSolutionsButton()
+        private void UpdateCompareButton()
         {
-            ToolStripButton button = null;
+            this.UpdateButton(Constants.U_COMPARE_BUTTON, this.Solutions.Length > 0 && this.Organizations.Length > 0);
+        }
 
-            var menu = this.Parent.Controls.Find("tsMenu", true).Cast<ToolStrip>().FirstOrDefault();
-
-            if (menu != null)
-            {
-                button = menu.Items.Find("tsbCompareSolutions", true).Cast<ToolStripButton>().FirstOrDefault();
-            }
-
-            if (button != null)
-            {
-                if (this.lvSolutions.CheckedItems.Count > 0 && this.lvOrganizations.CheckedItems.Count > 0)
-                {
-                    button.Enabled = true;
-                }
-                else
-                {
-                    button.Enabled = false;
-                }
-            }
+        /// <summary>
+        /// Updates Save button on plugin depending on currently checked solution items
+        /// </summary>
+        private void UpdateSaveButton()
+        {
+            this.UpdateButton(Constants.U_SAVE_BUTTON, this.Solutions.Length > 0);
         }
 
         /// <summary>
@@ -264,5 +311,6 @@
         }
 
         #endregion Private Methods
+
     }
 }

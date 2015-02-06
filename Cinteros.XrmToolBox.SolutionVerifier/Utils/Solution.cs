@@ -7,6 +7,17 @@
     {
         #region Public Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Solution"/> class.
+        /// </summary>
+        public Solution()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Solution"/> class.
+        /// </summary>
+        /// <param name="entity">Entity from which solution object is initialized</param>
         public Solution(Entity entity)
         {
             this.Id = (Guid)entity.Attributes[Constants.A_SOLUTIONID];
@@ -20,34 +31,49 @@
 
         #region Public Properties
 
+        /// <summary>
+        /// Gets or sets solution's friendly name
+        /// </summary>
         public string FriendlyName
         {
             get;
-            private set;
+            set;
         }
 
+        /// <summary>
+        /// Gets solution's id
+        /// </summary>
         public Guid Id
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether solution is managed or not
+        /// </summary>
         public bool IsManaged
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets or sets solution's unique name
+        /// </summary>
         public string UniqueName
         {
             get;
-            private set;
+            set;
         }
 
+        /// <summary>
+        /// Gets or sets solution's version
+        /// </summary>
         public Version Version
         {
             get;
-            private set;
+            set;
         }
 
         #endregion Public Properties

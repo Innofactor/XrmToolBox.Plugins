@@ -11,15 +11,29 @@
         public const string A_UNIQUENAME = "uniquename";
         public const string A_VERSION = "version";
         public const string E_SOLUTION = "solution";
-        public const string HEADER_MAINTEXT = "Solution Name / Organization";
-        public const int HEADER_MAINWIDTH = 200;
+
+        /// <summary>
+        /// Name of toolstrip's Compare button
+        /// </summary>
+        public const string U_COMPARE_BUTTON = "tsbCompare";
+
+        public const string U_HEADER_MAINTEXT = "Solution Name / Organization";
+        public const int U_HEADER_MAINWIDTH = 200;
+
+        /// <summary>
+        /// Name of toolstrip's Save button
+        /// </summary>
+        public const string U_SAVE_BUTTON = "tsbSave";
 
         /// <summary>
         /// Default solution unique name
         /// </summary>
-        public const string SOLUTION_DEFAULT = "Default";
+        public const string U_SOLUTION_DEFAULT = "Default";
 
-        public static string SOLUTION_NA = "N/A";
+        /// <summary>
+        /// Text for solution that is not available
+        /// </summary>
+        public const string U_SOLUTION_NA = "N/A";
 
         #endregion Public Fields
     }

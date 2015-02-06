@@ -31,7 +31,7 @@
             this.gbReference = new System.Windows.Forms.GroupBox();
             this.lvReference = new System.Windows.Forms.ListView();
             this.chRefOrgName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chRefServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chRefUrl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.gbOrganizations = new System.Windows.Forms.GroupBox();
             this.cbToggleOrganizations = new System.Windows.Forms.CheckBox();
@@ -60,7 +60,7 @@
             this.gbReference.Size = new System.Drawing.Size(597, 76);
             this.gbReference.TabIndex = 10;
             this.gbReference.TabStop = false;
-            this.gbReference.Text = "Reference organization";
+            this.gbReference.Text = "Reference";
             // 
             // lvReference
             // 
@@ -69,7 +69,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvReference.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chRefOrgName,
-            this.chRefServer});
+            this.chRefUrl});
             this.lvReference.Enabled = false;
             this.lvReference.Location = new System.Drawing.Point(7, 20);
             this.lvReference.Name = "lvReference";
@@ -83,10 +83,10 @@
             this.chRefOrgName.Text = "Organization";
             this.chRefOrgName.Width = 200;
             // 
-            // chRefServer
+            // chRefUrl
             // 
-            this.chRefServer.Text = "Server";
-            this.chRefServer.Width = 200;
+            this.chRefUrl.Text = "Url";
+            this.chRefUrl.Width = 400;
             // 
             // tableLayoutPanel1
             // 
@@ -213,13 +213,14 @@
             this.chSolutionVersion.Text = "Version";
             this.chSolutionVersion.Width = 200;
             // 
-            // SelectOrganizations
+            // SelectParameters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.gbReference);
-            this.Name = "SelectOrganizations";
+            this.DoubleBuffered = true;
+            this.Name = "SelectParameters";
             this.Size = new System.Drawing.Size(600, 400);
             this.gbReference.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -236,18 +237,18 @@
         private System.Windows.Forms.GroupBox gbReference;
         private System.Windows.Forms.ListView lvReference;
         private System.Windows.Forms.ColumnHeader chRefOrgName;
-        private System.Windows.Forms.ColumnHeader chRefServer;
+        private System.Windows.Forms.ColumnHeader chRefUrl;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox gbOrganizations;
         private System.Windows.Forms.ListView lvOrganizations;
         private System.Windows.Forms.ColumnHeader chOrgName;
         private System.Windows.Forms.ColumnHeader chOrgService;
         private System.Windows.Forms.GroupBox gbSolutions;
+        private System.Windows.Forms.CheckBox cbToggleOrganizations;
+        private System.Windows.Forms.CheckBox cbToggleSolutions;
         private System.Windows.Forms.ListView lvSolutions;
         private System.Windows.Forms.ColumnHeader chSolutionName;
         private System.Windows.Forms.ColumnHeader chSolutionVersion;
-        private System.Windows.Forms.CheckBox cbToggleOrganizations;
-        private System.Windows.Forms.CheckBox cbToggleSolutions;
 
     }
 }
