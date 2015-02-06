@@ -7,7 +7,7 @@
         #region Public Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UpdateToolStripEventArgs" /> class.
+        /// Initializes a new instance of the <see cref="UpdateToolStripEventArgs"/> class.
         /// </summary>
         /// <param name="buttonName"></param>
         /// <param name="buttonStatus"></param>

@@ -7,34 +7,8 @@
     using System.Windows.Forms;
     using XrmToolBox;
 
-    public partial class SelectParameters : UserControl
+    public partial class SelectParameters : UserControl, IUpdateToolStrip
     {
-        #region Public Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SelectParameters" /> class.
-        /// </summary>
-        public SelectParameters()
-        {
-            InitializeComponent();
-
-            this.ParentChanged += this.SelectParameters_ParentChanged;
-        }
-
-        #endregion Public Constructors
-
-        #region Public Delegates
-
-        public delegate void UpdateToolStripHandler(object sender, UpdateToolStripEventArgs e);
-
-        #endregion Public Delegates
-
-        #region Public Events
-
-        public event UpdateToolStripHandler UpdateToolStrip;
-
-        #endregion Public Events
-
         #region Public Properties
 
         public ConnectionDetail[] Organizations
@@ -321,5 +295,25 @@
         }
 
         #endregion Private Methods
+
+        #region Public Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SelectParameters"/> class.
+        /// </summary>
+        public SelectParameters()
+        {
+            InitializeComponent();
+
+            this.ParentChanged += this.SelectParameters_ParentChanged;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Events
+
+        public event EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
+
+        #endregion Public Events
     }
 }
