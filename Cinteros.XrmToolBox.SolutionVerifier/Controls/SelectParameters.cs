@@ -11,6 +11,9 @@
     {
         #region Public Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SelectParameters" /> class.
+        /// </summary>
         public SelectParameters()
         {
             InitializeComponent();
@@ -19,6 +22,18 @@
         }
 
         #endregion Public Constructors
+
+        #region Public Delegates
+
+        public delegate void UpdateToolStripHandler(object sender, UpdateToolStripEventArgs e);
+
+        #endregion Public Delegates
+
+        #region Public Events
+
+        public event UpdateToolStripHandler UpdateToolStrip;
+
+        #endregion Public Events
 
         #region Public Properties
 
