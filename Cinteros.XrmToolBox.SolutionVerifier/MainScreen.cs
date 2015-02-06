@@ -9,7 +9,6 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.IO;
     using System.Linq;
     using System.Net;
     using System.Windows.Forms;
@@ -18,19 +17,6 @@
 
     public partial class MainScreen : PluginBase
     {
-
-        #region Private Methods
-
-        private void tsbBack_Click(object sender, EventArgs e)
-        {
-            // Execution order is important here, due to rewriting status of tool strip of plugin
-            // main window
-            this.ShowBackButton(false);
-            this.CurrentPage = new SelectParameters();
-        }
-
-        #endregion Private Methods
-
         #region Private Fields
 
         private Control control;
@@ -62,11 +48,15 @@
                 this.Controls.Remove(this.control);
                 this.Controls.Add(value);
 
+                ((IUpdateToolStrip)value).UpdateToolStrip += MainScreen_UpdateToolStrip;
+
                 this.control = value;
             }
         }
 
         #endregion Public Properties
+
+        #region Private Methods
 
         private void fromReferenceFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -79,6 +69,21 @@
         private void MainScreen_Load(object sender, EventArgs e)
         {
             this.CurrentPage = new SelectParameters();
+        }
+
+        private void MainScreen_UpdateToolStrip(object sender, UpdateToolStripEventArgs e)
+        {
+            if (e != null)
+            {
+                var menu = this.Controls.Find("tsMenu", true).Cast<ToolStrip>().FirstOrDefault();
+
+                var button = (menu != null) ? menu.Items.Find(e.ButtonName, true).Cast<ToolStripButton>().FirstOrDefault() : null;
+
+                if (button != null)
+                {
+                    button.Enabled = e.ButtonStatus;
+                }
+            }
         }
 
         private void open_FileOk(object sender, CancelEventArgs e)
@@ -180,6 +185,14 @@
             this.tsbBack.Enabled = status;
         }
 
+        private void tsbBack_Click(object sender, EventArgs e)
+        {
+            // Execution order is important here, due to rewriting status of tool strip of plugin
+            // main window
+            this.ShowBackButton(false);
+            this.CurrentPage = new SelectParameters();
+        }
+
         private void tsbClose_Click(object sender, EventArgs e)
         {
             base.CloseTool();
@@ -198,5 +211,7 @@
             save.FileName = "reference-solutions.xml";
             save.ShowDialog();
         }
+
+        #endregion Private Methods
     }
 }

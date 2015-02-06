@@ -46,13 +46,6 @@
             return item;
         }
 
-        public static ToolStripButton FindToolStripButton(Control sender, string name)
-        {
-            var menu = sender.Parent.Controls.Find("tsMenu", true).Cast<ToolStrip>().FirstOrDefault();
-
-            return (menu != null) ? menu.Items.Find(name, true).Cast<ToolStripButton>().FirstOrDefault() : null;
-        }
-
         #endregion Public Methods
     }
 }

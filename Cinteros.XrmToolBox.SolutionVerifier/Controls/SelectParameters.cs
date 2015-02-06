@@ -9,6 +9,26 @@
 
     public partial class SelectParameters : UserControl, IUpdateToolStrip
     {
+        #region Public Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SelectParameters"/> class.
+        /// </summary>
+        public SelectParameters()
+        {
+            InitializeComponent();
+
+            this.ParentChanged += this.SelectParameters_ParentChanged;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Events
+
+        public event EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
+
+        #endregion Public Events
+
         #region Public Properties
 
         public ConnectionDetail[] Organizations
@@ -236,41 +256,28 @@
             this.Reference = plugin.ConnectionDetail;
         }
 
+        private void UpdateButton(string name, bool status)
+        {
+            if (status)
+            {
+                if (this.UpdateToolStrip != null)
+                {
+                    this.UpdateToolStrip(this, new UpdateToolStripEventArgs(name, status));
+                }
+            }
+        }
+
         /// <summary>
         /// Updates button on tool depending on currently checked items
         /// </summary>
         private void UpdateCompareButton()
         {
-            var button = Helpers.FindToolStripButton(this, "tsbCompare");
-
-            if (button != null)
-            {
-                if (this.Solutions.Length > 0 && this.Organizations.Length > 0)
-                {
-                    button.Enabled = true;
-                }
-                else
-                {
-                    button.Enabled = false;
-                }
-            }
+            this.UpdateButton("tsbCompare", this.Solutions.Length > 0 && this.Organizations.Length > 0);
         }
 
         private void UpdateSaveButton()
         {
-            var button = Helpers.FindToolStripButton(this, "tsbSave");
-
-            if (button != null)
-            {
-                if (this.Solutions.Length > 0)
-                {
-                    button.Enabled = true;
-                }
-                else
-                {
-                    button.Enabled = false;
-                }
-            }
+            this.UpdateButton("tsbSave", this.Solutions.Length > 0);
         }
 
         /// <summary>
@@ -295,25 +302,5 @@
         }
 
         #endregion Private Methods
-
-        #region Public Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SelectParameters"/> class.
-        /// </summary>
-        public SelectParameters()
-        {
-            InitializeComponent();
-
-            this.ParentChanged += this.SelectParameters_ParentChanged;
-        }
-
-        #endregion Public Constructors
-
-        #region Public Events
-
-        public event EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
-
-        #endregion Public Events
     }
 }
