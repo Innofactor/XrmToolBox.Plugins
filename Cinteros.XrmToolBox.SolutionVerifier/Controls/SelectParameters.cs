@@ -9,6 +9,7 @@
 
     public partial class SelectParameters : UserControl, IUpdateToolStrip
     {
+
         #region Public Constructors
 
         /// <summary>
@@ -256,6 +257,11 @@
             this.Reference = plugin.ConnectionDetail;
         }
 
+        /// <summary>
+        /// Sends event that changes enabled status of the given button on plugin toolstrip
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="status"></param>
         private void UpdateButton(string name, bool status)
         {
             if (status)
@@ -268,16 +274,19 @@
         }
 
         /// <summary>
-        /// Updates button on tool depending on currently checked items
+        /// Updates Compare button on plugin depending on currently checked items
         /// </summary>
         private void UpdateCompareButton()
         {
-            this.UpdateButton("tsbCompare", this.Solutions.Length > 0 && this.Organizations.Length > 0);
+            this.UpdateButton(Constants.U_COMPARE_BUTTON, this.Solutions.Length > 0 && this.Organizations.Length > 0);
         }
 
+        /// <summary>
+        /// Updates Save button on plugin depending on currently checked solution items
+        /// </summary>
         private void UpdateSaveButton()
         {
-            this.UpdateButton("tsbSave", this.Solutions.Length > 0);
+            this.UpdateButton(Constants.U_SAVE_BUTTON, this.Solutions.Length > 0);
         }
 
         /// <summary>
@@ -302,5 +311,6 @@
         }
 
         #endregion Private Methods
+
     }
 }

@@ -17,6 +17,7 @@
 
     public partial class MainScreen : PluginBase
     {
+
         #region Private Fields
 
         private Control control;
@@ -213,5 +214,6 @@
         }
 
         #endregion Private Methods
+
     }
 }

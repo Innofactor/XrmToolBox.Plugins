@@ -9,6 +9,24 @@
 
     public partial class ViewResults : UserControl, IUpdateToolStrip
     {
+
+        #region Public Constructors
+
+        public ViewResults(Dictionary<ConnectionDetail, Solution[]> matrix)
+        {
+            InitializeComponent();
+
+            this.Matrix = matrix;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Events
+
+        public event System.EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
+
+        #endregion Public Events
+
         #region Public Properties
 
         public Dictionary<ConnectionDetail, Solution[]> Matrix
@@ -51,8 +69,8 @@
         private void AddListViewHeaders(string[] headers)
         {
             var header = new ColumnHeader();
-            header.Text = Constants.HEADER_MAINTEXT;
-            header.Width = Constants.HEADER_MAINWIDTH;
+            header.Text = Constants.U_HEADER_MAINTEXT;
+            header.Width = Constants.U_HEADER_MAINWIDTH;
             this.lvSolutions.Columns.Add(header);
 
             foreach (var text in headers)
@@ -86,7 +104,7 @@
                 // Solution is not present on target system
                 if (current == null)
                 {
-                    cell.Text = Constants.SOLUTION_NA;
+                    cell.Text = Constants.U_SOLUTION_NA;
                     cell.ForeColor = Color.LightGray;
                     cell.BackColor = Color.White;
                     cell.Tag = "Solution is unavailable on the target organization";
@@ -110,22 +128,5 @@
         }
 
         #endregion Private Methods
-
-        #region Public Constructors
-
-        public ViewResults(Dictionary<ConnectionDetail, Solution[]> matrix)
-        {
-            InitializeComponent();
-
-            this.Matrix = matrix;
-        }
-
-        #endregion Public Constructors
-
-        #region Public Events
-
-        public event System.EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
-
-        #endregion Public Events
     }
 }
