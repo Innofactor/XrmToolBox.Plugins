@@ -7,20 +7,8 @@
     using System.Linq;
     using System.Windows.Forms;
 
-    public partial class ViewResults : UserControl
+    public partial class ViewResults : UserControl, IUpdateToolStrip
     {
-
-        #region Public Constructors
-
-        public ViewResults(Dictionary<ConnectionDetail, Solution[]> matrix)
-        {
-            InitializeComponent();
-
-            this.Matrix = matrix;
-        }
-
-        #endregion Public Constructors
-
         #region Public Properties
 
         public Dictionary<ConnectionDetail, Solution[]> Matrix
@@ -123,5 +111,21 @@
 
         #endregion Private Methods
 
+        #region Public Constructors
+
+        public ViewResults(Dictionary<ConnectionDetail, Solution[]> matrix)
+        {
+            InitializeComponent();
+
+            this.Matrix = matrix;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Events
+
+        public event System.EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
+
+        #endregion Public Events
     }
 }
