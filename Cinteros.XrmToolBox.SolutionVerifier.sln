@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McTools.Xrm.Connection", "X
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McTools.Xrm.Connection.WinForms", "XrmToolBox\Connection Projects\McTools.Xrm.Connection.WinForms\McTools.Xrm.Connection.WinForms.csproj", "{EEB5C09F-CEC6-4FB5-87B5-AE61AE89C9EB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{5095947C-6653-42EC-B183-990E244F12BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug Without GemBox|Any CPU = Debug Without GemBox|Any CPU
@@ -43,5 +45,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C3824C2C-6E2E-4FDE-A2AA-229BBC7C3B1F} = {5095947C-6653-42EC-B183-990E244F12BA}
+		{EEB5C09F-CEC6-4FB5-87B5-AE61AE89C9EB} = {5095947C-6653-42EC-B183-990E244F12BA}
+		{328D55BE-8B9A-4087-A5C2-9FBAF623F54B} = {5095947C-6653-42EC-B183-990E244F12BA}
 	EndGlobalSection
 EndGlobal
