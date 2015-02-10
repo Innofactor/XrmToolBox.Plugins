@@ -11,6 +11,7 @@
     using System.ComponentModel;
     using System.Linq;
     using System.Net;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
     using System.Xml;
     using XrmToolBox;
@@ -131,8 +132,8 @@
                     var matrix = new Dictionary<ConnectionDetail, Solution[]>();
 
                     matrix.Add(this.ConnectionDetail, reference);
-
-                    foreach (var service in services)
+                    
+                    Parallel.ForEach(services, service =>
                     {
                         try
                         {
@@ -146,8 +147,7 @@
                         {
                             // Hiding exception,
                         }
-                    }
-
+                    });
                     e.Result = matrix;
                 },
                 (e) =>  // Cleanup when work has completed
