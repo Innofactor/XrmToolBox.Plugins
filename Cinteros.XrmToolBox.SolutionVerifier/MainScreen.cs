@@ -1,6 +1,9 @@
-﻿namespace Cinteros.XrmToolbox.SolutionVerifier
+﻿[assembly: XrmToolBox.Attributes.BackgroundColor("#000000")]
+
+namespace Cinteros.XrmToolbox.SolutionVerifier
 {
     using Cinteros.XrmToolbox.SolutionVerifier.Controls;
+    using Cinteros.XrmToolbox.SolutionVerifier.Properties;
     using Cinteros.XrmToolbox.SolutionVerifier.Utils;
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Client;
@@ -9,6 +12,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Drawing;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
@@ -35,6 +39,12 @@
         #endregion Public Constructors
 
         #region Public Properties
+
+        public override Image PluginLogo
+        {
+
+            get { return Resources.Cinteros; }
+        }
 
         public Control CurrentPage
         {
