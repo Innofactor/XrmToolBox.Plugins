@@ -22,7 +22,6 @@ namespace Cinteros.Xrm.SolutionVerifier
 
     public partial class MainScreen : PluginBase
     {
-
         #region Private Fields
 
         private Control control;
@@ -39,12 +38,6 @@ namespace Cinteros.Xrm.SolutionVerifier
         #endregion Public Constructors
 
         #region Public Properties
-
-        public override Image PluginLogo
-        {
-
-            get { return Resources.Cinteros; }
-        }
 
         public Control CurrentPage
         {
@@ -66,9 +59,27 @@ namespace Cinteros.Xrm.SolutionVerifier
             }
         }
 
+        public override Image PluginLogo
+        {
+            get { return Resources.Cinteros; }
+        }
+
         #endregion Public Properties
 
         #region Private Methods
+
+        private void fromConnectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.ConnectionDetail != null)
+            {
+                ((SelectParameters)this.CurrentPage).Reference = this.ConnectionDetail;
+
+                this.OnConnectionUpdated(new ConnectionUpdatedEventArgs(null, this.ConnectionDetail));
+            }
+            else
+            {
+            }
+        }
 
         private void fromReferenceFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -76,17 +87,6 @@ namespace Cinteros.Xrm.SolutionVerifier
             open.FileOk += open_FileOk;
 
             open.ShowDialog();
-        }
-
-        private void fromConnectionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (this.ConnectionDetail != null)
-            {
-                ((SelectParameters)this.CurrentPage).Reference = this.ConnectionDetail;
-            }
-            else
-            {
-            }
         }
 
         private void MainScreen_Load(object sender, EventArgs e)
@@ -153,7 +153,7 @@ namespace Cinteros.Xrm.SolutionVerifier
                     var matrix = new Dictionary<ConnectionDetail, Solution[]>();
 
                     matrix.Add(this.ConnectionDetail, reference);
-                    
+
                     Parallel.ForEach(services, service =>
                     {
                         try
@@ -235,6 +235,5 @@ namespace Cinteros.Xrm.SolutionVerifier
         }
 
         #endregion Private Methods
-
     }
 }

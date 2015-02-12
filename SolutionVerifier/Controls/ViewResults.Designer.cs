@@ -52,6 +52,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvSolutions.FullRowSelect = true;
+            this.lvSolutions.GridLines = true;
             this.lvSolutions.Location = new System.Drawing.Point(7, 20);
             this.lvSolutions.Name = "lvSolutions";
             this.lvSolutions.Size = new System.Drawing.Size(584, 337);
