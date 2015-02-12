@@ -1,4 +1,4 @@
-﻿namespace Cinteros.XrmToolbox.SolutionVerifier.Utils
+﻿namespace Cinteros.Xrm.SolutionVerifier.Utils
 {
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Sdk.Query;

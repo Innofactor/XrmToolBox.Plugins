@@ -1,10 +1,10 @@
 ﻿[assembly: XrmToolBox.Attributes.BackgroundColor("#000000")]
 
-namespace Cinteros.XrmToolbox.SolutionVerifier
+namespace Cinteros.Xrm.SolutionVerifier
 {
-    using Cinteros.XrmToolbox.SolutionVerifier.Controls;
-    using Cinteros.XrmToolbox.SolutionVerifier.Properties;
-    using Cinteros.XrmToolbox.SolutionVerifier.Utils;
+    using Cinteros.Xrm.SolutionVerifier.Controls;
+    using Cinteros.Xrm.SolutionVerifier.Properties;
+    using Cinteros.Xrm.SolutionVerifier.Utils;
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Client;
     using Microsoft.Xrm.Client.Services;

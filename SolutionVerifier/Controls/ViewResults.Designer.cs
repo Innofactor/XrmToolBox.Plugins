@@ -1,4 +1,4 @@
-﻿namespace Cinteros.XrmToolbox.SolutionVerifier.Controls
+﻿namespace Cinteros.Xrm.SolutionVerifier.Controls
 {
     partial class ViewResults
     {

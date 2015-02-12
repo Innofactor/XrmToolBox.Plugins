@@ -1,6 +1,6 @@
-﻿namespace Cinteros.XrmToolbox.SolutionVerifier.Controls
+﻿namespace Cinteros.Xrm.SolutionVerifier.Controls
 {
-    using Cinteros.XrmToolbox.SolutionVerifier.Utils;
+    using Cinteros.Xrm.SolutionVerifier.Utils;
     using McTools.Xrm.Connection;
     using System;
     using System.Linq;

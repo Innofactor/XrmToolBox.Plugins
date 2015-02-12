@@ -1,4 +1,4 @@
-﻿namespace Cinteros.XrmToolbox.SolutionVerifier
+﻿namespace Cinteros.Xrm.SolutionVerifier
 {
     partial class MainScreen
     {
