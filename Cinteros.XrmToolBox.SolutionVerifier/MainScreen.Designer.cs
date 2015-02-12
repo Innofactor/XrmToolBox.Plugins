@@ -101,6 +101,7 @@
             this.fromConnectionToolStripMenuItem.Name = "fromConnectionToolStripMenuItem";
             this.fromConnectionToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.fromConnectionToolStripMenuItem.Text = "Current connection";
+            this.fromConnectionToolStripMenuItem.Click += new System.EventHandler(this.fromConnectionToolStripMenuItem_Click);
             // 
             // fromReferenceFileToolStripMenuItem
             // 

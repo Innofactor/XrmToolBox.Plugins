@@ -78,6 +78,17 @@ namespace Cinteros.XrmToolbox.SolutionVerifier
             open.ShowDialog();
         }
 
+        private void fromConnectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.ConnectionDetail != null)
+            {
+                ((SelectParameters)this.CurrentPage).Reference = this.ConnectionDetail;
+            }
+            else
+            {
+            }
+        }
+
         private void MainScreen_Load(object sender, EventArgs e)
         {
             this.CurrentPage = new SelectParameters();
