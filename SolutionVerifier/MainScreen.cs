@@ -22,6 +22,70 @@ namespace Cinteros.Xrm.SolutionVerifier
 
     public partial class MainScreen : PluginBase, IUpdateToolStrip
     {
+        #region Private Fields
+
+        private Control control;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public MainScreen()
+        {
+            InitializeComponent();
+
+            this.UpdateToolStrip += MainScreen_UpdateToolStrip;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Events
+
+        public event EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
+
+        #endregion Public Events
+
+        #region Public Properties
+
+        public Control CurrentPage
+        {
+            get
+            {
+                return this.control;
+            }
+            set
+            {
+                value.Size = this.Size;
+                value.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
+
+                this.Controls.Remove(this.control);
+                this.Controls.Add(value);
+
+                ((IUpdateToolStrip)value).UpdateToolStrip += MainScreen_UpdateToolStrip;
+
+                this.control = value;
+            }
+        }
+
+        public override Image PluginLogo
+        {
+            get
+            {
+                return Resources.Cinteros;
+            }
+        }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public void JustifyToolStrip()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion Public Methods
+
         #region Private Methods
 
         private void fromConnectionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -187,69 +251,5 @@ namespace Cinteros.Xrm.SolutionVerifier
         }
 
         #endregion Private Methods
-
-        #region Private Fields
-
-        private Control control;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public MainScreen()
-        {
-            InitializeComponent();
-
-            this.UpdateToolStrip += MainScreen_UpdateToolStrip;
-        }
-
-        #endregion Public Constructors
-
-        #region Public Events
-
-        public event EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
-
-        #endregion Public Events
-
-        #region Public Properties
-
-        public Control CurrentPage
-        {
-            get
-            {
-                return this.control;
-            }
-            set
-            {
-                value.Size = this.Size;
-                value.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
-
-                this.Controls.Remove(this.control);
-                this.Controls.Add(value);
-
-                ((IUpdateToolStrip)value).UpdateToolStrip += MainScreen_UpdateToolStrip;
-
-                this.control = value;
-            }
-        }
-
-        public override Image PluginLogo
-        {
-            get
-            {
-                return Resources.Cinteros;
-            }
-        }
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        public void JustifyToolStrip()
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion Public Methods
     }
 }
