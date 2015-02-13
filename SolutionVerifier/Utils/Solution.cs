@@ -2,6 +2,7 @@
 {
     using Microsoft.Xrm.Sdk;
     using System;
+    using System.Reflection;
 
     public class Solution
     {
@@ -71,6 +72,15 @@
         /// Gets or sets solution's version
         /// </summary>
         public Version Version
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets assemblies linked to solution
+        /// </summary>
+        public Assembly[] Assemblies
         {
             get;
             set;

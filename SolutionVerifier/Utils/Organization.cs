@@ -7,8 +7,9 @@
     {
         public ConnectionDetail ConnectionDetail;
 
+        /// <summary>
+        /// Array of solutions available in the organization
+        /// </summary>
         public Solution[] Solutions;
-
-        public Assembly[] Assemblies;
     }
 }

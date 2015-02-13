@@ -180,10 +180,10 @@ namespace Cinteros.Xrm.SolutionVerifier
                         try
                         {
                             var entities = instance.RetrieveMultiple(query).Entities;
-                            var response = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
-                            response = response.Where(x => reference.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
+                            var solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
+                            solutions = solutions.Where(x => reference.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
 
-                            matrix.Add(service.Key, response);
+                            matrix.Add(service.Key, solutions);
                         }
                         catch (InvalidOperationException ex)
                         {
