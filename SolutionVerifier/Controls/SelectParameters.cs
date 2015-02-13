@@ -97,6 +97,9 @@
 
         #region Public Methods
 
+        /// <summary>
+        /// Rises exceptions that updates buttons on toolbars
+        /// </summary>
         public void JustifyToolStrip()
         {
             if (this.UpdateToolStrip != null)
@@ -237,6 +240,8 @@
 
                 this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
                 this.lvSolutions_ItemSelectionChanged(this.lvSolutions, null);
+
+                this.JustifyToolStrip();
             }
         }
 

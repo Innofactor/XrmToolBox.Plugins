@@ -183,8 +183,6 @@ namespace Cinteros.Xrm.SolutionVerifier
                         var instance = new OrganizationService(service.Value);
                         try
                         {
-                            var tasks = new List<Task>();
-
                             Solution[] solutions = null;
                             PluginAssembly[] assemblies = null;
 
@@ -220,8 +218,8 @@ namespace Cinteros.Xrm.SolutionVerifier
                     {
                         // Execution order is important here, due to rewriting status of tool strip
                         // of plugin main window
-                        this.ShowBackButton(true);
                         this.CurrentPage = new ViewResults((Dictionary<ConnectionDetail, Solution[]>)e.Result);
+                        ((IUpdateToolStrip)this.CurrentPage).JustifyToolStrip();
                     }
                 }
             );
@@ -238,20 +236,12 @@ namespace Cinteros.Xrm.SolutionVerifier
             }
         }
 
-        private void ShowBackButton(bool status)
-        {
-            if (this.UpdateToolStrip != null)
-            {
-                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_BACK_BUTTON, false));
-            }
-        }
-
         private void tsbBack_Click(object sender, EventArgs e)
         {
             // Execution order is important here, due to rewriting status of tool strip of plugin
             // main window
-            this.ShowBackButton(false);
             this.CurrentPage = new SelectParameters();
+            ((IUpdateToolStrip)this.CurrentPage).JustifyToolStrip();
         }
 
         private void tsbClose_Click(object sender, EventArgs e)

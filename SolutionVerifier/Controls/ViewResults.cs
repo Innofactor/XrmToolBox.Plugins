@@ -16,6 +16,8 @@
             InitializeComponent();
 
             this.Matrix = matrix;
+
+            this.JustifyToolStrip();
         }
 
         #endregion Public Constructors
@@ -65,9 +67,17 @@
 
         #region Public Methods
 
+        /// <summary>
+        /// Rises exceptions that updates buttons on toolbars
+        /// </summary>
         public void JustifyToolStrip()
         {
-            throw new System.NotImplementedException();
+            if (this.UpdateToolStrip != null)
+            {
+                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_BACK_BUTTON, true));
+                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_SAVE_BUTTON, true));
+                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_COMPARE_BUTTON, false));
+            }
         }
 
         #endregion Public Methods
