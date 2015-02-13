@@ -29,8 +29,8 @@
         {
             var query = new QueryExpression(Constants.E_PLUGIN_ASSEMBLY);
             query.Criteria = new FilterExpression();
-            query.Criteria.AddCondition(Constants.A_UNIQUE_NAME, ConditionOperator.NotEqual, Constants.U_SOLUTION_DEFAULT);
-            query.ColumnSet = new ColumnSet(new string[] { Constants.A_UNIQUE_NAME, Constants.A_FRIENDLY_NAME, Constants.A_VERSION, Constants.A_IS_MANAGED });
+            query.Criteria.AddCondition(Constants.A_SOLUTION_ID, ConditionOperator.Equal, solutionId);
+            query.ColumnSet = new ColumnSet(true);
 
             return query;
         }
