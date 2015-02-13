@@ -63,9 +63,11 @@ namespace Cinteros.Xrm.SolutionVerifier
                 this.Controls.Remove(this.control);
                 this.Controls.Add(value);
 
-                ((IUpdateToolStrip)value).UpdateToolStrip += MainScreen_UpdateToolStrip;
-
                 this.control = value;
+
+                ((IUpdateToolStrip)this.control).UpdateToolStrip += MainScreen_UpdateToolStrip;
+                ((IUpdateToolStrip)this.control).JustifyToolStrip();
+                this.JustifyToolStrip();
             }
         }
 
@@ -83,7 +85,17 @@ namespace Cinteros.Xrm.SolutionVerifier
 
         public void JustifyToolStrip()
         {
-            throw new NotImplementedException();
+            if (this.UpdateToolStrip != null)
+            {
+                if (this.CurrentPage.GetType().Equals(typeof(SelectParameters)))
+                {
+                    this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_BACK_BUTTON, false));
+                }
+                else
+                {
+                    this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_BACK_BUTTON, true));
+                }
+            }
         }
 
         #endregion Public Methods
@@ -216,10 +228,7 @@ namespace Cinteros.Xrm.SolutionVerifier
                 {
                     if (e.Result != null)
                     {
-                        // Execution order is important here, due to rewriting status of tool strip
-                        // of plugin main window
                         this.CurrentPage = new ViewResults((Dictionary<ConnectionDetail, Solution[]>)e.Result);
-                        ((IUpdateToolStrip)this.CurrentPage).JustifyToolStrip();
                     }
                 }
             );
@@ -238,10 +247,7 @@ namespace Cinteros.Xrm.SolutionVerifier
 
         private void tsbBack_Click(object sender, EventArgs e)
         {
-            // Execution order is important here, due to rewriting status of tool strip of plugin
-            // main window
             this.CurrentPage = new SelectParameters();
-            ((IUpdateToolStrip)this.CurrentPage).JustifyToolStrip();
         }
 
         private void tsbClose_Click(object sender, EventArgs e)

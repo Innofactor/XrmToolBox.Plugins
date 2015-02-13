@@ -240,8 +240,6 @@
 
                 this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
                 this.lvSolutions_ItemSelectionChanged(this.lvSolutions, null);
-
-                this.JustifyToolStrip();
             }
         }
 
