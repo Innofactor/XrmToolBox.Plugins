@@ -21,11 +21,11 @@
         /// <param name="entity">Entity from which solution object is initialized</param>
         public Solution(Entity entity)
         {
-            this.Id = (Guid)entity.Attributes[Constants.A_SOLUTIONID];
+            this.Id = (Guid)entity.Attributes[Constants.A_SOLUTION_ID];
             this.Version = new Version((string)entity.Attributes[Constants.A_VERSION]);
-            this.UniqueName = (string)entity.Attributes[Constants.A_UNIQUENAME];
-            this.FriendlyName = (string)entity.Attributes[Constants.A_FRIENDLYNAME];
-            this.IsManaged = (bool)entity.Attributes[Constants.A_ISMANAGED];
+            this.UniqueName = (string)entity.Attributes[Constants.A_UNIQUE_NAME];
+            this.FriendlyName = (string)entity.Attributes[Constants.A_FRIENDLY_NAME];
+            this.IsManaged = (bool)entity.Attributes[Constants.A_IS_MANAGED];
         }
 
         #endregion Public Constructors

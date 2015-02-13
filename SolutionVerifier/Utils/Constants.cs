@@ -4,13 +4,14 @@
     {
         #region Public Fields
 
-        public const string A_FRIENDLYNAME = "friendlyname";
-        public const string A_ISMANAGED = "ismanaged";
-        public const string A_ISVISIBLE = "isvisible";
-        public const string A_SOLUTIONID = "solutionid";
-        public const string A_UNIQUENAME = "uniquename";
+        public const string A_FRIENDLY_NAME = "friendlyname";
+        public const string A_IS_MANAGED = "ismanaged";
+        public const string A_IS_VISIBLE = "isvisible";
+        public const string A_SOLUTION_ID = "solutionid";
+        public const string A_UNIQUE_NAME = "uniquename";
         public const string A_VERSION = "version";
         public const string E_SOLUTION = "solution";
+        public const string E_PLUGIN_ASSEMBLY = "pluginassembly";
 
         /// <summary>
         /// Name of toolstrip's Compare button

@@ -2,6 +2,7 @@
 {
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Sdk.Query;
+    using System;
     using System.Windows.Forms;
     using System.Xml;
 
@@ -17,9 +18,19 @@
         {
             var query = new QueryExpression(Constants.E_SOLUTION);
             query.Criteria = new FilterExpression();
-            query.Criteria.AddCondition(Constants.A_ISVISIBLE, ConditionOperator.Equal, true);
-            query.Criteria.AddCondition(Constants.A_UNIQUENAME, ConditionOperator.NotEqual, Constants.U_SOLUTION_DEFAULT);
-            query.ColumnSet = new ColumnSet(new string[] { Constants.A_UNIQUENAME, Constants.A_FRIENDLYNAME, Constants.A_VERSION, Constants.A_ISMANAGED });
+            query.Criteria.AddCondition(Constants.A_IS_VISIBLE, ConditionOperator.Equal, true);
+            query.Criteria.AddCondition(Constants.A_UNIQUE_NAME, ConditionOperator.NotEqual, Constants.U_SOLUTION_DEFAULT);
+            query.ColumnSet = new ColumnSet(new string[] { Constants.A_UNIQUE_NAME, Constants.A_FRIENDLY_NAME, Constants.A_VERSION, Constants.A_IS_MANAGED });
+
+            return query;
+        }
+
+        public static QueryExpression CreateAssembliesQuery(Guid solutionId)
+        {
+            var query = new QueryExpression(Constants.E_PLUGIN_ASSEMBLY);
+            query.Criteria = new FilterExpression();
+            query.Criteria.AddCondition(Constants.A_UNIQUE_NAME, ConditionOperator.NotEqual, Constants.U_SOLUTION_DEFAULT);
+            query.ColumnSet = new ColumnSet(new string[] { Constants.A_UNIQUE_NAME, Constants.A_FRIENDLY_NAME, Constants.A_VERSION, Constants.A_IS_MANAGED });
 
             return query;
         }
