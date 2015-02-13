@@ -1,14 +1,77 @@
 ﻿namespace Cinteros.Xrm.SolutionVerifier.Controls
 {
-    using Cinteros.Xrm.SolutionVerifier.Utils;
-    using McTools.Xrm.Connection;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
+    using Cinteros.Xrm.SolutionVerifier.Utils;
+    using McTools.Xrm.Connection;
 
     public partial class ViewResults : UserControl, IUpdateToolStrip
     {
+        #region Public Constructors
+
+        public ViewResults(Dictionary<ConnectionDetail, Solution[]> matrix)
+        {
+            InitializeComponent();
+
+            this.Matrix = matrix;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Events
+
+        public event System.EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
+
+        #endregion Public Events
+
+        #region Public Properties
+
+        public Dictionary<ConnectionDetail, Solution[]> Matrix
+        {
+            set
+            {
+                this.AddListViewHeaders(value.Keys.Select(x => x.OrganizationFriendlyName).ToArray<string>());
+
+                foreach (var solution in value.First().Value)
+                {
+                    var row = new ListViewItem(solution.FriendlyName);
+                    row.UseItemStyleForSubItems = false;
+
+                    var reference = new List<Solution>();
+                    var i = 0;
+
+                    foreach (var item in value)
+                    {
+                        var current = item.Value.Where(x => solution.UniqueName.Equals(x.UniqueName)).FirstOrDefault<Solution>();
+
+                        if (i++ == 0)
+                        {
+                            reference.Add(current);
+                            row.SubItems.Add(this.CreateCell(null, current));
+                        }
+                        else
+                        {
+                            row.SubItems.Add(this.CreateCell(reference, current));
+                        }
+                    }
+                    this.lvSolutions.Items.Add(row);
+                }
+            }
+        }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public void JustifyToolStrip()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion Public Methods
+
         #region Private Methods
 
         private void AddListViewHeaders(string[] headers)
@@ -73,68 +136,5 @@
         }
 
         #endregion Private Methods
-
-        #region Public Constructors
-
-        public ViewResults(Dictionary<ConnectionDetail, Solution[]> matrix)
-        {
-            InitializeComponent();
-
-            this.Matrix = matrix;
-        }
-
-        #endregion Public Constructors
-
-        #region Public Events
-
-        public event System.EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
-
-        #endregion Public Events
-
-        #region Public Properties
-
-        public Dictionary<ConnectionDetail, Solution[]> Matrix
-        {
-            set
-            {
-                this.AddListViewHeaders(value.Keys.Select(x => x.OrganizationFriendlyName).ToArray<string>());
-
-                foreach (var solution in value.First().Value)
-                {
-                    var row = new ListViewItem(solution.FriendlyName);
-                    row.UseItemStyleForSubItems = false;
-
-                    var reference = new List<Solution>();
-                    var i = 0;
-
-                    foreach (var item in value)
-                    {
-                        var current = item.Value.Where(x => solution.UniqueName.Equals(x.UniqueName)).FirstOrDefault<Solution>();
-
-                        if (i++ == 0)
-                        {
-                            reference.Add(current);
-                            row.SubItems.Add(this.CreateCell(null, current));
-                        }
-                        else
-                        {
-                            row.SubItems.Add(this.CreateCell(reference, current));
-                        }
-                    }
-                    this.lvSolutions.Items.Add(row);
-                }
-            }
-        }
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        public void JustifyToolStrip()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        #endregion Public Methods
     }
 }

@@ -1,8 +1,7 @@
 ﻿namespace Cinteros.Xrm.SolutionVerifier.Utils
 {
-    using Microsoft.Xrm.Sdk;
     using System;
-    using System.Reflection;
+    using Microsoft.Xrm.Sdk;
 
     public class Solution
     {
@@ -31,6 +30,15 @@
         #endregion Public Constructors
 
         #region Public Properties
+
+        /// <summary>
+        /// Gets or sets assemblies linked to solution
+        /// </summary>
+        public PluginAssembly[] Assemblies
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Gets or sets solution's friendly name
@@ -77,20 +85,15 @@
             set;
         }
 
-        /// <summary>
-        /// Gets or sets assemblies linked to solution
-        /// </summary>
-        public PluginAssembly[] Assemblies
-        {
-            get;
-            set;
-        }
-
         #endregion Public Properties
+
+        #region Public Methods
 
         public override string ToString()
         {
             return this.FriendlyName;
         }
+
+        #endregion Public Methods
     }
 }

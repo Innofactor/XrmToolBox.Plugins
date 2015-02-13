@@ -23,6 +23,7 @@ namespace Cinteros.Xrm.SolutionVerifier
 
     public partial class MainScreen : PluginBase, IUpdateToolStrip
     {
+
         #region Private Fields
 
         private Control control;
@@ -273,5 +274,6 @@ namespace Cinteros.Xrm.SolutionVerifier
         }
 
         #endregion Private Methods
+
     }
 }

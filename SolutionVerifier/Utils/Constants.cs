@@ -7,12 +7,17 @@
         public const string A_FRIENDLY_NAME = "friendlyname";
         public const string A_IS_MANAGED = "ismanaged";
         public const string A_IS_VISIBLE = "isvisible";
+        public const string A_NAME = "name";
         public const string A_SOLUTION_ID = "solutionid";
         public const string A_UNIQUE_NAME = "uniquename";
-        public const string A_NAME = "name";
         public const string A_VERSION = "version";
-        public const string E_SOLUTION = "solution";
         public const string E_PLUGIN_ASSEMBLY = "pluginassembly";
+        public const string E_SOLUTION = "solution";
+
+        /// <summary>
+        /// Name of toolstrip's Back button
+        /// </summary>
+        public const string U_BACK_BUTTON = "tsbBack";
 
         /// <summary>
         /// Name of toolstrip's Compare button
@@ -26,11 +31,6 @@
         /// Name of toolstrip's Save button
         /// </summary>
         public const string U_SAVE_BUTTON = "tsbSave";
-
-        /// <summary>
-        /// Name of toolstrip's Back button
-        /// </summary>
-        public const string U_BACK_BUTTON = "tsbBack";
 
         /// <summary>
         /// Default solution unique name

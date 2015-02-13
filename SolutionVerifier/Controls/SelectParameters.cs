@@ -1,10 +1,10 @@
 ﻿namespace Cinteros.Xrm.SolutionVerifier.Controls
 {
-    using Cinteros.Xrm.SolutionVerifier.Utils;
-    using McTools.Xrm.Connection;
     using System;
     using System.Linq;
     using System.Windows.Forms;
+    using Cinteros.Xrm.SolutionVerifier.Utils;
+    using McTools.Xrm.Connection;
     using XrmToolBox;
 
     public partial class SelectParameters : UserControl, IUpdateToolStrip
@@ -255,8 +255,6 @@
                     }
                     else
                     {
-                        // a.Result = plugin.Service.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
-
                         var solutions = plugin.Service.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
 
                         var assemblies = plugin.Service.RetrieveMultiple(Helpers.CreateAssembliesQuery()).Entities.Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
