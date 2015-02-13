@@ -155,13 +155,13 @@ namespace Cinteros.Xrm.SolutionVerifier
 
         private void Process()
         {
-            var services = new Dictionary<ConnectionDetail, OrganizationService>();
+            var services = new Dictionary<ConnectionDetail, CrmConnection>();
 
             WebRequest.GetSystemWebProxy();
 
             foreach (var organization in ((SelectParameters)this.CurrentPage).Organizations)
             {
-                services.Add(organization, new OrganizationService(CrmConnection.Parse(organization.GetOrganizationCrmConnectionString())));
+                services.Add(organization, CrmConnection.Parse(organization.GetOrganizationCrmConnectionString()));
             }
 
             var reference = ((SelectParameters)this.CurrentPage).Solutions;
@@ -176,9 +176,10 @@ namespace Cinteros.Xrm.SolutionVerifier
 
                     Parallel.ForEach(services, service =>
                     {
+                        var instance = new OrganizationService(service.Value);
                         try
                         {
-                            var entities = service.Value.RetrieveMultiple(query).Entities;
+                            var entities = instance.RetrieveMultiple(query).Entities;
                             var response = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
                             response = response.Where(x => reference.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
 
@@ -187,6 +188,10 @@ namespace Cinteros.Xrm.SolutionVerifier
                         catch (InvalidOperationException ex)
                         {
                             // Hiding exception,
+                        }
+                        finally
+                        {
+                            instance.Dispose();
                         }
                     });
                     e.Result = matrix;
