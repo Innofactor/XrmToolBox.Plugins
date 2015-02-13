@@ -87,5 +87,10 @@
         }
 
         #endregion Public Properties
+
+        public override string ToString()
+        {
+            return this.FriendlyName;
+        }
     }
 }

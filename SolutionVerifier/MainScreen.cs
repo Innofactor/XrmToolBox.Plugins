@@ -177,7 +177,7 @@ namespace Cinteros.Xrm.SolutionVerifier
 
                     matrix.Add(this.ConnectionDetail, reference);
 
-                    Parallel.ForEach(services, async service =>
+                    Parallel.ForEach(services, service =>
                     {
                         var instance = new OrganizationService(service.Value);
                         try

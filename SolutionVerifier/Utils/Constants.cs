@@ -9,6 +9,7 @@
         public const string A_IS_VISIBLE = "isvisible";
         public const string A_SOLUTION_ID = "solutionid";
         public const string A_UNIQUE_NAME = "uniquename";
+        public const string A_NAME = "name";
         public const string A_VERSION = "version";
         public const string E_SOLUTION = "solution";
         public const string E_PLUGIN_ASSEMBLY = "pluginassembly";
