@@ -80,7 +80,7 @@
         /// <summary>
         /// Gets or sets assemblies linked to solution
         /// </summary>
-        public Assembly[] Assemblies
+        public PluginAssembly[] Assemblies
         {
             get;
             set;

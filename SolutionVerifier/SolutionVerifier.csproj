@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Utils\IUpdateToolStrip.cs" />
     <Compile Include="Utils\Organization.cs" />
+    <Compile Include="Utils\PluginAssembly.cs" />
     <Compile Include="Utils\UpdateToolStripEventArgs.cs" />
     <Compile Include="Controls\ViewResults.cs">
       <SubType>UserControl</SubType>

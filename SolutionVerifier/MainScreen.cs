@@ -15,6 +15,7 @@ namespace Cinteros.Xrm.SolutionVerifier
     using System.Drawing;
     using System.Linq;
     using System.Net;
+    using System.Reflection;
     using System.Threading.Tasks;
     using System.Windows.Forms;
     using System.Xml;
@@ -169,19 +170,35 @@ namespace Cinteros.Xrm.SolutionVerifier
             this.WorkAsync("Getting solutions information from organizations...",
                 (e) => // Work To Do Asynchronously
                 {
-                    var query = Helpers.CreateSolutionsQuery();
+                    var solutionsQuery = Helpers.CreateSolutionsQuery();
+                    var assembliesQuery = Helpers.CreateAssembliesQuery();
+
                     var matrix = new Dictionary<ConnectionDetail, Solution[]>();
 
                     matrix.Add(this.ConnectionDetail, reference);
 
-                    Parallel.ForEach(services, service =>
+                    Parallel.ForEach(services, async service =>
                     {
                         var instance = new OrganizationService(service.Value);
                         try
                         {
-                            var entities = instance.RetrieveMultiple(query).Entities;
-                            var solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
+                            var tasks = new List<Task>();
+
+                            Solution[] solutions = null;
+                            PluginAssembly[] assemblies = null;
+
+                            var entities = instance.RetrieveMultiple(solutionsQuery).Entities;
+                            solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
                             solutions = solutions.Where(x => reference.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
+
+                            entities = instance.RetrieveMultiple(assembliesQuery).Entities;
+                            assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
+                            assemblies = assemblies.Where(x => solutions.Where(y => y.Id == x.SolutionId).Count() > 0).ToArray<PluginAssembly>();
+
+                            foreach (var solution in solutions)
+                            {
+                                solution.Assemblies = assemblies.Where(x => x.SolutionId == solution.Id).ToArray<PluginAssembly>();
+                            }
 
                             matrix.Add(service.Key, solutions);
                         }

@@ -25,11 +25,10 @@
             return query;
         }
 
-        public static QueryExpression CreateAssembliesQuery(Guid solutionId)
+        public static QueryExpression CreateAssembliesQuery()
         {
             var query = new QueryExpression(Constants.E_PLUGIN_ASSEMBLY);
             query.Criteria = new FilterExpression();
-            query.Criteria.AddCondition(Constants.A_SOLUTION_ID, ConditionOperator.Equal, solutionId);
             query.ColumnSet = new ColumnSet(true);
 
             return query;
