@@ -26,6 +26,11 @@
         public const string U_SAVE_BUTTON = "tsbSave";
 
         /// <summary>
+        /// Name of toolstrip's Back button
+        /// </summary>
+        public const string U_BACK_BUTTON = "tsbBack";
+
+        /// <summary>
         /// Default solution unique name
         /// </summary>
         public const string U_SOLUTION_DEFAULT = "Default";

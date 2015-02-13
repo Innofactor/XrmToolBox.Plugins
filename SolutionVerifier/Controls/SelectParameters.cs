@@ -9,7 +9,6 @@
 
     public partial class SelectParameters : UserControl, IUpdateToolStrip
     {
-
         #region Public Constructors
 
         /// <summary>
@@ -95,6 +94,15 @@
         }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public void JustifyToolStrip(UpdateToolStripEventArgs[] args)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion Public Methods
 
         #region Private Methods
 
@@ -311,6 +319,5 @@
         }
 
         #endregion Private Methods
-
     }
 }

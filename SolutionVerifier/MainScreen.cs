@@ -20,52 +20,8 @@ namespace Cinteros.Xrm.SolutionVerifier
     using System.Xml;
     using XrmToolBox;
 
-    public partial class MainScreen : PluginBase
+    public partial class MainScreen : PluginBase, IUpdateToolStrip
     {
-        #region Private Fields
-
-        private Control control;
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public MainScreen()
-        {
-            InitializeComponent();
-        }
-
-        #endregion Public Constructors
-
-        #region Public Properties
-
-        public Control CurrentPage
-        {
-            get
-            {
-                return this.control;
-            }
-            set
-            {
-                value.Size = this.Size;
-                value.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
-
-                this.Controls.Remove(this.control);
-                this.Controls.Add(value);
-
-                ((IUpdateToolStrip)value).UpdateToolStrip += MainScreen_UpdateToolStrip;
-
-                this.control = value;
-            }
-        }
-
-        public override Image PluginLogo
-        {
-            get { return Resources.Cinteros; }
-        }
-
-        #endregion Public Properties
-
         #region Private Methods
 
         private void fromConnectionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -197,14 +153,10 @@ namespace Cinteros.Xrm.SolutionVerifier
 
         private void ShowBackButton(bool status)
         {
-            var items = this.tsMenu.Items.Cast<ToolStripItem>().Where(x => (x != tsbClose) & (x != tsbBack) & (!x.GetType().Equals(typeof(ToolStripSeparator))));
-
-            foreach (var item in items)
+            if (this.UpdateToolStrip != null)
             {
-                item.Enabled = !status;
+                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_BACK_BUTTON, false));
             }
-
-            this.tsbBack.Enabled = status;
         }
 
         private void tsbBack_Click(object sender, EventArgs e)
@@ -235,5 +187,69 @@ namespace Cinteros.Xrm.SolutionVerifier
         }
 
         #endregion Private Methods
+
+        #region Private Fields
+
+        private Control control;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public MainScreen()
+        {
+            InitializeComponent();
+
+            this.UpdateToolStrip += MainScreen_UpdateToolStrip;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Events
+
+        public event EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
+
+        #endregion Public Events
+
+        #region Public Properties
+
+        public Control CurrentPage
+        {
+            get
+            {
+                return this.control;
+            }
+            set
+            {
+                value.Size = this.Size;
+                value.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
+
+                this.Controls.Remove(this.control);
+                this.Controls.Add(value);
+
+                ((IUpdateToolStrip)value).UpdateToolStrip += MainScreen_UpdateToolStrip;
+
+                this.control = value;
+            }
+        }
+
+        public override Image PluginLogo
+        {
+            get
+            {
+                return Resources.Cinteros;
+            }
+        }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public void JustifyToolStrip(UpdateToolStripEventArgs[] args)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion Public Methods
     }
 }
