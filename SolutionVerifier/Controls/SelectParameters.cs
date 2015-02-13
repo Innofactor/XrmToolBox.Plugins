@@ -97,9 +97,13 @@
 
         #region Public Methods
 
-        public void JustifyToolStrip(UpdateToolStripEventArgs[] args)
+        public void JustifyToolStrip()
         {
-            throw new NotImplementedException();
+            if (this.UpdateToolStrip != null)
+            {
+                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_SAVE_BUTTON, this.Solutions.Length > 0));
+                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_COMPARE_BUTTON, this.Solutions.Length > 0 && this.Organizations.Length > 0));
+            }
         }
 
         #endregion Public Methods
@@ -117,7 +121,7 @@
             }
             this.lvOrganizations.ItemChecked += lvOrganizations_ItemChecked;
 
-            this.UpdateCompareButton();
+            this.JustifyToolStrip();
         }
 
         private void cbToggleSolutions_CheckedChanged(object sender, EventArgs e)
@@ -131,8 +135,7 @@
             }
             this.lvSolutions.ItemChecked += lvSolutions_ItemChecked;
 
-            this.UpdateSaveButton();
-            this.UpdateCompareButton();
+            this.JustifyToolStrip();
         }
 
         /// <summary>
@@ -146,7 +149,7 @@
             this.UpdateSwitcher((ListView)sender, this.cbToggleOrganizations, e.Item.Checked);
             this.cbToggleOrganizations.CheckedChanged += this.cbToggleOrganizations_CheckedChanged;
 
-            this.UpdateCompareButton();
+            this.JustifyToolStrip();
         }
 
         /// <summary>
@@ -163,7 +166,7 @@
                 item.Checked = !item.Checked;
             }
 
-            this.UpdateCompareButton();
+            this.JustifyToolStrip();
         }
 
         /// <summary>
@@ -177,8 +180,7 @@
             this.UpdateSwitcher((ListView)sender, this.cbToggleSolutions, e.Item.Checked);
             this.cbToggleSolutions.CheckedChanged += this.cbToggleSolutions_CheckedChanged;
 
-            this.UpdateSaveButton();
-            this.UpdateCompareButton();
+            this.JustifyToolStrip();
         }
 
         /// <summary>
@@ -195,7 +197,7 @@
                 item.Checked = !item.Checked;
             }
 
-            this.UpdateCompareButton();
+            this.JustifyToolStrip();
         }
 
         private void SelectParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
@@ -279,22 +281,6 @@
                     this.UpdateToolStrip(this, new UpdateToolStripEventArgs(name, status));
                 }
             }
-        }
-
-        /// <summary>
-        /// Updates Compare button on plugin depending on currently checked items
-        /// </summary>
-        private void UpdateCompareButton()
-        {
-            this.UpdateButton(Constants.U_COMPARE_BUTTON, this.Solutions.Length > 0 && this.Organizations.Length > 0);
-        }
-
-        /// <summary>
-        /// Updates Save button on plugin depending on currently checked solution items
-        /// </summary>
-        private void UpdateSaveButton()
-        {
-            this.UpdateButton(Constants.U_SAVE_BUTTON, this.Solutions.Length > 0);
         }
 
         /// <summary>

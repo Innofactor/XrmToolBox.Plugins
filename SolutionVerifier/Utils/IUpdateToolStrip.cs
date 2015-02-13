@@ -11,6 +11,6 @@
 
         #endregion Public Events
 
-        void JustifyToolStrip(UpdateToolStripEventArgs[] args);
+        void JustifyToolStrip();
     }
 }

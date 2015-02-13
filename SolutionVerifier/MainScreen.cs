@@ -245,7 +245,7 @@ namespace Cinteros.Xrm.SolutionVerifier
 
         #region Public Methods
 
-        public void JustifyToolStrip(UpdateToolStripEventArgs[] args)
+        public void JustifyToolStrip()
         {
             throw new NotImplementedException();
         }
