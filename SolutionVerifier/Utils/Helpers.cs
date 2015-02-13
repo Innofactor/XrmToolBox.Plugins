@@ -28,7 +28,7 @@
         {
             var row = new string[] {
                 connection.OrganizationFriendlyName,
-                connection.OrganizationServiceUrl,
+                connection.ServerName,
             };
 
             var item = new ListViewItem(row);
