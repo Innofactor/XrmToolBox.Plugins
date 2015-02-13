@@ -11,7 +11,7 @@
     {
         #region Public Constructors
 
-        public ViewResults(Dictionary<ConnectionDetail, Solution[]> matrix)
+        public ViewResults(OrganizationDetail[] matrix)
         {
             InitializeComponent();
 
@@ -30,13 +30,13 @@
 
         #region Public Properties
 
-        public Dictionary<ConnectionDetail, Solution[]> Matrix
+        public OrganizationDetail[] Matrix
         {
             set
             {
-                this.AddListViewHeaders(value.Keys.Select(x => x.OrganizationFriendlyName).ToArray<string>());
+                this.AddListViewHeaders(value.Select(x => x.ConnectionDetail.OrganizationFriendlyName).ToArray<string>());
 
-                foreach (var solution in value.First().Value)
+                foreach (var solution in value.First().Solutions)
                 {
                     var row = new ListViewItem(solution.FriendlyName);
                     row.UseItemStyleForSubItems = false;
@@ -46,7 +46,7 @@
 
                     foreach (var item in value)
                     {
-                        var current = item.Value.Where(x => solution.UniqueName.Equals(x.UniqueName)).FirstOrDefault<Solution>();
+                        var current = item.Solutions.Where(x => solution.UniqueName.Equals(x.UniqueName)).FirstOrDefault<Solution>();
 
                         if (i++ == 0)
                         {

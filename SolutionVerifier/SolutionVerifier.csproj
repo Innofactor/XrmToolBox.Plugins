@@ -56,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utils\IUpdateToolStrip.cs" />
-    <Compile Include="Utils\Organization.cs" />
+    <Compile Include="Utils\OrganizationDetail.cs" />
     <Compile Include="Utils\PluginAssembly.cs" />
     <Compile Include="Utils\UpdateToolStripEventArgs.cs" />
     <Compile Include="Controls\ViewResults.cs">
@@ -121,10 +121,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Cinteros 3.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Cinteros.gif" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

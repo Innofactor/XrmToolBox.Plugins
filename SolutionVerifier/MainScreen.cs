@@ -186,9 +186,9 @@ namespace Cinteros.Xrm.SolutionVerifier
                     var solutionsQuery = Helpers.CreateSolutionsQuery();
                     var assembliesQuery = Helpers.CreateAssembliesQuery();
 
-                    var matrix = new Dictionary<ConnectionDetail, Solution[]>();
+                    var matrix = new List<OrganizationDetail>();
 
-                    matrix.Add(this.ConnectionDetail, reference);
+                    matrix.Add(new OrganizationDetail(this.ConnectionDetail, reference));
 
                     Parallel.ForEach(services, service =>
                     {
@@ -211,7 +211,7 @@ namespace Cinteros.Xrm.SolutionVerifier
                                 solution.Assemblies = assemblies.Where(x => x.SolutionId == solution.Id).ToArray<PluginAssembly>();
                             }
 
-                            matrix.Add(service.Key, solutions);
+                            matrix.Add(new OrganizationDetail(service.Key, solutions));
                         }
                         catch (InvalidOperationException ex)
                         {
@@ -222,13 +222,13 @@ namespace Cinteros.Xrm.SolutionVerifier
                             instance.Dispose();
                         }
                     });
-                    e.Result = matrix;
+                    e.Result = matrix.ToArray<OrganizationDetail>();
                 },
                 (e) =>  // Cleanup when work has completed
                 {
                     if (e.Result != null)
                     {
-                        this.CurrentPage = new ViewResults((Dictionary<ConnectionDetail, Solution[]>)e.Result);
+                        this.CurrentPage = new ViewResults((OrganizationDetail[])e.Result);
                     }
                 }
             );
