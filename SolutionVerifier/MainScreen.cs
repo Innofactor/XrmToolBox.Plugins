@@ -2,6 +2,15 @@
 
 namespace Cinteros.Xrm.SolutionVerifier
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Drawing;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Windows.Forms;
+    using System.Xml;
     using Cinteros.Xrm.SolutionVerifier.Controls;
     using Cinteros.Xrm.SolutionVerifier.Properties;
     using Cinteros.Xrm.SolutionVerifier.Utils;
@@ -9,21 +18,10 @@ namespace Cinteros.Xrm.SolutionVerifier
     using Microsoft.Xrm.Client;
     using Microsoft.Xrm.Client.Services;
     using Microsoft.Xrm.Sdk;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Drawing;
-    using System.Linq;
-    using System.Net;
-    using System.Reflection;
-    using System.Threading.Tasks;
-    using System.Windows.Forms;
-    using System.Xml;
     using XrmToolBox;
 
     public partial class MainScreen : PluginBase, IUpdateToolStrip
     {
-
         #region Private Fields
 
         private Control control;
@@ -36,7 +34,7 @@ namespace Cinteros.Xrm.SolutionVerifier
         {
             InitializeComponent();
 
-            this.UpdateToolStrip += MainScreen_UpdateToolStrip;
+            this.UpdateToolStrip += this.MainScreen_UpdateToolStrip;
         }
 
         #endregion Public Constructors
@@ -49,6 +47,10 @@ namespace Cinteros.Xrm.SolutionVerifier
 
         #region Public Properties
 
+
+        /// <summary>
+        /// Gets or sets control, that would be seen as current page
+        /// </summary>
         public Control CurrentPage
         {
             get
@@ -65,12 +67,15 @@ namespace Cinteros.Xrm.SolutionVerifier
 
                 this.control = value;
 
-                ((IUpdateToolStrip)this.control).UpdateToolStrip += MainScreen_UpdateToolStrip;
+                ((IUpdateToolStrip)this.control).UpdateToolStrip += this.MainScreen_UpdateToolStrip;
                 ((IUpdateToolStrip)this.control).JustifyToolStrip();
                 this.JustifyToolStrip();
             }
         }
 
+        /// <summary>
+        /// Gets plugin logo
+        /// </summary>
         public override Image PluginLogo
         {
             get
@@ -118,7 +123,7 @@ namespace Cinteros.Xrm.SolutionVerifier
         private void fromReferenceFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var open = new OpenFileDialog();
-            open.FileOk += open_FileOk;
+            open.FileOk += this.open_FileOk;
 
             open.ShowDialog();
         }
@@ -213,7 +218,7 @@ namespace Cinteros.Xrm.SolutionVerifier
 
                             matrix.Add(new OrganizationDetail(service.Key, solutions));
                         }
-                        catch (InvalidOperationException ex)
+                        catch (InvalidOperationException)
                         {
                             // Hiding exception,
                         }
@@ -263,13 +268,12 @@ namespace Cinteros.Xrm.SolutionVerifier
         private void tsbSave_Click(object sender, EventArgs e)
         {
             var save = new SaveFileDialog();
-            save.FileOk += save_FileOk;
+            save.FileOk += this.save_FileOk;
 
             save.FileName = "reference-solutions.xml";
             save.ShowDialog();
         }
 
         #endregion Private Methods
-
     }
 }
