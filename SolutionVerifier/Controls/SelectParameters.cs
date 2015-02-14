@@ -263,7 +263,7 @@
                 },
                 (a) =>  // Cleanup when work has completed
                 {
-                    this.Solutions = (Solution[])a.Result;
+                    this.Solutions = ((OrganizationDetail)a.Result).Solutions;
                 }
             );
 

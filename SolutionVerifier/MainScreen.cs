@@ -207,7 +207,7 @@ namespace Cinteros.Xrm.SolutionVerifier
                     {
                         try
                         {
-                            matrix.Add(new OrganizationDetail(reference, service));
+                            matrix.Add(new OrganizationDetail(service.Key, reference, service.Value));
                         }
                         catch (InvalidOperationException)
                         {

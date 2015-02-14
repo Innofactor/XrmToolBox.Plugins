@@ -33,32 +33,15 @@
         {
             Solution[] solutions = null;
             PluginAssembly[] assemblies = null;
+            DataCollection<Entity> entities = null;
 
             var organizationService = new OrganizationService(service);
 
-            var solutionsTask = new Task(() =>
-            {
-                var entities = organizationService.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities;
-                solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
-            });
-
-            var assembliesTask = new Task(() =>
-            {
-                var entities = organizationService.RetrieveMultiple(Helpers.CreateAssembliesQuery()).Entities;
-                assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
-            });
-
-            var tasks = new List<Task>
-            {
-                solutionsTask,
-                assembliesTask
-            };
-
-            tasks.ForEach(x => x.Start());
-
-            do
-            {
-            } while (tasks.Where(x => x.Status == TaskStatus.Running).Count() != 0);
+            entities = organizationService.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities;
+            solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
+            
+            entities = organizationService.RetrieveMultiple(Helpers.CreateAssembliesQuery()).Entities;
+            assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
 
             //var entities = instance.RetrieveMultiple(solutionsQuery).Entities;
             //solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
