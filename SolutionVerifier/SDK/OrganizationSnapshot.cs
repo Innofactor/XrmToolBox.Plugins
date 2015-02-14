@@ -7,7 +7,7 @@
     using Microsoft.Xrm.Client.Services;
     using Microsoft.Xrm.Sdk;
 
-    public class OrganizationDetail
+    public class OrganizationSnapshot
     {
         #region Public Fields
 
@@ -22,13 +22,13 @@
 
         #region Public Constructors
 
-        public OrganizationDetail(ConnectionDetail connectionDetail, Solution[] solutions)
+        public OrganizationSnapshot(ConnectionDetail connectionDetail, Solution[] solutions)
         {
             this.ConnectionDetail = connectionDetail;
             this.Solutions = solutions;
         }
 
-        public OrganizationDetail(ConnectionDetail connectionDetail, Solution[] reference, CrmConnection CrmConnection)
+        public OrganizationSnapshot(ConnectionDetail connectionDetail, Solution[] reference, CrmConnection CrmConnection)
         {
             Solution[] solutions = null;
             PluginAssembly[] assemblies = null;
@@ -59,7 +59,7 @@
             this.Solutions = solutions;
         }
 
-        public OrganizationDetail(ConnectionDetail connectionDetail, IOrganizationService organizationService)
+        public OrganizationSnapshot(ConnectionDetail connectionDetail, IOrganizationService organizationService)
         {
             var solutions = organizationService.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
 

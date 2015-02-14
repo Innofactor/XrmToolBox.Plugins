@@ -279,12 +279,12 @@
                     }
                     else
                     {
-                        a.Result = new OrganizationDetail(plugin.ConnectionDetail, plugin.Service);
+                        a.Result = new OrganizationSnapshot(plugin.ConnectionDetail, plugin.Service);
                     }
                 },
                 (a) =>  // Cleanup when work has completed
                 {
-                    this.Solutions = ((OrganizationDetail)a.Result).Solutions;
+                    this.Solutions = ((OrganizationSnapshot)a.Result).Solutions;
                 }
             );
 

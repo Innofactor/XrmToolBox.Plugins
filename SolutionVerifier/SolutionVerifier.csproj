@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utils\IUpdateToolStrip.cs" />
-    <Compile Include="SDK\OrganizationDetail.cs" />
+    <Compile Include="SDK\OrganizationSnapshot.cs" />
     <Compile Include="SDK\PluginAssembly.cs" />
     <Compile Include="Utils\UpdateToolStripEventArgs.cs" />
     <Compile Include="Controls\ViewResults.cs">

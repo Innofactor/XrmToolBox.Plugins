@@ -200,28 +200,28 @@ namespace Cinteros.Xrm.SolutionVerifier
             this.WorkAsync("Getting solutions information from organizations...",
                 (e) => // Work To Do Asynchronously
                 {
-                    var matrix = new List<OrganizationDetail>();
+                    var matrix = new List<OrganizationSnapshot>();
 
-                    matrix.Add(new OrganizationDetail(this.ConnectionDetail, reference));
+                    matrix.Add(new OrganizationSnapshot(this.ConnectionDetail, reference));
 
                     Parallel.ForEach(services, service =>
                     {
                         try
                         {
-                            matrix.Add(new OrganizationDetail(service.Key, reference, service.Value));
+                            matrix.Add(new OrganizationSnapshot(service.Key, reference, service.Value));
                         }
                         catch (InvalidOperationException)
                         {
                             // Hiding exception,
                         }
                     });
-                    e.Result = matrix.ToArray<OrganizationDetail>();
+                    e.Result = matrix.ToArray<OrganizationSnapshot>();
                 },
                 (e) =>  // Cleanup when work has completed
                 {
                     if (e.Result != null)
                     {
-                        this.CurrentPage = new ViewResults((OrganizationDetail[])e.Result);
+                        this.CurrentPage = new ViewResults((OrganizationSnapshot[])e.Result);
                     }
                 }
             );

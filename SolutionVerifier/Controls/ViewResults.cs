@@ -11,7 +11,7 @@
     {
         #region Public Constructors
 
-        public ViewResults(OrganizationDetail[] matrix)
+        public ViewResults(OrganizationSnapshot[] matrix)
         {
             InitializeComponent();
 
@@ -30,7 +30,7 @@
 
         #region Public Properties
 
-        public OrganizationDetail[] Matrix
+        public OrganizationSnapshot[] Matrix
         {
             set
             {
