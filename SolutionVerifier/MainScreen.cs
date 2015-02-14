@@ -5,6 +5,8 @@ namespace Cinteros.Xrm.SolutionVerifier
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Configuration;
+    using System.Diagnostics;
     using System.Drawing;
     using System.Linq;
     using System.Net;
@@ -180,10 +182,19 @@ namespace Cinteros.Xrm.SolutionVerifier
 
             foreach (var organization in ((SelectParameters)this.CurrentPage).Organizations)
             {
-                services.Add(organization, CrmConnection.Parse(organization.GetOrganizationCrmConnectionString()));
+                try
+                {
+                    services.Add(organization, CrmConnection.Parse(organization.GetOrganizationCrmConnectionString()));
+                }
+                catch (ConfigurationErrorsException ex)
+                {
+                    // The specified user credentials are invalid.
+                }
             }
 
             var reference = ((SelectParameters)this.CurrentPage).Solutions;
+
+            //var watch = Stopwatch.StartNew();
 
             this.WorkAsync("Getting solutions information from organizations...",
                 (e) => // Work To Do Asynchronously
@@ -202,13 +213,40 @@ namespace Cinteros.Xrm.SolutionVerifier
                         {
                             Solution[] solutions = null;
                             PluginAssembly[] assemblies = null;
+                            var solutionsTask = new Task<Solution[]>(() =>
+                            {
+                                var entities = instance.RetrieveMultiple(solutionsQuery).Entities;
+                                solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
 
-                            var entities = instance.RetrieveMultiple(solutionsQuery).Entities;
-                            solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
+                                return solutions;
+                            });
+
+                            var assembliesTask = new Task<PluginAssembly[]>(() =>
+                            {
+                                var entities = instance.RetrieveMultiple(assembliesQuery).Entities;
+                                assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
+
+                                return assemblies;
+                            });
+
+                            var tasks = new List<Task>
+                            {
+                                solutionsTask,
+                                assembliesTask
+                            };
+
+                            tasks.ForEach(x => x.Start());
+
+                            do
+                            {
+                            } while (tasks.Where(x => x.Status == TaskStatus.Running).Count() != 0);
+
+                            //var entities = instance.RetrieveMultiple(solutionsQuery).Entities;
+                            //solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
                             solutions = solutions.Where(x => reference.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
 
-                            entities = instance.RetrieveMultiple(assembliesQuery).Entities;
-                            assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
+                            //entities = instance.RetrieveMultiple(assembliesQuery).Entities;
+                            //assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
                             assemblies = assemblies.Where(x => solutions.Where(y => y.Id == x.SolutionId).Count() > 0).ToArray<PluginAssembly>();
 
                             foreach (var solution in solutions)
