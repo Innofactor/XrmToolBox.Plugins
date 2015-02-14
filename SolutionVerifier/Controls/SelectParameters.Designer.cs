@@ -140,6 +140,7 @@
             this.chOrgName,
             this.chOrgService});
             this.lvOrganizations.FullRowSelect = true;
+            this.lvOrganizations.GridLines = true;
             this.lvOrganizations.Location = new System.Drawing.Point(6, 42);
             this.lvOrganizations.Name = "lvOrganizations";
             this.lvOrganizations.Size = new System.Drawing.Size(280, 230);
@@ -194,6 +195,7 @@
             this.chSolutionName,
             this.chSolutionVersion});
             this.lvSolutions.FullRowSelect = true;
+            this.lvSolutions.GridLines = true;
             this.lvSolutions.Location = new System.Drawing.Point(6, 42);
             this.lvSolutions.Name = "lvSolutions";
             this.lvSolutions.Size = new System.Drawing.Size(279, 230);
