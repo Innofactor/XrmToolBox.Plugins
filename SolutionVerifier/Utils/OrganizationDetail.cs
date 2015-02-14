@@ -29,12 +29,12 @@
             this.Solutions = solutions;
         }
 
-        public OrganizationDetail(Solution[] reference, KeyValuePair<ConnectionDetail, CrmConnection> service)
+        public OrganizationDetail(ConnectionDetail connectionDetail, Solution[] reference, CrmConnection service)
         {
             Solution[] solutions = null;
             PluginAssembly[] assemblies = null;
 
-            var organizationService = new OrganizationService(service.Value);
+            var organizationService = new OrganizationService(service);
 
             var solutionsTask = new Task(() =>
             {
@@ -73,7 +73,23 @@
                 solution.Assemblies = assemblies.Where(x => x.SolutionId == solution.Id).ToArray<PluginAssembly>();
             }
 
-            this.ConnectionDetail = service.Key;
+            this.ConnectionDetail = connectionDetail;
+            this.Solutions = solutions;
+        }
+
+        public OrganizationDetail(ConnectionDetail connectionDetail, IOrganizationService organizationService)
+        {
+            var solutions = organizationService.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
+
+            var assemblies = organizationService.RetrieveMultiple(Helpers.CreateAssembliesQuery()).Entities.Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
+            assemblies = assemblies.Where(x => solutions.Where(y => y.Id == x.SolutionId).Count() > 0).ToArray<PluginAssembly>();
+
+            for (int i = 0; i < solutions.Length; i++)
+            {
+                solutions[i].Assemblies = assemblies.Where(x => x.SolutionId == solutions[i].Id).ToArray<PluginAssembly>();
+            }
+
+            this.ConnectionDetail = connectionDetail;
             this.Solutions = solutions;
         }
 

@@ -258,17 +258,7 @@
                     }
                     else
                     {
-                        var solutions = plugin.Service.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
-
-                        var assemblies = plugin.Service.RetrieveMultiple(Helpers.CreateAssembliesQuery()).Entities.Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
-                        assemblies = assemblies.Where(x => solutions.Where(y => y.Id == x.SolutionId).Count() > 0).ToArray<PluginAssembly>();
-
-                        for (int i = 0; i < solutions.Length; i++)
-                        {
-                            solutions[i].Assemblies = assemblies.Where(x => x.SolutionId == solutions[i].Id).ToArray<PluginAssembly>();
-                        }
-
-                        a.Result = solutions;
+                        a.Result = new OrganizationDetail(plugin.ConnectionDetail, plugin.Service);
                     }
                 },
                 (a) =>  // Cleanup when work has completed
