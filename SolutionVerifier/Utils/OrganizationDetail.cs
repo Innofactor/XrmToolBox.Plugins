@@ -1,8 +1,6 @@
 ﻿namespace Cinteros.Xrm.SolutionVerifier.Utils
 {
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Client;
     using Microsoft.Xrm.Client.Services;
@@ -29,17 +27,17 @@
             this.Solutions = solutions;
         }
 
-        public OrganizationDetail(ConnectionDetail connectionDetail, Solution[] reference, CrmConnection service)
+        public OrganizationDetail(ConnectionDetail connectionDetail, Solution[] reference, CrmConnection CrmConnection)
         {
             Solution[] solutions = null;
             PluginAssembly[] assemblies = null;
             DataCollection<Entity> entities = null;
 
-            var organizationService = new OrganizationService(service);
+            var organizationService = new OrganizationService(CrmConnection);
 
             entities = organizationService.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities;
             solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
-            
+
             entities = organizationService.RetrieveMultiple(Helpers.CreateAssembliesQuery()).Entities;
             assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
 
