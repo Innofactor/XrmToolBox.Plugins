@@ -24,6 +24,7 @@ namespace Cinteros.Xrm.SolutionVerifier
 
     public partial class MainScreen : PluginBase, IUpdateToolStrip
     {
+
         #region Private Fields
 
         private Control control;
@@ -48,7 +49,6 @@ namespace Cinteros.Xrm.SolutionVerifier
         #endregion Public Events
 
         #region Public Properties
-
 
         /// <summary>
         /// Gets or sets control, that would be seen as current page
@@ -199,70 +199,19 @@ namespace Cinteros.Xrm.SolutionVerifier
             this.WorkAsync("Getting solutions information from organizations...",
                 (e) => // Work To Do Asynchronously
                 {
-                    var solutionsQuery = Helpers.CreateSolutionsQuery();
-                    var assembliesQuery = Helpers.CreateAssembliesQuery();
-
                     var matrix = new List<OrganizationDetail>();
 
                     matrix.Add(new OrganizationDetail(this.ConnectionDetail, reference));
 
                     Parallel.ForEach(services, service =>
                     {
-                        var instance = new OrganizationService(service.Value);
                         try
                         {
-                            Solution[] solutions = null;
-                            PluginAssembly[] assemblies = null;
-                            var solutionsTask = new Task<Solution[]>(() =>
-                            {
-                                var entities = instance.RetrieveMultiple(solutionsQuery).Entities;
-                                solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
-
-                                return solutions;
-                            });
-
-                            var assembliesTask = new Task<PluginAssembly[]>(() =>
-                            {
-                                var entities = instance.RetrieveMultiple(assembliesQuery).Entities;
-                                assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
-
-                                return assemblies;
-                            });
-
-                            var tasks = new List<Task>
-                            {
-                                solutionsTask,
-                                assembliesTask
-                            };
-
-                            tasks.ForEach(x => x.Start());
-
-                            do
-                            {
-                            } while (tasks.Where(x => x.Status == TaskStatus.Running).Count() != 0);
-
-                            //var entities = instance.RetrieveMultiple(solutionsQuery).Entities;
-                            //solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
-                            solutions = solutions.Where(x => reference.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
-
-                            //entities = instance.RetrieveMultiple(assembliesQuery).Entities;
-                            //assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
-                            assemblies = assemblies.Where(x => solutions.Where(y => y.Id == x.SolutionId).Count() > 0).ToArray<PluginAssembly>();
-
-                            foreach (var solution in solutions)
-                            {
-                                solution.Assemblies = assemblies.Where(x => x.SolutionId == solution.Id).ToArray<PluginAssembly>();
-                            }
-
-                            matrix.Add(new OrganizationDetail(service.Key, solutions));
+                            matrix.Add(new OrganizationDetail(reference, service));
                         }
                         catch (InvalidOperationException)
                         {
                             // Hiding exception,
-                        }
-                        finally
-                        {
-                            instance.Dispose();
                         }
                     });
                     e.Result = matrix.ToArray<OrganizationDetail>();
@@ -313,5 +262,6 @@ namespace Cinteros.Xrm.SolutionVerifier
         }
 
         #endregion Private Methods
+
     }
 }

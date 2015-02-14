@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Windows.Forms;
     using Cinteros.Xrm.SolutionVerifier.Utils;
-    using McTools.Xrm.Connection;
 
     public partial class ViewResults : UserControl, IUpdateToolStrip
     {
