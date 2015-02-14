@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Windows.Forms;
+    using Cinteros.Xrm.SolutionVerifier.SDK;
     using Cinteros.Xrm.SolutionVerifier.Utils;
     using McTools.Xrm.Connection;
     using XrmToolBox;
@@ -79,7 +80,6 @@
 
                 foreach (var solution in value)
                 {
-                    
                     var row = new string[] {
                         solution.FriendlyName,
                         solution.Version.ToString(),

@@ -57,8 +57,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utils\IUpdateToolStrip.cs" />
-    <Compile Include="Utils\OrganizationDetail.cs" />
-    <Compile Include="Utils\PluginAssembly.cs" />
+    <Compile Include="SDK\OrganizationDetail.cs" />
+    <Compile Include="SDK\PluginAssembly.cs" />
     <Compile Include="Utils\UpdateToolStripEventArgs.cs" />
     <Compile Include="Controls\ViewResults.cs">
       <SubType>UserControl</SubType>
@@ -87,7 +87,7 @@
     <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\Extensions.cs" />
     <Compile Include="Utils\Helpers.cs" />
-    <Compile Include="Utils\Solution.cs" />
+    <Compile Include="SDK\Solution.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\ViewResults.resx">

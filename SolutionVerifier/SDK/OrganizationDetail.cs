@@ -1,6 +1,7 @@
-﻿namespace Cinteros.Xrm.SolutionVerifier.Utils
+﻿namespace Cinteros.Xrm.SolutionVerifier.SDK
 {
     using System.Linq;
+    using Cinteros.Xrm.SolutionVerifier.Utils;
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Client;
     using Microsoft.Xrm.Client.Services;

@@ -15,6 +15,7 @@ namespace Cinteros.Xrm.SolutionVerifier
     using System.Xml;
     using Cinteros.Xrm.SolutionVerifier.Controls;
     using Cinteros.Xrm.SolutionVerifier.Properties;
+    using Cinteros.Xrm.SolutionVerifier.SDK;
     using Cinteros.Xrm.SolutionVerifier.Utils;
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Client;

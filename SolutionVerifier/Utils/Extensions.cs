@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Xml;
+    using Cinteros.Xrm.SolutionVerifier.SDK;
 
     public static class Extensions
     {

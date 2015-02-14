@@ -1,6 +1,7 @@
-﻿namespace Cinteros.Xrm.SolutionVerifier.Utils
+﻿namespace Cinteros.Xrm.SolutionVerifier.SDK
 {
     using System;
+    using Cinteros.Xrm.SolutionVerifier.Utils;
     using Microsoft.Xrm.Sdk;
 
     public class PluginAssembly

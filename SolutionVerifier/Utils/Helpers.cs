@@ -2,6 +2,7 @@
 {
     using System.Windows.Forms;
     using System.Xml;
+    using Cinteros.Xrm.SolutionVerifier.SDK;
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Sdk.Query;
 

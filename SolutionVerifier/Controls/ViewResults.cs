@@ -4,6 +4,7 @@
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
+    using Cinteros.Xrm.SolutionVerifier.SDK;
     using Cinteros.Xrm.SolutionVerifier.Utils;
 
     public partial class ViewResults : UserControl, IUpdateToolStrip
