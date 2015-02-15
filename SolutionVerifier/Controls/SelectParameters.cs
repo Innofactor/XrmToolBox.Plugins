@@ -149,8 +149,8 @@
         {
             if (this.UpdateToolStrip != null)
             {
-                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_SAVE_BUTTON, this.Solutions.Length > 0));
-                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_COMPARE_BUTTON, this.Solutions.Length > 0 && this.Organizations.Length > 0));
+                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_SAVE_BUTTON, this.Solutions.Solutions.Length > 0));
+                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_COMPARE_BUTTON, this.Solutions.Solutions.Length > 0 && this.Organizations.Length > 0));
             }
         }
 
