@@ -57,9 +57,9 @@
             this.Solutions = solutions;
         }
 
-        public OrganizationSnapshot(ConnectionDetail connectionDetail, IOrganizationService organizationService)
+        public OrganizationSnapshot(ConnectionDetail connectionDetail)
         {
-            connectionDetail.GetOrganizationCrmConnectionString();
+            var organizationService = new OrganizationService(CrmConnection.Parse(connectionDetail.GetOrganizationCrmConnectionString()));
 
             var solutions = organizationService.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
 

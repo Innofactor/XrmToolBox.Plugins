@@ -279,7 +279,7 @@
                     }
                     else
                     {
-                        a.Result = new OrganizationSnapshot(plugin.ConnectionDetail, plugin.Service);
+                        a.Result = new OrganizationSnapshot(plugin.ConnectionDetail);
                     }
                 },
                 (a) =>  // Cleanup when work has completed
