@@ -67,29 +67,42 @@
             }
         }
 
-        public Solution[] Solutions
+        public OrganizationSnapshot Solutions
         {
             get
             {
-                return this.lvSolutions.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (Solution)x.Tag).ToArray<Solution>();
+                return new OrganizationSnapshot
+                {
+                    ConnectionDetail = this.Reference,
+                    Solutions = this.lvSolutions.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (Solution)x.Tag).ToArray<Solution>();
+                }; 
             }
             set
             {
                 this.lvSolutions.ItemChecked -= this.lvSolutions_ItemChecked;
                 this.lvSolutions.Items.Clear();
 
-                foreach (var solution in value)
+                var solutionsGroup = new ListViewGroup("Solutions:");
+                this.lvSolutions.Groups.Add(solutionsGroup);
+
+                var assembliesGroup = new ListViewGroup("Assemblies:");
+                this.lvSolutions.Groups.Add(assembliesGroup);
+
+                foreach (var snapshot in value)
                 {
-                    var row = new string[] {
-                        solution.FriendlyName,
-                        solution.Version.ToString(),
-                    };
+                    foreach (var solution in snapshot.Solutions)
+                    {
+                        var row = new string[] {
+                            solution.FriendlyName,
+                            solution.Version.ToString(),
+                        };
 
-                    var item = new ListViewItem(row);
-                    item.Tag = solution;
+                        var item = new ListViewItem(row);
+                        item.Group = solutionsGroup;
+                        item.Tag = solution;
 
-                    this.lvSolutions.Items.Add(item);
-
+                        this.lvSolutions.Items.Add(item);
+                    }
                     //if (solution.Assemblies.Length > 0)
                     //{
                     //    var group = new ListViewGroup("assemblies:");

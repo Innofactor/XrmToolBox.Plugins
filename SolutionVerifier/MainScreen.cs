@@ -205,7 +205,7 @@ namespace Cinteros.Xrm.SolutionVerifier
                 {
                     var matrix = new List<OrganizationSnapshot>();
 
-                    matrix.Add(new OrganizationSnapshot { ConnectionDetail = this.ConnectionDetail, Solutions = reference });
+                    matrix.Add(new OrganizationSnapshot { ConnectionDetail = this.ConnectionDetail, Solutions = ((OrganizationSnapshot)reference).Solutions });
 
                     Parallel.ForEach(services, service =>
                     {
