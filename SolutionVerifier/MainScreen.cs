@@ -196,7 +196,7 @@ namespace Cinteros.Xrm.SolutionVerifier
                 }
             }
 
-            var reference = ((SelectParameters)this.CurrentPage).Snapshot;
+            var snapshot = ((SelectParameters)this.CurrentPage).Snapshot;
 
             //var watch = Stopwatch.StartNew();
 
@@ -205,13 +205,13 @@ namespace Cinteros.Xrm.SolutionVerifier
                 {
                     var matrix = new List<OrganizationSnapshot>();
 
-                    matrix.Add(new OrganizationSnapshot { ConnectionDetail = this.ConnectionDetail, Solutions = ((OrganizationSnapshot)reference).Solutions });
+                    matrix.Add(new OrganizationSnapshot { ConnectionDetail = this.ConnectionDetail, Solutions = snapshot.Solutions });
 
                     Parallel.ForEach(services, service =>
                     {
                         try
                         {
-                            matrix.Add(new OrganizationSnapshot(service.Key, reference));
+                            matrix.Add(new OrganizationSnapshot(service.Key, snapshot.Solutions));
                         }
                         catch (InvalidOperationException)
                         {
