@@ -91,6 +91,9 @@ namespace Cinteros.Xrm.SolutionVerifier
 
         #region Public Methods
 
+        /// <summary>
+        /// Enables or disables `back` button depending on the situation
+        /// </summary>
         public void JustifyToolStrip()
         {
             if (this.UpdateToolStrip != null)
@@ -187,7 +190,7 @@ namespace Cinteros.Xrm.SolutionVerifier
                 {
                     services.Add(organization, CrmConnection.Parse(organization.GetOrganizationCrmConnectionString()));
                 }
-                catch (ConfigurationErrorsException ex)
+                catch (ConfigurationErrorsException)
                 {
                     // The specified user credentials are invalid.
                 }
@@ -202,13 +205,13 @@ namespace Cinteros.Xrm.SolutionVerifier
                 {
                     var matrix = new List<OrganizationSnapshot>();
 
-                    matrix.Add(new OrganizationSnapshot(this.ConnectionDetail, reference));
+                    matrix.Add(new OrganizationSnapshot { ConnectionDetail = this.ConnectionDetail, Solutions = reference });
 
                     Parallel.ForEach(services, service =>
                     {
                         try
                         {
-                            matrix.Add(new OrganizationSnapshot(service.Key, reference, service.Value));
+                            matrix.Add(new OrganizationSnapshot(service.Key, reference));
                         }
                         catch (InvalidOperationException)
                         {

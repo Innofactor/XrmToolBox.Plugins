@@ -22,19 +22,17 @@
 
         #region Public Constructors
 
-        public OrganizationSnapshot(ConnectionDetail connectionDetail, Solution[] solutions)
+        public OrganizationSnapshot()
         {
-            this.ConnectionDetail = connectionDetail;
-            this.Solutions = solutions;
         }
 
-        public OrganizationSnapshot(ConnectionDetail connectionDetail, Solution[] reference, CrmConnection CrmConnection)
+        public OrganizationSnapshot(ConnectionDetail connectionDetail, Solution[] reference)
         {
             Solution[] solutions = null;
             PluginAssembly[] assemblies = null;
             DataCollection<Entity> entities = null;
 
-            var organizationService = new OrganizationService(CrmConnection);
+            var organizationService = new OrganizationService(CrmConnection.Parse(connectionDetail.GetOrganizationCrmConnectionString()));
 
             entities = organizationService.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities;
             solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
@@ -61,6 +59,8 @@
 
         public OrganizationSnapshot(ConnectionDetail connectionDetail, IOrganizationService organizationService)
         {
+            connectionDetail.GetOrganizationCrmConnectionString();
+
             var solutions = organizationService.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
 
             var assemblies = organizationService.RetrieveMultiple(Helpers.CreateAssembliesQuery()).Entities.Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
