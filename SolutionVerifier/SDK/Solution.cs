@@ -33,15 +33,6 @@
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets assemblies linked to solution
-        /// </summary>
-        public PluginAssembly[] Assemblies
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Gets or sets solution's friendly name
         /// </summary>
         public string FriendlyName

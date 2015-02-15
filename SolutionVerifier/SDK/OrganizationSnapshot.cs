@@ -11,12 +11,29 @@
     {
         #region Public Fields
 
-        public ConnectionDetail ConnectionDetail;
+        public ConnectionDetail ConnectionDetail
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Array of solutions available in the organization
         /// </summary>
-        public Solution[] Solutions;
+        public Solution[] Solutions
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets assemblies linked to solution
+        /// </summary>
+        public PluginAssembly[] Assemblies
+        {
+            get;
+            set;
+        }
 
         #endregion Public Fields
 
@@ -48,13 +65,9 @@
             //assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
             assemblies = assemblies.Where(x => solutions.Where(y => y.Id == x.SolutionId).Count() > 0).ToArray<PluginAssembly>();
 
-            foreach (var solution in solutions)
-            {
-                solution.Assemblies = assemblies.Where(x => x.SolutionId == solution.Id).ToArray<PluginAssembly>();
-            }
-
             this.ConnectionDetail = connectionDetail;
             this.Solutions = solutions;
+            this.Assemblies = assemblies;
         }
 
         public OrganizationSnapshot(ConnectionDetail connectionDetail)
@@ -66,13 +79,9 @@
             var assemblies = organizationService.RetrieveMultiple(Helpers.CreateAssembliesQuery()).Entities.Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
             assemblies = assemblies.Where(x => solutions.Where(y => y.Id == x.SolutionId).Count() > 0).ToArray<PluginAssembly>();
 
-            for (int i = 0; i < solutions.Length; i++)
-            {
-                solutions[i].Assemblies = assemblies.Where(x => x.SolutionId == solutions[i].Id).ToArray<PluginAssembly>();
-            }
-
             this.ConnectionDetail = connectionDetail;
             this.Solutions = solutions;
+            this.Assemblies = assemblies;
         }
 
         #endregion Public Constructors

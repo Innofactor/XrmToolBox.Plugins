@@ -90,25 +90,25 @@
 
                     this.lvSolutions.Items.Add(item);
 
-                    if (solution.Assemblies.Length > 0)
-                    {
-                        var group = new ListViewGroup("assemblies:");
-                        this.lvSolutions.Groups.Add(group);
+                    //if (solution.Assemblies.Length > 0)
+                    //{
+                    //    var group = new ListViewGroup("assemblies:");
+                    //    this.lvSolutions.Groups.Add(group);
 
-                        foreach (var assembly in solution.Assemblies)
-                        {
-                            row = new string[] {
-                            assembly.Name,
-                            assembly.Version.ToString(),
-                        };
+                    //    foreach (var assembly in solution.Assemblies)
+                    //    {
+                    //        row = new string[] {
+                    //        assembly.Name,
+                    //        assembly.Version.ToString(),
+                    //    };
 
-                            item = new ListViewItem(row);
-                            item.Group = group;
-                            item.Tag = assembly;
+                    //        item = new ListViewItem(row);
+                    //        item.Group = group;
+                    //        item.Tag = assembly;
 
-                            this.lvSolutions.Items.Add(item);
-                        }
-                    }
+                    //        this.lvSolutions.Items.Add(item);
+                    //    }
+                    //}
                 }
                 this.lvSolutions.ItemChecked += this.lvSolutions_ItemChecked;
             }
