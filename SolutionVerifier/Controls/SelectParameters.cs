@@ -74,7 +74,7 @@
                 return new OrganizationSnapshot
                 {
                     ConnectionDetail = this.Reference,
-                    Solutions = this.lvSolutions.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (Solution)x.Tag).ToArray<Solution>();
+                    Solutions = this.lvSolutions.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (Solution)x.Tag).ToArray<Solution>()
                 }; 
             }
             set
@@ -88,21 +88,33 @@
                 var assembliesGroup = new ListViewGroup("Assemblies:");
                 this.lvSolutions.Groups.Add(assembliesGroup);
 
-                foreach (var snapshot in value)
+                foreach (var solution in value.Solutions)
                 {
-                    foreach (var solution in snapshot.Solutions)
-                    {
-                        var row = new string[] {
-                            solution.FriendlyName,
-                            solution.Version.ToString(),
-                        };
+                    var row = new string[] {
+                        solution.FriendlyName,
+                        solution.Version.ToString(),
+                    };
 
-                        var item = new ListViewItem(row);
-                        item.Group = solutionsGroup;
-                        item.Tag = solution;
+                    var item = new ListViewItem(row);
+                    item.Group = solutionsGroup;
+                    item.Tag = solution;
 
-                        this.lvSolutions.Items.Add(item);
-                    }
+                    this.lvSolutions.Items.Add(item);
+                }
+
+                foreach (var assembly in value.Assemblies)
+                {
+                    var row = new string[] {
+                        assembly.Name,
+                        assembly.Version.ToString(),
+                    };
+
+                    var item = new ListViewItem(row);
+                    item.Group = assembliesGroup;
+                    item.Tag = assembly;
+
+                    this.lvSolutions.Items.Add(item);
+                }
                     //if (solution.Assemblies.Length > 0)
                     //{
                     //    var group = new ListViewGroup("assemblies:");
@@ -122,7 +134,6 @@
                     //        this.lvSolutions.Items.Add(item);
                     //    }
                     //}
-                }
                 this.lvSolutions.ItemChecked += this.lvSolutions_ItemChecked;
             }
         }
