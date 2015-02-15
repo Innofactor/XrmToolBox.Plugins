@@ -163,7 +163,7 @@ namespace Cinteros.Xrm.SolutionVerifier
                 var document = new XmlDocument();
                 document.Load(dialog.FileName);
 
-                ((SelectParameters)this.CurrentPage).Solutions = Helpers.LoadSolutionFile(dialog.FileName);
+                ((SelectParameters)this.CurrentPage).Snapshot = Helpers.LoadSolutionFile(dialog.FileName);
 
                 var connection = new ConnectionDetail
                 {
@@ -196,7 +196,7 @@ namespace Cinteros.Xrm.SolutionVerifier
                 }
             }
 
-            var reference = ((SelectParameters)this.CurrentPage).Solutions;
+            var reference = ((SelectParameters)this.CurrentPage).Snapshot;
 
             //var watch = Stopwatch.StartNew();
 
@@ -236,7 +236,7 @@ namespace Cinteros.Xrm.SolutionVerifier
             {
                 if (this.CurrentPage.GetType() == typeof(SelectParameters))
                 {
-                    ((SelectParameters)this.CurrentPage).Solutions.ToXml().Save(((SaveFileDialog)sender).FileName);
+                    ((SelectParameters)this.CurrentPage).Snapshot.ToXml().Save(((SaveFileDialog)sender).FileName);
                 }
             }
         }

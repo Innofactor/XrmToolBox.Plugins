@@ -67,7 +67,7 @@
             }
         }
 
-        public OrganizationSnapshot Solutions
+        public OrganizationSnapshot Snapshot
         {
             get
             {
@@ -149,8 +149,8 @@
         {
             if (this.UpdateToolStrip != null)
             {
-                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_SAVE_BUTTON, this.Solutions.Solutions.Length > 0));
-                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_COMPARE_BUTTON, this.Solutions.Solutions.Length > 0 && this.Organizations.Length > 0));
+                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_SAVE_BUTTON, this.Snapshot.Solutions.Length > 0));
+                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_COMPARE_BUTTON, this.Snapshot.Solutions.Length > 0 && this.Organizations.Length > 0));
             }
         }
 
@@ -308,7 +308,7 @@
                 },
                 (a) =>  // Cleanup when work has completed
                 {
-                    this.Solutions = ((OrganizationSnapshot)a.Result).Solutions;
+                    this.Snapshot = ((OrganizationSnapshot)a.Result).Solutions;
                 }
             );
 
