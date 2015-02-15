@@ -14,7 +14,9 @@
         {
             var query = new QueryExpression(Constants.E_PLUGIN_ASSEMBLY);
             query.Criteria = new FilterExpression();
+            query.Criteria.AddCondition(Constants.A_IS_HIDDEN, ConditionOperator.Equal, false);
             query.ColumnSet = new ColumnSet(true);
+            query.ColumnSet = new ColumnSet(new string[] { Constants.A_NAME, Constants.A_SOLUTION_ID, Constants.A_VERSION });
 
             return query;
         }
