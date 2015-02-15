@@ -308,7 +308,7 @@
                 },
                 (a) =>  // Cleanup when work has completed
                 {
-                    this.Snapshot = ((OrganizationSnapshot)a.Result).Solutions;
+                    this.Snapshot = (OrganizationSnapshot)a.Result;
                 }
             );
 
