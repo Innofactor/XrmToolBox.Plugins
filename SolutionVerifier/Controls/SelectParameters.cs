@@ -73,19 +73,19 @@
         {
             get
             {
-                return (this.lvSolutions.Tag == null) ? new OrganizationSnapshot() : (OrganizationSnapshot)this.lvSolutions.Tag; 
+                return (this.lvSnapshot.Tag == null) ? new OrganizationSnapshot() : (OrganizationSnapshot)this.lvSnapshot.Tag; 
             }
             set
             {
-                this.lvSolutions.ItemChecked -= this.lvSolutions_ItemChecked;
-                this.lvSolutions.Items.Clear();
-                this.lvSolutions.Tag = value;
+                this.lvSnapshot.ItemChecked -= this.lvSolutions_ItemChecked;
+                this.lvSnapshot.Items.Clear();
+                this.lvSnapshot.Tag = value;
 
                 var solutionsGroup = new ListViewGroup("Solutions:");
-                this.lvSolutions.Groups.Add(solutionsGroup);
+                this.lvSnapshot.Groups.Add(solutionsGroup);
 
                 var assembliesGroup = new ListViewGroup("Assemblies:");
-                this.lvSolutions.Groups.Add(assembliesGroup);
+                this.lvSnapshot.Groups.Add(assembliesGroup);
 
                 foreach (var solution in value.Solutions)
                 {
@@ -98,7 +98,7 @@
                     item.Group = solutionsGroup;
                     item.Tag = solution;
 
-                    this.lvSolutions.Items.Add(item);
+                    this.lvSnapshot.Items.Add(item);
                 }
 
                 foreach (var assembly in value.Assemblies)
@@ -112,7 +112,7 @@
                     item.Group = assembliesGroup;
                     item.Tag = assembly;
 
-                    this.lvSolutions.Items.Add(item);
+                    this.lvSnapshot.Items.Add(item);
                 }
 
                 //if (solution.Assemblies.Length > 0)
@@ -134,7 +134,7 @@
                 //        this.lvSolutions.Items.Add(item);
                 //    }
                 //}
-                this.lvSolutions.ItemChecked += this.lvSolutions_ItemChecked;
+                this.lvSnapshot.ItemChecked += this.lvSolutions_ItemChecked;
             }
         }
 
@@ -176,12 +176,12 @@
         {
             var cb = (CheckBox)sender;
 
-            this.lvSolutions.ItemChecked -= lvSolutions_ItemChecked;
-            foreach (var item in this.lvSolutions.Items.Cast<ListViewItem>().ToArray())
+            this.lvSnapshot.ItemChecked -= lvSolutions_ItemChecked;
+            foreach (var item in this.lvSnapshot.Items.Cast<ListViewItem>().ToArray())
             {
                 item.Checked = cb.Checked;
             }
-            this.lvSolutions.ItemChecked += lvSolutions_ItemChecked;
+            this.lvSnapshot.ItemChecked += lvSolutions_ItemChecked;
 
             this.JustifyToolStrip();
         }
@@ -325,7 +325,7 @@
                 parent.AssignToolStripButtonHandler(Constants.U_SAVE_BUTTON, tsbSave_Click);
 
                 this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
-                this.lvSolutions_ItemSelectionChanged(this.lvSolutions, null);
+                this.lvSolutions_ItemSelectionChanged(this.lvSnapshot, null);
             }
         }
         private void tsbSave_Click(object sender, EventArgs e)

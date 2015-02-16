@@ -40,7 +40,7 @@
             this.chOrgService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbSolutions = new System.Windows.Forms.GroupBox();
             this.cbToggleSolutions = new System.Windows.Forms.CheckBox();
-            this.lvSolutions = new System.Windows.Forms.ListView();
+            this.lvSnapshot = new System.Windows.Forms.ListView();
             this.chSolutionName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSolutionVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbReference.SuspendLayout();
@@ -166,7 +166,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbSolutions.Controls.Add(this.cbToggleSolutions);
-            this.gbSolutions.Controls.Add(this.lvSolutions);
+            this.gbSolutions.Controls.Add(this.lvSnapshot);
             this.gbSolutions.Location = new System.Drawing.Point(3, 3);
             this.gbSolutions.Name = "gbSolutions";
             this.gbSolutions.Size = new System.Drawing.Size(292, 278);
@@ -187,23 +187,23 @@
             // 
             // lvSolutions
             // 
-            this.lvSolutions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvSnapshot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvSolutions.CheckBoxes = true;
-            this.lvSolutions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvSnapshot.CheckBoxes = true;
+            this.lvSnapshot.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chSolutionName,
             this.chSolutionVersion});
-            this.lvSolutions.FullRowSelect = true;
-            this.lvSolutions.GridLines = true;
-            this.lvSolutions.Location = new System.Drawing.Point(6, 42);
-            this.lvSolutions.Name = "lvSolutions";
-            this.lvSolutions.Size = new System.Drawing.Size(279, 230);
-            this.lvSolutions.TabIndex = 2;
-            this.lvSolutions.UseCompatibleStateImageBehavior = false;
-            this.lvSolutions.View = System.Windows.Forms.View.Details;
-            this.lvSolutions.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvSolutions_ItemChecked);
-            this.lvSolutions.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvSolutions_ItemSelectionChanged);
+            this.lvSnapshot.FullRowSelect = true;
+            this.lvSnapshot.GridLines = true;
+            this.lvSnapshot.Location = new System.Drawing.Point(6, 42);
+            this.lvSnapshot.Name = "lvSolutions";
+            this.lvSnapshot.Size = new System.Drawing.Size(279, 230);
+            this.lvSnapshot.TabIndex = 2;
+            this.lvSnapshot.UseCompatibleStateImageBehavior = false;
+            this.lvSnapshot.View = System.Windows.Forms.View.Details;
+            this.lvSnapshot.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvSolutions_ItemChecked);
+            this.lvSnapshot.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvSolutions_ItemSelectionChanged);
             // 
             // chSolutionName
             // 
@@ -248,7 +248,7 @@
         private System.Windows.Forms.GroupBox gbSolutions;
         private System.Windows.Forms.CheckBox cbToggleOrganizations;
         private System.Windows.Forms.CheckBox cbToggleSolutions;
-        private System.Windows.Forms.ListView lvSolutions;
+        private System.Windows.Forms.ListView lvSnapshot;
         private System.Windows.Forms.ColumnHeader chSolutionName;
         private System.Windows.Forms.ColumnHeader chSolutionVersion;
 
