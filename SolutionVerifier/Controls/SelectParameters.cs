@@ -279,11 +279,7 @@
         {
             if (!e.Cancel)
             {
-                //if (this.CurrentPage.GetType() == typeof(SelectParameters))
-                //{
-                // TODO: re-enable and fix
-                // ((SelectParameters)this.CurrentPage).Snapshot.ToXml().Save(((SaveFileDialog)sender).FileName);
-                //}
+                this.Snapshot.ToXml().Save(((SaveFileDialog)sender).FileName);
             }
         }
 

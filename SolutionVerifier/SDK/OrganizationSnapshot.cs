@@ -1,6 +1,7 @@
 ﻿namespace Cinteros.Xrm.SolutionVerifier.SDK
 {
     using System.Linq;
+    using System.Xml;
     using Cinteros.Xrm.SolutionVerifier.Utils;
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Client;
@@ -54,6 +55,58 @@
         }
 
         #endregion Public Constructors
+
+        public XmlDocument ToXml()
+        {
+            var document = new XmlDocument();
+
+            document.AppendChild(document.CreateXmlDeclaration("1.0", "UTF-8", "yes"));
+            document.AppendChild(document.CreateComment("Reference snapshot"));
+
+            var root = document.CreateElement("snapshot");
+            document.AppendChild(root);
+
+            XmlElement element;
+            XmlAttribute attribute;
+
+            foreach (var solution in this.Solutions)
+            {
+                element = document.CreateElement("solution");
+
+                attribute = document.CreateAttribute("unique-name");
+                attribute.Value = solution.UniqueName;
+                element.Attributes.Append(attribute);
+
+                attribute = document.CreateAttribute("friendly-name");
+                attribute.Value = solution.FriendlyName;
+                element.Attributes.Append(attribute);
+
+                attribute = document.CreateAttribute("version");
+                attribute.Value = solution.Version.ToString();
+                element.Attributes.Append(attribute);
+
+                root.AppendChild(element);
+            }
+
+            foreach (var assembly in this.Assemblies)
+            {
+                element = document.CreateElement("assembly");
+
+                attribute = document.CreateAttribute("name");
+                attribute.Value = assembly.Name;
+                element.Attributes.Append(attribute);
+
+                attribute = document.CreateAttribute("version");
+                attribute.Value = assembly.Version.ToString();
+                element.Attributes.Append(attribute);
+
+                root.AppendChild(element);
+            }
+
+            return document;
+        }
+
+
 
         #region Public Properties
 
