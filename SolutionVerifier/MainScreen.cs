@@ -22,7 +22,6 @@ namespace Cinteros.Xrm.SolutionVerifier
 
     public partial class MainScreen : PluginBase, IUpdateToolStrip
     {
-
         #region Private Fields
 
         private Control control;
@@ -88,6 +87,16 @@ namespace Cinteros.Xrm.SolutionVerifier
 
         #region Public Methods
 
+        public void AssignToolStripButtonHandler(string name, EventHandler handler)
+        {
+            var button = this.GetToolStipButton(name);
+
+            if (button != null)
+            {
+                button.Click += handler;
+            }
+        }
+
         /// <summary>
         /// Enables or disables `back` button depending on the situation
         /// </summary>
@@ -129,6 +138,14 @@ namespace Cinteros.Xrm.SolutionVerifier
             open.FileOk += this.open_FileOk;
 
             open.ShowDialog();
+        }
+
+        private ToolStripButton GetToolStipButton(string name)
+        {
+            var menu = this.Controls.Find("tsMenu", true).Cast<ToolStrip>().FirstOrDefault();
+
+            var button = (menu != null) ? menu.Items.Find(name, true).Cast<ToolStripButton>().FirstOrDefault() : null;
+            return button;
         }
 
         private void MainScreen_Load(object sender, EventArgs e)
@@ -223,24 +240,6 @@ namespace Cinteros.Xrm.SolutionVerifier
             );
         }
 
-        public void AssignToolStripButtonHandler(string name, EventHandler handler)
-        {
-            var button = this.GetToolStipButton(name);
-
-            if (button != null)
-            {
-                button.Click += handler;
-            }
-        }
-
-        private ToolStripButton GetToolStipButton(string name)
-        {
-            var menu = this.Controls.Find("tsMenu", true).Cast<ToolStrip>().FirstOrDefault();
-
-            var button = (menu != null) ? menu.Items.Find(name, true).Cast<ToolStripButton>().FirstOrDefault() : null;
-            return button;
-        }
-
         private void tsbBack_Click(object sender, EventArgs e)
         {
             this.CurrentPage = new SelectParameters();
@@ -257,6 +256,5 @@ namespace Cinteros.Xrm.SolutionVerifier
         }
 
         #endregion Private Methods
-
     }
 }

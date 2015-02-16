@@ -322,6 +322,7 @@
                     this.Organizations = (new ConnectionManager().ConnectionsList.Connections.ToArray<ConnectionDetail>());
                 }
 
+                parent.AssignToolStripButtonHandler(Constants.U_SAVE_BUTTON, tsbSave_Click);
 
                 this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
                 this.lvSolutions_ItemSelectionChanged(this.lvSolutions, null);
