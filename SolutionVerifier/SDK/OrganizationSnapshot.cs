@@ -9,34 +9,6 @@
 
     public class OrganizationSnapshot
     {
-        #region Public Fields
-
-        public ConnectionDetail ConnectionDetail
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Array of solutions available in the organization
-        /// </summary>
-        public Solution[] Solutions
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets assemblies linked to solution
-        /// </summary>
-        public PluginAssembly[] Assemblies
-        {
-            get;
-            set;
-        }
-
-        #endregion Public Fields
-
         #region Public Constructors
 
         public OrganizationSnapshot()
@@ -82,5 +54,33 @@
         }
 
         #endregion Public Constructors
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets or sets assemblies linked to solution
+        /// </summary>
+        public PluginAssembly[] Assemblies
+        {
+            get;
+            set;
+        }
+
+        public ConnectionDetail ConnectionDetail
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Array of solutions available in the organization
+        /// </summary>
+        public Solution[] Solutions
+        {
+            get;
+            set;
+        }
+
+        #endregion Public Properties
     }
 }

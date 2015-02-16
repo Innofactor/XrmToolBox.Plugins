@@ -6,7 +6,6 @@ namespace Cinteros.Xrm.SolutionVerifier
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Configuration;
-    using System.Diagnostics;
     using System.Drawing;
     using System.Linq;
     using System.Net;
@@ -19,8 +18,6 @@ namespace Cinteros.Xrm.SolutionVerifier
     using Cinteros.Xrm.SolutionVerifier.Utils;
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Client;
-    using Microsoft.Xrm.Client.Services;
-    using Microsoft.Xrm.Sdk;
     using XrmToolBox;
 
     public partial class MainScreen : PluginBase, IUpdateToolStrip
@@ -163,8 +160,7 @@ namespace Cinteros.Xrm.SolutionVerifier
                 var document = new XmlDocument();
                 document.Load(dialog.FileName);
 
-                // TODO: re-enable and fix
-                // ((SelectParameters)this.CurrentPage).Snapshot = Helpers.LoadSolutionFile(dialog.FileName);
+                // TODO: re-enable and fix ((SelectParameters)this.CurrentPage).Snapshot = Helpers.LoadSolutionFile(dialog.FileName);
 
                 var connection = new ConnectionDetail
                 {
@@ -198,8 +194,6 @@ namespace Cinteros.Xrm.SolutionVerifier
             }
 
             var snapshot = ((SelectParameters)this.CurrentPage).Snapshot;
-
-            //var watch = Stopwatch.StartNew();
 
             this.WorkAsync("Getting solutions information from organizations...",
                 (e) => // Work To Do Asynchronously

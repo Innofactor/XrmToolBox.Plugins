@@ -57,7 +57,6 @@
             return document.ToArray();
         }
 
-
         #endregion Public Methods
     }
 }
