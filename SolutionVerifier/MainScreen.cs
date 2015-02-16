@@ -140,9 +140,7 @@ namespace Cinteros.Xrm.SolutionVerifier
         {
             if (e != null)
             {
-                var menu = this.Controls.Find("tsMenu", true).Cast<ToolStrip>().FirstOrDefault();
-
-                var button = (menu != null) ? menu.Items.Find(e.ButtonName, true).Cast<ToolStripButton>().FirstOrDefault() : null;
+                var button = this.GetToolStipButton(e.ButtonName);
 
                 if (button != null)
                 {
@@ -223,6 +221,24 @@ namespace Cinteros.Xrm.SolutionVerifier
                     }
                 }
             );
+        }
+
+        public void AssignToolStripButtonHandler(string name, EventHandler handler)
+        {
+            var button = this.GetToolStipButton(name);
+
+            if (button != null)
+            {
+                button.Click += handler;
+            }
+        }
+
+        private ToolStripButton GetToolStipButton(string name)
+        {
+            var menu = this.Controls.Find("tsMenu", true).Cast<ToolStrip>().FirstOrDefault();
+
+            var button = (menu != null) ? menu.Items.Find(name, true).Cast<ToolStripButton>().FirstOrDefault() : null;
+            return button;
         }
 
         private void tsbBack_Click(object sender, EventArgs e)
