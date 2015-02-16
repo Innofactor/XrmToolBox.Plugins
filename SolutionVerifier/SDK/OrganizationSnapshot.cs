@@ -41,6 +41,8 @@
 
         public OrganizationSnapshot()
         {
+            this.Solutions = new Solution[0];
+            this.Assemblies = new PluginAssembly[0];
         }
 
         public OrganizationSnapshot(ConnectionDetail connectionDetail, Solution[] reference)

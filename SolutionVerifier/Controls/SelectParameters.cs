@@ -71,16 +71,13 @@
         {
             get
             {
-                return new OrganizationSnapshot
-                {
-                    ConnectionDetail = this.Reference,
-                    Solutions = this.lvSolutions.CheckedItems.Cast<ListViewItem>().ToArray().Select(x => (Solution)x.Tag).ToArray<Solution>()
-                }; 
+                return (this.lvSolutions.Tag == null) ? new OrganizationSnapshot() : (OrganizationSnapshot)this.lvSolutions.Tag; 
             }
             set
             {
                 this.lvSolutions.ItemChecked -= this.lvSolutions_ItemChecked;
                 this.lvSolutions.Items.Clear();
+                this.lvSolutions.Tag = value;
 
                 var solutionsGroup = new ListViewGroup("Solutions:");
                 this.lvSolutions.Groups.Add(solutionsGroup);
