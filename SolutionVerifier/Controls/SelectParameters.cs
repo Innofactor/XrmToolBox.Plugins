@@ -1,6 +1,7 @@
 ﻿namespace Cinteros.Xrm.SolutionVerifier.Controls
 {
     using System;
+    using System.ComponentModel;
     using System.Linq;
     using System.Windows.Forms;
     using Cinteros.Xrm.SolutionVerifier.SDK;
@@ -249,7 +250,7 @@
         {
             if (e.ConnectionDetail != null && !string.IsNullOrEmpty(e.ConnectionDetail.OrganizationServiceUrl))
             {
-                this.SetSolutions((MainScreen)sender);
+                this.RetrieveSnapshot((MainScreen)sender);
             }
         }
 
@@ -269,7 +270,7 @@
 
                 if (parent.ConnectionDetail != null)
                 {
-                    this.SetSolutions(parent);
+                    this.RetrieveSnapshot(parent);
 
                     // All connections except currently connected one
                     this.Organizations = (new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
@@ -289,7 +290,7 @@
         /// Updating list of solutions from connection provided by XrmToolBox plugin class
         /// </summary>
         /// <param name="plugin">XrmToolBox plugin class</param>
-        private void SetSolutions(MainScreen plugin)
+        private void RetrieveSnapshot(MainScreen plugin)
         {
             plugin.WorkAsync(string.Format("Getting solutions information from '{0}'...", plugin.ConnectionDetail.OrganizationFriendlyName),
                 (a) => // Work To Do Asynchronously
@@ -348,6 +349,29 @@
                 }
             }
         }
+
+
+        private void save_FileOk(object sender, CancelEventArgs e)
+        {
+            if (!e.Cancel)
+            {
+                //if (this.CurrentPage.GetType() == typeof(SelectParameters))
+                //{
+                    // TODO: re-enable and fix
+                    // ((SelectParameters)this.CurrentPage).Snapshot.ToXml().Save(((SaveFileDialog)sender).FileName);
+                //}
+            }
+        }
+
+        private void tsbSave_Click(object sender, EventArgs e)
+        {
+            var save = new SaveFileDialog();
+            save.FileOk += this.save_FileOk;
+
+            save.FileName = "reference-solutions.xml";
+            save.ShowDialog();
+        }
+
 
         #endregion Private Methods
     }

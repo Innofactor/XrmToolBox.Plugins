@@ -231,18 +231,6 @@ namespace Cinteros.Xrm.SolutionVerifier
             );
         }
 
-        private void save_FileOk(object sender, CancelEventArgs e)
-        {
-            if (!e.Cancel)
-            {
-                if (this.CurrentPage.GetType() == typeof(SelectParameters))
-                {
-                    // TODO: re-enable and fix
-                    // ((SelectParameters)this.CurrentPage).Snapshot.ToXml().Save(((SaveFileDialog)sender).FileName);
-                }
-            }
-        }
-
         private void tsbBack_Click(object sender, EventArgs e)
         {
             this.CurrentPage = new SelectParameters();
@@ -256,15 +244,6 @@ namespace Cinteros.Xrm.SolutionVerifier
         private void tsbCompare_Click(object sender, EventArgs e)
         {
             this.Process();
-        }
-
-        private void tsbSave_Click(object sender, EventArgs e)
-        {
-            var save = new SaveFileDialog();
-            save.FileOk += this.save_FileOk;
-
-            save.FileName = "reference-solutions.xml";
-            save.ShowDialog();
         }
 
         #endregion Private Methods
