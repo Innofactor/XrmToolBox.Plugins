@@ -63,9 +63,9 @@
 
             foreach (XmlElement element in document.DocumentElement.ChildNodes)
             {
+                var solutions = new List<Solution>();
                 if (element.Name == "solutions")
                 {
-                    var solutions = new List<Solution>();
                     foreach (XmlElement solution in element.ChildNodes)
                     {
                         var item = new Solution
@@ -77,13 +77,12 @@
 
                         solutions.Add(item);
                     }
-
-                    this.Solutions = solutions.ToArray();
                 }
+                this.Solutions = solutions.ToArray();
 
+                var assemblies = new List<PluginAssembly>();
                 if (element.Name == "assemblies")
                 {
-                    var assemblies = new List<PluginAssembly>();
                     foreach (XmlElement assembly in element.ChildNodes)
                     {
                         var item = new PluginAssembly()
@@ -94,9 +93,8 @@
 
                         assemblies.Add(item);
                     }
-
-                    this.Assemblies = assemblies.ToArray();
                 }
+                this.Assemblies = assemblies.ToArray();
             }
         }
 
