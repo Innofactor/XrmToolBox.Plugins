@@ -9,15 +9,15 @@
     using McTools.Xrm.Connection;
     using XrmToolBox;
 
-    public partial class SelectParameters : UserControl, IUpdateToolStrip
+    public partial class ViewParameters : UserControl, IUpdateToolStrip
     {
 
         #region Public Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SelectParameters"/> class.
+        /// Initializes a new instance of the <see cref="ViewParameters"/> class.
         /// </summary>
-        public SelectParameters()
+        public ViewParameters()
         {
             InitializeComponent();
 

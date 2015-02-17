@@ -1,6 +1,6 @@
 ﻿namespace Cinteros.Xrm.SolutionVerifier.Controls
 {
-    partial class SelectParameters
+    partial class ViewParameters
     {
         /// <summary> 
         /// Required designer variable.

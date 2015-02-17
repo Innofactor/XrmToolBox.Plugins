@@ -112,7 +112,7 @@ namespace Cinteros.Xrm.SolutionVerifier
         {
             if (this.UpdateToolStrip != null)
             {
-                if (this.CurrentPage.GetType().Equals(typeof(SelectParameters)))
+                if (this.CurrentPage.GetType().Equals(typeof(ViewParameters)))
                 {
                     this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_BACK_BUTTON, false));
                 }
@@ -131,7 +131,7 @@ namespace Cinteros.Xrm.SolutionVerifier
         {
             if (this.ConnectionDetail != null)
             {
-                ((SelectParameters)this.CurrentPage).Reference = this.ConnectionDetail;
+                ((ViewParameters)this.CurrentPage).Reference = this.ConnectionDetail;
 
                 this.OnConnectionUpdated(new ConnectionUpdatedEventArgs(null, this.ConnectionDetail));
             }
@@ -158,7 +158,7 @@ namespace Cinteros.Xrm.SolutionVerifier
 
         private void MainScreen_Load(object sender, EventArgs e)
         {
-            this.CurrentPage = new SelectParameters();
+            this.CurrentPage = new ViewParameters();
         }
 
         private void MainScreen_UpdateToolStrip(object sender, UpdateToolStripEventArgs e)
@@ -204,7 +204,7 @@ namespace Cinteros.Xrm.SolutionVerifier
 
             WebRequest.GetSystemWebProxy();
 
-            foreach (var organization in ((SelectParameters)this.CurrentPage).Organizations)
+            foreach (var organization in ((ViewParameters)this.CurrentPage).Organizations)
             {
                 try
                 {
@@ -216,7 +216,7 @@ namespace Cinteros.Xrm.SolutionVerifier
                 }
             }
 
-            var snapshot = ((SelectParameters)this.CurrentPage).Snapshot;
+            var snapshot = ((ViewParameters)this.CurrentPage).Snapshot;
 
             this.WorkAsync("Getting solutions information from organizations...",
                 (e) => // Work To Do Asynchronously
@@ -250,7 +250,7 @@ namespace Cinteros.Xrm.SolutionVerifier
 
         private void tsbBack_Click(object sender, EventArgs e)
         {
-            this.CurrentPage = new SelectParameters();
+            this.CurrentPage = new ViewParameters();
         }
 
         private void tsbClose_Click(object sender, EventArgs e)
