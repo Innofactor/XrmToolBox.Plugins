@@ -200,7 +200,7 @@ namespace Cinteros.Xrm.SolutionVerifier
 
         private void Process()
         {
-            var services = new Dictionary<ConnectionDetail, CrmConnection>();
+            var services = new List<ConnectionDetail>();
 
             WebRequest.GetSystemWebProxy();
 
@@ -208,7 +208,7 @@ namespace Cinteros.Xrm.SolutionVerifier
             {
                 try
                 {
-                    services.Add(organization, CrmConnection.Parse(organization.GetOrganizationCrmConnectionString()));
+                    services.Add(organization);
                 }
                 catch (ConfigurationErrorsException)
                 {
@@ -229,7 +229,7 @@ namespace Cinteros.Xrm.SolutionVerifier
                     {
                         try
                         {
-                            matrix.Add(new OrganizationSnapshot(service.Key, snapshot.Solutions));
+                            matrix.Add(new OrganizationSnapshot(service, snapshot.Solutions));
                         }
                         catch (InvalidOperationException)
                         {
