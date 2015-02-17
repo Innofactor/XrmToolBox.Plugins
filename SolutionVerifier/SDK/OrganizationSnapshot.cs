@@ -1,5 +1,7 @@
 ﻿namespace Cinteros.Xrm.SolutionVerifier.SDK
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Xml;
     using Cinteros.Xrm.SolutionVerifier.Utils;
@@ -54,6 +56,26 @@
             this.Assemblies = organizationService.RetrieveMultiple(Helpers.CreateAssembliesQuery()).Entities.Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
         }
 
+        public OrganizationSnapshot(string fileName)
+        {
+            var document = new XmlDocument();
+            document.Load(fileName);
+            var solutions = new List<Solution>();
+
+            foreach (XmlElement element in document.DocumentElement.ChildNodes)
+            {
+                var solution = new Solution
+                {
+                    Version = new Version(element.Attributes["version"].Value),
+                    UniqueName = element.Attributes["unique-name"].Value,
+                    FriendlyName = element.Attributes["unique-name"].Value
+                };
+
+                solutions.Add(solution);
+            }
+
+        }
+
         #endregion Public Constructors
 
         #region Public Properties
@@ -99,6 +121,9 @@
             XmlElement element;
             XmlAttribute attribute;
 
+            var solutions = document.CreateElement("solutions");
+            root.AppendChild(solutions);
+
             foreach (var solution in this.Solutions)
             {
                 element = document.CreateElement("solution");
@@ -115,8 +140,11 @@
                 attribute.Value = solution.Version.ToString();
                 element.Attributes.Append(attribute);
 
-                root.AppendChild(element);
+                solutions.AppendChild(element);
             }
+
+            var assemblies = document.CreateElement("assemblies");
+            root.AppendChild(assemblies);
 
             foreach (var assembly in this.Assemblies)
             {
@@ -130,7 +158,7 @@
                 attribute.Value = assembly.Version.ToString();
                 element.Attributes.Append(attribute);
 
-                root.AppendChild(element);
+                assemblies.AppendChild(element);
             }
 
             return document;

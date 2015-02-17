@@ -259,7 +259,7 @@
                 {
                     if (string.IsNullOrEmpty(plugin.ConnectionDetail.ServerName))
                     {
-                        a.Result = Helpers.LoadSolutionFile(plugin.ConnectionDetail.OrganizationServiceUrl);
+                        a.Result = new OrganizationSnapshot(plugin.ConnectionDetail.OrganizationServiceUrl); //Helpers.LoadSolutionFile(plugin.ConnectionDetail.OrganizationServiceUrl);
                     }
                     else
                     {
@@ -324,6 +324,7 @@
                 this.lvSolutions_ItemSelectionChanged(this.lvSnapshot, null);
             }
         }
+
         private void tsbSave_Click(object sender, EventArgs e)
         {
             var save = new SaveFileDialog();
