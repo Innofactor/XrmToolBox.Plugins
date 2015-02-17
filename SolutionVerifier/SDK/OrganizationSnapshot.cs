@@ -14,12 +14,20 @@
     {
         #region Public Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrganizationSnapshot"/> class.
+        /// </summary>
         public OrganizationSnapshot()
         {
             this.Solutions = new Solution[0];
             this.Assemblies = new PluginAssembly[0];
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrganizationSnapshot"/> class.
+        /// </summary>
+        /// <param name="connectionDetail"></param>
+        /// <param name="reference"></param>
         public OrganizationSnapshot(ConnectionDetail connectionDetail, OrganizationSnapshot reference)
         {
             Solution[] solutions = null;
@@ -47,6 +55,10 @@
             this.Assemblies = assemblies;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrganizationSnapshot"/> class.
+        /// </summary>
+        /// <param name="connectionDetail"></param>
         public OrganizationSnapshot(ConnectionDetail connectionDetail)
         {
             var organizationService = new OrganizationService(CrmConnection.Parse(connectionDetail.GetOrganizationCrmConnectionString()));
@@ -56,6 +68,10 @@
             this.Assemblies = organizationService.RetrieveMultiple(Helpers.CreateAssembliesQuery()).Entities.Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrganizationSnapshot"/> class.
+        /// </summary>
+        /// <param name="fileName"></param>
         public OrganizationSnapshot(string fileName)
         {
             var document = new XmlDocument();
@@ -78,6 +94,7 @@
                         solutions.Add(item);
                     }
                 }
+
                 this.Solutions = solutions.ToArray();
 
                 var assemblies = new List<PluginAssembly>();
@@ -94,6 +111,7 @@
                         assemblies.Add(item);
                     }
                 }
+
                 this.Assemblies = assemblies.ToArray();
             }
         }
@@ -103,7 +121,7 @@
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets assemblies linked to solution
+        /// Gets or sets array of assemblies available in the organization
         /// </summary>
         public PluginAssembly[] Assemblies
         {
@@ -111,6 +129,9 @@
             set;
         }
 
+        /// <summary>
+        /// Gets or sets connection detail for the organization
+        /// </summary>
         public ConnectionDetail ConnectionDetail
         {
             get;
@@ -118,7 +139,7 @@
         }
 
         /// <summary>
-        /// Array of solutions available in the organization
+        /// Gets or sets array of solutions available in the organization
         /// </summary>
         public Solution[] Solutions
         {
