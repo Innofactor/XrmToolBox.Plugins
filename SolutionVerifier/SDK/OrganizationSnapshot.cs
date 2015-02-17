@@ -20,7 +20,7 @@
             this.Assemblies = new PluginAssembly[0];
         }
 
-        public OrganizationSnapshot(ConnectionDetail connectionDetail, Solution[] reference)
+        public OrganizationSnapshot(ConnectionDetail connectionDetail, OrganizationSnapshot reference)
         {
             Solution[] solutions = null;
             PluginAssembly[] assemblies = null;
@@ -36,7 +36,7 @@
 
             //var entities = instance.RetrieveMultiple(solutionsQuery).Entities;
             //solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
-            solutions = solutions.Where(x => reference.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
+            solutions = solutions.Where(x => reference.Solutions.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
 
             //entities = instance.RetrieveMultiple(assembliesQuery).Entities;
             //assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();

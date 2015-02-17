@@ -230,7 +230,7 @@ namespace Cinteros.Xrm.SolutionVerifier
                     {
                         try
                         {
-                            matrix.Add(new OrganizationSnapshot(service, snapshot.Solutions));
+                            matrix.Add(new OrganizationSnapshot(service, snapshot));
                         }
                         catch (InvalidOperationException)
                         {
