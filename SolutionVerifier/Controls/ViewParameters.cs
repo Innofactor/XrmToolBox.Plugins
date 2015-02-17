@@ -53,21 +53,21 @@
             }
         }
 
-        /// <summary>
-        /// Reference connection (CRM organization or file)
-        /// </summary>
-        public ConnectionDetail Reference
-        {
-            get
-            {
-                return this.lvReference.Items.Cast<ListViewItem>().ToArray().Select(x => (ConnectionDetail)x.Tag).FirstOrDefault();
-            }
-            set
-            {
-                this.lvReference.Items.Clear();
-                this.lvReference.Items.Add(Helpers.LoadItemConnection(value));
-            }
-        }
+        ///// <summary>
+        ///// Reference connection (CRM organization or file)
+        ///// </summary>
+        //public ConnectionDetail Reference
+        //{
+        //    get
+        //    {
+        //        return this.lvReference.Items.Cast<ListViewItem>().ToArray().Select(x => (ConnectionDetail)x.Tag).FirstOrDefault();
+        //    }
+        //    set
+        //    {
+        //        this.lvReference.Items.Clear();
+        //        this.lvReference.Items.Add(Helpers.LoadItemConnection(value));
+        //    }
+        //}
 
         public OrganizationSnapshot Snapshot
         {
@@ -272,7 +272,7 @@
                 }
             );
 
-            this.Reference = plugin.ConnectionDetail;
+            //this.Reference = plugin.ConnectionDetail;
         }
 
         private void save_FileOk(object sender, CancelEventArgs e)

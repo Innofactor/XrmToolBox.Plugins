@@ -131,9 +131,9 @@ namespace Cinteros.Xrm.SolutionVerifier
         {
             if (this.ConnectionDetail != null)
             {
-                ((ViewParameters)this.CurrentPage).Reference = this.ConnectionDetail;
+                //((ViewParameters)this.CurrentPage).Reference = this.ConnectionDetail;
 
-                this.OnConnectionUpdated(new ConnectionUpdatedEventArgs(null, this.ConnectionDetail));
+                //this.OnConnectionUpdated(new ConnectionUpdatedEventArgs(null, this.ConnectionDetail));
             }
             else
             {
