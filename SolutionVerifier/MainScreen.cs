@@ -87,13 +87,21 @@ namespace Cinteros.Xrm.SolutionVerifier
 
         #region Public Methods
 
+        private Dictionary<string, EventHandler> handlers = new Dictionary<string,EventHandler>();
+
         public void AssignToolStripButtonHandler(string name, EventHandler handler)
         {
             var button = this.GetToolStipButton(name);
 
             if (button != null)
             {
+                if (this.handlers.ContainsKey(name))
+                {
+                    button.Click -= this.handlers[name];
+                    this.handlers.Remove(name);
+                }
                 button.Click += handler;
+                this.handlers.Add(name, handler);
             }
         }
 
