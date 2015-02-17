@@ -60,20 +60,44 @@
         {
             var document = new XmlDocument();
             document.Load(fileName);
-            var solutions = new List<Solution>();
 
             foreach (XmlElement element in document.DocumentElement.ChildNodes)
             {
-                var solution = new Solution
+                if (element.Name == "solutions")
                 {
-                    Version = new Version(element.Attributes["version"].Value),
-                    UniqueName = element.Attributes["unique-name"].Value,
-                    FriendlyName = element.Attributes["unique-name"].Value
-                };
+                    var solutions = new List<Solution>();
+                    foreach (XmlElement solution in element.ChildNodes)
+                    {
+                        var item = new Solution
+                        {
+                            Version = new Version(solution.Attributes["version"].Value),
+                            UniqueName = solution.Attributes["unique-name"].Value,
+                            FriendlyName = solution.Attributes["unique-name"].Value
+                        };
 
-                solutions.Add(solution);
+                        solutions.Add(item);
+                    }
+
+                    this.Solutions = solutions.ToArray();
+                }
+
+                if (element.Name == "assemblies")
+                {
+                    var assemblies = new List<PluginAssembly>();
+                    foreach (XmlElement assembly in element.ChildNodes)
+                    {
+                        var item = new PluginAssembly()
+                        {
+                            Version = new Version(assembly.Attributes["version"].Value),
+                            Name = assembly.Attributes["name"].Value
+                        };
+
+                        assemblies.Add(item);
+                    }
+
+                    this.Assemblies = assemblies.ToArray();
+                }
             }
-
         }
 
         #endregion Public Constructors

@@ -8,6 +8,10 @@
     {
         #region Public Constructors
 
+        public PluginAssembly()
+        {
+        }
+
         public PluginAssembly(Entity entity)
         {
             this.Name = (string)entity.Attributes[Constants.A_NAME];
