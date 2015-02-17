@@ -22,9 +22,12 @@ namespace Cinteros.Xrm.SolutionVerifier
 
     public partial class MainScreen : PluginBase, IUpdateToolStrip
     {
+
         #region Private Fields
 
         private Control control;
+
+        private Dictionary<string, EventHandler> handlers = new Dictionary<string, EventHandler>();
 
         #endregion Private Fields
 
@@ -86,8 +89,6 @@ namespace Cinteros.Xrm.SolutionVerifier
         #endregion Public Properties
 
         #region Public Methods
-
-        private Dictionary<string, EventHandler> handlers = new Dictionary<string,EventHandler>();
 
         public void AssignToolStripButtonHandler(string name, EventHandler handler)
         {
@@ -264,5 +265,6 @@ namespace Cinteros.Xrm.SolutionVerifier
         }
 
         #endregion Private Methods
+
     }
 }

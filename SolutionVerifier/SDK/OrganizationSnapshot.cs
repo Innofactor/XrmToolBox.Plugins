@@ -56,6 +56,36 @@
 
         #endregion Public Constructors
 
+        #region Public Properties
+
+        /// <summary>
+        /// Gets or sets assemblies linked to solution
+        /// </summary>
+        public PluginAssembly[] Assemblies
+        {
+            get;
+            set;
+        }
+
+        public ConnectionDetail ConnectionDetail
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Array of solutions available in the organization
+        /// </summary>
+        public Solution[] Solutions
+        {
+            get;
+            set;
+        }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
         public XmlDocument ToXml()
         {
             var document = new XmlDocument();
@@ -106,34 +136,6 @@
             return document;
         }
 
-
-
-        #region Public Properties
-
-        /// <summary>
-        /// Gets or sets assemblies linked to solution
-        /// </summary>
-        public PluginAssembly[] Assemblies
-        {
-            get;
-            set;
-        }
-
-        public ConnectionDetail ConnectionDetail
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Array of solutions available in the organization
-        /// </summary>
-        public Solution[] Solutions
-        {
-            get;
-            set;
-        }
-
-        #endregion Public Properties
+        #endregion Public Methods
     }
 }
