@@ -48,7 +48,7 @@
 
             //entities = instance.RetrieveMultiple(assembliesQuery).Entities;
             //assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
-            assemblies = assemblies.Where(x => solutions.Where(y => y.Id == x.SolutionId).Count() > 0).ToArray<PluginAssembly>();
+            assemblies = assemblies.Where(x => reference.Assemblies.Where(y => y.FriendlyName == x.FriendlyName).Count() > 0).ToArray<PluginAssembly>();
 
             this.ConnectionDetail = connectionDetail;
             this.Solutions = solutions;
@@ -109,7 +109,7 @@
                         var item = new PluginAssembly()
                         {
                             Version = new Version(assembly.Attributes["version"].Value),
-                            Name = assembly.Attributes["name"].Value
+                            FriendlyName = assembly.Attributes["name"].Value
                         };
 
                         assemblies.Add(item);
@@ -198,7 +198,7 @@
                 element = document.CreateElement("assembly");
 
                 attribute = document.CreateAttribute("name");
-                attribute.Value = assembly.Name;
+                attribute.Value = assembly.FriendlyName;
                 element.Attributes.Append(attribute);
 
                 attribute = document.CreateAttribute("version");

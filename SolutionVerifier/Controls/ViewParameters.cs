@@ -94,7 +94,7 @@
                 foreach (var assembly in value.Assemblies)
                 {
                     var row = new string[] {
-                        assembly.Name,
+                        assembly.FriendlyName,
                         assembly.Version.ToString(),
                     };
 

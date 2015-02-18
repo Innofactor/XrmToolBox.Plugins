@@ -4,7 +4,7 @@
     using Cinteros.Xrm.SolutionVerifier.Utils;
     using Microsoft.Xrm.Sdk;
 
-    public class Solution
+    public class Solution : IComperable
     {
         #region Public Constructors
 

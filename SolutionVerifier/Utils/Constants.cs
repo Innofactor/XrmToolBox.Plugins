@@ -41,7 +41,7 @@
         /// <summary>
         /// Text for solution that is not available
         /// </summary>
-        public const string U_SOLUTION_NA = "N/A";
+        public const string U_ITEM_NA = "N/A";
 
         #endregion Public Fields
     }

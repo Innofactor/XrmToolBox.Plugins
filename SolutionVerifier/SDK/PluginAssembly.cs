@@ -4,7 +4,7 @@
     using Cinteros.Xrm.SolutionVerifier.Utils;
     using Microsoft.Xrm.Sdk;
 
-    public class PluginAssembly
+    public class PluginAssembly : IComperable
     {
         #region Public Constructors
 
@@ -14,7 +14,7 @@
 
         public PluginAssembly(Entity entity)
         {
-            this.Name = (string)entity.Attributes[Constants.A_NAME];
+            this.FriendlyName = (string)entity.Attributes[Constants.A_NAME];
             this.SolutionId = (Guid)entity.Attributes[Constants.A_SOLUTION_ID];
             this.Version = new Version((string)entity.Attributes[Constants.A_VERSION]);
         }
@@ -32,7 +32,13 @@
             private set;
         }
 
-        public string Name
+        public string FriendlyName
+        {
+            get;
+            set;
+        }
+
+        public string UniqueName
         {
             get;
             set;
@@ -62,7 +68,7 @@
 
         public override string ToString()
         {
-            return this.Name;
+            return this.FriendlyName;
         }
 
         #endregion Public Methods

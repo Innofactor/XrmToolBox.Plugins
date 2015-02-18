@@ -61,6 +61,31 @@
                     }
                     this.lvSolutions.Items.Add(row);
                 }
+
+                foreach (var assembly in value.First().Assemblies)
+                {
+                    var row = new ListViewItem(assembly.FriendlyName);
+                    row.UseItemStyleForSubItems = false;
+
+                    var reference = new List<PluginAssembly>();
+                    var i = 0;
+
+                    foreach (var item in value)
+                    {
+                        var current = item.Assemblies.Where(x => assembly.FriendlyName.Equals(x.FriendlyName)).FirstOrDefault<PluginAssembly>();
+
+                        if (i++ == 0)
+                        {
+                            reference.Add(current);
+                            row.SubItems.Add(this.CreateCell(null, current));
+                        }
+                        else
+                        {
+                            row.SubItems.Add(this.CreateCell(reference, current));
+                        }
+                    }
+                    this.lvSolutions.Items.Add(row);
+                }
             }
         }
 
@@ -107,7 +132,8 @@
         /// <param name="reference"></param>
         /// <param name="current"></param>
         /// <returns></returns>
-        private ListViewItem.ListViewSubItem CreateCell(List<Solution> reference, Solution current)
+        private ListViewItem.ListViewSubItem CreateCell<T>(List<T> reference, T current) 
+            where T : IComperable
         {
             var cell = new ListViewItem.ListViewSubItem();
 
@@ -123,10 +149,10 @@
                 // Solution is not present on target system
                 if (current == null)
                 {
-                    cell.Text = Constants.U_SOLUTION_NA;
+                    cell.Text = Constants.U_ITEM_NA;
                     cell.ForeColor = Color.LightGray;
                     cell.BackColor = Color.White;
-                    cell.Tag = "Solution is unavailable on the target organization";
+                    cell.Tag = "Item is unavailable on the target organization";
                 }
                 else
                 {
@@ -135,7 +161,7 @@
                     if (reference.Exists(x => x.Version == current.Version))
                     {
                         cell.BackColor = Color.YellowGreen;
-                        cell.Tag = "Solution is unavailable on the target organization";
+                        cell.Tag = "Item is unavailable on the target organization";
                     }
                     else
                     {
