@@ -25,8 +25,13 @@
         /// </summary>
         public const string U_COMPARE_BUTTON = "tsbCompare";
 
-        public const string U_HEADER_MAINTEXT = "Solution Name / Organization";
+        public const string U_HEADER_MAINTEXT = "Item / Organization";
         public const int U_HEADER_MAINWIDTH = 200;
+
+        /// <summary>
+        /// Text for solution that is not available
+        /// </summary>
+        public const string U_ITEM_NA = "N/A";
 
         /// <summary>
         /// Name of toolstrip's Save button
@@ -37,11 +42,6 @@
         /// Default solution unique name
         /// </summary>
         public const string U_SOLUTION_DEFAULT = "Default";
-
-        /// <summary>
-        /// Text for solution that is not available
-        /// </summary>
-        public const string U_ITEM_NA = "N/A";
 
         #endregion Public Fields
     }

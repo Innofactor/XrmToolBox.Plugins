@@ -38,10 +38,10 @@
                 this.AddListViewHeaders(value.Select(x => x.ConnectionDetail.OrganizationFriendlyName).ToArray<string>());
 
                 var solutionsGroup = new ListViewGroup("Solutions:");
-                this.lvSolutions.Groups.Add(solutionsGroup);
+                this.lvMatrix.Groups.Add(solutionsGroup);
 
                 var assembliesGroup = new ListViewGroup("Assemblies:");
-                this.lvSolutions.Groups.Add(assembliesGroup);
+                this.lvMatrix.Groups.Add(assembliesGroup);
 
                 foreach (var solution in value.First().Solutions)
                 {
@@ -66,7 +66,7 @@
                             row.SubItems.Add(this.CreateCell(reference, current));
                         }
                     }
-                    this.lvSolutions.Items.Add(row);
+                    this.lvMatrix.Items.Add(row);
                 }
 
                 foreach (var assembly in value.First().Assemblies)
@@ -92,7 +92,7 @@
                             row.SubItems.Add(this.CreateCell(reference, current));
                         }
                     }
-                    this.lvSolutions.Items.Add(row);
+                    this.lvMatrix.Items.Add(row);
                 }
             }
         }
@@ -123,14 +123,14 @@
             var header = new ColumnHeader();
             header.Text = Constants.U_HEADER_MAINTEXT;
             header.Width = Constants.U_HEADER_MAINWIDTH;
-            this.lvSolutions.Columns.Add(header);
+            this.lvMatrix.Columns.Add(header);
 
             foreach (var text in headers)
             {
                 header = new ColumnHeader();
                 header.Text = text;
                 header.Width = 150;
-                this.lvSolutions.Columns.Add(header);
+                this.lvMatrix.Columns.Add(header);
             }
         }
 
