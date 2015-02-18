@@ -37,9 +37,16 @@
             {
                 this.AddListViewHeaders(value.Select(x => x.ConnectionDetail.OrganizationFriendlyName).ToArray<string>());
 
+                var solutionsGroup = new ListViewGroup("Solutions:");
+                this.lvSolutions.Groups.Add(solutionsGroup);
+
+                var assembliesGroup = new ListViewGroup("Assemblies:");
+                this.lvSolutions.Groups.Add(assembliesGroup);
+
                 foreach (var solution in value.First().Solutions)
                 {
                     var row = new ListViewItem(solution.FriendlyName);
+                    row.Group = solutionsGroup;
                     row.UseItemStyleForSubItems = false;
 
                     var reference = new List<Solution>();
@@ -65,6 +72,7 @@
                 foreach (var assembly in value.First().Assemblies)
                 {
                     var row = new ListViewItem(assembly.FriendlyName);
+                    row.Group = assembliesGroup;
                     row.UseItemStyleForSubItems = false;
 
                     var reference = new List<PluginAssembly>();
