@@ -9,6 +9,7 @@
 
     public partial class ViewResults : UserControl, IUpdateToolStrip
     {
+
         #region Public Constructors
 
         public ViewResults(OrganizationSnapshot[] matrix)
@@ -146,5 +147,6 @@
         }
 
         #endregion Private Methods
+
     }
 }

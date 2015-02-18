@@ -34,6 +34,9 @@
 
         #region Public Properties
 
+        /// <summary>
+        /// Gets or sets array of organization to compare
+        /// </summary>
         public ConnectionDetail[] Organizations
         {
             get
@@ -53,22 +56,9 @@
             }
         }
 
-        ///// <summary>
-        ///// Reference connection (CRM organization or file)
-        ///// </summary>
-        //public ConnectionDetail Reference
-        //{
-        //    get
-        //    {
-        //        return this.lvReference.Items.Cast<ListViewItem>().ToArray().Select(x => (ConnectionDetail)x.Tag).FirstOrDefault();
-        //    }
-        //    set
-        //    {
-        //        this.lvReference.Items.Clear();
-        //        this.lvReference.Items.Add(Helpers.LoadItemConnection(value));
-        //    }
-        //}
-
+        /// <summary>
+        /// Gets or sets organization snapshot 
+        /// </summary>
         public OrganizationSnapshot Snapshot
         {
             get
@@ -115,25 +105,6 @@
                     this.lvSnapshot.Items.Add(item);
                 }
 
-                //if (solution.Assemblies.Length > 0)
-                //{
-                //    var group = new ListViewGroup("assemblies:");
-                //    this.lvSolutions.Groups.Add(group);
-
-                //    foreach (var assembly in solution.Assemblies)
-                //    {
-                //        row = new string[] {
-                //        assembly.Name,
-                //        assembly.Version.ToString(),
-                //    };
-
-                //        item = new ListViewItem(row);
-                //        item.Group = group;
-                //        item.Tag = assembly;
-
-                //        this.lvSolutions.Items.Add(item);
-                //    }
-                //}
                 this.lvSnapshot.ItemChecked += this.lvSolutions_ItemChecked;
             }
         }
