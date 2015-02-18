@@ -11,7 +11,6 @@
 
     public partial class ViewParameters : UserControl, IUpdateToolStrip
     {
-
         #region Public Constructors
 
         /// <summary>
@@ -21,7 +20,7 @@
         {
             InitializeComponent();
 
-            this.ParentChanged += this.SelectParameters_ParentChanged;
+            this.ParentChanged += this.ViewParameters_ParentChanged;
         }
 
         #endregion Public Constructors
@@ -57,17 +56,17 @@
         }
 
         /// <summary>
-        /// Gets or sets organization snapshot 
+        /// Gets or sets organization snapshot
         /// </summary>
         public OrganizationSnapshot Snapshot
         {
             get
             {
-                return (this.lvSnapshot.Tag == null) ? new OrganizationSnapshot() : (OrganizationSnapshot)this.lvSnapshot.Tag; 
+                return (this.lvSnapshot.Tag == null) ? new OrganizationSnapshot() : (OrganizationSnapshot)this.lvSnapshot.Tag;
             }
             set
             {
-                this.lvSnapshot.ItemChecked -= this.lvSolutions_ItemChecked;
+                this.lvSnapshot.ItemChecked -= this.lvSnapshot_ItemChecked;
                 this.lvSnapshot.Items.Clear();
                 this.lvSnapshot.Tag = value;
 
@@ -105,7 +104,7 @@
                     this.lvSnapshot.Items.Add(item);
                 }
 
-                this.lvSnapshot.ItemChecked += this.lvSolutions_ItemChecked;
+                this.lvSnapshot.ItemChecked += this.lvSnapshot_ItemChecked;
             }
         }
 
@@ -147,12 +146,12 @@
         {
             var cb = (CheckBox)sender;
 
-            this.lvSnapshot.ItemChecked -= lvSolutions_ItemChecked;
+            this.lvSnapshot.ItemChecked -= lvSnapshot_ItemChecked;
             foreach (var item in this.lvSnapshot.Items.Cast<ListViewItem>().ToArray())
             {
                 item.Checked = cb.Checked;
             }
-            this.lvSnapshot.ItemChecked += lvSolutions_ItemChecked;
+            this.lvSnapshot.ItemChecked += lvSnapshot_ItemChecked;
 
             this.JustifyToolStrip();
         }
@@ -193,7 +192,7 @@
         /// </summary>
         /// <param name="sender">Solutions list view</param>
         /// <param name="e">Event arguments</param>
-        private void lvSolutions_ItemChecked(object sender, ItemCheckedEventArgs e)
+        private void lvSnapshot_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             this.cbToggleSolutions.CheckedChanged -= this.cbToggleSolutions_CheckedChanged;
             this.UpdateSwitcher((ListView)sender, this.cbToggleSolutions, e.Item.Checked);
@@ -207,7 +206,7 @@
         /// </summary>
         /// <param name="sender">Solutions list view</param>
         /// <param name="e">Event arguments</param>
-        private void lvSolutions_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        private void lvSnapshot_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             var list = (ListView)sender;
 
@@ -254,7 +253,7 @@
             }
         }
 
-        private void SelectParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
+        private void ViewParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
         {
             if (e.ConnectionDetail != null && !string.IsNullOrEmpty(e.ConnectionDetail.OrganizationServiceUrl))
             {
@@ -268,13 +267,13 @@
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SelectParameters_ParentChanged(object sender, EventArgs e)
+        private void ViewParameters_ParentChanged(object sender, EventArgs e)
         {
             var parent = (MainScreen)this.Parent;
 
             if (parent != null)
             {
-                parent.ConnectionUpdated += SelectParameters_ConnectionUpdated;
+                parent.ConnectionUpdated += ViewParameters_ConnectionUpdated;
 
                 if (parent.ConnectionDetail != null)
                 {
@@ -292,7 +291,7 @@
                 parent.AssignToolStripButtonHandler(Constants.U_SAVE_BUTTON, tsbSave_Click);
 
                 this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
-                this.lvSolutions_ItemSelectionChanged(this.lvSnapshot, null);
+                this.lvSnapshot_ItemSelectionChanged(this.lvSnapshot, null);
             }
         }
 
@@ -343,6 +342,5 @@
         }
 
         #endregion Private Methods
-
     }
 }

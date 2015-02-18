@@ -158,8 +158,8 @@
             this.lvSnapshot.TabIndex = 2;
             this.lvSnapshot.UseCompatibleStateImageBehavior = false;
             this.lvSnapshot.View = System.Windows.Forms.View.Details;
-            this.lvSnapshot.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvSolutions_ItemChecked);
-            this.lvSnapshot.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvSolutions_ItemSelectionChanged);
+            this.lvSnapshot.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvSnapshot_ItemChecked);
+            this.lvSnapshot.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvSnapshot_ItemSelectionChanged);
             // 
             // chSolutionName
             // 
