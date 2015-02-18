@@ -77,9 +77,14 @@
             var document = new XmlDocument();
             document.Load(fileName);
 
+            var solutions = new List<Solution>();
+            var assemblies = new List<PluginAssembly>();
+
+            this.Solutions = solutions.ToArray();
+            this.Assemblies = assemblies.ToArray();
+
             foreach (XmlElement element in document.DocumentElement.ChildNodes)
             {
-                var solutions = new List<Solution>();
                 if (element.Name == "solutions")
                 {
                     foreach (XmlElement solution in element.ChildNodes)
@@ -93,11 +98,10 @@
 
                         solutions.Add(item);
                     }
+
+                    this.Solutions = solutions.ToArray();
                 }
 
-                this.Solutions = solutions.ToArray();
-
-                var assemblies = new List<PluginAssembly>();
                 if (element.Name == "assemblies")
                 {
                     foreach (XmlElement assembly in element.ChildNodes)
@@ -110,9 +114,9 @@
 
                         assemblies.Add(item);
                     }
-                }
 
-                this.Assemblies = assemblies.ToArray();
+                    this.Assemblies = assemblies.ToArray();
+                }
             }
         }
 
