@@ -155,6 +155,18 @@
 
         #region Public Methods
 
+        public override string ToString()
+        {
+            if (this.ConnectionDetail != null && this.ConnectionDetail.OrganizationFriendlyName != null && !string.IsNullOrEmpty(this.ConnectionDetail.OrganizationFriendlyName))
+            {
+                return this.ConnectionDetail.OrganizationFriendlyName;
+            }
+            else
+            {
+                return base.ToString();
+            }
+        }
+
         public XmlDocument ToXml()
         {
             var document = new XmlDocument();

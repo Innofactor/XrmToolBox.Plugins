@@ -17,12 +17,10 @@ namespace Cinteros.Xrm.SolutionVerifier
     using Cinteros.Xrm.SolutionVerifier.SDK;
     using Cinteros.Xrm.SolutionVerifier.Utils;
     using McTools.Xrm.Connection;
-    using Microsoft.Xrm.Client;
     using XrmToolBox;
 
     public partial class MainScreen : PluginBase, IUpdateToolStrip
     {
-
         #region Private Fields
 
         private Control control;
@@ -224,7 +222,12 @@ namespace Cinteros.Xrm.SolutionVerifier
                 {
                     var matrix = new List<OrganizationSnapshot>();
 
-                    matrix.Add(new OrganizationSnapshot { ConnectionDetail = this.ConnectionDetail, Solutions = snapshot.Solutions });
+                    matrix.Add(new OrganizationSnapshot
+                    {
+                        ConnectionDetail = this.ConnectionDetail,
+                        Solutions = snapshot.Solutions,
+                        Assemblies = snapshot.Assemblies
+                    });
 
                     Parallel.ForEach(services, service =>
                     {
@@ -265,6 +268,5 @@ namespace Cinteros.Xrm.SolutionVerifier
         }
 
         #endregion Private Methods
-
     }
 }
