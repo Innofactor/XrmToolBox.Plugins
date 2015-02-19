@@ -34,14 +34,14 @@
             this.lvOrganizations = new System.Windows.Forms.ListView();
             this.chOrgName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chOrgService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.gbSolutions = new System.Windows.Forms.GroupBox();
+            this.gbSnapshot = new System.Windows.Forms.GroupBox();
             this.cbToggleSolutions = new System.Windows.Forms.CheckBox();
             this.lvSnapshot = new System.Windows.Forms.ListView();
             this.chSolutionName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSolutionVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1.SuspendLayout();
             this.gbOrganizations.SuspendLayout();
-            this.gbSolutions.SuspendLayout();
+            this.gbSnapshot.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -53,7 +53,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.gbOrganizations, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.gbSolutions, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.gbSnapshot, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 34);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -116,19 +116,18 @@
             this.chOrgService.Text = "Server";
             this.chOrgService.Width = 200;
             // 
-            // gbSolutions
+            // gbSnapshot
             // 
-            this.gbSolutions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.gbSnapshot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbSolutions.Controls.Add(this.cbToggleSolutions);
-            this.gbSolutions.Controls.Add(this.lvSnapshot);
-            this.gbSolutions.Location = new System.Drawing.Point(3, 3);
-            this.gbSolutions.Name = "gbSolutions";
-            this.gbSolutions.Size = new System.Drawing.Size(292, 357);
-            this.gbSolutions.TabIndex = 13;
-            this.gbSolutions.TabStop = false;
-            this.gbSolutions.Text = "Solutions to compare";
+            this.gbSnapshot.Controls.Add(this.cbToggleSolutions);
+            this.gbSnapshot.Controls.Add(this.lvSnapshot);
+            this.gbSnapshot.Location = new System.Drawing.Point(3, 3);
+            this.gbSnapshot.Name = "gbSnapshot";
+            this.gbSnapshot.Size = new System.Drawing.Size(292, 357);
+            this.gbSnapshot.TabIndex = 13;
+            this.gbSnapshot.TabStop = false;
             // 
             // cbToggleSolutions
             // 
@@ -182,8 +181,8 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.gbOrganizations.ResumeLayout(false);
             this.gbOrganizations.PerformLayout();
-            this.gbSolutions.ResumeLayout(false);
-            this.gbSolutions.PerformLayout();
+            this.gbSnapshot.ResumeLayout(false);
+            this.gbSnapshot.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -195,7 +194,7 @@
         private System.Windows.Forms.ListView lvOrganizations;
         private System.Windows.Forms.ColumnHeader chOrgName;
         private System.Windows.Forms.ColumnHeader chOrgService;
-        private System.Windows.Forms.GroupBox gbSolutions;
+        private System.Windows.Forms.GroupBox gbSnapshot;
         private System.Windows.Forms.CheckBox cbToggleOrganizations;
         private System.Windows.Forms.CheckBox cbToggleSolutions;
         private System.Windows.Forms.ListView lvSnapshot;
