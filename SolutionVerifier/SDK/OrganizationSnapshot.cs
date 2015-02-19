@@ -26,8 +26,9 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="OrganizationSnapshot"/> class.
         /// </summary>
-        /// <param name="connectionDetail"></param>
-        /// <param name="reference"></param>
+        /// <param name="connectionDetail">Object holding connection details to given organization.</param>
+        /// <param name="reference">Instance of the <see cref="OrganizationSnapshot"/> class, serving as refenece. 
+        /// Only these solutions and assemblies will be included, that are already present in the reference.</param>
         public OrganizationSnapshot(ConnectionDetail connectionDetail, OrganizationSnapshot reference)
         {
             Solution[] solutions = null;
@@ -38,16 +39,10 @@
 
             entities = organizationService.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities;
             solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
+            solutions = solutions.Where(x => reference.Solutions.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
 
             entities = organizationService.RetrieveMultiple(Helpers.CreateAssembliesQuery()).Entities;
             assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
-
-            //var entities = instance.RetrieveMultiple(solutionsQuery).Entities;
-            //solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
-            solutions = solutions.Where(x => reference.Solutions.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
-
-            //entities = instance.RetrieveMultiple(assembliesQuery).Entities;
-            //assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
             assemblies = assemblies.Where(x => reference.Assemblies.Where(y => y.FriendlyName == x.FriendlyName).Count() > 0).ToArray<PluginAssembly>();
 
             this.ConnectionDetail = connectionDetail;
@@ -58,7 +53,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="OrganizationSnapshot"/> class.
         /// </summary>
-        /// <param name="connectionDetail"></param>
+        /// <param name="connectionDetail">Object holding connection details to given organization.</param>
         public OrganizationSnapshot(ConnectionDetail connectionDetail)
         {
             var organizationService = new OrganizationService(CrmConnection.Parse(connectionDetail.GetOrganizationCrmConnectionString()));
@@ -71,7 +66,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="OrganizationSnapshot"/> class.
         /// </summary>
-        /// <param name="fileName"></param>
+        /// <param name="fileName">Location of XML file from which instance of the <see cref="OrganizationSnapshot"/> class will be constructed.</param>
         public OrganizationSnapshot(string fileName)
         {
             var document = new XmlDocument();
@@ -134,7 +129,7 @@
         }
 
         /// <summary>
-        /// Gets or sets connection detail for the organization
+        /// Gets or sets connection detail for the organization.
         /// </summary>
         public ConnectionDetail ConnectionDetail
         {
@@ -143,7 +138,7 @@
         }
 
         /// <summary>
-        /// Gets or sets array of solutions available in the organization
+        /// Gets or sets array of solutions available in the organization.
         /// </summary>
         public Solution[] Solutions
         {
@@ -155,6 +150,10 @@
 
         #region Public Methods
 
+        /// <summary>
+        /// Replaces text representation of <see cref="OrganizationSnapshot"/> class of name of organization it connected.
+        /// </summary>
+        /// <returns>Text representation of <see cref="OrganizationSnapshot"/> class.</returns>
         public override string ToString()
         {
             if (this.ConnectionDetail != null && this.ConnectionDetail.OrganizationFriendlyName != null && !string.IsNullOrEmpty(this.ConnectionDetail.OrganizationFriendlyName))
@@ -209,7 +208,7 @@
             {
                 element = document.CreateElement("assembly");
 
-                attribute = document.CreateAttribute("name");
+                attribute = document.CreateAttribute("friendly-name");
                 attribute.Value = assembly.FriendlyName;
                 element.Attributes.Append(attribute);
 
