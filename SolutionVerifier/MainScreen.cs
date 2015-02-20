@@ -25,7 +25,7 @@ namespace Cinteros.Xrm.SolutionVerifier
 
         private Control control;
 
-        private Dictionary<string, EventHandler> handlers = new Dictionary<string, EventHandler>();
+        private Dictionary<string, EventHandler> toolStripHandlers = new Dictionary<string, EventHandler>();
 
         #endregion Private Fields
 
@@ -94,13 +94,13 @@ namespace Cinteros.Xrm.SolutionVerifier
 
             if (button != null)
             {
-                if (this.handlers.ContainsKey(name))
+                if (this.toolStripHandlers.ContainsKey(name))
                 {
-                    button.Click -= this.handlers[name];
-                    this.handlers.Remove(name);
+                    button.Click -= this.toolStripHandlers[name];
+                    this.toolStripHandlers.Remove(name);
                 }
                 button.Click += handler;
-                this.handlers.Add(name, handler);
+                this.toolStripHandlers.Add(name, handler);
             }
         }
 
