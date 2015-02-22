@@ -3,11 +3,11 @@ using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following set of attributes.
 // Change these attribute values to modify the information associated with an assembly.
-[assembly: AssemblyTitle("Solution Verifier")]
-[assembly: AssemblyDescription("Tool to compare multiple solutions versions over multiple environments")]
+[assembly: AssemblyTitle("Version Verifier")]
+[assembly: AssemblyDescription("Tool to compare solution components versions over multiple environments")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Cinteros AB")]
-[assembly: AssemblyProduct("Cinteros.XrmToolbox.SolutionVerifier")]
+[assembly: AssemblyProduct("Cinteros.Xrm.VersionVerifier")]
 [assembly: AssemblyCopyright("Copyright © Cinteros AB 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
