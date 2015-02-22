@@ -37,8 +37,8 @@
             this.gbSnapshot = new System.Windows.Forms.GroupBox();
             this.cbToggleSolutions = new System.Windows.Forms.CheckBox();
             this.lvSnapshot = new System.Windows.Forms.ListView();
-            this.chSolutionName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chSolutionVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chItemName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chItemVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1.SuspendLayout();
             this.gbOrganizations.SuspendLayout();
             this.gbSnapshot.SuspendLayout();
@@ -147,8 +147,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvSnapshot.CheckBoxes = true;
             this.lvSnapshot.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chSolutionName,
-            this.chSolutionVersion});
+            this.chItemName,
+            this.chItemVersion});
             this.lvSnapshot.FullRowSelect = true;
             this.lvSnapshot.GridLines = true;
             this.lvSnapshot.Location = new System.Drawing.Point(6, 42);
@@ -160,15 +160,15 @@
             this.lvSnapshot.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvSnapshot_ItemChecked);
             this.lvSnapshot.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvSnapshot_ItemSelectionChanged);
             // 
-            // chSolutionName
+            // chItemName
             // 
-            this.chSolutionName.Text = "Solution";
-            this.chSolutionName.Width = 200;
+            this.chItemName.Text = "Name";
+            this.chItemName.Width = 200;
             // 
-            // chSolutionVersion
+            // chItemVersion
             // 
-            this.chSolutionVersion.Text = "Version";
-            this.chSolutionVersion.Width = 200;
+            this.chItemVersion.Text = "Version";
+            this.chItemVersion.Width = 200;
             // 
             // ViewParameters
             // 
@@ -198,8 +198,8 @@
         private System.Windows.Forms.CheckBox cbToggleOrganizations;
         private System.Windows.Forms.CheckBox cbToggleSolutions;
         private System.Windows.Forms.ListView lvSnapshot;
-        private System.Windows.Forms.ColumnHeader chSolutionName;
-        private System.Windows.Forms.ColumnHeader chSolutionVersion;
+        private System.Windows.Forms.ColumnHeader chItemName;
+        private System.Windows.Forms.ColumnHeader chItemVersion;
 
     }
 }

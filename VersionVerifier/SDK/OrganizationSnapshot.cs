@@ -88,7 +88,7 @@
                         {
                             Version = new Version(solution.Attributes["version"].Value),
                             UniqueName = solution.Attributes["unique-name"].Value,
-                            FriendlyName = solution.Attributes["unique-name"].Value
+                            FriendlyName = solution.Attributes["friendly-name"].Value
                         };
 
                         solutions.Add(item);
@@ -104,7 +104,7 @@
                         var item = new PluginAssembly()
                         {
                             Version = new Version(assembly.Attributes["version"].Value),
-                            FriendlyName = assembly.Attributes["name"].Value
+                            FriendlyName = assembly.Attributes["friendly-name"].Value
                         };
 
                         assemblies.Add(item);

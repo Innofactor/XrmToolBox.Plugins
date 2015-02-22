@@ -131,8 +131,8 @@
             this.tsbCompare.Image = ((System.Drawing.Image)(resources.GetObject("tsbCompare.Image")));
             this.tsbCompare.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbCompare.Name = "tsbCompare";
-            this.tsbCompare.Size = new System.Drawing.Size(127, 22);
-            this.tsbCompare.Text = "Compare solutions";
+            this.tsbCompare.Size = new System.Drawing.Size(122, 22);
+            this.tsbCompare.Text = "Compare versions";
             this.tsbCompare.Click += new System.EventHandler(this.tsbCompare_Click);
             // 
             // MainScreen
