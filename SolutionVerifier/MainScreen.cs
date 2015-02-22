@@ -19,73 +19,8 @@ namespace Cinteros.Xrm.SolutionVerifier
     using McTools.Xrm.Connection;
     using XrmToolBox;
 
-    public partial class MainScreen : PluginBase, IUpdateToolStrip
+    public partial class MainScreen : PluginBase, IUpdateToolStrip, IGitHubPlugin
     {
-        #region Private Fields
-
-        private Control control;
-
-        private Dictionary<string, EventHandler> toolStripHandlers = new Dictionary<string, EventHandler>();
-
-        #endregion Private Fields
-
-        #region Public Constructors
-
-        public MainScreen()
-        {
-            InitializeComponent();
-
-            this.UpdateToolStrip += this.MainScreen_UpdateToolStrip;
-        }
-
-        #endregion Public Constructors
-
-        #region Public Events
-
-        public event EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
-
-        #endregion Public Events
-
-        #region Public Properties
-
-        /// <summary>
-        /// Gets or sets control, that would be seen as current page
-        /// </summary>
-        public Control CurrentPage
-        {
-            get
-            {
-                return this.control;
-            }
-            set
-            {
-                value.Size = this.Size;
-                value.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
-
-                this.Controls.Remove(this.control);
-                this.Controls.Add(value);
-
-                this.control = value;
-
-                ((IUpdateToolStrip)this.control).UpdateToolStrip += this.MainScreen_UpdateToolStrip;
-                ((IUpdateToolStrip)this.control).JustifyToolStrip();
-                this.JustifyToolStrip();
-            }
-        }
-
-        /// <summary>
-        /// Gets plugin logo
-        /// </summary>
-        public override Image PluginLogo
-        {
-            get
-            {
-                return Resources.Cinteros;
-            }
-        }
-
-        #endregion Public Properties
-
         #region Public Methods
 
         public void AssignToolStripButtonHandler(string name, EventHandler handler)
@@ -268,5 +203,92 @@ namespace Cinteros.Xrm.SolutionVerifier
         }
 
         #endregion Private Methods
+
+        #region Private Fields
+
+        private Control control;
+
+        private Dictionary<string, EventHandler> toolStripHandlers = new Dictionary<string, EventHandler>();
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public MainScreen()
+        {
+            InitializeComponent();
+
+            this.UpdateToolStrip += this.MainScreen_UpdateToolStrip;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Events
+
+        public event EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
+
+        #endregion Public Events
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets or sets control, that would be seen as current page
+        /// </summary>
+        public Control CurrentPage
+        {
+            get
+            {
+                return this.control;
+            }
+            set
+            {
+                value.Size = this.Size;
+                value.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
+
+                this.Controls.Remove(this.control);
+                this.Controls.Add(value);
+
+                this.control = value;
+
+                ((IUpdateToolStrip)this.control).UpdateToolStrip += this.MainScreen_UpdateToolStrip;
+                ((IUpdateToolStrip)this.control).JustifyToolStrip();
+                this.JustifyToolStrip();
+            }
+        }
+
+        /// <summary>
+        /// Gets plugin logo
+        /// </summary>
+        public override Image PluginLogo
+        {
+            get
+            {
+                return Resources.Cinteros;
+            }
+        }
+
+        /// <summary>
+        /// Github repository name
+        /// </summary>
+        public string RepositoryName
+        {
+            get
+            {
+                return "SolutionVerifier";
+            }
+        }
+
+        /// <summary>
+        /// Github user name
+        /// </summary>
+        public string UserName
+        {
+            get
+            {
+                return "Cinteros";
+            }
+        }
+
+        #endregion Public Properties
     }
 }
