@@ -1,6 +1,7 @@
 ﻿namespace Cinteros.Xrm.SolutionVerifier.Controls
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows.Forms;
@@ -47,9 +48,16 @@
                 this.lvOrganizations.ItemChecked -= this.lvOrganizations_ItemChecked;
                 this.lvOrganizations.Items.Clear();
 
+                var servers = value.GroupBy(x => x.ServerName).Select(x => new ListViewGroup(x.Key)).ToArray();
+                this.lvOrganizations.Groups.AddRange(servers);
+
+
                 foreach (var connection in value)
                 {
-                    this.lvOrganizations.Items.Add(Helpers.LoadItemConnection(connection));
+                    var item = Helpers.LoadItemConnection(connection);
+                    item.Group = servers.Where(x => x.Header == connection.ServerName).FirstOrDefault();
+
+                    this.lvOrganizations.Items.Add(item);
                 }
                 this.lvOrganizations.ItemChecked += this.lvOrganizations_ItemChecked;
             }
@@ -70,10 +78,10 @@
                 this.lvSnapshot.Items.Clear();
                 this.lvSnapshot.Tag = value;
 
-                var solutionsGroup = new ListViewGroup("Solutions:");
+                var solutionsGroup = new ListViewGroup("Solutions");
                 this.lvSnapshot.Groups.Add(solutionsGroup);
 
-                var assembliesGroup = new ListViewGroup("Assemblies:");
+                var assembliesGroup = new ListViewGroup("Assemblies");
                 this.lvSnapshot.Groups.Add(assembliesGroup);
 
                 foreach (var solution in value.Solutions)
