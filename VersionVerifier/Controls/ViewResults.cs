@@ -1,11 +1,11 @@
-﻿namespace Cinteros.Xrm.SolutionVerifier.Controls
+﻿namespace Cinteros.Xrm.VersionVerifier.Controls
 {
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
-    using Cinteros.Xrm.SolutionVerifier.SDK;
-    using Cinteros.Xrm.SolutionVerifier.Utils;
+    using Cinteros.Xrm.VersionVerifier.SDK;
+    using Cinteros.Xrm.VersionVerifier.Utils;
 
     public partial class ViewResults : UserControl, IUpdateToolStrip
     {

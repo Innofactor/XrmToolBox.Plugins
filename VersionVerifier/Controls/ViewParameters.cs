@@ -1,12 +1,12 @@
-﻿namespace Cinteros.Xrm.SolutionVerifier.Controls
+﻿namespace Cinteros.Xrm.VersionVerifier.Controls
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows.Forms;
-    using Cinteros.Xrm.SolutionVerifier.SDK;
-    using Cinteros.Xrm.SolutionVerifier.Utils;
+    using Cinteros.Xrm.VersionVerifier.SDK;
+    using Cinteros.Xrm.VersionVerifier.Utils;
     using McTools.Xrm.Connection;
     using XrmToolBox;
 

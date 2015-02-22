@@ -1,7 +1,7 @@
-﻿namespace Cinteros.Xrm.SolutionVerifier.SDK
+﻿namespace Cinteros.Xrm.VersionVerifier.SDK
 {
     using System;
-    using Cinteros.Xrm.SolutionVerifier.Utils;
+    using Cinteros.Xrm.VersionVerifier.Utils;
     using Microsoft.Xrm.Sdk;
 
     public class PluginAssembly : IComperable

@@ -1,8 +1,8 @@
-﻿namespace Cinteros.Xrm.SolutionVerifier.Utils
+﻿namespace Cinteros.Xrm.VersionVerifier.Utils
 {
     using System.Windows.Forms;
     using System.Xml;
-    using Cinteros.Xrm.SolutionVerifier.SDK;
+    using Cinteros.Xrm.VersionVerifier.SDK;
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Sdk.Query;
 

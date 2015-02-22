@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.SolutionVerifier.Controls
+﻿namespace Cinteros.Xrm.VersionVerifier.Controls
 {
     partial class ViewParameters
     {

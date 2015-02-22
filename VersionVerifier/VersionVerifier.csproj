@@ -7,8 +7,8 @@
     <ProjectGuid>{2834BDB0-802C-4C6F-AA3B-A344FD21A206}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cinteros.Xrm.SolutionVerifier</RootNamespace>
-    <AssemblyName>Cinteros.Xrm.SolutionVerifier</AssemblyName>
+    <RootNamespace>Cinteros.Xrm.VersionVerifier</RootNamespace>
+    <AssemblyName>Cinteros.Xrm.VersionVerifier</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.SolutionVerifier
+﻿namespace Cinteros.Xrm.VersionVerifier
 {
     partial class MainScreen
     {

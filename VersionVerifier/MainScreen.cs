@@ -1,6 +1,6 @@
 ﻿[assembly: XrmToolBox.Attributes.BackgroundColor("#000000")]
 
-namespace Cinteros.Xrm.SolutionVerifier
+namespace Cinteros.Xrm.VersionVerifier
 {
     using System;
     using System.Collections.Generic;
@@ -12,10 +12,10 @@ namespace Cinteros.Xrm.SolutionVerifier
     using System.Threading.Tasks;
     using System.Windows.Forms;
     using System.Xml;
-    using Cinteros.Xrm.SolutionVerifier.Controls;
-    using Cinteros.Xrm.SolutionVerifier.Properties;
-    using Cinteros.Xrm.SolutionVerifier.SDK;
-    using Cinteros.Xrm.SolutionVerifier.Utils;
+    using Cinteros.Xrm.VersionVerifier.Controls;
+    using Cinteros.Xrm.VersionVerifier.Properties;
+    using Cinteros.Xrm.VersionVerifier.SDK;
+    using Cinteros.Xrm.VersionVerifier.Utils;
     using McTools.Xrm.Connection;
     using XrmToolBox;
 
