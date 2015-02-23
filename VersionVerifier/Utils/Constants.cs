@@ -16,6 +16,16 @@
         public const string E_SOLUTION = "solution";
 
         /// <summary>
+        /// Text for solutions group
+        /// </summary>
+        public const string U_SOLUTIONS = "Solutions";
+
+        /// <summary>
+        /// Text for solutions group
+        /// </summary>
+        public const string U_ASSEMBLIES = "Assemblies";
+
+        /// <summary>
         /// Name of toolstrip's Back button
         /// </summary>
         public const string U_BACK_BUTTON = "tsbBack";

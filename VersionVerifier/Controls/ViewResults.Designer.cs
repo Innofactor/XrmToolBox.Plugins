@@ -46,15 +46,14 @@
             this.gbCompareSolutions.TabStop = false;
             this.gbCompareSolutions.Text = "Compare solutions";
             // 
-            // lvSolutions
+            // lvMatrix
             // 
             this.lvMatrix.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvMatrix.FullRowSelect = true;
-            this.lvMatrix.GridLines = true;
             this.lvMatrix.Location = new System.Drawing.Point(7, 20);
-            this.lvMatrix.Name = "lvSolutions";
+            this.lvMatrix.Name = "lvMatrix";
             this.lvMatrix.Size = new System.Drawing.Size(584, 337);
             this.lvMatrix.TabIndex = 0;
             this.lvMatrix.UseCompatibleStateImageBehavior = false;

@@ -37,10 +37,10 @@
             {
                 this.AddListViewHeaders(value.Select(x => x.ConnectionDetail.OrganizationFriendlyName).ToArray<string>());
 
-                var solutionsGroup = new ListViewGroup("Solutions:");
+                var solutionsGroup = new ListViewGroup(Constants.U_SOLUTIONS);
                 this.lvMatrix.Groups.Add(solutionsGroup);
 
-                var assembliesGroup = new ListViewGroup("Assemblies:");
+                var assembliesGroup = new ListViewGroup(Constants.U_ASSEMBLIES);
                 this.lvMatrix.Groups.Add(assembliesGroup);
 
                 foreach (var solution in value.First().Solutions)
