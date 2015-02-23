@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Windows.Forms;
     using System.Xml;
     using Cinteros.Xrm.VersionVerifier.Utils;
     using McTools.Xrm.Connection;
@@ -78,39 +79,60 @@
             this.Solutions = solutions.ToArray();
             this.Assemblies = assemblies.ToArray();
 
+            var errorCount = 0;
+
             foreach (XmlElement element in document.DocumentElement.ChildNodes)
             {
-                if (element.Name == "solutions")
+                if (element.Name == Constants.U_SOLUTIONS.ToLower())
                 {
                     foreach (XmlElement solution in element.ChildNodes)
                     {
-                        var item = new Solution
+                        try
                         {
-                            Version = new Version(solution.Attributes["version"].Value),
-                            UniqueName = solution.Attributes["unique-name"].Value,
-                            FriendlyName = solution.Attributes["friendly-name"].Value
-                        };
+                            var item = new Solution
+                            {
+                                Version = new Version(solution.Attributes["version"].Value),
+                                UniqueName = solution.Attributes["unique-name"].Value,
+                                FriendlyName = solution.Attributes["friendly-name"].Value
+                            };
 
-                        solutions.Add(item);
+                            solutions.Add(item);
+                        }
+                        catch (NullReferenceException)
+                        {
+                            errorCount++;
+                        }
                     }
 
                     this.Solutions = solutions.ToArray();
                 }
 
-                if (element.Name == "assemblies")
+                if (element.Name == Constants.U_ASSEMBLIES.ToLower())
                 {
                     foreach (XmlElement assembly in element.ChildNodes)
                     {
-                        var item = new PluginAssembly()
+                        try
                         {
-                            Version = new Version(assembly.Attributes["version"].Value),
-                            FriendlyName = assembly.Attributes["friendly-name"].Value
-                        };
+                            var item = new PluginAssembly()
+                            {
+                                Version = new Version(assembly.Attributes["version"].Value),
+                                FriendlyName = assembly.Attributes["friendly-name"].Value
+                            };
 
-                        assemblies.Add(item);
+                            assemblies.Add(item);
+                        }
+                        catch (NullReferenceException)
+                        {
+                            errorCount++;
+                        }
                     }
 
                     this.Assemblies = assemblies.ToArray();
+                }
+
+                if (errorCount != 0)
+                {
+                    MessageBox.Show(string.Format("Reference file was not fully loaded. \nNumber of elements failed: {0}", errorCount), "File import error"); 
                 }
             }
         }
