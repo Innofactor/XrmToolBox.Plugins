@@ -96,7 +96,6 @@
             this.chOrgName,
             this.chOrgService});
             this.lvOrganizations.FullRowSelect = true;
-            this.lvOrganizations.GridLines = true;
             this.lvOrganizations.Location = new System.Drawing.Point(6, 42);
             this.lvOrganizations.Name = "lvOrganizations";
             this.lvOrganizations.Size = new System.Drawing.Size(280, 309);
@@ -150,7 +149,6 @@
             this.chItemName,
             this.chItemVersion});
             this.lvSnapshot.FullRowSelect = true;
-            this.lvSnapshot.GridLines = true;
             this.lvSnapshot.Location = new System.Drawing.Point(6, 42);
             this.lvSnapshot.Name = "lvSnapshot";
             this.lvSnapshot.Size = new System.Drawing.Size(279, 309);

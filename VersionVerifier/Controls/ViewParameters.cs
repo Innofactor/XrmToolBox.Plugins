@@ -266,7 +266,10 @@
             if (e.ConnectionDetail != null && !string.IsNullOrEmpty(e.ConnectionDetail.OrganizationServiceUrl))
             {
                 this.RetrieveSnapshot((MainScreen)sender);
-                this.gbSnapshot.Text = e.ConnectionDetail.OrganizationFriendlyName;
+                if (e.ConnectionDetail != null)
+                {
+                    this.gbSnapshot.Text = e.ConnectionDetail.OrganizationFriendlyName;
+                }
             }
         }
 
@@ -301,7 +304,10 @@
 
                 this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
                 this.lvSnapshot_ItemSelectionChanged(this.lvSnapshot, null);
-                this.gbSnapshot.Text = parent.ConnectionDetail.OrganizationFriendlyName ;
+                if (parent.ConnectionDetail != null)
+                {
+                    this.gbSnapshot.Text = parent.ConnectionDetail.OrganizationFriendlyName;
+                }
             }
         }
 
