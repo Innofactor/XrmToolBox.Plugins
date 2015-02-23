@@ -1,6 +1,6 @@
 # Version Verifier for XrmToolBox
 
-This tool is a plugin to the [XrmToolbox](http://xrmtoolbox.codeplex.com/) by [Tanguy Touzard](https://www.codeplex.com/site/users/view/tanguy92).
+This tool is a plugin to the [XrmToolbox](http://www.xrmtoolbox.com/) by [Tanguy Touzard](https://github.com/MscrmTools).
 
 ### Background
 
