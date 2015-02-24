@@ -245,21 +245,21 @@
             save.ShowDialog();
         }
 
-        /// <summary>
-        /// Sends event that changes enabled status of the given button on plugin toolstrip
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="status"></param>
-        private void UpdateButton(string name, bool status)
-        {
-            if (status)
-            {
-                if (this.UpdateToolStrip != null)
-                {
-                    this.UpdateToolStrip(this, new UpdateToolStripEventArgs(name, status));
-                }
-            }
-        }
+        ///// <summary>
+        ///// Sends event that changes enabled status of the given button on plugin toolstrip
+        ///// </summary>
+        ///// <param name="name"></param>
+        ///// <param name="status"></param>
+        //private void UpdateButton(string name, bool status)
+        //{
+        //    if (status)
+        //    {
+        //        if (this.UpdateToolStrip != null)
+        //        {
+        //            this.UpdateToolStrip(this, new UpdateToolStripEventArgs(name, status));
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// Updates 'Select all' button, depending on currently checked items
