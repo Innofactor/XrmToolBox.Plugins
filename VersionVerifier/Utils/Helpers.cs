@@ -16,9 +16,9 @@
         {
             var query = new QueryExpression(Constants.E_PLUGIN_ASSEMBLY);
             query.Criteria = new FilterExpression();
-            query.Criteria.AddCondition(Constants.A_IS_HIDDEN, ConditionOperator.Equal, false);
+            query.Criteria.AddCondition(Constants.Crm.Attributes.A_IS_HIDDEN, ConditionOperator.Equal, false);
             query.ColumnSet = new ColumnSet(true);
-            query.ColumnSet = new ColumnSet(new string[] { Constants.A_NAME, Constants.A_SOLUTION_ID, Constants.A_VERSION });
+            query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.A_NAME, Constants.Crm.Attributes.A_SOLUTION_ID, Constants.Crm.Attributes.A_VERSION });
 
             return query;
         }
@@ -31,9 +31,9 @@
         {
             var query = new QueryExpression(Constants.E_SOLUTION);
             query.Criteria = new FilterExpression();
-            query.Criteria.AddCondition(Constants.A_IS_VISIBLE, ConditionOperator.Equal, true);
-            query.Criteria.AddCondition(Constants.A_UNIQUE_NAME, ConditionOperator.NotEqual, Constants.U_SOLUTION_DEFAULT);
-            query.ColumnSet = new ColumnSet(new string[] { Constants.A_UNIQUE_NAME, Constants.A_FRIENDLY_NAME, Constants.A_VERSION, Constants.A_IS_MANAGED });
+            query.Criteria.AddCondition(Constants.Crm.Attributes.A_IS_VISIBLE, ConditionOperator.Equal, true);
+            query.Criteria.AddCondition(Constants.Crm.Attributes.A_UNIQUE_NAME, ConditionOperator.NotEqual, Constants.U_SOLUTION_DEFAULT);
+            query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.A_UNIQUE_NAME, Constants.Crm.Attributes.A_FRIENDLY_NAME, Constants.Crm.Attributes.A_VERSION, Constants.Crm.Attributes.A_IS_MANAGED });
 
             return query;
         }
