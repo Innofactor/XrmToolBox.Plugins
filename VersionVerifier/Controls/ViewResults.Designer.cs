@@ -44,7 +44,7 @@
             this.gbCompareSolutions.Size = new System.Drawing.Size(597, 363);
             this.gbCompareSolutions.TabIndex = 0;
             this.gbCompareSolutions.TabStop = false;
-            this.gbCompareSolutions.Text = "Compare solutions";
+            this.gbCompareSolutions.Text = "Compare versions";
             // 
             // lvMatrix
             // 

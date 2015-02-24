@@ -52,7 +52,6 @@
                 var servers = value.GroupBy(x => x.ServerName).Select(x => new ListViewGroup(x.Key)).ToArray();
                 this.lvOrganizations.Groups.AddRange(servers);
 
-
                 foreach (var connection in value)
                 {
                     var item = Helpers.LoadItemConnection(connection);
