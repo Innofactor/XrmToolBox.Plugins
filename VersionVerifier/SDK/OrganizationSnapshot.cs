@@ -135,10 +135,10 @@
                     this.Assemblies = assemblies.ToArray();
                 }
 
-                if (errorCount != 0)
-                {
-                    MessageBox.Show(string.Format("Reference file was not fully loaded. \nNumber of elements failed: {0}", errorCount), "File import error");
-                }
+                //if (errorCount != 0)
+                //{
+                //    MessageBox.Show(string.Format("Reference file was not fully loaded. \nNumber of elements failed: {0}", errorCount), "File import error");
+                //}
             }
         }
 
