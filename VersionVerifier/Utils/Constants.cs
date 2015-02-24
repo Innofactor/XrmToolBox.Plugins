@@ -4,27 +4,12 @@
     {
         #region Internal Fields
 
-        /// <summary>
-        /// Name of toolstrip's Back button
-        /// </summary>
-        internal const string U_BACK_BUTTON = "tsbBack";
-
-        /// <summary>
-        /// Name of toolstrip's Compare button
-        /// </summary>
-        internal const string U_COMPARE_BUTTON = "tsbCompare";
-
         internal const int U_HEADER_MAINWIDTH = 200;
 
         /// <summary>
         /// Text for solution that is not available
         /// </summary>
         internal const string U_ITEM_NA = "N/A";
-
-        /// <summary>
-        /// Name of toolstrip's Save button
-        /// </summary>
-        internal const string U_SAVE_BUTTON = "tsbSave";
 
         /// <summary>
         /// Default solution unique name
@@ -78,6 +63,28 @@
         internal struct UI
         {
             #region Internal Structs
+
+            internal struct Buttons
+            {
+                #region Internal Fields
+
+                /// <summary>
+                /// Name of toolstrip's Back button
+                /// </summary>
+                internal const string BACK = "tsbBack";
+
+                /// <summary>
+                /// Name of toolstrip's Compare button
+                /// </summary>
+                internal const string COMPARE = "tsbCompare";
+
+                /// <summary>
+                /// Name of toolstrip's Save button
+                /// </summary>
+                internal const string SAVE = "tsbSave";
+
+                #endregion Internal Fields
+            }
 
             internal struct Labels
             {

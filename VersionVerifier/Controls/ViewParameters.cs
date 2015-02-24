@@ -102,8 +102,8 @@
         {
             if (this.UpdateToolStrip != null)
             {
-                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_SAVE_BUTTON, this.lvSnapshot.CheckedItems.Count > 0, tsbSave_Click));
-                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_COMPARE_BUTTON, this.lvSnapshot.CheckedItems.Count > 0 && this.lvOrganizations.CheckedItems.Count > 0));
+                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.UI.Buttons.SAVE, this.lvSnapshot.CheckedItems.Count > 0, tsbSave_Click));
+                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.UI.Buttons.COMPARE, this.lvSnapshot.CheckedItems.Count > 0 && this.lvOrganizations.CheckedItems.Count > 0));
             }
         }
 

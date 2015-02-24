@@ -135,11 +135,11 @@ namespace Cinteros.Xrm.VersionVerifier
             {
                 if (this.CurrentPage.GetType().Equals(typeof(ViewParameters)))
                 {
-                    this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_BACK_BUTTON, false));
+                    this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.UI.Buttons.BACK, false));
                 }
                 else
                 {
-                    this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_BACK_BUTTON, true));
+                    this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.UI.Buttons.BACK, true));
                 }
             }
         }
