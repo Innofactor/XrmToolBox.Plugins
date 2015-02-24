@@ -14,9 +14,9 @@
 
         public PluginAssembly(Entity entity)
         {
-            this.FriendlyName = (string)entity.Attributes[Constants.Crm.Attributes.A_NAME];
-            this.SolutionId = (Guid)entity.Attributes[Constants.Crm.Attributes.A_SOLUTION_ID];
-            this.Version = new Version((string)entity.Attributes[Constants.Crm.Attributes.A_VERSION]);
+            this.FriendlyName = (string)entity.Attributes[Constants.Crm.Attributes.NAME];
+            this.SolutionId = (Guid)entity.Attributes[Constants.Crm.Attributes.SOLUTION_ID];
+            this.Version = new Version((string)entity.Attributes[Constants.Crm.Attributes.VERSION]);
         }
 
         #endregion Public Constructors

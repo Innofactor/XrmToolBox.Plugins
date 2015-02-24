@@ -14,11 +14,11 @@
 
         public static QueryExpression CreateAssembliesQuery()
         {
-            var query = new QueryExpression(Constants.E_PLUGIN_ASSEMBLY);
+            var query = new QueryExpression(Constants.Crm.Entities.PLUGIN_ASSEMBLY);
             query.Criteria = new FilterExpression();
-            query.Criteria.AddCondition(Constants.Crm.Attributes.A_IS_HIDDEN, ConditionOperator.Equal, false);
+            query.Criteria.AddCondition(Constants.Crm.Attributes.IS_HIDDEN, ConditionOperator.Equal, false);
             query.ColumnSet = new ColumnSet(true);
-            query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.A_NAME, Constants.Crm.Attributes.A_SOLUTION_ID, Constants.Crm.Attributes.A_VERSION });
+            query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.NAME, Constants.Crm.Attributes.SOLUTION_ID, Constants.Crm.Attributes.VERSION });
 
             return query;
         }
@@ -29,11 +29,11 @@
         /// <returns></returns>
         public static QueryExpression CreateSolutionsQuery()
         {
-            var query = new QueryExpression(Constants.E_SOLUTION);
+            var query = new QueryExpression(Constants.Crm.Entities.SOLUTION);
             query.Criteria = new FilterExpression();
-            query.Criteria.AddCondition(Constants.Crm.Attributes.A_IS_VISIBLE, ConditionOperator.Equal, true);
-            query.Criteria.AddCondition(Constants.Crm.Attributes.A_UNIQUE_NAME, ConditionOperator.NotEqual, Constants.U_SOLUTION_DEFAULT);
-            query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.A_UNIQUE_NAME, Constants.Crm.Attributes.A_FRIENDLY_NAME, Constants.Crm.Attributes.A_VERSION, Constants.Crm.Attributes.A_IS_MANAGED });
+            query.Criteria.AddCondition(Constants.Crm.Attributes.IS_VISIBLE, ConditionOperator.Equal, true);
+            query.Criteria.AddCondition(Constants.Crm.Attributes.UNIQUE_NAME, ConditionOperator.NotEqual, Constants.U_SOLUTION_DEFAULT);
+            query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.UNIQUE_NAME, Constants.Crm.Attributes.FRIENDLY_NAME, Constants.Crm.Attributes.VERSION, Constants.Crm.Attributes.IS_MANAGED });
 
             return query;
         }

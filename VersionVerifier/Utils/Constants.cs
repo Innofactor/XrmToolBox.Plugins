@@ -8,27 +8,30 @@
         {
             internal struct Attributes
             {
-                internal const string A_FRIENDLY_NAME = "friendlyname";
-                internal const string A_IS_HIDDEN = "ishidden";
-                internal const string A_IS_MANAGED = "ismanaged";
-                internal const string A_IS_VISIBLE = "isvisible";
-                internal const string A_NAME = "name";
-                internal const string A_SOLUTION_ID = "solutionid";
-                internal const string A_UNIQUE_NAME = "uniquename";
-                internal const string A_VERSION = "version";
+                internal const string FRIENDLY_NAME = "friendlyname";
+                internal const string IS_HIDDEN = "ishidden";
+                internal const string IS_MANAGED = "ismanaged";
+                internal const string IS_VISIBLE = "isvisible";
+                internal const string NAME = "name";
+                internal const string SOLUTION_ID = "solutionid";
+                internal const string UNIQUE_NAME = "uniquename";
+                internal const string VERSION = "version";
+            }
+
+            internal struct Entities
+            {
+                /// <summary>
+                /// Name of the 'pluginassembly' entity
+                /// </summary>
+                internal const string PLUGIN_ASSEMBLY = "pluginassembly";
+
+                /// <summary>
+                /// Name of the 'solution' entity
+                /// </summary>
+                internal const string SOLUTION = "solution";
             }
         }
         
-        /// <summary>
-        /// Name of the 'pluginassembly' entity
-        /// </summary>
-        internal const string E_PLUGIN_ASSEMBLY = "pluginassembly";
-        
-        /// <summary>
-        /// Name of the 'solution' entity
-        /// </summary>
-        internal const string E_SOLUTION = "solution";
-
         /// <summary>
         /// Text for solutions group
         /// </summary>
