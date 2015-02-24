@@ -17,9 +17,30 @@
             this.ButtonStatus = buttonStatus;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateToolStripEventArgs"/> class.
+        /// </summary>
+        /// <param name="buttonName"></param>
+        /// <param name="buttonStatus"></param>
+        /// <param name="buttonClick"></param>
+        public UpdateToolStripEventArgs(string buttonName, bool buttonStatus, EventHandler buttonClick)
+            : this(buttonName, buttonStatus)
+        {
+            this.ButtonClick = buttonClick;
+        }
+
         #endregion Public Constructors
 
         #region Public Properties
+
+        /// <summary>
+        /// Gets handler that will be executed when button is clicked
+        /// </summary>
+        public EventHandler ButtonClick
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// Gets name of toolstrip button to change enabled flag

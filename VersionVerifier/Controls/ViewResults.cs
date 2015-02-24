@@ -1,6 +1,8 @@
 ﻿namespace Cinteros.Xrm.VersionVerifier.Controls
 {
+    using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
@@ -24,7 +26,7 @@
 
         #region Public Events
 
-        public event System.EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
+        public event EventHandler<UpdateToolStripEventArgs> UpdateToolStrip;
 
         #endregion Public Events
 
@@ -177,6 +179,23 @@
                 }
             }
             return cell;
+        }
+
+        private void FileOk(object sender, CancelEventArgs e)
+        {
+            if (!e.Cancel)
+            {
+                // this.Snapshot.ToXml().Save(((SaveFileDialog)sender).FileName);
+            }
+        }
+
+        private void tsbSave_Click(object sender, EventArgs e)
+        {
+            var save = new SaveFileDialog();
+            save.FileOk += this.FileOk;
+
+            save.FileName = "comparison-matrix.xml";
+            save.ShowDialog();
         }
 
         #endregion Private Methods

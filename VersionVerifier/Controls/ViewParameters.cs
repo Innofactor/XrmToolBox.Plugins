@@ -228,7 +228,7 @@
             //this.Reference = plugin.ConnectionDetail;
         }
 
-        private void save_FileOk(object sender, CancelEventArgs e)
+        private void FileOk(object sender, CancelEventArgs e)
         {
             if (!e.Cancel)
             {
@@ -239,7 +239,7 @@
         private void tsbSave_Click(object sender, EventArgs e)
         {
             var save = new SaveFileDialog();
-            save.FileOk += this.save_FileOk;
+            save.FileOk += this.FileOk;
 
             save.FileName = "reference-solutions.xml";
             save.ShowDialog();
