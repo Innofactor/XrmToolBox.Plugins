@@ -127,7 +127,6 @@
         private void AddListViewHeaders(string[] headers)
         {
             var header = new ColumnHeader();
-            header.Text = Constants.U_HEADER_MAINTEXT;
             header.Width = Constants.U_HEADER_MAINWIDTH;
             this.lvMatrix.Columns.Add(header);
 
