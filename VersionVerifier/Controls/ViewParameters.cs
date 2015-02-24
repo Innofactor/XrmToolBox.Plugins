@@ -12,6 +12,7 @@
 
     public partial class ViewParameters : UserControl, IUpdateToolStrip
     {
+
         #region Public Constructors
 
         /// <summary>
@@ -236,6 +237,52 @@
             }
         }
 
+        private void tsbSave_Click(object sender, EventArgs e)
+        {
+            var save = new SaveFileDialog();
+            save.FileOk += this.save_FileOk;
+
+            save.FileName = "reference-solutions.xml";
+            save.ShowDialog();
+        }
+
+        /// <summary>
+        /// Sends event that changes enabled status of the given button on plugin toolstrip
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="status"></param>
+        private void UpdateButton(string name, bool status)
+        {
+            if (status)
+            {
+                if (this.UpdateToolStrip != null)
+                {
+                    this.UpdateToolStrip(this, new UpdateToolStripEventArgs(name, status));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Updates 'Select all' button, depending on currently checked items
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="switcher"></param>
+        /// <param name="status"></param>
+        private void UpdateSwitcher(ListView list, CheckBox switcher, bool status)
+        {
+            if (!status)
+            {
+                switcher.Checked = false;
+            }
+            else
+            {
+                if (list.CheckedItems.Count == list.Items.Count)
+                {
+                    switcher.Checked = true;
+                }
+            }
+        }
+
         private void ViewParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
         {
             if (e.ConnectionDetail != null && !string.IsNullOrEmpty(e.ConnectionDetail.OrganizationServiceUrl))
@@ -282,52 +329,6 @@
                 if (parent.ConnectionDetail != null)
                 {
                     this.gbSnapshot.Text = parent.ConnectionDetail.OrganizationFriendlyName;
-                }
-            }
-        }
-
-        private void tsbSave_Click(object sender, EventArgs e)
-        {
-            var save = new SaveFileDialog();
-            save.FileOk += this.save_FileOk;
-
-            save.FileName = "reference-solutions.xml";
-            save.ShowDialog();
-        }
-
-        /// <summary>
-        /// Sends event that changes enabled status of the given button on plugin toolstrip
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="status"></param>
-        private void UpdateButton(string name, bool status)
-        {
-            if (status)
-            {
-                if (this.UpdateToolStrip != null)
-                {
-                    this.UpdateToolStrip(this, new UpdateToolStripEventArgs(name, status));
-                }
-            }
-        }
-
-        /// <summary>
-        /// Updates 'Select all' button, depending on currently checked items
-        /// </summary>
-        /// <param name="list"></param>
-        /// <param name="switcher"></param>
-        /// <param name="status"></param>
-        private void UpdateSwitcher(ListView list, CheckBox switcher, bool status)
-        {
-            if (!status)
-            {
-                switcher.Checked = false;
-            }
-            else
-            {
-                if (list.CheckedItems.Count == list.Items.Count)
-                {
-                    switcher.Checked = true;
                 }
             }
         }

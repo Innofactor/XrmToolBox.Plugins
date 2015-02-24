@@ -18,11 +18,6 @@
         /// <summary>
         /// Text for solutions group
         /// </summary>
-        public const string U_SOLUTIONS = "Solutions";
-
-        /// <summary>
-        /// Text for solutions group
-        /// </summary>
         public const string U_ASSEMBLIES = "Assemblies";
 
         /// <summary>
@@ -36,6 +31,7 @@
         public const string U_COMPARE_BUTTON = "tsbCompare";
 
         public const string U_HEADER_MAINTEXT = "";
+
         public const int U_HEADER_MAINWIDTH = 200;
 
         /// <summary>
@@ -52,6 +48,11 @@
         /// Default solution unique name
         /// </summary>
         public const string U_SOLUTION_DEFAULT = "Default";
+
+        /// <summary>
+        /// Text for solutions group
+        /// </summary>
+        public const string U_SOLUTIONS = "Solutions";
 
         #endregion Public Fields
     }

@@ -23,6 +23,12 @@
 
         #region Public Properties
 
+        public string FriendlyName
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Gets assembly's id
         /// </summary>
@@ -32,18 +38,6 @@
             private set;
         }
 
-        public string FriendlyName
-        {
-            get;
-            set;
-        }
-
-        public string UniqueName
-        {
-            get;
-            set;
-        }
-
         /// <summary>
         /// Gets solution's id
         /// </summary>
@@ -51,6 +45,12 @@
         {
             get;
             private set;
+        }
+
+        public string UniqueName
+        {
+            get;
+            set;
         }
 
         /// <summary>

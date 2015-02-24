@@ -9,7 +9,6 @@
 
     public partial class ViewResults : UserControl, IUpdateToolStrip
     {
-
         #region Public Constructors
 
         public ViewResults(OrganizationSnapshot[] matrix)
@@ -140,7 +139,7 @@
         /// <param name="reference"></param>
         /// <param name="current"></param>
         /// <returns></returns>
-        private ListViewItem.ListViewSubItem CreateCell<T>(List<T> reference, T current) 
+        private ListViewItem.ListViewSubItem CreateCell<T>(List<T> reference, T current)
             where T : IComparableEntity
         {
             var cell = new ListViewItem.ListViewSubItem();
@@ -181,6 +180,5 @@
         }
 
         #endregion Private Methods
-
     }
 }

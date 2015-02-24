@@ -4,15 +4,17 @@
 
     public interface IComparableEntity
     {
+        #region Public Properties
+
+        string FriendlyName
+        {
+            get;
+            set;
+        }
+
         Guid Id
         {
             get;
-        }
-        
-        string FriendlyName 
-        { 
-            get; 
-            set; 
         }
 
         string UniqueName
@@ -20,11 +22,13 @@
             get;
             set;
         }
-        
-        Version Version 
-        { 
-            get; 
-            set; 
+
+        Version Version
+        {
+            get;
+            set;
         }
+
+        #endregion Public Properties
     }
 }

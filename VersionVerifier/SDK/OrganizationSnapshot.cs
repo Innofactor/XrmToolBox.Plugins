@@ -28,8 +28,10 @@
         /// Initializes a new instance of the <see cref="OrganizationSnapshot"/> class.
         /// </summary>
         /// <param name="connectionDetail">Object holding connection details to given organization.</param>
-        /// <param name="reference">Instance of the <see cref="OrganizationSnapshot"/> class, serving as refenece. 
-        /// Only these solutions and assemblies will be included, that are already present in the reference.</param>
+        /// <param name="reference">
+        /// Instance of the <see cref="OrganizationSnapshot"/> class, serving as refenece. Only
+        /// these solutions and assemblies will be included, that are already present in the reference.
+        /// </param>
         public OrganizationSnapshot(ConnectionDetail connectionDetail, OrganizationSnapshot reference)
         {
             Solution[] solutions = null;
@@ -67,7 +69,10 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="OrganizationSnapshot"/> class.
         /// </summary>
-        /// <param name="fileName">Location of XML file from which instance of the <see cref="OrganizationSnapshot"/> class will be constructed.</param>
+        /// <param name="fileName">
+        /// Location of XML file from which instance of the <see cref="OrganizationSnapshot"/> class
+        /// will be constructed.
+        /// </param>
         public OrganizationSnapshot(string fileName)
         {
             var document = new XmlDocument();
@@ -132,7 +137,7 @@
 
                 if (errorCount != 0)
                 {
-                    MessageBox.Show(string.Format("Reference file was not fully loaded. \nNumber of elements failed: {0}", errorCount), "File import error"); 
+                    MessageBox.Show(string.Format("Reference file was not fully loaded. \nNumber of elements failed: {0}", errorCount), "File import error");
                 }
             }
         }
@@ -173,7 +178,8 @@
         #region Public Methods
 
         /// <summary>
-        /// Replaces text representation of <see cref="OrganizationSnapshot"/> class of name of organization it connected.
+        /// Replaces text representation of <see cref="OrganizationSnapshot"/> class of name of
+        /// organization it connected.
         /// </summary>
         /// <returns>Text representation of <see cref="OrganizationSnapshot"/> class.</returns>
         public override string ToString()
