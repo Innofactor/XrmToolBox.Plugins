@@ -102,7 +102,7 @@
         {
             if (this.UpdateToolStrip != null)
             {
-                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_SAVE_BUTTON, this.lvSnapshot.CheckedItems.Count > 0));
+                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_SAVE_BUTTON, this.lvSnapshot.CheckedItems.Count > 0, tsbSave_Click));
                 this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.U_COMPARE_BUTTON, this.lvSnapshot.CheckedItems.Count > 0 && this.lvOrganizations.CheckedItems.Count > 0));
             }
         }
@@ -208,15 +208,15 @@
         private void RetrieveSnapshot(MainScreen plugin)
         {
             plugin.WorkAsync(string.Format("Getting solutions information from '{0}'...", plugin.ConnectionDetail.OrganizationFriendlyName),
-                (a) => // Work To Do Asynchronously
+                (e) => // Work To Do Asynchronously
                 {
                     if (string.IsNullOrEmpty(plugin.ConnectionDetail.ServerName))
                     {
-                        a.Result = new OrganizationSnapshot(plugin.ConnectionDetail.OrganizationServiceUrl); //Helpers.LoadSolutionFile(plugin.ConnectionDetail.OrganizationServiceUrl);
+                        e.Result = new OrganizationSnapshot(plugin.ConnectionDetail.OrganizationServiceUrl); //Helpers.LoadSolutionFile(plugin.ConnectionDetail.OrganizationServiceUrl);
                     }
                     else
                     {
-                        a.Result = new OrganizationSnapshot(plugin.ConnectionDetail);
+                        e.Result = new OrganizationSnapshot(plugin.ConnectionDetail);
                     }
                 },
                 (a) =>  // Cleanup when work has completed
@@ -241,7 +241,7 @@
             var save = new SaveFileDialog();
             save.FileOk += this.FileOk;
 
-            save.FileName = "reference-solutions.xml";
+            save.FileName = "reference-snapshot.xml";
             save.ShowDialog();
         }
 
@@ -320,8 +320,6 @@
                     // All connections
                     this.Organizations = (new ConnectionManager().ConnectionsList.Connections.ToArray<ConnectionDetail>());
                 }
-
-                parent.AssignToolStripButtonHandler(Constants.U_SAVE_BUTTON, tsbSave_Click);
 
                 this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
                 this.lvSnapshot_ItemSelectionChanged(this.lvSnapshot, null);

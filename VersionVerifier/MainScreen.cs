@@ -191,6 +191,17 @@ namespace Cinteros.Xrm.VersionVerifier
                 if (button != null)
                 {
                     button.Enabled = e.ButtonStatus;
+
+                    if (e.ButtonClick != null)
+                    {
+                        if (this.toolStripHandlers.ContainsKey(e.ButtonName))
+                        {
+                            button.Click -= this.toolStripHandlers[e.ButtonName];
+                            this.toolStripHandlers.Remove(e.ButtonName);
+                        }
+                        button.Click += e.ButtonClick;
+                        this.toolStripHandlers.Add(e.ButtonName, e.ButtonClick);
+                    }
                 }
             }
         }

@@ -12,9 +12,8 @@
         /// <param name="buttonName"></param>
         /// <param name="buttonStatus"></param>
         public UpdateToolStripEventArgs(string buttonName, bool buttonStatus)
+            : this(buttonName, buttonStatus, null)
         {
-            this.ButtonName = buttonName;
-            this.ButtonStatus = buttonStatus;
         }
 
         /// <summary>
@@ -23,10 +22,24 @@
         /// <param name="buttonName"></param>
         /// <param name="buttonStatus"></param>
         /// <param name="buttonClick"></param>
-        public UpdateToolStripEventArgs(string buttonName, bool buttonStatus, EventHandler buttonClick)
-            : this(buttonName, buttonStatus)
+        public UpdateToolStripEventArgs(string buttonName, bool? buttonStatus, EventHandler buttonClick)
         {
+            this.ButtonName = buttonName;
+            if (buttonStatus != null)
+            {
+                this.ButtonStatus = (bool)buttonStatus;
+            }
             this.ButtonClick = buttonClick;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateToolStripEventArgs"/> class.
+        /// </summary>
+        /// <param name="buttonName"></param>
+        /// <param name="buttonClick"></param>
+        public UpdateToolStripEventArgs(string buttonName, EventHandler buttonClick)
+            : this(buttonName, null, buttonClick)
+        {
         }
 
         #endregion Public Constructors
