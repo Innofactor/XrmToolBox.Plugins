@@ -2,40 +2,7 @@
 {
     internal struct Constants
     {
-        #region internal Fields
-
-        internal struct Crm
-        {
-            internal struct Attributes
-            {
-                internal const string FRIENDLY_NAME = "friendlyname";
-                internal const string IS_HIDDEN = "ishidden";
-                internal const string IS_MANAGED = "ismanaged";
-                internal const string IS_VISIBLE = "isvisible";
-                internal const string NAME = "name";
-                internal const string SOLUTION_ID = "solutionid";
-                internal const string UNIQUE_NAME = "uniquename";
-                internal const string VERSION = "version";
-            }
-
-            internal struct Entities
-            {
-                /// <summary>
-                /// Name of the 'pluginassembly' entity
-                /// </summary>
-                internal const string PLUGIN_ASSEMBLY = "pluginassembly";
-
-                /// <summary>
-                /// Name of the 'solution' entity
-                /// </summary>
-                internal const string SOLUTION = "solution";
-            }
-        }
-        
-        /// <summary>
-        /// Text for solutions group
-        /// </summary>
-        internal const string U_ASSEMBLIES = "Assemblies";
+        #region Internal Fields
 
         /// <summary>
         /// Name of toolstrip's Back button
@@ -64,20 +31,87 @@
         /// </summary>
         internal const string U_SOLUTION_DEFAULT = "Default";
 
-        /// <summary>
-        /// Text for solutions group
-        /// </summary>
-        internal const string U_SOLUTIONS = "Solutions";
+        #endregion Internal Fields
+
+        #region Internal Structs
+
+        internal struct Crm
+        {
+            #region Internal Structs
+
+            internal struct Attributes
+            {
+                #region Internal Fields
+
+                internal const string FRIENDLY_NAME = "friendlyname";
+                internal const string IS_HIDDEN = "ishidden";
+                internal const string IS_MANAGED = "ismanaged";
+                internal const string IS_VISIBLE = "isvisible";
+                internal const string NAME = "name";
+                internal const string SOLUTION_ID = "solutionid";
+                internal const string UNIQUE_NAME = "uniquename";
+                internal const string VERSION = "version";
+
+                #endregion Internal Fields
+            }
+
+            internal struct Entities
+            {
+                #region Internal Fields
+
+                /// <summary>
+                /// Name of the 'pluginassembly' entity
+                /// </summary>
+                internal const string PLUGIN_ASSEMBLY = "pluginassembly";
+
+                /// <summary>
+                /// Name of the 'solution' entity
+                /// </summary>
+                internal const string SOLUTION = "solution";
+
+                #endregion Internal Fields
+            }
+
+            #endregion Internal Structs
+        }
+
+        internal struct UI
+        {
+            #region Internal Structs
+
+            internal struct Labels
+            {
+                #region Internal Fields
+
+                /// <summary>
+                /// Text for solutions group
+                /// </summary>
+                internal const string ASSEMBLIES = "Assemblies";
+
+                /// <summary>
+                /// Text for solutions group
+                /// </summary>
+                internal const string SOLUTIONS = "Solutions";
+
+                #endregion Internal Fields
+            }
+
+            #endregion Internal Structs
+        }
 
         internal struct Xml
         {
+            #region Internal Fields
+
             internal const string ASSEMBLIES = "assemblies";
-            internal const string SOLUTIONS = "solutions";
             internal const string FRIENDLY_NAME = "friendly-name";
+            internal const string SOLUTIONS = "solutions";
             internal const string UNIQUE_NAME = "unique-name";
             internal const string VERSION = "version";
+
+            #endregion Internal Fields
         }
 
-        #endregion internal Fields
+        #endregion Internal Structs
     }
 }

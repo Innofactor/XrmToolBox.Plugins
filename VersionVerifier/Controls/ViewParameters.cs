@@ -78,10 +78,10 @@
                 this.lvSnapshot.Items.Clear();
                 this.lvSnapshot.Tag = value;
 
-                var solutionsGroup = new ListViewGroup(Constants.U_SOLUTIONS);
+                var solutionsGroup = new ListViewGroup(Constants.UI.Labels.SOLUTIONS);
                 this.lvSnapshot.Groups.Add(solutionsGroup);
 
-                var assembliesGroup = new ListViewGroup(Constants.U_ASSEMBLIES);
+                var assembliesGroup = new ListViewGroup(Constants.UI.Labels.ASSEMBLIES);
                 this.lvSnapshot.Groups.Add(assembliesGroup);
 
                 Helpers.FillListView(value.Solutions, this.lvSnapshot, solutionsGroup);
