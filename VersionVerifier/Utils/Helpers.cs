@@ -14,6 +14,17 @@
     {
         #region Public Methods
 
+        public static QueryExpression CreateAssembliesQuery()
+        {
+            var query = new QueryExpression(Constants.Crm.Entities.PLUGIN_ASSEMBLY);
+            query.Criteria = new FilterExpression();
+            query.Criteria.AddCondition(Constants.Crm.Attributes.IS_HIDDEN, ConditionOperator.Equal, false);
+            query.ColumnSet = new ColumnSet(true);
+            query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.NAME, Constants.Crm.Attributes.SOLUTION_ID, Constants.Crm.Attributes.VERSION });
+
+            return query;
+        }
+
         /// <summary>
         /// Creates cell in resulting grid
         /// </summary>
@@ -58,17 +69,6 @@
                 }
             }
             return cell;
-        }
-
-        public static QueryExpression CreateAssembliesQuery()
-        {
-            var query = new QueryExpression(Constants.Crm.Entities.PLUGIN_ASSEMBLY);
-            query.Criteria = new FilterExpression();
-            query.Criteria.AddCondition(Constants.Crm.Attributes.IS_HIDDEN, ConditionOperator.Equal, false);
-            query.ColumnSet = new ColumnSet(true);
-            query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.NAME, Constants.Crm.Attributes.SOLUTION_ID, Constants.Crm.Attributes.VERSION });
-
-            return query;
         }
 
         /// <summary>
@@ -116,6 +116,18 @@
             return item;
         }
 
+        public static Solution[] LoadSolutionFile(string filename)
+        {
+            var document = new XmlDocument();
+            document.Load(filename);
+
+            return document.ToArray();
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
         private static string GetCredentials(ConnectionDetail connection)
         {
             if (string.IsNullOrEmpty(connection.UserName))
@@ -137,14 +149,6 @@
             }
         }
 
-        public static Solution[] LoadSolutionFile(string filename)
-        {
-            var document = new XmlDocument();
-            document.Load(filename);
-
-            return document.ToArray();
-        }
-
-        #endregion Public Methods
+        #endregion Private Methods
     }
 }

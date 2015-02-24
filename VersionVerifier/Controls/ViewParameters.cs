@@ -139,6 +139,14 @@
             this.JustifyToolStrip();
         }
 
+        private void FileOk(object sender, CancelEventArgs e)
+        {
+            if (!e.Cancel)
+            {
+                this.Snapshot.ToXml().Save(((SaveFileDialog)sender).FileName);
+            }
+        }
+
         /// <summary>
         /// Event handler capturing changes in organization selections
         /// </summary>
@@ -227,15 +235,6 @@
 
             //this.Reference = plugin.ConnectionDetail;
         }
-
-        private void FileOk(object sender, CancelEventArgs e)
-        {
-            if (!e.Cancel)
-            {
-                this.Snapshot.ToXml().Save(((SaveFileDialog)sender).FileName);
-            }
-        }
-
         private void tsbSave_Click(object sender, EventArgs e)
         {
             var save = new SaveFileDialog();
@@ -315,5 +314,6 @@
         }
 
         #endregion Private Methods
+
     }
 }

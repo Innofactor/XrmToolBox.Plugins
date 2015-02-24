@@ -44,15 +44,23 @@
             {
                 #region Internal Fields
 
+                #region Internal Fields
+
                 /// <summary>
                 /// Name of the 'pluginassembly' entity
                 /// </summary>
                 internal const string PLUGIN_ASSEMBLY = "pluginassembly";
 
+                #endregion Internal Fields
+
+                #region Internal Fields
+
                 /// <summary>
                 /// Name of the 'solution' entity
                 /// </summary>
                 internal const string SOLUTION = "solution";
+
+                #endregion Internal Fields
 
                 #endregion Internal Fields
             }
@@ -64,8 +72,12 @@
         {
             #region Internal Structs
 
+            #region Internal Structs
+
             internal struct Buttons
             {
+                #region Internal Fields
+
                 #region Internal Fields
 
                 /// <summary>
@@ -84,7 +96,11 @@
                 internal const string SAVE = "tsbSave";
 
                 #endregion Internal Fields
+
+                #endregion Internal Fields
             }
+
+            #endregion Internal Structs
 
             internal struct Labels
             {
@@ -110,10 +126,15 @@
         {
             #region Internal Fields
 
+            #region Internal Fields
+
             internal const string ASSEMBLIES = "assemblies";
             internal const string FRIENDLY_NAME = "friendly-name";
             internal const string SOLUTIONS = "solutions";
             internal const string UNIQUE_NAME = "unique-name";
+
+            #endregion Internal Fields
+
             internal const string VERSION = "version";
 
             #endregion Internal Fields

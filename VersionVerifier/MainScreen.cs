@@ -21,6 +21,7 @@ namespace Cinteros.Xrm.VersionVerifier
 
     public partial class MainScreen : PluginBase, IUpdateToolStrip, IGitHubPlugin
     {
+
         #region Private Fields
 
         private Control control;
@@ -301,5 +302,6 @@ namespace Cinteros.Xrm.VersionVerifier
         }
 
         #endregion Private Methods
+
     }
 }
