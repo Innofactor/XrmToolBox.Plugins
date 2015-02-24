@@ -1,5 +1,7 @@
 ﻿namespace Cinteros.Xrm.VersionVerifier.Utils
 {
+    using System.Security.Principal;
+    using System.Text;
     using System.Windows.Forms;
     using System.Xml;
     using Cinteros.Xrm.VersionVerifier.SDK;
@@ -57,13 +59,34 @@
         {
             var row = new string[] {
                 connection.OrganizationFriendlyName,
-                connection.ServerName,
+                Helpers.GetCredentials(connection),
             };
 
             var item = new ListViewItem(row);
             item.Tag = connection;
 
             return item;
+        }
+
+        private static string GetCredentials(ConnectionDetail connection)
+        {
+            if (string.IsNullOrEmpty(connection.UserName))
+            {
+                return WindowsIdentity.GetCurrent().Name;
+            }
+            else
+            {
+                var builder = new StringBuilder();
+
+                if (!string.IsNullOrEmpty(connection.UserDomain))
+                {
+                    builder.Append(connection.UserDomain);
+                    builder.Append("\\");
+                }
+                builder.Append(connection.UserName);
+
+                return builder.ToString();
+            }
         }
 
         public static Solution[] LoadSolutionFile(string filename)

@@ -33,7 +33,7 @@
             this.cbToggleOrganizations = new System.Windows.Forms.CheckBox();
             this.lvOrganizations = new System.Windows.Forms.ListView();
             this.chOrgName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chOrgService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chOrgCredentials = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbSnapshot = new System.Windows.Forms.GroupBox();
             this.cbToggleSolutions = new System.Windows.Forms.CheckBox();
             this.lvSnapshot = new System.Windows.Forms.ListView();
@@ -94,7 +94,7 @@
             this.lvOrganizations.CheckBoxes = true;
             this.lvOrganizations.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chOrgName,
-            this.chOrgService});
+            this.chOrgCredentials});
             this.lvOrganizations.FullRowSelect = true;
             this.lvOrganizations.Location = new System.Drawing.Point(6, 42);
             this.lvOrganizations.Name = "lvOrganizations";
@@ -110,10 +110,10 @@
             this.chOrgName.Text = "Organization";
             this.chOrgName.Width = 200;
             // 
-            // chOrgService
+            // chOrgCredentials
             // 
-            this.chOrgService.Text = "Server";
-            this.chOrgService.Width = 200;
+            this.chOrgCredentials.Text = "Credentials";
+            this.chOrgCredentials.Width = 200;
             // 
             // gbSnapshot
             // 
@@ -191,7 +191,7 @@
         private System.Windows.Forms.GroupBox gbOrganizations;
         private System.Windows.Forms.ListView lvOrganizations;
         private System.Windows.Forms.ColumnHeader chOrgName;
-        private System.Windows.Forms.ColumnHeader chOrgService;
+        private System.Windows.Forms.ColumnHeader chOrgCredentials;
         private System.Windows.Forms.GroupBox gbSnapshot;
         private System.Windows.Forms.CheckBox cbToggleOrganizations;
         private System.Windows.Forms.CheckBox cbToggleSolutions;
