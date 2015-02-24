@@ -34,9 +34,14 @@
 
         public OrganizationSnapshot[] Matrix
         {
+            get
+            {
+                return (OrganizationSnapshot[])this.lvMatrix.Tag;
+            }
             set
             {
                 this.AddListViewHeaders(value.Select(x => x.ConnectionDetail.OrganizationFriendlyName).ToArray<string>());
+                this.lvMatrix.Tag = value;
 
                 var solutionsGroup = new ListViewGroup(Constants.U_SOLUTIONS);
                 this.lvMatrix.Groups.Add(solutionsGroup);
@@ -185,7 +190,7 @@
         {
             if (!e.Cancel)
             {
-                // this.Snapshot.ToXml().Save(((SaveFileDialog)sender).FileName);
+                this.Matrix.ToXml().Save(((SaveFileDialog)sender).FileName);
             }
         }
 

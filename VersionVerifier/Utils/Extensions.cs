@@ -28,6 +28,11 @@
             return solutions.ToArray();
         }
 
+        public static XmlDocument ToXml(this OrganizationSnapshot[] matrix)
+        {
+            return null;
+        }
+
         #endregion Public Methods
     }
 }
