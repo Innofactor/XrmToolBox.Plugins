@@ -1,6 +1,6 @@
 ﻿namespace Cinteros.Xrm.VersionVerifier.Utils
 {
-    internal static class Constants
+    internal struct Constants
     {
         #region Public Fields
 
@@ -60,11 +60,14 @@
         /// </summary>
         public const string U_SOLUTIONS = "Solutions";
 
-        public const string X_ASSEMBLIES = "assemblies";
-        public const string X_SOLUTIONS = "solutions";
-        public const string X_FRIENDLY_NAME = "friendly-name";
-        public const string X_UNIQUE_NAME = "unique-name";
-        public const string X_VERSION = "version";
+        public struct Xml
+        {
+            public const string ASSEMBLIES = "assemblies";
+            public const string SOLUTIONS = "solutions";
+            public const string FRIENDLY_NAME = "friendly-name";
+            public const string UNIQUE_NAME = "unique-name";
+            public const string VERSION = "version";
+        }
 
         #endregion Public Fields
     }
