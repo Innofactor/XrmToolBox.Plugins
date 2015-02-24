@@ -1,5 +1,7 @@
 ﻿namespace Cinteros.Xrm.VersionVerifier.Utils
 {
+    using System.Collections.Generic;
+    using System.Drawing;
     using System.Security.Principal;
     using System.Text;
     using System.Windows.Forms;
@@ -11,6 +13,52 @@
     public static class Helpers
     {
         #region Public Methods
+
+        /// <summary>
+        /// Creates cell in resulting grid
+        /// </summary>
+        /// <param name="reference"></param>
+        /// <param name="current"></param>
+        /// <returns></returns>
+        public static ListViewItem.ListViewSubItem CreateCell<T>(List<T> reference, T current)
+            where T : IComparableEntity
+        {
+            var cell = new ListViewItem.ListViewSubItem();
+
+            // Reference solution
+            if (reference == null)
+            {
+                cell.Text = current.Version.ToString();
+                cell.BackColor = Color.White;
+                cell.Tag = "Reference version";
+            }
+            else
+            {
+                // Solution is not present on target system
+                if (current == null)
+                {
+                    cell.Text = Constants.U_ITEM_NA;
+                    cell.ForeColor = Color.LightGray;
+                    cell.BackColor = Color.White;
+                    cell.Tag = "Item is unavailable on the target organization";
+                }
+                else
+                {
+                    cell.Text = current.Version.ToString();
+                    // Solutioin is the same on both systems
+                    if (reference.Exists(x => x.Version == current.Version))
+                    {
+                        cell.BackColor = Color.YellowGreen;
+                        cell.Tag = "Item is unavailable on the target organization";
+                    }
+                    else
+                    {
+                        cell.BackColor = Color.Orange;
+                    }
+                }
+            }
+            return cell;
+        }
 
         public static QueryExpression CreateAssembliesQuery()
         {

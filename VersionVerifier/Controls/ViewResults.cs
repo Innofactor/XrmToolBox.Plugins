@@ -65,11 +65,11 @@
                         if (i++ == 0)
                         {
                             reference.Add(current);
-                            row.SubItems.Add(this.CreateCell(null, current));
+                            row.SubItems.Add(Helpers.CreateCell(null, current));
                         }
                         else
                         {
-                            row.SubItems.Add(this.CreateCell(reference, current));
+                            row.SubItems.Add(Helpers.CreateCell(reference, current));
                         }
                     }
                     this.lvMatrix.Items.Add(row);
@@ -91,11 +91,11 @@
                         if (i++ == 0)
                         {
                             reference.Add(current);
-                            row.SubItems.Add(this.CreateCell(null, current));
+                            row.SubItems.Add(Helpers.CreateCell(null, current));
                         }
                         else
                         {
-                            row.SubItems.Add(this.CreateCell(reference, current));
+                            row.SubItems.Add(Helpers.CreateCell(reference, current));
                         }
                     }
                     this.lvMatrix.Items.Add(row);
@@ -137,52 +137,6 @@
                 header.Width = 150;
                 this.lvMatrix.Columns.Add(header);
             }
-        }
-
-        /// <summary>
-        /// Creates cell in resulting grid
-        /// </summary>
-        /// <param name="reference"></param>
-        /// <param name="current"></param>
-        /// <returns></returns>
-        private ListViewItem.ListViewSubItem CreateCell<T>(List<T> reference, T current)
-            where T : IComparableEntity
-        {
-            var cell = new ListViewItem.ListViewSubItem();
-
-            // Reference solution
-            if (reference == null)
-            {
-                cell.Text = current.Version.ToString();
-                cell.BackColor = Color.White;
-                cell.Tag = "Reference version";
-            }
-            else
-            {
-                // Solution is not present on target system
-                if (current == null)
-                {
-                    cell.Text = Constants.U_ITEM_NA;
-                    cell.ForeColor = Color.LightGray;
-                    cell.BackColor = Color.White;
-                    cell.Tag = "Item is unavailable on the target organization";
-                }
-                else
-                {
-                    cell.Text = current.Version.ToString();
-                    // Solutioin is the same on both systems
-                    if (reference.Exists(x => x.Version == current.Version))
-                    {
-                        cell.BackColor = Color.YellowGreen;
-                        cell.Tag = "Item is unavailable on the target organization";
-                    }
-                    else
-                    {
-                        cell.BackColor = Color.Orange;
-                    }
-                }
-            }
-            return cell;
         }
 
         private void FileOk(object sender, CancelEventArgs e)
