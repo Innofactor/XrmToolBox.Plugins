@@ -84,33 +84,8 @@
                 var assembliesGroup = new ListViewGroup(Constants.U_ASSEMBLIES);
                 this.lvSnapshot.Groups.Add(assembliesGroup);
 
-                foreach (var solution in value.Solutions)
-                {
-                    var row = new string[] {
-                        solution.FriendlyName,
-                        solution.Version.ToString(),
-                    };
-
-                    var item = new ListViewItem(row);
-                    item.Group = solutionsGroup;
-                    item.Tag = solution;
-
-                    this.lvSnapshot.Items.Add(item);
-                }
-
-                foreach (var assembly in value.Assemblies)
-                {
-                    var row = new string[] {
-                        assembly.FriendlyName,
-                        assembly.Version.ToString(),
-                    };
-
-                    var item = new ListViewItem(row);
-                    item.Group = assembliesGroup;
-                    item.Tag = assembly;
-
-                    this.lvSnapshot.Items.Add(item);
-                }
+                Helpers.FillListView(value.Solutions, this.lvSnapshot, solutionsGroup);
+                Helpers.FillListView(value.Assemblies, this.lvSnapshot, assembliesGroup);
 
                 this.lvSnapshot.ItemChecked += this.lvSnapshot_ItemChecked;
             }

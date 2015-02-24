@@ -56,7 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SDK\IComperable.cs" />
+    <Compile Include="SDK\IComparableEntity.cs" />
     <Compile Include="Utils\IUpdateToolStrip.cs" />
     <Compile Include="SDK\OrganizationSnapshot.cs" />
     <Compile Include="SDK\PluginAssembly.cs" />

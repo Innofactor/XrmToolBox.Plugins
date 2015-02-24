@@ -35,7 +35,7 @@
         /// </summary>
         public const string U_COMPARE_BUTTON = "tsbCompare";
 
-        public const string U_HEADER_MAINTEXT = "Item / Organization";
+        public const string U_HEADER_MAINTEXT = "";
         public const int U_HEADER_MAINWIDTH = 200;
 
         /// <summary>

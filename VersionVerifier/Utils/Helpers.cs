@@ -36,6 +36,23 @@
             return query;
         }
 
+        public static void FillListView<T>(T[] sourceItems, ListView listView, ListViewGroup listViewGroup) where T : IComparableEntity
+        {
+            foreach (var sourceItem in sourceItems)
+            {
+                var row = new string[] {
+                        sourceItem.FriendlyName,
+                        sourceItem.Version.ToString(),
+                    };
+
+                var item = new ListViewItem(row);
+                item.Group = listViewGroup;
+                item.Tag = sourceItem;
+
+                listView.Items.Add(item);
+            }
+        }
+
         public static ListViewItem LoadItemConnection(ConnectionDetail connection)
         {
             var row = new string[] {

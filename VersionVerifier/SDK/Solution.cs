@@ -4,7 +4,7 @@
     using Cinteros.Xrm.VersionVerifier.Utils;
     using Microsoft.Xrm.Sdk;
 
-    public class Solution : IComperable
+    public class Solution : IComparableEntity
     {
         #region Public Constructors
 

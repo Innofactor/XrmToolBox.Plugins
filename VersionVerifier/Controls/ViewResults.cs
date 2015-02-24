@@ -141,7 +141,7 @@
         /// <param name="current"></param>
         /// <returns></returns>
         private ListViewItem.ListViewSubItem CreateCell<T>(List<T> reference, T current) 
-            where T : IComperable
+            where T : IComparableEntity
         {
             var cell = new ListViewItem.ListViewSubItem();
 
