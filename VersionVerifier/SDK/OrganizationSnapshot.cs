@@ -88,7 +88,7 @@
 
             foreach (XmlElement element in document.DocumentElement.ChildNodes)
             {
-                if (element.Name == Constants.U_SOLUTIONS.ToLower())
+                if (element.Name == Constants.X_SOLUTIONS)
                 {
                     foreach (XmlElement solution in element.ChildNodes)
                     {
@@ -96,9 +96,9 @@
                         {
                             var item = new Solution
                             {
-                                Version = new Version(solution.Attributes["version"].Value),
-                                UniqueName = solution.Attributes["unique-name"].Value,
-                                FriendlyName = solution.Attributes["friendly-name"].Value
+                                Version = new Version(solution.Attributes[Constants.X_VERSION].Value),
+                                UniqueName = solution.Attributes[Constants.X_UNIQUE_NAME].Value,
+                                FriendlyName = solution.Attributes[Constants.X_FRIENDLY_NAME].Value
                             };
 
                             solutions.Add(item);
@@ -112,7 +112,7 @@
                     this.Solutions = solutions.ToArray();
                 }
 
-                if (element.Name == Constants.U_ASSEMBLIES.ToLower())
+                if (element.Name == Constants.X_ASSEMBLIES)
                 {
                     foreach (XmlElement assembly in element.ChildNodes)
                     {
@@ -120,8 +120,8 @@
                         {
                             var item = new PluginAssembly()
                             {
-                                Version = new Version(assembly.Attributes["version"].Value),
-                                FriendlyName = assembly.Attributes["friendly-name"].Value
+                                Version = new Version(assembly.Attributes[Constants.X_VERSION].Value),
+                                FriendlyName = assembly.Attributes[Constants.X_FRIENDLY_NAME].Value
                             };
 
                             assemblies.Add(item);
@@ -207,40 +207,40 @@
             XmlElement element;
             XmlAttribute attribute;
 
-            var solutions = document.CreateElement("solutions");
+            var solutions = document.CreateElement(Constants.X_SOLUTIONS);
             root.AppendChild(solutions);
 
             foreach (var solution in this.Solutions)
             {
                 element = document.CreateElement("solution");
 
-                attribute = document.CreateAttribute("unique-name");
+                attribute = document.CreateAttribute(Constants.X_UNIQUE_NAME);
                 attribute.Value = solution.UniqueName;
                 element.Attributes.Append(attribute);
 
-                attribute = document.CreateAttribute("friendly-name");
+                attribute = document.CreateAttribute(Constants.X_FRIENDLY_NAME);
                 attribute.Value = solution.FriendlyName;
                 element.Attributes.Append(attribute);
 
-                attribute = document.CreateAttribute("version");
+                attribute = document.CreateAttribute(Constants.X_VERSION);
                 attribute.Value = solution.Version.ToString();
                 element.Attributes.Append(attribute);
 
                 solutions.AppendChild(element);
             }
 
-            var assemblies = document.CreateElement("assemblies");
+            var assemblies = document.CreateElement(Constants.X_ASSEMBLIES);
             root.AppendChild(assemblies);
 
             foreach (var assembly in this.Assemblies)
             {
                 element = document.CreateElement("assembly");
 
-                attribute = document.CreateAttribute("friendly-name");
+                attribute = document.CreateAttribute(Constants.X_FRIENDLY_NAME);
                 attribute.Value = assembly.FriendlyName;
                 element.Attributes.Append(attribute);
 
-                attribute = document.CreateAttribute("version");
+                attribute = document.CreateAttribute(Constants.X_VERSION);
                 attribute.Value = assembly.Version.ToString();
                 element.Attributes.Append(attribute);
 

@@ -12,7 +12,15 @@
         public const string A_SOLUTION_ID = "solutionid";
         public const string A_UNIQUE_NAME = "uniquename";
         public const string A_VERSION = "version";
+        
+        /// <summary>
+        /// Name of the 'pluginassembly' entity
+        /// </summary>
         public const string E_PLUGIN_ASSEMBLY = "pluginassembly";
+        
+        /// <summary>
+        /// Name of the 'solution' entity
+        /// </summary>
         public const string E_SOLUTION = "solution";
 
         /// <summary>
@@ -51,6 +59,12 @@
         /// Text for solutions group
         /// </summary>
         public const string U_SOLUTIONS = "Solutions";
+
+        public const string X_ASSEMBLIES = "assemblies";
+        public const string X_SOLUTIONS = "solutions";
+        public const string X_FRIENDLY_NAME = "friendly-name";
+        public const string X_UNIQUE_NAME = "unique-name";
+        public const string X_VERSION = "version";
 
         #endregion Public Fields
     }
