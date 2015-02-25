@@ -83,8 +83,6 @@
             this.Solutions = solutions.ToArray();
             this.Assemblies = assemblies.ToArray();
 
-            var errorCount = 0;
-
             foreach (XmlElement element in document.DocumentElement.ChildNodes)
             {
                 if (element.Name == Constants.Xml.SOLUTIONS)
@@ -104,7 +102,7 @@
                         }
                         catch (NullReferenceException)
                         {
-                            errorCount++;
+                            // Hiding import errors
                         }
                     }
 
@@ -120,24 +118,20 @@
                             var item = new PluginAssembly()
                             {
                                 Version = new Version(assembly.Attributes[Constants.Xml.VERSION].Value),
-                                FriendlyName = assembly.Attributes[Constants.Xml.FRIENDLY_NAME].Value
+                                FriendlyName = assembly.Attributes[Constants.Xml.FRIENDLY_NAME].Value,
+                                UniqueName = assembly.Attributes[Constants.Xml.UNIQUE_NAME].Value
                             };
 
                             assemblies.Add(item);
                         }
                         catch (NullReferenceException)
                         {
-                            errorCount++;
+                            // Hiding import errors
                         }
                     }
 
                     this.Assemblies = assemblies.ToArray();
                 }
-
-                //if (errorCount != 0)
-                //{
-                //    MessageBox.Show(string.Format("Reference file was not fully loaded. \nNumber of elements failed: {0}", errorCount), "File import error");
-                //}
             }
         }
 
