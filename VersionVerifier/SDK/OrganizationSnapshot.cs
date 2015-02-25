@@ -77,62 +77,18 @@
             var document = new XmlDocument();
             document.Load(fileName);
 
-            var solutions = new List<Solution>();
-            var assemblies = new List<PluginAssembly>();
+            this.Load(document);
+        }
 
-            this.Solutions = solutions.ToArray();
-            this.Assemblies = assemblies.ToArray();
-
-            foreach (XmlElement element in document.DocumentElement.ChildNodes)
-            {
-                if (element.Name == Constants.Xml.SOLUTIONS)
-                {
-                    foreach (XmlElement solution in element.ChildNodes)
-                    {
-                        try
-                        {
-                            var item = new Solution
-                            {
-                                Version = new Version(solution.Attributes[Constants.Xml.VERSION].Value),
-                                UniqueName = solution.Attributes[Constants.Xml.UNIQUE_NAME].Value,
-                                FriendlyName = solution.Attributes[Constants.Xml.FRIENDLY_NAME].Value
-                            };
-
-                            solutions.Add(item);
-                        }
-                        catch (NullReferenceException)
-                        {
-                            // Hiding import errors
-                        }
-                    }
-
-                    this.Solutions = solutions.ToArray();
-                }
-
-                if (element.Name == Constants.Xml.ASSEMBLIES)
-                {
-                    foreach (XmlElement assembly in element.ChildNodes)
-                    {
-                        try
-                        {
-                            var item = new PluginAssembly()
-                            {
-                                Version = new Version(assembly.Attributes[Constants.Xml.VERSION].Value),
-                                FriendlyName = assembly.Attributes[Constants.Xml.FRIENDLY_NAME].Value,
-                                UniqueName = assembly.Attributes[Constants.Xml.UNIQUE_NAME].Value
-                            };
-
-                            assemblies.Add(item);
-                        }
-                        catch (NullReferenceException)
-                        {
-                            // Hiding import errors
-                        }
-                    }
-
-                    this.Assemblies = assemblies.ToArray();
-                }
-            }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrganizationSnapshot"/> class.
+        /// </summary>
+        /// <param name="document">
+        /// XML document from which instance of the <see cref="OrganizationSnapshot"/> class will be constructed.
+        /// </param>
+        public OrganizationSnapshot(XmlDocument document)
+        {
+            this.Load(document);
         }
 
         #endregion Public Constructors
@@ -244,5 +200,69 @@
         }
 
         #endregion Public Methods
+
+        #region Private Methods
+
+        private void Load(XmlDocument document)
+        {
+            var solutions = new List<Solution>();
+            var assemblies = new List<PluginAssembly>();
+
+            this.Solutions = solutions.ToArray();
+            this.Assemblies = assemblies.ToArray();
+
+            foreach (XmlElement element in document.DocumentElement.ChildNodes)
+            {
+                if (element.Name == Constants.Xml.SOLUTIONS)
+                {
+                    foreach (XmlElement solution in element.ChildNodes)
+                    {
+                        try
+                        {
+                            var item = new Solution
+                            {
+                                Version = new Version(solution.Attributes[Constants.Xml.VERSION].Value),
+                                UniqueName = solution.Attributes[Constants.Xml.UNIQUE_NAME].Value,
+                                FriendlyName = solution.Attributes[Constants.Xml.FRIENDLY_NAME].Value
+                            };
+
+                            solutions.Add(item);
+                        }
+                        catch (NullReferenceException)
+                        {
+                            // Hiding import errors
+                        }
+                    }
+
+                    this.Solutions = solutions.ToArray();
+                }
+
+                if (element.Name == Constants.Xml.ASSEMBLIES)
+                {
+                    foreach (XmlElement assembly in element.ChildNodes)
+                    {
+                        try
+                        {
+                            var item = new PluginAssembly()
+                            {
+                                Version = new Version(assembly.Attributes[Constants.Xml.VERSION].Value),
+                                FriendlyName = assembly.Attributes[Constants.Xml.FRIENDLY_NAME].Value,
+                                UniqueName = assembly.Attributes[Constants.Xml.UNIQUE_NAME].Value
+                            };
+
+                            assemblies.Add(item);
+                        }
+                        catch (NullReferenceException)
+                        {
+                            // Hiding import errors
+                        }
+                    }
+
+                    this.Assemblies = assemblies.ToArray();
+                }
+            }
+        }
+
+        #endregion Private Methods
     }
 }
