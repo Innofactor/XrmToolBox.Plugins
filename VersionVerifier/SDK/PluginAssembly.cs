@@ -35,12 +35,18 @@
 
         #region Public Properties
 
+        /// <summary>
+        /// Gets or sets assembly's friendly name
+        /// </summary>
         public string FriendlyName
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets assembly's Qualified Name
+        /// </summary>
         public string UniqueName
         {
             get;

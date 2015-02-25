@@ -45,7 +45,7 @@
 
             entities = organizationService.RetrieveMultiple(Helpers.CreateAssembliesQuery()).Entities;
             assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
-            assemblies = assemblies.Where(x => reference.Assemblies.Where(y => y.FriendlyName == x.FriendlyName).Count() > 0).ToArray<PluginAssembly>();
+            assemblies = assemblies.Where(x => reference.Assemblies.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<PluginAssembly>();
 
             this.ConnectionDetail = connectionDetail;
             this.Solutions = solutions;
@@ -161,7 +161,7 @@
 
             foreach (var solution in this.Solutions)
             {
-                element = document.CreateElement("solution");
+                element = document.CreateElement(Constants.Xml.SOLUTION);
 
                 attribute = document.CreateAttribute(Constants.Xml.UNIQUE_NAME);
                 attribute.Value = solution.UniqueName;
@@ -183,7 +183,7 @@
 
             foreach (var assembly in this.Assemblies)
             {
-                element = document.CreateElement("assembly");
+                element = document.CreateElement(Constants.Xml.ASSEMBLY);
 
                 attribute = document.CreateAttribute(Constants.Xml.FRIENDLY_NAME);
                 attribute.Value = assembly.FriendlyName;

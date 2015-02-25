@@ -146,8 +146,10 @@
             #region Internal Fields
 
             internal const string ASSEMBLIES = "assemblies";
+            internal const string ASSEMBLY = "assembly";
             internal const string FRIENDLY_NAME = "friendly-name";
             internal const string SOLUTIONS = "solutions";
+            internal const string SOLUTION = "solution";
             internal const string UNIQUE_NAME = "unique-name";
             internal const string VERSION = "version";
 
