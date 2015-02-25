@@ -37,16 +37,16 @@
             {
                 #region Internal Fields
 
+                internal const string CULTURE = "culture";
                 internal const string FRIENDLY_NAME = "friendlyname";
                 internal const string IS_HIDDEN = "ishidden";
                 internal const string IS_MANAGED = "ismanaged";
                 internal const string IS_VISIBLE = "isvisible";
                 internal const string NAME = "name";
+                internal const string PUBLIC_KEY_TOKEN = "publickeytoken";
                 internal const string SOLUTION_ID = "solutionid";
                 internal const string UNIQUE_NAME = "uniquename";
                 internal const string VERSION = "version";
-                internal const string CULTURE = "culture";
-                internal const string PUBLIC_KEY_TOKEN = "publickeytoken";
 
                 #endregion Internal Fields
             }
@@ -148,8 +148,8 @@
             internal const string ASSEMBLIES = "assemblies";
             internal const string ASSEMBLY = "assembly";
             internal const string FRIENDLY_NAME = "friendly-name";
-            internal const string SOLUTIONS = "solutions";
             internal const string SOLUTION = "solution";
+            internal const string SOLUTIONS = "solutions";
             internal const string UNIQUE_NAME = "unique-name";
             internal const string VERSION = "version";
 

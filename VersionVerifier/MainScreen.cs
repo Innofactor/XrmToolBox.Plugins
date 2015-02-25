@@ -109,8 +109,6 @@ namespace Cinteros.Xrm.VersionVerifier
 
         #endregion Public Properties
 
-        #region Public Methods
-
         //public void AssignToolStripButtonHandler(string name, EventHandler handler)
         //{
         //    var button = this.GetToolStipButton(name);
@@ -126,6 +124,8 @@ namespace Cinteros.Xrm.VersionVerifier
         //        this.toolStripHandlers.Add(name, handler);
         //    }
         //}
+
+        #region Public Methods
 
         /// <summary>
         /// Enables or disables `back` button depending on the situation
