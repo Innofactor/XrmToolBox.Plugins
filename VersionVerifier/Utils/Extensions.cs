@@ -17,9 +17,9 @@
             {
                 var solution = new Solution
                 {
-                    Version = new Version(element.Attributes["version"].Value),
-                    UniqueName = element.Attributes["unique-name"].Value,
-                    FriendlyName = element.Attributes["unique-name"].Value
+                    Version = new Version(element.Attributes[Constants.Xml.VERSION].Value),
+                    UniqueName = element.Attributes[Constants.Xml.UNIQUE_NAME].Value,
+                    FriendlyName = element.Attributes[Constants.Xml.FRIENDLY_NAME].Value
                 };
 
                 solutions.Add(solution);

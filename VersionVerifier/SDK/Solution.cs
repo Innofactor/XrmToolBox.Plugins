@@ -21,7 +21,6 @@
         /// <param name="entity">Entity from which solution object is initialized</param>
         public Solution(Entity entity)
         {
-            this.Id = (Guid)entity.Attributes[Constants.Crm.Attributes.SOLUTION_ID];
             this.Version = new Version((string)entity.Attributes[Constants.Crm.Attributes.VERSION]);
             this.UniqueName = (string)entity.Attributes[Constants.Crm.Attributes.UNIQUE_NAME];
             this.FriendlyName = (string)entity.Attributes[Constants.Crm.Attributes.FRIENDLY_NAME];
@@ -39,15 +38,6 @@
         {
             get;
             set;
-        }
-
-        /// <summary>
-        /// Gets solution's id
-        /// </summary>
-        public Guid Id
-        {
-            get;
-            private set;
         }
 
         /// <summary>

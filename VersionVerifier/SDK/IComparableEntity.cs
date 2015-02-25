@@ -12,11 +12,6 @@
             set;
         }
 
-        Guid Id
-        {
-            get;
-        }
-
         string UniqueName
         {
             get;

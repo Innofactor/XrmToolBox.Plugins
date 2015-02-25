@@ -45,6 +45,7 @@
                 internal const string SOLUTION_ID = "solutionid";
                 internal const string UNIQUE_NAME = "uniquename";
                 internal const string VERSION = "version";
+                internal const string PLUGIN_ASSEMBLY_UNIQUE_ID = "pluginassemblyidunique";
 
                 #endregion Internal Fields
             }

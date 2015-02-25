@@ -15,7 +15,6 @@
         public PluginAssembly(Entity entity)
         {
             this.FriendlyName = (string)entity.Attributes[Constants.Crm.Attributes.NAME];
-            this.SolutionId = (Guid)entity.Attributes[Constants.Crm.Attributes.SOLUTION_ID];
             this.Version = new Version((string)entity.Attributes[Constants.Crm.Attributes.VERSION]);
         }
 
@@ -27,24 +26,6 @@
         {
             get;
             set;
-        }
-
-        /// <summary>
-        /// Gets assembly's id
-        /// </summary>
-        public Guid Id
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets solution's id
-        /// </summary>
-        public Guid SolutionId
-        {
-            get;
-            private set;
         }
 
         public string UniqueName
