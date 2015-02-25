@@ -19,8 +19,7 @@
             var query = new QueryExpression(Constants.Crm.Entities.PLUGIN_ASSEMBLY);
             query.Criteria = new FilterExpression();
             query.Criteria.AddCondition(Constants.Crm.Attributes.IS_HIDDEN, ConditionOperator.Equal, false);
-            query.ColumnSet = new ColumnSet(true);
-            // query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.NAME, Constants.Crm.Attributes.VERSION });
+            query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.NAME, Constants.Crm.Attributes.VERSION, Constants.Crm.Attributes.CULTURE, Constants.Crm.Attributes.PUBLIC_KEY_TOKEN });
 
             return query;
         }
@@ -81,8 +80,7 @@
             query.Criteria = new FilterExpression();
             query.Criteria.AddCondition(Constants.Crm.Attributes.IS_VISIBLE, ConditionOperator.Equal, true);
             query.Criteria.AddCondition(Constants.Crm.Attributes.UNIQUE_NAME, ConditionOperator.NotEqual, Constants.U_SOLUTION_DEFAULT);
-            query.ColumnSet = new ColumnSet(true);
-            // query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.UNIQUE_NAME, Constants.Crm.Attributes.FRIENDLY_NAME, Constants.Crm.Attributes.VERSION, Constants.Crm.Attributes.IS_MANAGED });
+            query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.UNIQUE_NAME, Constants.Crm.Attributes.FRIENDLY_NAME, Constants.Crm.Attributes.VERSION, Constants.Crm.Attributes.IS_MANAGED });
 
             return query;
         }
