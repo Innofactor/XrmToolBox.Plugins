@@ -232,8 +232,6 @@
                     this.Snapshot = (OrganizationSnapshot)a.Result;
                 }
             );
-
-            //this.Reference = plugin.ConnectionDetail;
         }
         private void tsbSave_Click(object sender, EventArgs e)
         {

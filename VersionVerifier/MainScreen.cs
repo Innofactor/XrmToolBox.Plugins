@@ -92,7 +92,7 @@ namespace Cinteros.Xrm.VersionVerifier
         {
             get
             {
-                return "SolutionVerifier";
+                return "VersionVerifier";
             }
         }
 
@@ -111,21 +111,21 @@ namespace Cinteros.Xrm.VersionVerifier
 
         #region Public Methods
 
-        public void AssignToolStripButtonHandler(string name, EventHandler handler)
-        {
-            var button = this.GetToolStipButton(name);
+        //public void AssignToolStripButtonHandler(string name, EventHandler handler)
+        //{
+        //    var button = this.GetToolStipButton(name);
 
-            if (button != null)
-            {
-                if (this.toolStripHandlers.ContainsKey(name))
-                {
-                    button.Click -= this.toolStripHandlers[name];
-                    this.toolStripHandlers.Remove(name);
-                }
-                button.Click += handler;
-                this.toolStripHandlers.Add(name, handler);
-            }
-        }
+        //    if (button != null)
+        //    {
+        //        if (this.toolStripHandlers.ContainsKey(name))
+        //        {
+        //            button.Click -= this.toolStripHandlers[name];
+        //            this.toolStripHandlers.Remove(name);
+        //        }
+        //        button.Click += handler;
+        //        this.toolStripHandlers.Add(name, handler);
+        //    }
+        //}
 
         /// <summary>
         /// Enables or disables `back` button depending on the situation
@@ -172,7 +172,7 @@ namespace Cinteros.Xrm.VersionVerifier
 
         private ToolStripButton GetToolStipButton(string name)
         {
-            var menu = this.Controls.Find("tsMenu", true).Cast<ToolStrip>().FirstOrDefault();
+            var menu = this.Controls.Find(Constants.UI.MENU, true).Cast<ToolStrip>().FirstOrDefault();
 
             var button = (menu != null) ? menu.Items.Find(name, true).Cast<ToolStripButton>().FirstOrDefault() : null;
             return button;
@@ -183,6 +183,11 @@ namespace Cinteros.Xrm.VersionVerifier
             this.CurrentPage = new ViewParameters();
         }
 
+        /// <summary>
+        /// Handler that will respond on event fired on each toolstrip buttons change state
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainScreen_UpdateToolStrip(object sender, UpdateToolStripEventArgs e)
         {
             if (e != null)
