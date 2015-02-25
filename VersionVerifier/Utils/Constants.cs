@@ -1,5 +1,8 @@
 ﻿namespace Cinteros.Xrm.VersionVerifier.Utils
 {
+    /// <summary>
+    /// Structure holding constants
+    /// </summary>
     internal struct Constants
     {
         #region Internal Fields
@@ -20,10 +23,16 @@
 
         #region Internal Structs
 
+        /// <summary>
+        /// Structure holding CRM related constants
+        /// </summary>
         internal struct Crm
         {
             #region Internal Structs
 
+            /// <summary>
+            /// Structure holding CRM Attributes related constants
+            /// </summary>
             internal struct Attributes
             {
                 #region Internal Fields
@@ -40,6 +49,9 @@
                 #endregion Internal Fields
             }
 
+            /// <summary>
+            /// Structure holding CRM Entities related constantns
+            /// </summary>
             internal struct Entities
             {
                 #region Internal Fields
@@ -60,16 +72,25 @@
             #endregion Internal Structs
         }
 
+        /// <summary>
+        /// Structure holding UI related constants
+        /// </summary>
         internal struct UI
         {
             #region Internal Fields
 
+            /// <summary>
+            /// Name of the plugin toolstrip
+            /// </summary>
             internal const string MENU = "tsMenu";
 
             #endregion Internal Fields
 
             #region Internal Structs
 
+            /// <summary>
+            /// Structure holding UI Buttons related constants
+            /// </summary>
             internal struct Buttons
             {
                 #region Internal Fields
@@ -92,6 +113,9 @@
                 #endregion Internal Fields
             }
 
+            /// <summary>
+            /// Structure holding UI Labels related constants
+            /// </summary>
             internal struct Labels
             {
                 #region Internal Fields
@@ -112,6 +136,9 @@
             #endregion Internal Structs
         }
 
+        /// <summary>
+        /// Structure holding XML related constants
+        /// </summary>
         internal struct Xml
         {
             #region Internal Fields
