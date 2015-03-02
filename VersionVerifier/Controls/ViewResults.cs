@@ -153,6 +153,7 @@
             var save = new SaveFileDialog();
             save.FileOk += this.FileOk;
 
+
             save.FileName = "comparison-matrix.xml";
             save.ShowDialog();
         }
