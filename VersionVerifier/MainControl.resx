@@ -147,7 +147,7 @@
         4AbwOgnwDfz1w9Fo6yiIqmSIP88Bj+QgzkBAcDIVaoNu9dv/B4L4A1xD6WgkMGbxAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="fromConnectionToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tsmiCurrentConnection.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAIkSURBVDhPpZFLaxphFIbzD/pzsuiui1LopquuBQUF
@@ -162,7 +162,7 @@
         9C+C36FNP7VarR2z2Qyj0Qi9Xg+tVgu1Wg2VSjW4zz4o/nuw9wtdEBK3EWw5nwAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="fromReferenceFileToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tsmiReferenceFile.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         wwAADsMBx2+oZAAAAExJREFUOE9joBooKir6TwBHQZViByBFuABIrqqq6iOQjoUqxwSEDAABqCEJUC2o
@@ -172,9 +172,9 @@
   <data name="tsddOpen.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABrSURBVDhPzY9RCoAgEET1pH655+jiWQ1MsWs5EPXhg0EZ
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABrSURBVDhPzY9RCoAgEET1ov655+jiWQ1MsWs5EPXhg0EZ
         14emXzGzTYVjY9TQHAIf1hEl8HwWDJlXgN6lHTEeRTDAbQB9KWWttS6snlECXD5X1neEoGHtJBldQAiu
-        P8uX4MCHdU+W33hHSjvfBGyc311JPgAAAABJRU5ErkJggg==
+        P8uX4MCHdU+W33hHSjva8GyZt72DrQAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="tsbSave.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

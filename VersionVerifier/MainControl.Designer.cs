@@ -34,8 +34,8 @@
             this.tsbBack = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsddOpen = new System.Windows.Forms.ToolStripDropDownButton();
-            this.fromConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fromReferenceFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCurrentConnection = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiReferenceFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbCompare = new System.Windows.Forms.ToolStripButton();
@@ -87,29 +87,29 @@
             // tsddOpen
             // 
             this.tsddOpen.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fromConnectionToolStripMenuItem,
-            this.fromReferenceFileToolStripMenuItem});
+            this.tsmiCurrentConnection,
+            this.tsmiReferenceFile});
             this.tsddOpen.Image = ((System.Drawing.Image)(resources.GetObject("tsddOpen.Image")));
             this.tsddOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsddOpen.Name = "tsddOpen";
             this.tsddOpen.Size = new System.Drawing.Size(103, 22);
             this.tsddOpen.Text = "Open from...";
             // 
-            // fromConnectionToolStripMenuItem
+            // tsmiCurrentConnection
             // 
-            this.fromConnectionToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("fromConnectionToolStripMenuItem.Image")));
-            this.fromConnectionToolStripMenuItem.Name = "fromConnectionToolStripMenuItem";
-            this.fromConnectionToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.fromConnectionToolStripMenuItem.Text = "Current connection";
-            this.fromConnectionToolStripMenuItem.Click += new System.EventHandler(this.fromConnectionToolStripMenuItem_Click);
+            this.tsmiCurrentConnection.Image = ((System.Drawing.Image)(resources.GetObject("tsmiCurrentConnection.Image")));
+            this.tsmiCurrentConnection.Name = "tsmiCurrentConnection";
+            this.tsmiCurrentConnection.Size = new System.Drawing.Size(177, 22);
+            this.tsmiCurrentConnection.Text = "Current connection";
+            this.tsmiCurrentConnection.Click += new System.EventHandler(this.fromConnectionToolStripMenuItem_Click);
             // 
-            // fromReferenceFileToolStripMenuItem
+            // tsmiReferenceFile
             // 
-            this.fromReferenceFileToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("fromReferenceFileToolStripMenuItem.Image")));
-            this.fromReferenceFileToolStripMenuItem.Name = "fromReferenceFileToolStripMenuItem";
-            this.fromReferenceFileToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.fromReferenceFileToolStripMenuItem.Text = "Reference file...";
-            this.fromReferenceFileToolStripMenuItem.Click += new System.EventHandler(this.fromReferenceFileToolStripMenuItem_Click);
+            this.tsmiReferenceFile.Image = ((System.Drawing.Image)(resources.GetObject("tsmiReferenceFile.Image")));
+            this.tsmiReferenceFile.Name = "tsmiReferenceFile";
+            this.tsmiReferenceFile.Size = new System.Drawing.Size(177, 22);
+            this.tsmiReferenceFile.Text = "Reference file...";
+            this.tsmiReferenceFile.Click += new System.EventHandler(this.fromReferenceFileToolStripMenuItem_Click);
             // 
             // tsbSave
             // 
@@ -135,13 +135,13 @@
             this.tsbCompare.Text = "Compare versions";
             this.tsbCompare.Click += new System.EventHandler(this.tsbCompare_Click);
             // 
-            // MainScreen
+            // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tsMenu);
             this.DoubleBuffered = true;
-            this.Name = "MainScreen";
+            this.Name = "MainControl";
             this.Size = new System.Drawing.Size(600, 400);
             this.Load += new System.EventHandler(this.MainScreen_Load);
             this.tsMenu.ResumeLayout(false);
@@ -161,7 +161,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton tsbSave;
         private System.Windows.Forms.ToolStripDropDownButton tsddOpen;
-        private System.Windows.Forms.ToolStripMenuItem fromConnectionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fromReferenceFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCurrentConnection;
+        private System.Windows.Forms.ToolStripMenuItem tsmiReferenceFile;
     }
 }

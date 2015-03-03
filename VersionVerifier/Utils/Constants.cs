@@ -98,11 +98,6 @@
                 #region Internal Fields
 
                 /// <summary>
-                /// Name of toolstrip's Save button
-                /// </summary>
-                internal const string SAVE = "tsbSave";
-
-                /// <summary>
                 /// Name of toolstrip's Back button
                 /// </summary>
                 internal const string BACK = "tsbBack";
@@ -116,6 +111,15 @@
                 /// Name of toolstrip's Open drop down button
                 /// </summary>
                 internal const string OPEN = "tsddOpen";
+
+                internal const string OPEN_CURRENT_CONNECTION = "tsmiCurrentConnection";
+
+                internal const string OPEN_REFERENCE_FILE = "tsmiReferenceFile";
+
+                /// <summary>
+                /// Name of toolstrip's Save button
+                /// </summary>
+                internal const string SAVE = "tsbSave";
 
                 #endregion Internal Fields
             }
