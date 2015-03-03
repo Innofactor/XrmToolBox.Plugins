@@ -213,7 +213,7 @@
         /// Updating list of solutions from connection provided by XrmToolBox plugin class
         /// </summary>
         /// <param name="plugin">XrmToolBox plugin class</param>
-        private void RetrieveSnapshot(MainScreen plugin)
+        private void RetrieveSnapshot(MainControl plugin)
         {
             plugin.WorkAsync(string.Format("Getting solutions information from '{0}'...", plugin.ConnectionDetail.OrganizationFriendlyName),
                 (e) => // Work To Do Asynchronously
@@ -267,7 +267,7 @@
         {
             if (e.ConnectionDetail != null && !string.IsNullOrEmpty(e.ConnectionDetail.OrganizationServiceUrl))
             {
-                this.RetrieveSnapshot((MainScreen)sender);
+                this.RetrieveSnapshot((MainControl)sender);
                 if (e.ConnectionDetail != null)
                 {
                     this.gbSnapshot.Text = e.ConnectionDetail.OrganizationFriendlyName;
@@ -283,7 +283,7 @@
         /// <param name="e"></param>
         private void ViewParameters_ParentChanged(object sender, EventArgs e)
         {
-            var parent = (MainScreen)this.Parent;
+            var parent = (MainControl)this.Parent;
 
             if (parent != null)
             {

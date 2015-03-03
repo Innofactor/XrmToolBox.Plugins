@@ -19,7 +19,7 @@ namespace Cinteros.Xrm.VersionVerifier
     using McTools.Xrm.Connection;
     using XrmToolBox;
 
-    public partial class MainScreen : PluginBase, IUpdateToolStrip, IGitHubPlugin
+    public partial class MainControl : PluginBase, IUpdateToolStrip, IGitHubPlugin
     {
 
         #region Private Fields
@@ -32,11 +32,11 @@ namespace Cinteros.Xrm.VersionVerifier
 
         #region Public Constructors
 
-        public MainScreen()
+        public MainControl()
         {
             InitializeComponent();
 
-            this.UpdateToolStrip += this.MainScreen_UpdateToolStrip;
+            this.UpdateToolStrip += this.MainControl_UpdateToolStrip;
         }
 
         #endregion Public Constructors
@@ -68,7 +68,7 @@ namespace Cinteros.Xrm.VersionVerifier
 
                 this.control = value;
 
-                ((IUpdateToolStrip)this.control).UpdateToolStrip += this.MainScreen_UpdateToolStrip;
+                ((IUpdateToolStrip)this.control).UpdateToolStrip += this.MainControl_UpdateToolStrip;
                 ((IUpdateToolStrip)this.control).JustifyToolStrip();
                 this.JustifyToolStrip();
             }
@@ -188,7 +188,7 @@ namespace Cinteros.Xrm.VersionVerifier
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MainScreen_UpdateToolStrip(object sender, UpdateToolStripEventArgs e)
+        private void MainControl_UpdateToolStrip(object sender, UpdateToolStripEventArgs e)
         {
             if (e != null)
             {
