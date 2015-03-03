@@ -34,11 +34,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Crm.Sdk.Proxy">
-      <HintPath>..\XrmToolBox\Referenced Assemblies\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xrm.Client">
-      <HintPath>..\XrmToolBox\Referenced Assemblies\Microsoft.Xrm.Client.dll</HintPath>
+    <Reference Include="Microsoft.Xrm.Client, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\StepsManipulator\XrmToolBox\Referenced Assemblies\Microsoft.Xrm.Client.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xrm.Sdk">
       <HintPath>..\XrmToolBox\Referenced Assemblies\Microsoft.Xrm.Sdk.dll</HintPath>
@@ -49,10 +47,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -109,10 +103,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XrmToolBox\Connection Projects\McTools.Xrm.Connection.WinForms\McTools.Xrm.Connection.WinForms.csproj">
-      <Project>{eeb5c09f-cec6-4fb5-87b5-ae61ae89c9eb}</Project>
-      <Name>McTools.Xrm.Connection.WinForms</Name>
-    </ProjectReference>
     <ProjectReference Include="..\XrmToolBox\Connection Projects\McTools.Xrm.Connection\McTools.Xrm.Connection.csproj">
       <Project>{c3824c2c-6e2e-4fde-a2aa-229bbc7c3b1f}</Project>
       <Name>McTools.Xrm.Connection</Name>
