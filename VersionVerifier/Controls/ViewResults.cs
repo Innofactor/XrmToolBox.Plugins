@@ -116,7 +116,8 @@
             if (this.UpdateToolStrip != null)
             {
                 this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.UI.Buttons.BACK, true));
-                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.UI.Buttons.SAVE, true, tsbSave_Click));
+                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.UI.Buttons.OPEN, false));
+                this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.UI.Buttons.SAVE, false));
                 this.UpdateToolStrip(this, new UpdateToolStripEventArgs(Constants.UI.Buttons.COMPARE, false));
             }
         }

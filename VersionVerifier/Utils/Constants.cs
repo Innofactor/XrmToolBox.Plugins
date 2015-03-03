@@ -98,6 +98,11 @@
                 #region Internal Fields
 
                 /// <summary>
+                /// Name of toolstrip's Save button
+                /// </summary>
+                internal const string SAVE = "tsbSave";
+
+                /// <summary>
                 /// Name of toolstrip's Back button
                 /// </summary>
                 internal const string BACK = "tsbBack";
@@ -108,9 +113,9 @@
                 internal const string COMPARE = "tsbCompare";
 
                 /// <summary>
-                /// Name of toolstrip's Save button
+                /// Name of toolstrip's Open drop down button
                 /// </summary>
-                internal const string SAVE = "tsbSave";
+                internal const string OPEN = "tsddOpen";
 
                 #endregion Internal Fields
             }

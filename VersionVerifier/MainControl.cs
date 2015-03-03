@@ -170,11 +170,11 @@ namespace Cinteros.Xrm.VersionVerifier
             open.ShowDialog();
         }
 
-        private ToolStripButton GetToolStipButton(string name)
+        private ToolStripItem GetToolStipItem(string name)
         {
             var menu = this.Controls.Find(Constants.UI.MENU, true).Cast<ToolStrip>().FirstOrDefault();
 
-            var button = (menu != null) ? menu.Items.Find(name, true).Cast<ToolStripButton>().FirstOrDefault() : null;
+            var button = (menu != null) ? menu.Items.Find(name, true).Cast<ToolStripItem>().FirstOrDefault() : null;
             return button;
         }
 
@@ -192,20 +192,20 @@ namespace Cinteros.Xrm.VersionVerifier
         {
             if (e != null)
             {
-                var button = this.GetToolStipButton(e.ButtonName);
+                var item = this.GetToolStipItem(e.ButtonName);
 
-                if (button != null)
+                if (item != null)
                 {
-                    button.Enabled = e.ButtonStatus;
+                    item.Enabled = e.ButtonStatus;
 
                     if (e.ButtonClick != null)
                     {
                         if (this.toolStripHandlers.ContainsKey(e.ButtonName))
                         {
-                            button.Click -= this.toolStripHandlers[e.ButtonName];
+                            item.Click -= this.toolStripHandlers[e.ButtonName];
                             this.toolStripHandlers.Remove(e.ButtonName);
                         }
-                        button.Click += e.ButtonClick;
+                        item.Click += e.ButtonClick;
                         this.toolStripHandlers.Add(e.ButtonName, e.ButtonClick);
                     }
                 }
