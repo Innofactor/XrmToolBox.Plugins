@@ -294,12 +294,12 @@
                     this.RetrieveSnapshot(parent);
 
                     // All connections except currently connected one
-                    this.Organizations = (new ConnectionManager().ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
+                    this.Organizations = (ConnectionManager.Instance.ConnectionsList.Connections.Where(x => x.ConnectionId != parent.ConnectionDetail.ConnectionId).ToArray<ConnectionDetail>());
                 }
                 else
                 {
                     // All connections
-                    this.Organizations = (new ConnectionManager().ConnectionsList.Connections.ToArray<ConnectionDetail>());
+                    this.Organizations = (ConnectionManager.Instance.ConnectionsList.Connections.ToArray<ConnectionDetail>());
                 }
 
                 this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
