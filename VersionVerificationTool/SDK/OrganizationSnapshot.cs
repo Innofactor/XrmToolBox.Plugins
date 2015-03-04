@@ -1,10 +1,10 @@
-﻿namespace Cinteros.Xrm.VersionVerifier.SDK
+﻿namespace Cinteros.Xrm.VersionVerificationTool.SDK
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Xml;
-    using Cinteros.Xrm.VersionVerifier.Utils;
+    using Cinteros.Xrm.VersionVerificationTool.Utils;
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Client;
     using Microsoft.Xrm.Client.Services;

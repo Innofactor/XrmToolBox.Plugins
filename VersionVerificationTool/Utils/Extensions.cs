@@ -1,9 +1,9 @@
-﻿namespace Cinteros.Xrm.VersionVerifier.Utils
+﻿namespace Cinteros.Xrm.VersionVerificationTool.Utils
 {
     using System;
     using System.Collections.Generic;
     using System.Xml;
-    using Cinteros.Xrm.VersionVerifier.SDK;
+    using Cinteros.Xrm.VersionVerificationTool.SDK;
 
     public static class Extensions
     {

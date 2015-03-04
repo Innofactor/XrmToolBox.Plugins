@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.VersionVerifier
+﻿namespace Cinteros.Xrm.VersionVerificationTool
 {
     partial class MainControl
     {

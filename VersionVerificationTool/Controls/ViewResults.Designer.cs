@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.VersionVerifier.Controls
+﻿namespace Cinteros.Xrm.VersionVerificationTool.Controls
 {
     partial class ViewResults
     {

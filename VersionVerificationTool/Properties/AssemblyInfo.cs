@@ -3,12 +3,10 @@ using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following set of attributes.
 // Change these attribute values to modify the information associated with an assembly.
-[assembly: AssemblyTitle("Version Verifier")]
+[assembly: AssemblyTitle("Version Verification Tool")]
 [assembly: AssemblyDescription("Tool to compare solution components versions over multiple environments")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Cinteros AB")]
-[assembly: AssemblyProduct("Cinteros.Xrm.VersionVerifier")]
-[assembly: AssemblyCopyright("Copyright © Cinteros AB 2015")]
+[assembly: AssemblyProduct("Cinteros.Xrm.VersionVerificationTool")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -18,12 +16,3 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("36e4ce51-d2f8-4a29-b3b2-159d9bb40979")]
-
-// Version information for an assembly consists of the following four values:
-// 
-// Major Version Minor Version Build Number Revision
-// 
-// You can specify all the values or you can default the Build and Revision Numbers by using the '*'
-// as shown below: [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.2015.3.3")]
-[assembly: AssemblyFileVersion("1.2015.3.3")]

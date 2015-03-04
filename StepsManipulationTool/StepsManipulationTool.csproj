@@ -7,8 +7,8 @@
     <ProjectGuid>{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cinteros.Xrm.StepsManipulator</RootNamespace>
-    <AssemblyName>Cinteros.Xrm.StepsManipulator</AssemblyName>
+    <RootNamespace>Cinteros.Xrm.StepsManipulationTool</RootNamespace>
+    <AssemblyName>Cinteros.Xrm.StepsManipulationTool</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="MainControl.cs">
       <SubType>UserControl</SubType>

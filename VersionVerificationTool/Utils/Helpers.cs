@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.VersionVerifier.Utils
+﻿namespace Cinteros.Xrm.VersionVerificationTool.Utils
 {
     using System.Collections.Generic;
     using System.Drawing;
@@ -6,7 +6,7 @@
     using System.Text;
     using System.Windows.Forms;
     using System.Xml;
-    using Cinteros.Xrm.VersionVerifier.SDK;
+    using Cinteros.Xrm.VersionVerificationTool.SDK;
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Sdk.Query;
 

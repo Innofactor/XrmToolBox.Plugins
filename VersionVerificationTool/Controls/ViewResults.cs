@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.VersionVerifier.Controls
+﻿namespace Cinteros.Xrm.VersionVerificationTool.Controls
 {
     using System;
     using System.Collections.Generic;
@@ -6,8 +6,8 @@
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
-    using Cinteros.Xrm.VersionVerifier.SDK;
-    using Cinteros.Xrm.VersionVerifier.Utils;
+    using Cinteros.Xrm.VersionVerificationTool.SDK;
+    using Cinteros.Xrm.VersionVerificationTool.Utils;
 
     public partial class ViewResults : UserControl, IUpdateToolStrip
     {
