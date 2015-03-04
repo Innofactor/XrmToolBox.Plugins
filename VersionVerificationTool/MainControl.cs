@@ -109,22 +109,6 @@ namespace Cinteros.Xrm.VersionVerificationTool
 
         #endregion Public Properties
 
-        //public void AssignToolStripButtonHandler(string name, EventHandler handler)
-        //{
-        //    var button = this.GetToolStipButton(name);
-
-        //    if (button != null)
-        //    {
-        //        if (this.toolStripHandlers.ContainsKey(name))
-        //        {
-        //            button.Click -= this.toolStripHandlers[name];
-        //            this.toolStripHandlers.Remove(name);
-        //        }
-        //        button.Click += handler;
-        //        this.toolStripHandlers.Add(name, handler);
-        //    }
-        //}
-
         #region Public Methods
 
         /// <summary>

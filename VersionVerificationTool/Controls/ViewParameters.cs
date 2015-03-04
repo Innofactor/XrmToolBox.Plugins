@@ -70,7 +70,16 @@
         {
             get
             {
-                return (this.lvSnapshot.Tag == null) ? new OrganizationSnapshot() : (OrganizationSnapshot)this.lvSnapshot.Tag;
+                var snapshot = new OrganizationSnapshot();
+
+                if (this.lvSnapshot.Tag != null)
+                {
+                    snapshot = (OrganizationSnapshot)this.lvSnapshot.Tag;
+                    snapshot.Assemblies = this.lvSnapshot.CheckedItems.Cast<ListViewItem>().Where(x => (x.Tag is PluginAssembly)).Select(x => (PluginAssembly)x.Tag).ToArray();
+                    snapshot.Solutions = this.lvSnapshot.CheckedItems.Cast<ListViewItem>().Where(x => (x.Tag is Solution)).Select(x => (Solution)x.Tag).ToArray();
+                }
+
+                return snapshot;
             }
             set
             {
