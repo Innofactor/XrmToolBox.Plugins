@@ -59,15 +59,5 @@ namespace Cinteros.Xrm.VersionVerificationTool.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Cinteros {
-            get {
-                object obj = ResourceManager.GetObject("Cinteros", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

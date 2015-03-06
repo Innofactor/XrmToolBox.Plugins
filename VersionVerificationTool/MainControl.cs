@@ -1,6 +1,4 @@
-﻿[assembly: XrmToolBox.Attributes.BackgroundColor("#000000")]
-
-namespace Cinteros.Xrm.VersionVerificationTool
+﻿namespace Cinteros.Xrm.VersionVerificationTool
 {
     using System;
     using System.Collections.Generic;
@@ -71,17 +69,6 @@ namespace Cinteros.Xrm.VersionVerificationTool
                 ((IUpdateToolStrip)this.control).UpdateToolStrip += this.MainControl_UpdateToolStrip;
                 ((IUpdateToolStrip)this.control).JustifyToolStrip();
                 this.JustifyToolStrip();
-            }
-        }
-
-        /// <summary>
-        /// Gets plugin logo
-        /// </summary>
-        public override Image PluginLogo
-        {
-            get
-            {
-                return Resources.Cinteros;
             }
         }
 
