@@ -80,9 +80,9 @@
             this.cbToggleOrganizations.AutoSize = true;
             this.cbToggleOrganizations.Location = new System.Drawing.Point(6, 19);
             this.cbToggleOrganizations.Name = "cbToggleOrganizations";
-            this.cbToggleOrganizations.Size = new System.Drawing.Size(69, 17);
+            this.cbToggleOrganizations.Size = new System.Drawing.Size(104, 17);
             this.cbToggleOrganizations.TabIndex = 4;
-            this.cbToggleOrganizations.Text = "Select all";
+            this.cbToggleOrganizations.Text = "Select all / none";
             this.cbToggleOrganizations.UseVisualStyleBackColor = true;
             this.cbToggleOrganizations.CheckedChanged += new System.EventHandler(this.cbToggleOrganizations_CheckedChanged);
             // 
@@ -133,9 +133,9 @@
             this.cbToggleSolutions.AutoSize = true;
             this.cbToggleSolutions.Location = new System.Drawing.Point(6, 19);
             this.cbToggleSolutions.Name = "cbToggleSolutions";
-            this.cbToggleSolutions.Size = new System.Drawing.Size(69, 17);
+            this.cbToggleSolutions.Size = new System.Drawing.Size(104, 17);
             this.cbToggleSolutions.TabIndex = 3;
-            this.cbToggleSolutions.Text = "Select all";
+            this.cbToggleSolutions.Text = "Select all / none";
             this.cbToggleSolutions.UseVisualStyleBackColor = true;
             this.cbToggleSolutions.CheckedChanged += new System.EventHandler(this.cbToggleSolutions_CheckedChanged);
             // 
