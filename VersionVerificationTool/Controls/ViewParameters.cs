@@ -136,7 +136,7 @@
             this.JustifyToolStrip();
         }
 
-        private void cbToggleSolutions_CheckedChanged(object sender, EventArgs e)
+        private void cbToggleItems_CheckedChanged(object sender, EventArgs e)
         {
             var cb = (CheckBox)sender;
 
@@ -196,9 +196,9 @@
         /// <param name="e">Event arguments</param>
         private void lvSnapshot_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
-            this.cbToggleSolutions.CheckedChanged -= this.cbToggleSolutions_CheckedChanged;
-            this.UpdateSwitcher((ListView)sender, this.cbToggleSolutions, e.Item.Checked);
-            this.cbToggleSolutions.CheckedChanged += this.cbToggleSolutions_CheckedChanged;
+            this.cbToggleItems.CheckedChanged -= this.cbToggleItems_CheckedChanged;
+            this.UpdateSwitcher((ListView)sender, this.cbToggleItems, e.Item.Checked);
+            this.cbToggleItems.CheckedChanged += this.cbToggleItems_CheckedChanged;
 
             this.JustifyToolStrip();
         }

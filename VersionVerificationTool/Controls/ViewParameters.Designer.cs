@@ -35,7 +35,7 @@
             this.chOrgName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chOrgCredentials = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbSnapshot = new System.Windows.Forms.GroupBox();
-            this.cbToggleSolutions = new System.Windows.Forms.CheckBox();
+            this.cbToggleItems = new System.Windows.Forms.CheckBox();
             this.lvSnapshot = new System.Windows.Forms.ListView();
             this.chItemName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chItemVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -120,7 +120,7 @@
             this.gbSnapshot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbSnapshot.Controls.Add(this.cbToggleSolutions);
+            this.gbSnapshot.Controls.Add(this.cbToggleItems);
             this.gbSnapshot.Controls.Add(this.lvSnapshot);
             this.gbSnapshot.Location = new System.Drawing.Point(3, 3);
             this.gbSnapshot.Name = "gbSnapshot";
@@ -128,16 +128,16 @@
             this.gbSnapshot.TabIndex = 13;
             this.gbSnapshot.TabStop = false;
             // 
-            // cbToggleSolutions
+            // cbToggleItems
             // 
-            this.cbToggleSolutions.AutoSize = true;
-            this.cbToggleSolutions.Location = new System.Drawing.Point(6, 19);
-            this.cbToggleSolutions.Name = "cbToggleSolutions";
-            this.cbToggleSolutions.Size = new System.Drawing.Size(104, 17);
-            this.cbToggleSolutions.TabIndex = 3;
-            this.cbToggleSolutions.Text = "Select all / none";
-            this.cbToggleSolutions.UseVisualStyleBackColor = true;
-            this.cbToggleSolutions.CheckedChanged += new System.EventHandler(this.cbToggleSolutions_CheckedChanged);
+            this.cbToggleItems.AutoSize = true;
+            this.cbToggleItems.Location = new System.Drawing.Point(6, 19);
+            this.cbToggleItems.Name = "cbToggleItems";
+            this.cbToggleItems.Size = new System.Drawing.Size(104, 17);
+            this.cbToggleItems.TabIndex = 3;
+            this.cbToggleItems.Text = "Select all / none";
+            this.cbToggleItems.UseVisualStyleBackColor = true;
+            this.cbToggleItems.CheckedChanged += new System.EventHandler(this.cbToggleItems_CheckedChanged);
             // 
             // lvSnapshot
             // 
@@ -194,7 +194,7 @@
         private System.Windows.Forms.ColumnHeader chOrgCredentials;
         private System.Windows.Forms.GroupBox gbSnapshot;
         private System.Windows.Forms.CheckBox cbToggleOrganizations;
-        private System.Windows.Forms.CheckBox cbToggleSolutions;
+        private System.Windows.Forms.CheckBox cbToggleItems;
         private System.Windows.Forms.ListView lvSnapshot;
         private System.Windows.Forms.ColumnHeader chItemName;
         private System.Windows.Forms.ColumnHeader chItemVersion;
