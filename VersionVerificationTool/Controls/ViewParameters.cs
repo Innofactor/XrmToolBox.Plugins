@@ -126,12 +126,12 @@
         {
             var cb = (CheckBox)sender;
 
-            this.lvOrganizations.ItemChecked -= lvOrganizations_ItemChecked;
+            this.lvOrganizations.ItemChecked -= this.lvOrganizations_ItemChecked;
             foreach (var item in this.lvOrganizations.Items.Cast<ListViewItem>().ToArray())
             {
                 item.Checked = cb.Checked;
             }
-            this.lvOrganizations.ItemChecked += lvOrganizations_ItemChecked;
+            this.lvOrganizations.ItemChecked += this.lvOrganizations_ItemChecked;
 
             this.JustifyToolStrip();
         }
@@ -140,12 +140,12 @@
         {
             var cb = (CheckBox)sender;
 
-            this.lvSnapshot.ItemChecked -= lvSnapshot_ItemChecked;
+            this.lvSnapshot.ItemChecked -= this.lvSnapshot_ItemChecked;
             foreach (var item in this.lvSnapshot.Items.Cast<ListViewItem>().ToArray())
             {
                 item.Checked = cb.Checked;
             }
-            this.lvSnapshot.ItemChecked += lvSnapshot_ItemChecked;
+            this.lvSnapshot.ItemChecked += this.lvSnapshot_ItemChecked;
 
             this.JustifyToolStrip();
         }
@@ -165,9 +165,13 @@
         /// <param name="e">Event arguments</param>
         private void lvOrganizations_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
-            this.cbToggleOrganizations.CheckedChanged -= this.cbToggleOrganizations_CheckedChanged;
-            this.UpdateSwitcher((ListView)sender, this.cbToggleOrganizations, e.Item.Checked);
-            this.cbToggleOrganizations.CheckedChanged += this.cbToggleOrganizations_CheckedChanged;
+            if (e != null)
+            {
+                var list = ((ListView)sender);
+                this.cbToggleOrganizations.CheckedChanged -= this.cbToggleOrganizations_CheckedChanged;
+                this.UpdateSwitcher((ListView)sender, this.cbToggleOrganizations, list.Items.Count == list.CheckedItems.Count);
+                this.cbToggleOrganizations.CheckedChanged += this.cbToggleOrganizations_CheckedChanged;
+            }
 
             this.JustifyToolStrip();
         }
@@ -179,11 +183,20 @@
         /// <param name="e">Event arguments</param>
         private void lvOrganizations_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            var list = (ListView)sender;
-
-            foreach (var item in list.Items.Cast<ListViewItem>().Where(x => x.Selected == true))
+            if (e != null)
             {
+                var list = ((ListView)sender);
+                var item = list.Items[e.ItemIndex];
+                
+                this.lvOrganizations.ItemChecked -= this.lvOrganizations_ItemChecked;
+                this.lvOrganizations.ItemSelectionChanged -= this.lvOrganizations_ItemSelectionChanged;
+                
                 item.Checked = !item.Checked;
+                item.Selected = !item.Selected;
+                this.UpdateSwitcher((ListView)sender, this.cbToggleOrganizations, list.Items.Count == list.CheckedItems.Count);
+                
+                this.lvOrganizations.ItemSelectionChanged += this.lvOrganizations_ItemSelectionChanged;
+                this.lvOrganizations.ItemChecked += this.lvOrganizations_ItemChecked;
             }
 
             this.JustifyToolStrip();
@@ -317,7 +330,7 @@
                 this.lvSnapshot_ItemSelectionChanged(this.lvSnapshot, null);
                 if (parent.ConnectionDetail != null)
                 {
-                    this.gbSnapshot.Text = parent.ConnectionDetail.OrganizationFriendlyName;
+                    this.gbSnapshot.Text = string.Format("{0} on {1}", parent.ConnectionDetail.OrganizationFriendlyName, parent.ConnectionDetail.ServerName);
                 }
             }
         }
