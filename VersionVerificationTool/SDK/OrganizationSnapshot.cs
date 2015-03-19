@@ -39,13 +39,20 @@
 
             var organizationService = connectionDetail.GetOrganizationService();
 
-            entities = organizationService.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities;
-            solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
-            solutions = solutions.Where(x => reference.Solutions.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
+            try
+            {
+                entities = organizationService.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities;
+                solutions = entities.ToArray<Entity>().Select(x => new Solution(x)).ToArray<Solution>();
+                solutions = solutions.Where(x => reference.Solutions.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<Solution>();
 
-            entities = organizationService.RetrieveMultiple(Helpers.CreateAssembliesQuery()).Entities;
-            assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
-            assemblies = assemblies.Where(x => reference.Assemblies.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<PluginAssembly>();
+                entities = organizationService.RetrieveMultiple(Helpers.CreateAssembliesQuery()).Entities;
+                assemblies = entities.ToArray<Entity>().Select(x => new PluginAssembly(x)).ToArray<PluginAssembly>();
+                assemblies = assemblies.Where(x => reference.Assemblies.Where(y => y.UniqueName == x.UniqueName).Count() > 0).ToArray<PluginAssembly>();
+            }
+            catch (Exception ex)
+            {
+                // Hiding exceptions
+            }
 
             this.ConnectionDetail = connectionDetail;
             this.Solutions = solutions;

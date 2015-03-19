@@ -194,6 +194,9 @@
                 item.Checked = !item.Checked;
                 item.Selected = !item.Selected;
                 this.UpdateSwitcher((ListView)sender, this.cbToggleOrganizations, list.Items.Count == list.CheckedItems.Count);
+
+                this.lvOrganizations.ItemChecked -= this.lvOrganizations_ItemChecked;
+                this.lvOrganizations.ItemSelectionChanged -= this.lvOrganizations_ItemSelectionChanged;
                 
                 this.lvOrganizations.ItemSelectionChanged += this.lvOrganizations_ItemSelectionChanged;
                 this.lvOrganizations.ItemChecked += this.lvOrganizations_ItemChecked;
