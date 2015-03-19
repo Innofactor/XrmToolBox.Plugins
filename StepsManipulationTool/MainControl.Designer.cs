@@ -34,8 +34,10 @@
             this.gbSteps = new System.Windows.Forms.GroupBox();
             this.lvSteps = new System.Windows.Forms.ListView();
             this.chName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tsMenu.SuspendLayout();
             this.gbSteps.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsMenu
@@ -61,9 +63,9 @@
             // 
             this.gbSteps.Controls.Add(this.lvSteps);
             this.gbSteps.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbSteps.Location = new System.Drawing.Point(0, 25);
+            this.gbSteps.Location = new System.Drawing.Point(3, 43);
             this.gbSteps.Name = "gbSteps";
-            this.gbSteps.Size = new System.Drawing.Size(600, 375);
+            this.gbSteps.Size = new System.Drawing.Size(594, 329);
             this.gbSteps.TabIndex = 1;
             this.gbSteps.TabStop = false;
             this.gbSteps.Text = "SDK Message Processing Steps";
@@ -78,7 +80,7 @@
             this.lvSteps.GridLines = true;
             this.lvSteps.Location = new System.Drawing.Point(3, 16);
             this.lvSteps.Name = "lvSteps";
-            this.lvSteps.Size = new System.Drawing.Size(594, 356);
+            this.lvSteps.Size = new System.Drawing.Size(588, 310);
             this.lvSteps.TabIndex = 0;
             this.lvSteps.UseCompatibleStateImageBehavior = false;
             this.lvSteps.View = System.Windows.Forms.View.Details;
@@ -88,17 +90,32 @@
             this.chName.Text = "Name";
             this.chName.Width = 450;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.gbSteps, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 25);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(600, 375);
+            this.tableLayoutPanel1.TabIndex = 2;
+            // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.gbSteps);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tsMenu);
             this.Name = "MainControl";
             this.Size = new System.Drawing.Size(600, 400);
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.gbSteps.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -111,5 +128,6 @@
         private System.Windows.Forms.GroupBox gbSteps;
         private System.Windows.Forms.ListView lvSteps;
         private System.Windows.Forms.ColumnHeader chName;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
