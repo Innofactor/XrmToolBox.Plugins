@@ -54,7 +54,27 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.btnGetRecords = new System.Windows.Forms.Button();
             this.lblRecords = new System.Windows.Forms.Label();
+            this.cmbAttribute = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.rbSetNull = new System.Windows.Forms.RadioButton();
+            this.rbSetTouch = new System.Windows.Forms.RadioButton();
+            this.rbSetValue = new System.Windows.Forms.RadioButton();
+            this.cmbValue = new System.Windows.Forms.ComboBox();
+            this.chkOnlyChange = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lblUpdateStatus = new System.Windows.Forms.Label();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.toolStripMain.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -99,6 +119,7 @@
             this.tsbAbout.Name = "tsbAbout";
             this.tsbAbout.Size = new System.Drawing.Size(60, 22);
             this.tsbAbout.Text = "About";
+            this.tsbAbout.Click += new System.EventHandler(this.tsbAbout_Click);
             // 
             // tsbOptions
             // 
@@ -119,6 +140,7 @@
             this.tsmiFriendly.Name = "tsmiFriendly";
             this.tsmiFriendly.Size = new System.Drawing.Size(156, 22);
             this.tsmiFriendly.Text = "Friendly names";
+            this.tsmiFriendly.Click += new System.EventHandler(this.tsmiFriendly_Click);
             // 
             // toolStripSeparator12
             // 
@@ -152,6 +174,7 @@
             this.tsmiAttributesAll.Name = "tsmiAttributesAll";
             this.tsmiAttributesAll.Size = new System.Drawing.Size(195, 22);
             this.tsmiAttributesAll.Text = "All";
+            this.tsmiAttributesAll.Click += new System.EventHandler(this.tsmiAttributes_Click);
             // 
             // toolStripSeparator13
             // 
@@ -167,6 +190,7 @@
             this.tsmiAttributesManaged.Name = "tsmiAttributesManaged";
             this.tsmiAttributesManaged.Size = new System.Drawing.Size(195, 22);
             this.tsmiAttributesManaged.Text = "Managed";
+            this.tsmiAttributesManaged.Click += new System.EventHandler(this.tsmiAttributes_Click);
             // 
             // tsmiAttributesUnmanaged
             // 
@@ -177,6 +201,7 @@
             this.tsmiAttributesUnmanaged.Name = "tsmiAttributesUnmanaged";
             this.tsmiAttributesUnmanaged.Size = new System.Drawing.Size(195, 22);
             this.tsmiAttributesUnmanaged.Text = "Unmanaged";
+            this.tsmiAttributesUnmanaged.Click += new System.EventHandler(this.tsmiAttributes_Click);
             // 
             // toolStripSeparator14
             // 
@@ -192,6 +217,7 @@
             this.tsmiAttributesCustomizable.Name = "tsmiAttributesCustomizable";
             this.tsmiAttributesCustomizable.Size = new System.Drawing.Size(195, 22);
             this.tsmiAttributesCustomizable.Text = "Customizable";
+            this.tsmiAttributesCustomizable.Click += new System.EventHandler(this.tsmiAttributes_Click);
             // 
             // tsmiAttributesUncustomizable
             // 
@@ -202,6 +228,7 @@
             this.tsmiAttributesUncustomizable.Name = "tsmiAttributesUncustomizable";
             this.tsmiAttributesUncustomizable.Size = new System.Drawing.Size(195, 22);
             this.tsmiAttributesUncustomizable.Text = "Uncustomizable";
+            this.tsmiAttributesUncustomizable.Click += new System.EventHandler(this.tsmiAttributes_Click);
             // 
             // toolStripSeparator15
             // 
@@ -217,6 +244,7 @@
             this.tsmiAttributesStandard.Name = "tsmiAttributesStandard";
             this.tsmiAttributesStandard.Size = new System.Drawing.Size(195, 22);
             this.tsmiAttributesStandard.Text = "Standard";
+            this.tsmiAttributesStandard.Click += new System.EventHandler(this.tsmiAttributes_Click);
             // 
             // tsmiAttributesCustom
             // 
@@ -227,6 +255,7 @@
             this.tsmiAttributesCustom.Name = "tsmiAttributesCustom";
             this.tsmiAttributesCustom.Size = new System.Drawing.Size(195, 22);
             this.tsmiAttributesCustom.Text = "Custom";
+            this.tsmiAttributesCustom.Click += new System.EventHandler(this.tsmiAttributes_Click);
             // 
             // toolStripSeparator16
             // 
@@ -240,6 +269,7 @@
             this.tsmiAttributesOnlyValidAF.Name = "tsmiAttributesOnlyValidAF";
             this.tsmiAttributesOnlyValidAF.Size = new System.Drawing.Size(195, 22);
             this.tsmiAttributesOnlyValidAF.Text = "Only valid for Adv.Find";
+            this.tsmiAttributesOnlyValidAF.Click += new System.EventHandler(this.tsmiAttributes_Click);
             // 
             // toolStripSeparator7
             // 
@@ -248,38 +278,211 @@
             // 
             // btnGetRecords
             // 
-            this.btnGetRecords.Location = new System.Drawing.Point(24, 47);
+            this.btnGetRecords.Location = new System.Drawing.Point(18, 29);
             this.btnGetRecords.Name = "btnGetRecords";
-            this.btnGetRecords.Size = new System.Drawing.Size(158, 23);
+            this.btnGetRecords.Size = new System.Drawing.Size(118, 23);
             this.btnGetRecords.TabIndex = 24;
-            this.btnGetRecords.Text = "Get records to update";
+            this.btnGetRecords.Text = "Get records";
             this.btnGetRecords.UseVisualStyleBackColor = true;
             this.btnGetRecords.Click += new System.EventHandler(this.btnGetRecords_Click);
             // 
             // lblRecords
             // 
             this.lblRecords.AutoSize = true;
-            this.lblRecords.Location = new System.Drawing.Point(200, 52);
+            this.lblRecords.Location = new System.Drawing.Point(18, 61);
             this.lblRecords.Name = "lblRecords";
             this.lblRecords.Size = new System.Drawing.Size(100, 13);
             this.lblRecords.TabIndex = 25;
             this.lblRecords.Text = "Records not loaded";
             // 
+            // cmbAttribute
+            // 
+            this.cmbAttribute.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbAttribute.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbAttribute.FormattingEnabled = true;
+            this.cmbAttribute.Location = new System.Drawing.Point(15, 43);
+            this.cmbAttribute.Name = "cmbAttribute";
+            this.cmbAttribute.Size = new System.Drawing.Size(276, 21);
+            this.cmbAttribute.TabIndex = 26;
+            this.cmbAttribute.SelectedIndexChanged += new System.EventHandler(this.cmbAttribute_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(15, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 13);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "Attribute";
+            // 
+            // rbSetNull
+            // 
+            this.rbSetNull.AutoSize = true;
+            this.rbSetNull.Location = new System.Drawing.Point(181, 27);
+            this.rbSetNull.Name = "rbSetNull";
+            this.rbSetNull.Size = new System.Drawing.Size(60, 17);
+            this.rbSetNull.TabIndex = 31;
+            this.rbSetNull.Text = "Set null";
+            this.rbSetNull.UseVisualStyleBackColor = true;
+            this.rbSetNull.CheckedChanged += new System.EventHandler(this.rbSet_CheckedChanged);
+            // 
+            // rbSetTouch
+            // 
+            this.rbSetTouch.AutoSize = true;
+            this.rbSetTouch.Location = new System.Drawing.Point(102, 27);
+            this.rbSetTouch.Name = "rbSetTouch";
+            this.rbSetTouch.Size = new System.Drawing.Size(56, 17);
+            this.rbSetTouch.TabIndex = 30;
+            this.rbSetTouch.Text = "Touch";
+            this.rbSetTouch.UseVisualStyleBackColor = true;
+            this.rbSetTouch.CheckedChanged += new System.EventHandler(this.rbSet_CheckedChanged);
+            // 
+            // rbSetValue
+            // 
+            this.rbSetValue.AutoSize = true;
+            this.rbSetValue.Checked = true;
+            this.rbSetValue.Location = new System.Drawing.Point(18, 27);
+            this.rbSetValue.Name = "rbSetValue";
+            this.rbSetValue.Size = new System.Drawing.Size(52, 17);
+            this.rbSetValue.TabIndex = 29;
+            this.rbSetValue.TabStop = true;
+            this.rbSetValue.Text = "Value";
+            this.rbSetValue.UseVisualStyleBackColor = true;
+            this.rbSetValue.CheckedChanged += new System.EventHandler(this.rbSet_CheckedChanged);
+            // 
+            // cmbValue
+            // 
+            this.cmbValue.FormattingEnabled = true;
+            this.cmbValue.Location = new System.Drawing.Point(15, 50);
+            this.cmbValue.Name = "cmbValue";
+            this.cmbValue.Size = new System.Drawing.Size(276, 21);
+            this.cmbValue.TabIndex = 32;
+            // 
+            // chkOnlyChange
+            // 
+            this.chkOnlyChange.AutoSize = true;
+            this.chkOnlyChange.Location = new System.Drawing.Point(15, 77);
+            this.chkOnlyChange.Name = "chkOnlyChange";
+            this.chkOnlyChange.Size = new System.Drawing.Size(164, 17);
+            this.chkOnlyChange.TabIndex = 33;
+            this.chkOnlyChange.Text = "Only when change is needed";
+            this.chkOnlyChange.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnGetRecords);
+            this.groupBox1.Controls.Add(this.lblRecords);
+            this.groupBox1.Location = new System.Drawing.Point(14, 54);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(308, 89);
+            this.groupBox1.TabIndex = 34;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "1. Select records to update";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.cmbAttribute);
+            this.groupBox2.Location = new System.Drawing.Point(14, 160);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(308, 82);
+            this.groupBox2.TabIndex = 35;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "2. Select attribute to update";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cmbValue);
+            this.groupBox3.Controls.Add(this.rbSetNull);
+            this.groupBox3.Controls.Add(this.chkOnlyChange);
+            this.groupBox3.Controls.Add(this.rbSetTouch);
+            this.groupBox3.Controls.Add(this.rbSetValue);
+            this.groupBox3.Location = new System.Drawing.Point(14, 259);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(308, 109);
+            this.groupBox3.TabIndex = 36;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "3. Choose update method";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.lblUpdateStatus);
+            this.groupBox4.Controls.Add(this.btnUpdate);
+            this.groupBox4.Location = new System.Drawing.Point(14, 385);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(308, 89);
+            this.groupBox4.TabIndex = 37;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "4. Execute update";
+            // 
+            // lblUpdateStatus
+            // 
+            this.lblUpdateStatus.AutoSize = true;
+            this.lblUpdateStatus.Location = new System.Drawing.Point(18, 61);
+            this.lblUpdateStatus.Name = "lblUpdateStatus";
+            this.lblUpdateStatus.Size = new System.Drawing.Size(86, 13);
+            this.lblUpdateStatus.TabIndex = 1;
+            this.lblUpdateStatus.Text = "Nothing updated";
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(18, 29);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(118, 23);
+            this.btnUpdate.TabIndex = 0;
+            this.btnUpdate.Text = "Update records";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.listView1);
+            this.groupBox5.Location = new System.Drawing.Point(344, 54);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(481, 420);
+            this.groupBox5.TabIndex = 38;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Records";
+            // 
+            // listView1
+            // 
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Location = new System.Drawing.Point(3, 16);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(475, 401);
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
             // DataUpdater
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.lblRecords);
-            this.Controls.Add(this.btnGetRecords);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStripMain);
             this.Name = "DataUpdater";
-            this.Size = new System.Drawing.Size(842, 527);
+            this.Size = new System.Drawing.Size(842, 489);
             this.ConnectionUpdated += new XrmToolBox.PluginBase.ConnectionUpdatedHandler(this.DataUpdater_ConnectionUpdated);
             this.Load += new System.EventHandler(this.DataUpdater_Load);
             this.toolStripMain.ResumeLayout(false);
             this.toolStripMain.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -309,5 +512,20 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.Button btnGetRecords;
         private System.Windows.Forms.Label lblRecords;
+        private System.Windows.Forms.ComboBox cmbAttribute;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RadioButton rbSetNull;
+        private System.Windows.Forms.RadioButton rbSetTouch;
+        private System.Windows.Forms.RadioButton rbSetValue;
+        private System.Windows.Forms.ComboBox cmbValue;
+        private System.Windows.Forms.CheckBox chkOnlyChange;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label lblUpdateStatus;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.ListView listView1;
     }
 }
