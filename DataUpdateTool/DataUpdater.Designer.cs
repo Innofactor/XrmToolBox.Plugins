@@ -61,19 +61,19 @@
             this.rbSetValue = new System.Windows.Forms.RadioButton();
             this.cmbValue = new System.Windows.Forms.ComboBox();
             this.chkOnlyChange = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.gb1select = new System.Windows.Forms.GroupBox();
+            this.gb2attribute = new System.Windows.Forms.GroupBox();
+            this.gb3value = new System.Windows.Forms.GroupBox();
+            this.gb4update = new System.Windows.Forms.GroupBox();
             this.lblUpdateStatus = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.toolStripMain.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.gb1select.SuspendLayout();
+            this.gb2attribute.SuspendLayout();
+            this.gb3value.SuspendLayout();
+            this.gb4update.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -304,7 +304,9 @@
             this.cmbAttribute.Name = "cmbAttribute";
             this.cmbAttribute.Size = new System.Drawing.Size(276, 21);
             this.cmbAttribute.TabIndex = 26;
+            this.cmbAttribute.Tag = "attribute";
             this.cmbAttribute.SelectedIndexChanged += new System.EventHandler(this.cmbAttribute_SelectedIndexChanged);
+            this.cmbAttribute.TextChanged += new System.EventHandler(this.cmbAttribute_TextChanged);
             // 
             // label1
             // 
@@ -358,6 +360,7 @@
             this.cmbValue.Name = "cmbValue";
             this.cmbValue.Size = new System.Drawing.Size(276, 21);
             this.cmbValue.TabIndex = 32;
+            this.cmbValue.Tag = "value";
             // 
             // chkOnlyChange
             // 
@@ -369,52 +372,52 @@
             this.chkOnlyChange.Text = "Only when change is needed";
             this.chkOnlyChange.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // gb1select
             // 
-            this.groupBox1.Controls.Add(this.btnGetRecords);
-            this.groupBox1.Controls.Add(this.lblRecords);
-            this.groupBox1.Location = new System.Drawing.Point(14, 54);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(308, 89);
-            this.groupBox1.TabIndex = 34;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "1. Select records to update";
+            this.gb1select.Controls.Add(this.btnGetRecords);
+            this.gb1select.Controls.Add(this.lblRecords);
+            this.gb1select.Location = new System.Drawing.Point(14, 54);
+            this.gb1select.Name = "gb1select";
+            this.gb1select.Size = new System.Drawing.Size(308, 89);
+            this.gb1select.TabIndex = 34;
+            this.gb1select.TabStop = false;
+            this.gb1select.Text = "1. Select records to update";
             // 
-            // groupBox2
+            // gb2attribute
             // 
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.cmbAttribute);
-            this.groupBox2.Location = new System.Drawing.Point(14, 160);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(308, 82);
-            this.groupBox2.TabIndex = 35;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "2. Select attribute to update";
+            this.gb2attribute.Controls.Add(this.label1);
+            this.gb2attribute.Controls.Add(this.cmbAttribute);
+            this.gb2attribute.Location = new System.Drawing.Point(14, 160);
+            this.gb2attribute.Name = "gb2attribute";
+            this.gb2attribute.Size = new System.Drawing.Size(308, 82);
+            this.gb2attribute.TabIndex = 35;
+            this.gb2attribute.TabStop = false;
+            this.gb2attribute.Text = "2. Select attribute to update";
             // 
-            // groupBox3
+            // gb3value
             // 
-            this.groupBox3.Controls.Add(this.cmbValue);
-            this.groupBox3.Controls.Add(this.rbSetNull);
-            this.groupBox3.Controls.Add(this.chkOnlyChange);
-            this.groupBox3.Controls.Add(this.rbSetTouch);
-            this.groupBox3.Controls.Add(this.rbSetValue);
-            this.groupBox3.Location = new System.Drawing.Point(14, 259);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(308, 109);
-            this.groupBox3.TabIndex = 36;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "3. Choose update method";
+            this.gb3value.Controls.Add(this.cmbValue);
+            this.gb3value.Controls.Add(this.rbSetNull);
+            this.gb3value.Controls.Add(this.chkOnlyChange);
+            this.gb3value.Controls.Add(this.rbSetTouch);
+            this.gb3value.Controls.Add(this.rbSetValue);
+            this.gb3value.Location = new System.Drawing.Point(14, 259);
+            this.gb3value.Name = "gb3value";
+            this.gb3value.Size = new System.Drawing.Size(308, 109);
+            this.gb3value.TabIndex = 36;
+            this.gb3value.TabStop = false;
+            this.gb3value.Text = "3. Choose update method";
             // 
-            // groupBox4
+            // gb4update
             // 
-            this.groupBox4.Controls.Add(this.lblUpdateStatus);
-            this.groupBox4.Controls.Add(this.btnUpdate);
-            this.groupBox4.Location = new System.Drawing.Point(14, 385);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(308, 89);
-            this.groupBox4.TabIndex = 37;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "4. Execute update";
+            this.gb4update.Controls.Add(this.lblUpdateStatus);
+            this.gb4update.Controls.Add(this.btnUpdate);
+            this.gb4update.Location = new System.Drawing.Point(14, 385);
+            this.gb4update.Name = "gb4update";
+            this.gb4update.Size = new System.Drawing.Size(308, 89);
+            this.gb4update.TabIndex = 37;
+            this.gb4update.TabStop = false;
+            this.gb4update.Text = "4. Execute update";
             // 
             // lblUpdateStatus
             // 
@@ -462,10 +465,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gb4update);
+            this.Controls.Add(this.gb3value);
+            this.Controls.Add(this.gb2attribute);
+            this.Controls.Add(this.gb1select);
             this.Controls.Add(this.toolStripMain);
             this.Name = "DataUpdater";
             this.Size = new System.Drawing.Size(842, 489);
@@ -473,14 +476,14 @@
             this.Load += new System.EventHandler(this.DataUpdater_Load);
             this.toolStripMain.ResumeLayout(false);
             this.toolStripMain.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.gb1select.ResumeLayout(false);
+            this.gb1select.PerformLayout();
+            this.gb2attribute.ResumeLayout(false);
+            this.gb2attribute.PerformLayout();
+            this.gb3value.ResumeLayout(false);
+            this.gb3value.PerformLayout();
+            this.gb4update.ResumeLayout(false);
+            this.gb4update.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -519,10 +522,10 @@
         private System.Windows.Forms.RadioButton rbSetValue;
         private System.Windows.Forms.ComboBox cmbValue;
         private System.Windows.Forms.CheckBox chkOnlyChange;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox gb1select;
+        private System.Windows.Forms.GroupBox gb2attribute;
+        private System.Windows.Forms.GroupBox gb3value;
+        private System.Windows.Forms.GroupBox gb4update;
         private System.Windows.Forms.Label lblUpdateStatus;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.GroupBox groupBox5;

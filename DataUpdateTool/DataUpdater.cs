@@ -27,17 +27,18 @@ namespace Cinteros.Xrm.DataUpdateTool
         private string fetchXml = fetchTemplate;
         private EntityCollection records;
         private bool working = false;
-        private static Dictionary<string, EntityMetadata> entities;
-        internal static List<string> entityShitList = new List<string>(); // Oops, did I name that one??
+        private Dictionary<string, EntityMetadata> entities;
+        internal List<string> entityShitList = new List<string>(); // Oops, did I name that one??
         internal static bool useFriendlyNames = false;
-        private static bool showAttributesAll = true;
-        private static bool showAttributesManaged = true;
-        private static bool showAttributesUnmanaged = true;
-        private static bool showAttributesCustomizable = true;
-        private static bool showAttributesUncustomizable = true;
-        private static bool showAttributesCustom = true;
-        private static bool showAttributesStandard = true;
-        private static bool showAttributesOnlyValidAF = true;
+        private bool showAttributesAll = true;
+        private bool showAttributesManaged = true;
+        private bool showAttributesUnmanaged = true;
+        private bool showAttributesCustomizable = true;
+        private bool showAttributesUncustomizable = true;
+        private bool showAttributesCustom = true;
+        private bool showAttributesStandard = true;
+        private bool showAttributesOnlyValidAF = true;
+        private Dictionary<string, string> entityAttributes = new Dictionary<string, string>();
 
         public DataUpdater()
         {
@@ -45,14 +46,6 @@ namespace Cinteros.Xrm.DataUpdateTool
         }
 
         #region interface implementation
-
-        public override Image PluginLogo
-        {
-            get
-            {
-                return imageList1.Images[0];
-            }
-        }
 
         public override void ClosingPlugin(XrmToolBox.PluginCloseInfo info)
         {
@@ -85,7 +78,9 @@ namespace Cinteros.Xrm.DataUpdateTool
 
         private void DataUpdater_Load(object sender, EventArgs e)
         {
+            EnableControls(false);
             LoadSetting();
+            EnableControls(true);
         }
 
         private void DataUpdater_ConnectionUpdated(object sender, ConnectionUpdatedEventArgs e)
@@ -159,6 +154,11 @@ namespace Cinteros.Xrm.DataUpdateTool
             UpdateValueField();
         }
 
+        private void cmbAttribute_TextChanged(object sender, EventArgs e)
+        {
+            EnableControls(true);
+        }
+
         private void rbSet_CheckedChanged(object sender, EventArgs e)
         {
             cmbValue.Enabled = rbSetValue.Checked;
@@ -196,6 +196,16 @@ namespace Cinteros.Xrm.DataUpdateTool
             {
                 config.AppSettings.Settings.Add("FetchXML", fetchXml);
             }
+            if (entityAttributes != null && entityAttributes.Count > 0)
+            {
+                var entattrstr = "";
+                foreach (var entattr in entityAttributes)
+                {
+                    entattrstr += entattr.Key + ":" + entattr.Value + "|";
+                }
+                config.AppSettings.Settings.Add("EntityAttributes", entattrstr);
+            }
+            SaveControlValue(config, tsmiFriendly);
             SaveControlValue(config, tsmiAttributesManaged);
             SaveControlValue(config, tsmiAttributesUnmanaged);
             SaveControlValue(config, tsmiAttributesCustomizable);
@@ -214,6 +224,20 @@ namespace Cinteros.Xrm.DataUpdateTool
             {
                 fetchXml = config.AppSettings.Settings["FetchXML"].Value;
             }
+            if (config.AppSettings.Settings["EntityAttributes"] != null)
+            {
+                var entattrstr = config.AppSettings.Settings["EntityAttributes"].Value;
+                foreach (var entattr in entattrstr.Split('|'))
+                {
+                    if (!string.IsNullOrEmpty(entattr) && entattr.Contains(':'))
+                    {
+                        var entity = entattr.Split(':')[0];
+                        var attr = entattr.Split(':')[1];
+                        entityAttributes.Add(entity, attr);
+                    }
+                }
+            }
+            LoadControlValue(config, tsmiFriendly);
             LoadControlValue(config, tsmiAttributesManaged);
             LoadControlValue(config, tsmiAttributesUnmanaged);
             LoadControlValue(config, tsmiAttributesCustomizable);
@@ -262,12 +286,16 @@ namespace Cinteros.Xrm.DataUpdateTool
 
         private void EnableControls(bool enabled)
         {
-            btnGetRecords.Enabled = enabled && Service != null;
+            gb1select.Enabled = enabled && Service != null;
+            gb2attribute.Enabled = gb1select.Enabled && records != null && records.Entities.Count > 0;
+            gb3value.Enabled = gb2attribute.Enabled && cmbAttribute.SelectedItem is AttributeItem;
+            gb4update.Enabled = gb3value.Enabled;
         }
 
         private void GetRecords()
         {
             var fetchwin = new XmlContentDisplayDialog(fetchXml, "Enter FetchXML to retrieve records to update", true, true);
+            fetchwin.StartPosition = FormStartPosition.CenterParent;
             if (fetchwin.ShowDialog() == DialogResult.OK)
             {
                 fetchXml = fetchwin.txtXML.Text;
@@ -324,6 +352,7 @@ namespace Cinteros.Xrm.DataUpdateTool
 
         private void RefreshAttributes()
         {
+            EnableControls(false);
             cmbAttribute.Items.Clear();
             if (records != null)
             {
@@ -341,7 +370,15 @@ namespace Cinteros.Xrm.DataUpdateTool
                 {
                     AttributeItem.AddAttributeToComboBox(cmbAttribute, attribute, true);
                 }
+                if (entityAttributes.ContainsKey(records.EntityName))
+                {
+                    var attr = entityAttributes[records.EntityName];
+                    var coll = new Dictionary<string, string>();
+                    coll.Add("attribute", attr);
+                    ControlUtils.FillControl(coll, cmbAttribute);
+                }
             }
+            EnableControls(true);
         }
 
         private void LoadEntityDetails(string entityName, Action detailsLoaded)
@@ -390,7 +427,7 @@ namespace Cinteros.Xrm.DataUpdateTool
                 });
         }
 
-        private static AttributeMetadata[] GetDisplayAttributes(string entityName)
+        private AttributeMetadata[] GetDisplayAttributes(string entityName)
         {
             var result = new List<AttributeMetadata>();
             AttributeMetadata[] attributes = null;
@@ -492,7 +529,7 @@ namespace Cinteros.Xrm.DataUpdateTool
                         {
                             value = currentvalue;
                         }
-                        if (!onlychange || !value.ToString().Equals(currentvalue.ToString()))
+                        if (!onlychange || !ValuesEqual(value, currentvalue))
                         {
                             updaterecord.Attributes.Add(attribute, value);
                             Service.Update(updaterecord);
@@ -526,6 +563,25 @@ namespace Cinteros.Xrm.DataUpdateTool
                 });
         }
 
+        private bool ValuesEqual(object value1, object value2)
+        {
+            if (value1 != null && value2 != null)
+            {
+                if (value1 is OptionSetValue && value2 is OptionSetValue)
+                {
+                    return ((OptionSetValue)value1).Value == ((OptionSetValue)value2).Value;
+                }
+                else
+                {
+                    return value1.ToString().Equals(value2.ToString());
+                }
+            }
+            else
+            {
+                return value1 == null && value2 == null;
+            }
+        }
+
         private object GetValue(AttributeTypeCode? type)
         {
             switch (type)
@@ -541,7 +597,7 @@ namespace Cinteros.Xrm.DataUpdateTool
                 case AttributeTypeCode.Picklist:
                 case AttributeTypeCode.State:
                 case AttributeTypeCode.Status:
-                    var value = ((OptionsetItem)cmbValue.SelectedValue).meta.Value;
+                    var value = ((OptionsetItem)cmbValue.SelectedItem).meta.Value;
                     return new OptionSetValue((int)value);
                     break;
                 default:
@@ -551,28 +607,36 @@ namespace Cinteros.Xrm.DataUpdateTool
 
         private void UpdateValueField()
         {
-            var attribute = (AttributeItem)cmbAttribute.SelectedValue;
-            if (attribute == null)
+            var attribute = (AttributeItem)cmbAttribute.SelectedItem;
+            if (attribute != null)
             {
-                return;
-            }
-            if (attribute.Metadata is EnumAttributeMetadata)
-            {
-                var options = ((EnumAttributeMetadata)attribute.Metadata).OptionSet;
-                if (options != null)
+                if (attribute.Metadata is EnumAttributeMetadata)
                 {
-                    foreach (var option in options.Options)
+                    var options = ((EnumAttributeMetadata)attribute.Metadata).OptionSet;
+                    if (options != null)
                     {
-                        cmbValue.Items.Add(new OptionsetItem(option));
+                        foreach (var option in options.Options)
+                        {
+                            cmbValue.Items.Add(new OptionsetItem(option));
+                        }
                     }
+                    cmbValue.DropDownStyle = ComboBoxStyle.DropDownList;
                 }
-                cmbValue.DropDownStyle = ComboBoxStyle.DropDownList;
+                else
+                {
+                    cmbValue.Items.Clear();
+                    cmbValue.DropDownStyle = ComboBoxStyle.Simple;
+                }
+                if (entityAttributes.ContainsKey(records.EntityName))
+                {
+                    entityAttributes[records.EntityName] = attribute.GetValue();
+                }
+                else
+                {
+                    entityAttributes.Add(records.EntityName, attribute.GetValue());
+                }
             }
-            else
-            {
-                cmbValue.Items.Clear();
-                cmbValue.DropDownStyle = ComboBoxStyle.Simple;
-            }
+            EnableControls(true);
         }
 
         #endregion Methods

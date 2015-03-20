@@ -96,5 +96,10 @@ namespace Cinteros.Xrm.DataUpdateTool.Forms
         {
             Close();
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://fxb.xrmtoolbox.com");
+        }
     }
 }
