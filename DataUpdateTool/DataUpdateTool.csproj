@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cinteros.Xrm.XmlEditorUtils, Version=1.2015.3.13, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Cinteros.Xrm.XmlEditorUtils.dll</HintPath>
+    </Reference>
     <Reference Include="McTools.Xrm.Connection">
       <HintPath>..\XrmToolBox\McTools.Xrm.Connection.dll</HintPath>
     </Reference>
@@ -94,12 +98,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\FetchXMLBuilder\XmlEditorUtils\XmlEditorUtils.csproj">
-      <Project>{9fc7bdf7-321c-4b96-9b70-d75a16bd7685}</Project>
-      <Name>XmlEditorUtils</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
