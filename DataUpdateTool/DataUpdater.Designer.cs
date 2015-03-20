@@ -69,6 +69,7 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.label2 = new System.Windows.Forms.Label();
             this.toolStripMain.SuspendLayout();
             this.gb1select.SuspendLayout();
             this.gb2attribute.SuspendLayout();
@@ -443,6 +444,7 @@
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.label2);
             this.groupBox5.Controls.Add(this.listView1);
             this.groupBox5.Location = new System.Drawing.Point(344, 54);
             this.groupBox5.Name = "groupBox5";
@@ -459,6 +461,17 @@
             this.listView1.Size = new System.Drawing.Size(475, 401);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.SystemColors.Window;
+            this.label2.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.label2.Location = new System.Drawing.Point(113, 175);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(234, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Hold on. Soon... In a release in the near future...";
             // 
             // DataUpdater
             // 
@@ -485,6 +498,7 @@
             this.gb4update.ResumeLayout(false);
             this.gb4update.PerformLayout();
             this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -530,5 +544,6 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Label label2;
     }
 }
