@@ -34,12 +34,20 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Xrm.Client, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\StepsManipulator\XrmToolBox\Referenced Assemblies\Microsoft.Xrm.Client.dll</HintPath>
+    <Reference Include="McTools.Xrm.Connection">
+      <HintPath>..\XrmToolBox\McTools.Xrm.Connection.dll</HintPath>
+    </Reference>
+    <Reference Include="McTools.Xrm.Connection.WinForms">
+      <HintPath>..\XrmToolBox\McTools.Xrm.Connection.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Crm.Sdk.Proxy">
+      <HintPath>..\XrmToolBox\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Client">
+      <HintPath>..\XrmToolBox\Microsoft.Xrm.Client.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xrm.Sdk">
-      <HintPath>..\XrmToolBox\Referenced Assemblies\Microsoft.Xrm.Sdk.dll</HintPath>
+      <HintPath>..\XrmToolBox\Microsoft.Xrm.Sdk.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -48,6 +56,9 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="XrmToolBox">
+      <HintPath>..\XrmToolBox\XrmToolBox.exe</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\VersionInfo.cs">
@@ -104,16 +115,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\XrmToolBox\Connection Projects\McTools.Xrm.Connection\McTools.Xrm.Connection.csproj">
-      <Project>{c3824c2c-6e2e-4fde-a2aa-229bbc7c3b1f}</Project>
-      <Name>McTools.Xrm.Connection</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\XrmToolBox\XrmToolBox\XrmToolBox.csproj">
-      <Project>{328d55be-8b9a-4087-a5c2-9fbaf623f54b}</Project>
-      <Name>XrmToolBox</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

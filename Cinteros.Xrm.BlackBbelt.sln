@@ -3,14 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersionVerificationTool", "VersionVerificationTool\VersionVerificationTool.csproj", "{2834BDB0-802C-4C6F-AA3B-A344FD21A206}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XrmToolBox", "XrmToolBox\XrmToolBox\XrmToolBox.csproj", "{328D55BE-8B9A-4087-A5C2-9FBAF623F54B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McTools.Xrm.Connection", "XrmToolBox\Connection Projects\McTools.Xrm.Connection\McTools.Xrm.Connection.csproj", "{C3824C2C-6E2E-4FDE-A2AA-229BBC7C3B1F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McTools.Xrm.Connection.WinForms", "XrmToolBox\Connection Projects\McTools.Xrm.Connection.WinForms\McTools.Xrm.Connection.WinForms.csproj", "{EEB5C09F-CEC6-4FB5-87B5-AE61AE89C9EB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Prerequisites", "Prerequisites", "{5095947C-6653-42EC-B183-990E244F12BA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamlMigrationTool", "XamlMigrationTool\XamlMigrationTool.csproj", "{CF2B4877-2505-4966-B630-8C89800030A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepsManipulationTool", "StepsManipulationTool\StepsManipulationTool.csproj", "{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}"
@@ -35,24 +27,6 @@ Global
 		{2834BDB0-802C-4C6F-AA3B-A344FD21A206}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2834BDB0-802C-4C6F-AA3B-A344FD21A206}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2834BDB0-802C-4C6F-AA3B-A344FD21A206}.Release|Any CPU.Build.0 = Release|Any CPU
-		{328D55BE-8B9A-4087-A5C2-9FBAF623F54B}.Debug Without GemBox|Any CPU.ActiveCfg = Debug Without GemBox|Any CPU
-		{328D55BE-8B9A-4087-A5C2-9FBAF623F54B}.Debug Without GemBox|Any CPU.Build.0 = Debug Without GemBox|Any CPU
-		{328D55BE-8B9A-4087-A5C2-9FBAF623F54B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{328D55BE-8B9A-4087-A5C2-9FBAF623F54B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{328D55BE-8B9A-4087-A5C2-9FBAF623F54B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{328D55BE-8B9A-4087-A5C2-9FBAF623F54B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C3824C2C-6E2E-4FDE-A2AA-229BBC7C3B1F}.Debug Without GemBox|Any CPU.ActiveCfg = Debug Without GemBox|Any CPU
-		{C3824C2C-6E2E-4FDE-A2AA-229BBC7C3B1F}.Debug Without GemBox|Any CPU.Build.0 = Debug Without GemBox|Any CPU
-		{C3824C2C-6E2E-4FDE-A2AA-229BBC7C3B1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C3824C2C-6E2E-4FDE-A2AA-229BBC7C3B1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C3824C2C-6E2E-4FDE-A2AA-229BBC7C3B1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C3824C2C-6E2E-4FDE-A2AA-229BBC7C3B1F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EEB5C09F-CEC6-4FB5-87B5-AE61AE89C9EB}.Debug Without GemBox|Any CPU.ActiveCfg = Debug Without GemBox|Any CPU
-		{EEB5C09F-CEC6-4FB5-87B5-AE61AE89C9EB}.Debug Without GemBox|Any CPU.Build.0 = Debug Without GemBox|Any CPU
-		{EEB5C09F-CEC6-4FB5-87B5-AE61AE89C9EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEB5C09F-CEC6-4FB5-87B5-AE61AE89C9EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEB5C09F-CEC6-4FB5-87B5-AE61AE89C9EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEB5C09F-CEC6-4FB5-87B5-AE61AE89C9EB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CF2B4877-2505-4966-B630-8C89800030A5}.Debug Without GemBox|Any CPU.ActiveCfg = Debug|Any CPU
 		{CF2B4877-2505-4966-B630-8C89800030A5}.Debug Without GemBox|Any CPU.Build.0 = Debug|Any CPU
 		{CF2B4877-2505-4966-B630-8C89800030A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -74,10 +48,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{C3824C2C-6E2E-4FDE-A2AA-229BBC7C3B1F} = {5095947C-6653-42EC-B183-990E244F12BA}
-		{EEB5C09F-CEC6-4FB5-87B5-AE61AE89C9EB} = {5095947C-6653-42EC-B183-990E244F12BA}
-		{328D55BE-8B9A-4087-A5C2-9FBAF623F54B} = {5095947C-6653-42EC-B183-990E244F12BA}
 	EndGlobalSection
 EndGlobal
