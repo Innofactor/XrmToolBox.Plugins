@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace Cinteros.Xrm.DataUpdater.Forms
+namespace Cinteros.Xrm.DataUpdateTool.Forms
 {
     public partial class XmlContentDisplayDialog : Form
     {

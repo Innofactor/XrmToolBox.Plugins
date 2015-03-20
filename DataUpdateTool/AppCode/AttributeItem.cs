@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Cinteros.Xrm.DataUpdater.AppCode
+namespace Cinteros.Xrm.DataUpdateTool.AppCode
 {
     class AttributeItem : IComboBoxItem
     {

@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.DataUpdater.Forms
+﻿namespace Cinteros.Xrm.DataUpdateTool.Forms
 {
     partial class XmlContentDisplayDialog
     {

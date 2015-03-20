@@ -7,17 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Cinteros.Xrm.DataUpdater.Forms;
+using Cinteros.Xrm.DataUpdateTool.Forms;
 using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Sdk;
 using Cinteros.Xrm.XmlEditorUtils;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
-using Cinteros.Xrm.DataUpdater.AppCode;
+using Cinteros.Xrm.DataUpdateTool.AppCode;
 using System.Configuration;
 using System.Reflection;
 
-namespace Cinteros.Xrm.DataUpdater
+namespace Cinteros.Xrm.DataUpdateTool
 {
     public partial class DataUpdater : XrmToolBox.PluginBase, XrmToolBox.IGitHubPlugin, XrmToolBox.IPayPalPlugin
     {

@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.DataUpdater
+﻿namespace Cinteros.Xrm.DataUpdateTool
 {
     partial class DataUpdater
     {

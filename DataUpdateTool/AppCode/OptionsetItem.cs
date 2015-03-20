@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinteros.Xrm.DataUpdater.AppCode
+namespace Cinteros.Xrm.DataUpdateTool.AppCode
 {
     class OptionsetItem : IComboBoxItem
     {

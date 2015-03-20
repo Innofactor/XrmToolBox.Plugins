@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Cinteros.Xrm.DataUpdater.Properties {
+namespace Cinteros.Xrm.DataUpdateTool.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Cinteros.Xrm.DataUpdater.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Cinteros.Xrm.DataUpdater.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Cinteros.Xrm.DataUpdateTool.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
