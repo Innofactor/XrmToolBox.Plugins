@@ -7,8 +7,8 @@
     <ProjectGuid>{CF2B4877-2505-4966-B630-8C89800030A5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cinteros.Xml.XamlMigrationTool</RootNamespace>
-    <AssemblyName>Cinteros.Xml.XamlMigrationTool</AssemblyName>
+    <RootNamespace>Cinteros.Xrm.XamlMigrationTool</RootNamespace>
+    <AssemblyName>Cinteros.Xrm.XamlMigrationTool</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

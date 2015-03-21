@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xml.XamlMigrationTool
+﻿namespace Cinteros.Xrm.XamlMigrationTool
 {
     partial class MainControl
     {
