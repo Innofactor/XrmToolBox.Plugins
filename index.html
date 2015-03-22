@@ -15,12 +15,14 @@
     <script>
         var GH_USER = "Cinteros";
         var GH_REPO = "XrmToolBox.Plugins";
+        var historyshowing = false;
+        var historyloaded = false;
 
         $(document).ready(function () {
             UpdateDownloads("latest-version", "latest-published", "latest-downloads", "release-link");
             UpdateTotalDownloads("total-downloads");
-            LoadPeople("stargazers", "gazers", 3);
-            LoadPeople("subscribers", "watchers", 3);
+            LoadPeople("stargazers", "gazers", 4);
+            LoadPeople("subscribers", "watchers", 4);
             LoadIssues("issues-open", "issues-total");
         });
 
@@ -54,33 +56,32 @@
             <p>A set of tools from Cinteros AB to be used with <a href="http://www.xrmtoolbox.com">XrmToolBox</a></p>
             <p class="view"><a href="https://github.com/Cinteros/XrmToolBox.Plugins">View the Project on GitHub <small>Cinteros/XrmToolBox.Plugins</small></a></p>
 
-            <table>
+            <table border="0">
                 <tr>
-                    <td><strong>Current version</strong></td>
+                    <td>Current version</td>
                     <td id="latest-version">Loading version...</td>
                 </tr>
                 <tr>
-                    <td><strong>Publish date</strong></td>
+                    <td>Publish date</td>
                     <td id="latest-published">Loading publish date...</td>
                 </tr>
                 <tr>
                     <td valign="top">
-                        <strong>
-                            Downloads (total)
-                            &nbsp;&nbsp;
-                            <a href="javascript:ShowHideDownloadHistory();" id="showhide-hist" title="Show download count by version">+</a>
-                        </strong>
+                        Downloads (total)
+                        <!--&nbsp;&nbsp;
+                        <a href="javascript:ShowHideDownloadHistory();" id="showhide-hist" title="Show download count by version">+</a>-->
                     </td>
                     <td>
                         <span id="latest-downloads">Loading download count...</span>
                         <span id="total-downloads"></span>
-                        <!--                        <span><a href="javascript:UpdateRelease();" title="Refresh counters"><img src="images/refresh.png" width="16" height="16" align="right" /></a></span><br />-->
-                        <span id="hist-downloads" style="font-size:'8px'; line-height:0.8; font-family:'Courier'"></span>
+                        <!--<span><a href="javascript:UpdateRelease();" title="Refresh counters"><img src="images/refresh.png" width="16" height="16" align="right" /></a></span><br />-->
+                        <!--<span id="hist-downloads" style="font-size:'8px'; line-height:0.8; font-family:'Courier'"></span>-->
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" align="center" valign="middle">
-                        <a class="download-button zip" id="latest-download"><span>Download FXB</span></a><br />
+                    <td colspan="2">
+                        <br />
+                        <h2><a id="latest-download"><span>Download</span></a></h2>
                         <a id="release-link">Release notes</a>
                         |
                         <a href="https://github.com/Cinteros/XrmToolBox.Plugins/releases">View All Releases</a>
@@ -94,11 +95,20 @@
                     <td colspan="2"><div id="release-notes"></div></td>
                 </tr-->
             </table>
-            <iframe src="https://ghbtns.com/github-btn.html?user=Cinteros&repo=XrmToolBox.Plugins&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe><br />
-            <span id="gazers"></span>
-            <iframe src="https://ghbtns.com/github-btn.html?user=Cinteros&repo=XrmToolBox.Plugins&type=watch&count=true&v=2" frameborder="0" scrolling="0" width="100px" height="20px"></iframe><br />
-            <span id="watchers"></span>
-            <hr />
+            <table border="0">
+                <tr>
+                    <td colspan="2">
+                        <iframe src="https://ghbtns.com/github-btn.html?user=Cinteros&repo=XrmToolBox.Plugins&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe><br />
+                        <span id="gazers"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <iframe src="https://ghbtns.com/github-btn.html?user=Cinteros&repo=XrmToolBox.Plugins&type=watch&count=true&v=2" frameborder="0" scrolling="0" width="100px" height="20px"></iframe><br />
+                        <span id="watchers"></span>
+                    </td>
+                </tr>
+            </table>
             <ul>
                 <li><a href="https://github.com/Cinteros/XrmToolBox.Plugins/zipball/master">Download <strong>ZIP File</strong></a></li>
                 <li><a href="https://github.com/Cinteros/XrmToolBox.Plugins/tarball/master">Download <strong>TAR Ball</strong></a></li>
@@ -108,7 +118,7 @@
         </header>
         <section>
             <h3>
-                <a id="welcome-to-cinteros" class="anchor" href="#welcome-to-cinteros" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to Cinteros plugins for XrmToolBox.
+                <a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction
             </h3>
             <p>Cinteros is a company from Stockholm, Sweden, entirely focused on delivering high-end customer solutions based on Microsoft Dynamics CRM.</p>
             <p>A natural part of our day to day work is to use XrmToolBox to facilitate development and analysis in our peojects.</p>
@@ -120,7 +130,34 @@
                 So we decided to implement some plugins of our own, and a few of those serve their purpose to be delivered to the public, in the same open source, free to use, way that
                 has been the philosophy of mr Touzard and his XrmToolBox from day one.
             </p>
-            <hr />
+            <h3>
+                <a id="plugins" class="anchor" href="#plugins" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plugins
+            </h3>
+            <p>This toolkit contains the following plugins:</p>
+            <ul>
+                <li>Version Verifier Tool</li>
+                <li>Bulk Data Update Tool</li>
+                <li>Steps Manipulation Tool</li>
+                <li>XAML Migration Tool</li>
+            </ul>
+            <p>The most popular plugin to XrmToolBox from Cinteros (so far) is the <strong>FetchXML Builder</strong>, which is available here: <a href="http://fxb.xrmtoolbox.com">http://fxb.xrmtoolbox.com</a></p>
+            <h3>
+                <a id="verver" class="anchor" href="#verver" aria-hidden="true"><span class="octicon octicon-link"></span></a>Version Verifier Tool
+            </h3>
+            <p>Verifies....</p>
+            <h3>
+                <a id="dataupd" class="anchor" href="#dataupd" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bulk Data Updater Tool
+            </h3>
+            <p>Updates....</p>
+            <h3>
+                <a id="stepman" class="anchor" href="#stepman" aria-hidden="true"><span class="octicon octicon-link"></span></a>Steps Manipulation Tool
+            </h3>
+            <p>Manipulates....</p>
+            <h3>
+                <a id="xamlmig" class="anchor" href="#xamlmig" aria-hidden="true"><span class="octicon octicon-link"></span></a>XAML Migration Tool
+            </h3>
+            <p>Migrates....</p>
+            <!--<hr />
             <hr />
             <hr />
             <br /><br /><br />
@@ -148,7 +185,7 @@ $ git checkout gh-pages
             <h3>
                 <a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact
             </h3>
-            <p>Having trouble with Pages? Check out the documentation at <a href="https://help.github.com/pages">https://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+            <p>Having trouble with Pages? Check out the documentation at <a href="https://help.github.com/pages">https://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>-->
         </section>
         <footer>
             <p>This project is maintained by <a href="https://github.com/Cinteros">Cinteros</a></p>
