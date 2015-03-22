@@ -24,5 +24,5 @@ deploy:
 - provider: GitHub
   tag: 1.$(year).$(month).$(day)
   auth_token:
-    secure: U8WF6FtOs2fsQe/2F8k5LNlWNkLlMiACIZvgj1EN9AuYP2cX3y3t5agU0nKs6X2sv5wVnDrgtEqlBTlB5/StWImhuCFPpwNnRVwFVQjR8OM=
+    secure: 93a1a2Zfpvh/BMCM/kyXS/shMcTeSWdv4uRffo2UPAuO4+hq7qSX9bwoYbj9sv5W 
   prerelease: true
