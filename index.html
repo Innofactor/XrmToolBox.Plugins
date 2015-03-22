@@ -6,26 +6,124 @@
     <title>Cinteros plugins for XrmToolBox by Cinteros</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://cinteros.github.io/FetchXMLBuilder/javascripts/rappen-gh-api.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script>
+        var GH_USER = "Cinteros";
+        var GH_REPO = "XrmToolBox.Plugins";
+
+        $(document).ready(function () {
+            UpdateDownloads("latest-version", "latest-published", "latest-downloads", "release-link");
+            UpdateTotalDownloads("total-downloads");
+            LoadPeople("stargazers", "gazers", 3);
+            LoadPeople("subscribers", "watchers", 3);
+            LoadIssues("issues-open", "issues-total");
+        });
+
+        ShowHideDownloadHistory = function () {
+            if (historyshowing) {
+                $("#hist-downloads").hide(200);
+                $("#showhide-hist").text("+");
+                historyshowing = false;
+            }
+            else {
+                if (!historyloaded) {
+                    $("#showhide-hist").text("loading");
+                    $("#hist-downloads").hide(0);
+                    UpdateHistoricDownloads("hist-downloads", ShowHideDownloadHistory);
+                    historyloaded = true;
+                }
+                else {
+                    $("#hist-downloads").show(100);
+                    $("#showhide-hist").text("-");
+                    historyshowing = true;
+                }
+            }
+        };
+    </script>
 </head>
 <body>
     <div class="wrapper">
         <header>
             <a href="http://cinteros.se" target="_blank"></a><img src="images/Cinteros600x150.png" /></a>
-            <h1>plugins for XrmToolBox</h1>
-            <p>Set of tools by Cinteros Ab to be used with XrmToolBox</p>
+            <h1>XrmToolBox plugins</h1>
+            <p>A set of tools from Cinteros AB to be used with <a href="http://www.xrmtoolbox.com">XrmToolBox</a></p>
             <p class="view"><a href="https://github.com/Cinteros/XrmToolBox.Plugins">View the Project on GitHub <small>Cinteros/XrmToolBox.Plugins</small></a></p>
 
+            <table>
+                <tr>
+                    <td><strong>Current version</strong></td>
+                    <td id="latest-version">Loading version...</td>
+                </tr>
+                <tr>
+                    <td><strong>Publish date</strong></td>
+                    <td id="latest-published">Loading publish date...</td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                        <strong>
+                            Downloads (total)
+                            &nbsp;&nbsp;
+                            <a href="javascript:ShowHideDownloadHistory();" id="showhide-hist" title="Show download count by version">+</a>
+                        </strong>
+                    </td>
+                    <td>
+                        <span id="latest-downloads">Loading download count...</span>
+                        <span id="total-downloads"></span>
+                        <!--                        <span><a href="javascript:UpdateRelease();" title="Refresh counters"><img src="images/refresh.png" width="16" height="16" align="right" /></a></span><br />-->
+                        <span id="hist-downloads" style="font-size:'8px'; line-height:0.8; font-family:'Courier'"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center" valign="middle">
+                        <a class="download-button zip" id="latest-download"><span>Download FXB</span></a><br />
+                        <a id="release-link">Release notes</a>
+                        |
+                        <a href="https://github.com/Cinteros/FetchXMLBuilder/releases">View All Releases</a>
+                    </td>
+                </tr>
+                <!--tr>
+                    <td valign="top">
+                        <strong>Release Notes&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                        <a href="javascript:ShowHideReleaseNotes();" id="showhide-releasenotes">Show</a>
+                    </td>
+                    <td colspan="2"><div id="release-notes"></div></td>
+                </tr-->
+            </table>
+            <iframe src="https://ghbtns.com/github-btn.html?user=Cinteros&repo=XrmToolBox.Plugins&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe><br />
+            <span id="gazers"></span>
+            <iframe src="https://ghbtns.com/github-btn.html?user=Cinteros&repo=XrmToolBox.Plugins&type=watch&count=true&v=2" frameborder="0" scrolling="0" width="100px" height="20px"></iframe><br />
+            <span id="watchers"></span>
+            <hr />
             <ul>
                 <li><a href="https://github.com/Cinteros/XrmToolBox.Plugins/zipball/master">Download <strong>ZIP File</strong></a></li>
                 <li><a href="https://github.com/Cinteros/XrmToolBox.Plugins/tarball/master">Download <strong>TAR Ball</strong></a></li>
                 <li><a href="https://github.com/Cinteros/XrmToolBox.Plugins">View On <strong>GitHub</strong></a></li>
             </ul>
+
         </header>
         <section>
+            <h3>
+                <a id="welcome-to-cinteros" class="anchor" href="#welcome-to-cinteros" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to Cinteros plugins for XrmToolBox.
+            </h3>
+            <p>Cinteros is a company from Stockholm, Sweden, entirely focused on delivering high-end customer solutions based on Microsoft Dynamics CRM.</p>
+            <p>A natural part of our day to day work is to use XrmToolBox to facilitate development and analysis in our peojects.</p>
+            <p>
+                Though the XrmToolBox plugin palette is extensive and very useful out of the box, we have found some areas where we too can contribute to
+                the "greater good" of the Microsoft Dynamics CRM world of customization and development.
+            </p>
+            <p>
+                So we decided to implement some plugins of our own, and a few of those serve their purpose to be delivered to the public, in the same open source, free to use, way that
+                has been the philosophy of mr Touzard and his XrmToolBox from day one.
+            </p>
+            <hr />
+            <hr />
+            <hr />
+            <br /><br /><br />
             <h3>
                 <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.
             </h3>
