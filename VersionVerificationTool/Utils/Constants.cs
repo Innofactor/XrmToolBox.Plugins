@@ -42,6 +42,7 @@
                 internal const string IS_HIDDEN = "ishidden";
                 internal const string IS_MANAGED = "ismanaged";
                 internal const string IS_VISIBLE = "isvisible";
+                internal const string ISOLATION_MODE = "isolationmode";
                 internal const string NAME = "name";
                 internal const string PUBLIC_KEY_TOKEN = "publickeytoken";
                 internal const string SOLUTION_ID = "solutionid";
