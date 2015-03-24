@@ -77,9 +77,9 @@
 
                         if (current != null)
                         {
-                            if (!current.IsManaged)
+                            if (current.IsManaged)
                             {
-                                subitem.Text += " / Unmanaged";
+                                subitem.Text += " / Managed";
                             }
                         }
 
@@ -109,6 +109,14 @@
                         else
                         {
                             subitem = Helpers.CreateCell(reference, current);
+                        }
+
+                        if (current != null)
+                        {
+                            if (current.IsolationMode == IsolationMode.Sandbox)
+                            {
+                                subitem.Text += " / Sandbox";
+                            }
                         }
 
                         row.SubItems.Add(subitem);
