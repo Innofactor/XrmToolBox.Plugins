@@ -65,6 +65,7 @@
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="SDK\IComparableEntity.cs" />
+    <Compile Include="SDK\IsolationMode.cs" />
     <Compile Include="Utils\IUpdateToolStrip.cs" />
     <Compile Include="SDK\OrganizationSnapshot.cs" />
     <Compile Include="SDK\PluginAssembly.cs" />
