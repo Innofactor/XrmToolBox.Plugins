@@ -54,6 +54,15 @@
         }
 
         /// <summary>
+        /// Gets or sets assembly's Isolation Mode
+        /// </summary>
+        public IsolationMode IsolationMode
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets or sets assembly's version
         /// </summary>
         public Version Version
