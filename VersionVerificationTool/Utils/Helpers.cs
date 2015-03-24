@@ -19,7 +19,13 @@
             var query = new QueryExpression(Constants.Crm.Entities.PLUGIN_ASSEMBLY);
             query.Criteria = new FilterExpression();
             query.Criteria.AddCondition(Constants.Crm.Attributes.IS_HIDDEN, ConditionOperator.Equal, false);
-            query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.NAME, Constants.Crm.Attributes.VERSION, Constants.Crm.Attributes.CULTURE, Constants.Crm.Attributes.PUBLIC_KEY_TOKEN });
+            query.ColumnSet = new ColumnSet(new string[] { 
+                Constants.Crm.Attributes.CULTURE, 
+                Constants.Crm.Attributes.ISOLATION_MODE,
+                Constants.Crm.Attributes.NAME, 
+                Constants.Crm.Attributes.PUBLIC_KEY_TOKEN,
+                Constants.Crm.Attributes.VERSION
+            });
 
             return query;
         }
