@@ -21,9 +21,9 @@
         $(document).ready(function () {
             UpdateDownloads("latest-version", "latest-published", "latest-downloads", "release-link");
             UpdateTotalDownloads("total-downloads");
-            LoadPeople("stargazers", "gazers", 4);
-            LoadPeople("subscribers", "watchers", 4);
-            LoadIssues("issues-open", "issues-total");
+            //LoadPeople("stargazers", "gazers", 4);
+            //LoadPeople("subscribers", "watchers", 4);
+            //LoadIssues("issues-open", "issues-total");
         });
 
         ShowHideDownloadHistory = function () {
@@ -97,17 +97,17 @@
             </table>
             <table border="0">
                 <tr>
-                    <td colspan="2">
-                        <iframe src="https://ghbtns.com/github-btn.html?user=Cinteros&repo=XrmToolBox.Plugins&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe><br />
+                    <td colspan="2" align="center">
+                        <iframe src="https://ghbtns.com/github-btn.html?user=Cinteros&repo=XrmToolBox.Plugins&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
                         <span id="gazers"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <iframe src="https://ghbtns.com/github-btn.html?user=Cinteros&repo=XrmToolBox.Plugins&type=watch&count=true&v=2" frameborder="0" scrolling="0" width="100px" height="20px"></iframe><br />
+                        <iframe src="https://ghbtns.com/github-btn.html?user=Cinteros&repo=XrmToolBox.Plugins&type=watch&count=true&v=2" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
                         <span id="watchers"></span>
                     </td>
                 </tr>
+                <!--<tr>
+                    <td colspan="2">
+                    </td>
+                </tr>-->
             </table>
             <ul>
                 <li><a href="https://github.com/Cinteros/XrmToolBox.Plugins/zipball/master">Download <strong>ZIP File</strong></a></li>
