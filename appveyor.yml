@@ -16,7 +16,6 @@ assembly_info:
   assembly_file_version: 1.$(year).$(month).{build}
   assembly_informational_version: $(APPVEYOR_REPO_COMMIT)
 build:
-  project: XrmToolBox.Plugins.sln
   parallel: true
   verbosity: normal
 after_build:
