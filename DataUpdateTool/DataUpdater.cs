@@ -16,6 +16,7 @@ using Microsoft.Xrm.Sdk.Metadata;
 using Cinteros.Xrm.DataUpdateTool.AppCode;
 using System.Configuration;
 using System.Reflection;
+using System.Xml;
 
 namespace Cinteros.Xrm.DataUpdateTool
 {
@@ -27,8 +28,10 @@ namespace Cinteros.Xrm.DataUpdateTool
         private string fetchXml = fetchTemplate;
         private EntityCollection records;
         private bool working = false;
-        private Dictionary<string, EntityMetadata> entities;
+        private static Dictionary<string, EntityMetadata> entities;
         internal List<string> entityShitList = new List<string>(); // Oops, did I name that one??
+        internal static Dictionary<string, List<Entity>> views;
+        private Entity view;
         internal static bool useFriendlyNames = false;
         private bool showAttributesAll = true;
         private bool showAttributesManaged = true;
@@ -93,6 +96,16 @@ namespace Cinteros.Xrm.DataUpdateTool
         private void tsbCloseThisTab_Click(object sender, EventArgs e)
         {
             CloseTool();
+        }
+
+        private void tsmiOpenFile_Click(object sender, EventArgs e)
+        {
+            OpenFile();
+        }
+
+        private void tsmiOpenView_Click(object sender, EventArgs e)
+        {
+            OpenView();
         }
 
         private void tsmiFriendly_Click(object sender, EventArgs e)
@@ -245,6 +258,7 @@ namespace Cinteros.Xrm.DataUpdateTool
             LoadControlValue(config, tsmiAttributesCustom);
             LoadControlValue(config, tsmiAttributesStandard);
             LoadControlValue(config, tsmiAttributesOnlyValidAF);
+            tsmiFriendly_Click(null, null);
             tsmiAttributes_Click(null, null);
         }
 
@@ -286,10 +300,80 @@ namespace Cinteros.Xrm.DataUpdateTool
 
         private void EnableControls(bool enabled)
         {
-            gb1select.Enabled = enabled && Service != null;
-            gb2attribute.Enabled = gb1select.Enabled && records != null && records.Entities.Count > 0;
-            gb3value.Enabled = gb2attribute.Enabled && cmbAttribute.SelectedItem is AttributeItem;
-            gb4update.Enabled = gb3value.Enabled;
+            MethodInvoker mi = delegate
+            {
+                try
+                {
+                    tsbOpen.Enabled = enabled;
+                    tsmiOpenFile.Enabled = enabled;
+                    tsmiOpenView.Enabled = enabled && Service != null;
+                    gb1select.Enabled = enabled && Service != null;
+                    gb2attribute.Enabled = gb1select.Enabled && records != null && records.Entities.Count > 0;
+                    gb3value.Enabled = gb2attribute.Enabled && cmbAttribute.SelectedItem is AttributeItem;
+                    gb4update.Enabled = gb3value.Enabled;
+                }
+                catch
+                {
+                    // Now what?
+                }
+            };
+            if (InvokeRequired)
+            {
+                Invoke(mi);
+            }
+            else
+            {
+                mi();
+            }
+        }
+
+        private void OpenFile()
+        {
+            var ofd = new OpenFileDialog
+            {
+                Title = "Select an XML file containing FetchXML",
+                Filter = "XML file (*.xml)|*.xml"
+            };
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                EnableControls(false);
+                var fetchDoc = new XmlDocument();
+                fetchDoc.Load(ofd.FileName);
+
+                if (fetchDoc.DocumentElement.Name != "fetch" ||
+                    fetchDoc.DocumentElement.ChildNodes.Count > 0 &&
+                    fetchDoc.DocumentElement.ChildNodes[0].Name == "fetch")
+                {
+                    MessageBox.Show(this, "Invalid Xml: Definition XML root must be fetch!", "Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    fetchXml = fetchDoc.OuterXml;
+                    EnableControls(true);
+                }
+            }
+        }
+
+        private void OpenView()
+        {
+            EnableControls(false);
+            if (views == null || views.Count == 0)
+            {
+                LoadViews(OpenView);
+                return;
+            }
+            var viewselector = new SelectViewDialog(this);
+            viewselector.StartPosition = FormStartPosition.CenterParent;
+            if (viewselector.ShowDialog() == DialogResult.OK)
+            {
+                view = viewselector.View;
+                var fetchDoc = new XmlDocument();
+                fetchDoc.LoadXml(view["fetchxml"].ToString());
+                fetchXml = fetchDoc.OuterXml;
+            }
+            EnableControls(true);
         }
 
         private void GetRecords()
@@ -301,33 +385,6 @@ namespace Cinteros.Xrm.DataUpdateTool
                 fetchXml = fetchwin.txtXML.Text;
                 RetrieveRecords(fetchXml, RetrieveRecordsReady);
             }
-        }
-
-        private void RetrieveRecords(string fetch, Action AfterRetrieve)
-        {
-            if (working)
-            {
-                return;
-            }
-            lblRecords.Text = "Loading records...";
-            records = null;
-            WorkAsync("Retrieving records...",
-                (eventargs) =>
-                {
-                    eventargs.Result = Service.RetrieveMultiple(new FetchExpression(fetch));
-                },
-                (completedargs) =>
-                {
-                    if (completedargs.Error != null)
-                    {
-                        MessageBox.Show(completedargs.Error.Message, "Retrieve Records", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else if (completedargs.Result is EntityCollection)
-                    {
-                        records = (EntityCollection)completedargs.Result;
-                    }
-                    AfterRetrieve();
-                });
         }
 
         private void RetrieveRecordsReady()
@@ -381,50 +438,28 @@ namespace Cinteros.Xrm.DataUpdateTool
             EnableControls(true);
         }
 
-        private void LoadEntityDetails(string entityName, Action detailsLoaded)
+        internal static Dictionary<string, EntityMetadata> GetDisplayEntities()
         {
-            working = true;
-            WorkAsync("Loading " + entityName + "...",
-                (eventargs) =>
+            var result = new Dictionary<string, EntityMetadata>();
+            if (entities != null)
+            {
+                foreach (var entity in entities)
                 {
-                    var req = new RetrieveEntityRequest()
-                    {
-                        LogicalName = entityName,
-                        EntityFilters = EntityFilters.Attributes | EntityFilters.Relationships,
-                        RetrieveAsIfPublished = true
-                    };
-                    eventargs.Result = Service.Execute(req);
-                },
-                (completedargs) =>
-                {
-                    if (completedargs.Error != null)
-                    {
-                        entityShitList.Add(entityName);
-                        MessageBox.Show(completedargs.Error.Message, "Load attribute metadata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    else
-                    {
-                        if (completedargs.Result is RetrieveEntityResponse)
-                        {
-                            var resp = (RetrieveEntityResponse)completedargs.Result;
-                            if (entities == null)
-                            {
-                                entities = new Dictionary<string, EntityMetadata>();
-                            }
-                            if (entities.ContainsKey(entityName))
-                            {
-                                entities[entityName] = resp.EntityMetadata;
-                            }
-                            else
-                            {
-                                entities.Add(entityName, resp.EntityMetadata);
-                            }
-                        }
-                        working = false;
-                        detailsLoaded();
-                    }
-                    working = false;
-                });
+                    //if (!showEntitiesAll)
+                    //{
+                    //    if (!showEntitiesManaged && entity.Value.IsManaged == true) { continue; }
+                    //    if (!showEntitiesUnmanaged && entity.Value.IsManaged == false) { continue; }
+                    //    if (!showEntitiesCustomizable && entity.Value.IsCustomizable.Value) { continue; }
+                    //    if (!showEntitiesUncustomizable && !entity.Value.IsCustomizable.Value) { continue; }
+                    //    if (!showEntitiesStandard && entity.Value.IsCustomEntity == false) { continue; }
+                    //    if (!showEntitiesCustom && entity.Value.IsCustomEntity == true) { continue; }
+                    //    if (!showEntitiesIntersect && entity.Value.IsIntersect == true) { continue; }
+                    //    if (showEntitiesOnlyValidAF && entity.Value.IsValidForAdvancedFind == false) { continue; }
+                    //}
+                    result.Add(entity.Key, entity.Value);
+                }
+            }
+            return result;
         }
 
         private AttributeMetadata[] GetDisplayAttributes(string entityName)
@@ -456,6 +491,36 @@ namespace Cinteros.Xrm.DataUpdateTool
             return result.ToArray();
         }
 
+        internal static string GetEntityDisplayName(string entityName)
+        {
+            if (!useFriendlyNames)
+            {
+                return entityName;
+            }
+            if (entities != null && entities.ContainsKey(entityName))
+            {
+                entityName = GetEntityDisplayName(entities[entityName]);
+            }
+            return entityName;
+        }
+
+        internal static string GetEntityDisplayName(EntityMetadata entity)
+        {
+            var result = entity.LogicalName;
+            if (useFriendlyNames)
+            {
+                if (entity.DisplayName.UserLocalizedLabel != null)
+                {
+                    result = entity.DisplayName.UserLocalizedLabel.Label;
+                }
+                if (result == entity.LogicalName && entity.DisplayName.LocalizedLabels.Count > 0)
+                {
+                    result = entity.DisplayName.LocalizedLabels[0].Label;
+                }
+            }
+            return result;
+        }
+
         internal static string GetAttributeDisplayName(AttributeMetadata attribute)
         {
             string attributeName = attribute.LogicalName;
@@ -465,102 +530,13 @@ namespace Cinteros.Xrm.DataUpdateTool
                 {
                     attributeName = attribute.DisplayName.UserLocalizedLabel.Label;
                 }
-                //else
-                //{
-                //    foreach (var label in attribute.DisplayName.LocalizedLabels)
-                //    {
-                //        if (label.LanguageCode == userLCID)
-                //        {
-                //            attributeName = label.Label;
-                //            break;
-                //        }
-                //    }
-                //}
                 if (attributeName == attribute.LogicalName && attribute.DisplayName.LocalizedLabels.Count > 0)
                 {
                     attributeName = attribute.DisplayName.LocalizedLabels[0].Label;
                 }
+                attributeName += " (" + attribute.LogicalName + ")";
             }
             return attributeName;
-        }
-
-        private void UpdateRecords()
-        {
-            if (!(cmbAttribute.SelectedItem is AttributeItem))
-            {
-                MessageBox.Show("Select an attribute to update from the list.");
-                return;
-            }
-            if (MessageBox.Show("All selected records will unconditionally be updated.\nUI defined rules will not be enforced.\n\nConfirm update!",
-                "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) != DialogResult.OK)
-            {
-                return;
-            }
-            var attributeitem = (AttributeItem)cmbAttribute.SelectedItem;
-            var onlychange = chkOnlyChange.Checked;
-            var entity = records.EntityName;
-            var attribute = attributeitem.GetValue();
-            var touch = rbSetTouch.Checked;
-            var value = rbSetValue.Checked ? GetValue(attributeitem.Metadata.AttributeType) : null;
-            WorkAsync("Updating records",
-                (bgworker, workargs) =>
-                {
-                    var total = records.Entities.Count;
-                    var current = 0;
-                    var updated = 0;
-                    foreach (var record in records.Entities)
-                    {
-                        current++;
-                        var pct = 100 * current / total;
-                        if (onlychange && !record.Contains(attribute))
-                        {
-                            bgworker.ReportProgress(pct, "Reloading record " + current.ToString());
-                            var newrecord = Service.Retrieve(entity, record.Id, new ColumnSet(attribute));
-                            if (newrecord.Contains(attribute))
-                            {
-                                record.Attributes.Add(attribute, newrecord[attribute]);
-                            }
-                        }
-                        bgworker.ReportProgress(pct, "Updating record " + current.ToString());
-                        var currentvalue = record.Contains(attribute) ? record[attribute] : null;
-                        var updaterecord = new Entity(entity);
-                        updaterecord.Id = record.Id;
-                        if (touch)
-                        {
-                            value = currentvalue;
-                        }
-                        if (!onlychange || !ValuesEqual(value, currentvalue))
-                        {
-                            updaterecord.Attributes.Add(attribute, value);
-                            Service.Update(updaterecord);
-                            if (record.Contains(attribute))
-                            {
-                                record[attribute] = value;
-                            }
-                            else
-                            {
-                                record.Attributes.Add(attribute, value);
-                            }
-                            updated++;
-                        }
-                    }
-                    workargs.Result = updated;
-                },
-                (completedargs) =>
-                {
-                    if (completedargs.Error != null)
-                    {
-                        MessageBox.Show(completedargs.Error.Message, "Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        lblUpdateStatus.Text = completedargs.Result.ToString() + " records updated";
-                    }
-                },
-                (changeargs) =>
-                {
-                    SetWorkingMessage(changeargs.UserState.ToString());
-                });
         }
 
         private bool ValuesEqual(object value1, object value2)
@@ -640,5 +616,305 @@ namespace Cinteros.Xrm.DataUpdateTool
         }
 
         #endregion Methods
+
+        #region Async SDK methods
+
+        internal void LoadViews(Action viewsLoaded)
+        {
+            if (working)
+            {
+                return;
+            }
+            if (entities == null || entities.Count == 0)
+            {
+                LoadEntities(viewsLoaded);
+                return;
+            }
+            working = true;
+            WorkAsync("Loading views...",
+                (bgworker, workargs) =>
+                {
+                    EnableControls(false);
+                    if (views == null || views.Count == 0)
+                    {
+                        if (Service == null)
+                        {
+                            throw new Exception("Need a connection to load views.");
+                        }
+                        var qex = new QueryExpression("savedquery");
+                        qex.ColumnSet = new ColumnSet("name", "returnedtypecode", "fetchxml");
+                        qex.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+                        qex.Criteria.AddCondition("querytype", ConditionOperator.In, 0, 32);
+                        qex.AddOrder("name", OrderType.Ascending);
+                        bgworker.ReportProgress(33, "Loading system views...");
+                        var sysviews = Service.RetrieveMultiple(qex);
+                        foreach (var view in sysviews.Entities)
+                        {
+                            var entityname = view["returnedtypecode"].ToString();
+                            if (!string.IsNullOrWhiteSpace(entityname) && entities.ContainsKey(entityname))
+                            {
+                                if (views == null)
+                                {
+                                    views = new Dictionary<string, List<Entity>>();
+                                }
+                                if (!views.ContainsKey(entityname + "|S"))
+                                {
+                                    views.Add(entityname + "|S", new List<Entity>());
+                                }
+                                views[entityname + "|S"].Add(view);
+                            }
+                        }
+                        qex.EntityName = "userquery";
+                        bgworker.ReportProgress(66, "Loading user views...");
+                        var userviews = Service.RetrieveMultiple(qex);
+                        foreach (var view in userviews.Entities)
+                        {
+                            var entityname = view["returnedtypecode"].ToString();
+                            if (!string.IsNullOrWhiteSpace(entityname) && entities.ContainsKey(entityname))
+                            {
+                                if (views == null)
+                                {
+                                    views = new Dictionary<string, List<Entity>>();
+                                }
+                                if (!views.ContainsKey(entityname + "|U"))
+                                {
+                                    views.Add(entityname + "|U", new List<Entity>());
+                                }
+                                views[entityname + "|U"].Add(view);
+                            }
+                        }
+                        bgworker.ReportProgress(100, "Finalizing...");
+                    }
+                },
+                (completedargs) =>
+                {
+                    working = false;
+                    EnableControls(true);
+                    if (completedargs.Error != null)
+                    {
+                        MessageBox.Show(completedargs.Error.Message);
+                    }
+                    else
+                    {
+                        viewsLoaded();
+                    }
+                },
+                (changeargs) =>
+                {
+                    SetWorkingMessage(changeargs.UserState.ToString());
+                });
+        }
+
+        private void LoadEntities(Action AfterLoad)
+        {
+            if (working)
+            {
+                return;
+            }
+            entities = null;
+            entityShitList = new List<string>();
+            working = true;
+            WorkAsync("Loading entities metadata...",
+                (eventargs) =>
+                {
+                    EnableControls(false);
+                    var req = new RetrieveAllEntitiesRequest()
+                    {
+                        EntityFilters = EntityFilters.Entity,
+                        RetrieveAsIfPublished = true
+                    };
+                    eventargs.Result = Service.Execute(req);
+                },
+                (completedargs) =>
+                {
+                    working = false;
+                    if (completedargs.Error != null)
+                    {
+                        MessageBox.Show(completedargs.Error.Message);
+                    }
+                    else
+                    {
+                        if (completedargs.Result is RetrieveAllEntitiesResponse)
+                        {
+                            entities = new Dictionary<string, EntityMetadata>();
+                            foreach (var entity in ((RetrieveAllEntitiesResponse)completedargs.Result).EntityMetadata)
+                            {
+                                entities.Add(entity.LogicalName, entity);
+                            }
+                        }
+                    }
+                    EnableControls(true);
+                    if (AfterLoad != null)
+                    {
+                        AfterLoad();
+                    }
+                });
+        }
+
+        private void LoadEntityDetails(string entityName, Action detailsLoaded)
+        {
+            if (working)
+            {
+                return;
+            }
+            working = true;
+            WorkAsync("Loading " + GetEntityDisplayName(entityName) + " metadata...",
+                (eventargs) =>
+                {
+                    var req = new RetrieveEntityRequest()
+                    {
+                        LogicalName = entityName,
+                        EntityFilters = EntityFilters.Attributes | EntityFilters.Relationships,
+                        RetrieveAsIfPublished = true
+                    };
+                    eventargs.Result = Service.Execute(req);
+                },
+                (completedargs) =>
+                {
+                    working = false;
+                    if (completedargs.Error != null)
+                    {
+                        entityShitList.Add(entityName);
+                        MessageBox.Show(completedargs.Error.Message, "Load attribute metadata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        if (completedargs.Result is RetrieveEntityResponse)
+                        {
+                            var resp = (RetrieveEntityResponse)completedargs.Result;
+                            if (entities == null)
+                            {
+                                entities = new Dictionary<string, EntityMetadata>();
+                            }
+                            if (entities.ContainsKey(entityName))
+                            {
+                                entities[entityName] = resp.EntityMetadata;
+                            }
+                            else
+                            {
+                                entities.Add(entityName, resp.EntityMetadata);
+                            }
+                        }
+                        detailsLoaded();
+                    }
+                    working = false;
+                });
+        }
+
+        private void RetrieveRecords(string fetch, Action AfterRetrieve)
+        {
+            if (working)
+            {
+                return;
+            }
+            lblRecords.Text = "Retrieving records...";
+            records = null;
+            working = true;
+            WorkAsync("Retrieving records...",
+                (eventargs) =>
+                {
+                    eventargs.Result = Service.RetrieveMultiple(new FetchExpression(fetch));
+                },
+                (completedargs) =>
+                {
+                    working = false;
+                    if (completedargs.Error != null)
+                    {
+                        MessageBox.Show(completedargs.Error.Message, "Retrieve Records", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (completedargs.Result is EntityCollection)
+                    {
+                        records = (EntityCollection)completedargs.Result;
+                    }
+                    AfterRetrieve();
+                });
+        }
+
+        private void UpdateRecords()
+        {
+            if (working)
+            {
+                return;
+            }
+            if (!(cmbAttribute.SelectedItem is AttributeItem))
+            {
+                MessageBox.Show("Select an attribute to update from the list.");
+                return;
+            }
+            if (MessageBox.Show("All selected records will unconditionally be updated.\nUI defined rules will not be enforced.\n\nConfirm update!",
+                "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) != DialogResult.OK)
+            {
+                return;
+            }
+            var attributeitem = (AttributeItem)cmbAttribute.SelectedItem;
+            var onlychange = chkOnlyChange.Checked;
+            var entity = records.EntityName;
+            var attribute = attributeitem.GetValue();
+            var touch = rbSetTouch.Checked;
+            var value = rbSetValue.Checked ? GetValue(attributeitem.Metadata.AttributeType) : null;
+            working = true;
+            WorkAsync("Updating records",
+                (bgworker, workargs) =>
+                {
+                    var total = records.Entities.Count;
+                    var current = 0;
+                    var updated = 0;
+                    foreach (var record in records.Entities)
+                    {
+                        current++;
+                        var pct = 100 * current / total;
+                        if (onlychange && !record.Contains(attribute))
+                        {
+                            bgworker.ReportProgress(pct, "Reloading record " + current.ToString());
+                            var newrecord = Service.Retrieve(entity, record.Id, new ColumnSet(attribute));
+                            if (newrecord.Contains(attribute))
+                            {
+                                record.Attributes.Add(attribute, newrecord[attribute]);
+                            }
+                        }
+                        bgworker.ReportProgress(pct, "Updating record " + current.ToString());
+                        var currentvalue = record.Contains(attribute) ? record[attribute] : null;
+                        var updaterecord = new Entity(entity);
+                        updaterecord.Id = record.Id;
+                        if (touch)
+                        {
+                            value = currentvalue;
+                        }
+                        if (!onlychange || !ValuesEqual(value, currentvalue))
+                        {
+                            updaterecord.Attributes.Add(attribute, value);
+                            Service.Update(updaterecord);
+                            if (record.Contains(attribute))
+                            {
+                                record[attribute] = value;
+                            }
+                            else
+                            {
+                                record.Attributes.Add(attribute, value);
+                            }
+                            updated++;
+                        }
+                    }
+                    workargs.Result = updated;
+                },
+                (completedargs) =>
+                {
+                    working = false;
+                    if (completedargs.Error != null)
+                    {
+                        MessageBox.Show(completedargs.Error.Message, "Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        lblUpdateStatus.Text = completedargs.Result.ToString() + " records updated";
+                    }
+                },
+                (changeargs) =>
+                {
+                    SetWorkingMessage(changeargs.UserState.ToString());
+                });
+        }
+
+        #endregion Async SDK methods
     }
 }
