@@ -24,7 +24,7 @@ after_build:
 - appveyor PushArtifact XrmToolBox.Plugins-%APPVEYOR_REPO_COMMIT:~0,7%.zip
 deploy:
 - provider: GitHub
-  tag: 1.$(year).$(month).{build}
+  tag: 1.$(year).$(month).{version}
   auth_token:
     secure: 93a1a2Zfpvh/BMCM/kyXS/shMcTeSWdv4uRffo2UPAuO4+hq7qSX9bwoYbj9sv5W 
   prerelease: true
