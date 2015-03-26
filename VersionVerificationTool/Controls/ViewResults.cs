@@ -50,6 +50,8 @@
                 var assembliesGroup = new ListViewGroup(Constants.UI.Labels.ASSEMBLIES);
                 this.lvMatrix.Groups.Add(assembliesGroup);
 
+                ListViewItem.ListViewSubItem subitem;
+                
                 foreach (var solution in value.First().Solutions)
                 {
                     var row = new ListViewItem(solution.FriendlyName);
@@ -66,12 +68,22 @@
                         if (i++ == 0)
                         {
                             reference.Add(current);
-                            row.SubItems.Add(Helpers.CreateCell(null, current));
+                            subitem = Helpers.CreateCell(null, current);
                         }
                         else
                         {
-                            row.SubItems.Add(Helpers.CreateCell(reference, current));
+                            subitem = Helpers.CreateCell(reference, current);
                         }
+
+                        if (current != null)
+                        {
+                            if (current.IsManaged)
+                            {
+                                subitem.Text += " / Managed";
+                            }
+                        }
+
+                        row.SubItems.Add(subitem);
                     }
                     this.lvMatrix.Items.Add(row);
                 }
@@ -92,12 +104,22 @@
                         if (i++ == 0)
                         {
                             reference.Add(current);
-                            row.SubItems.Add(Helpers.CreateCell(null, current));
+                            subitem = Helpers.CreateCell(null, current);
                         }
                         else
                         {
-                            row.SubItems.Add(Helpers.CreateCell(reference, current));
+                            subitem = Helpers.CreateCell(reference, current);
                         }
+
+                        if (current != null)
+                        {
+                            if (current.IsolationMode == IsolationMode.Sandbox)
+                            {
+                                subitem.Text += " / Sandbox";
+                            }
+                        }
+
+                        row.SubItems.Add(subitem);
                     }
                     this.lvMatrix.Items.Add(row);
                 }

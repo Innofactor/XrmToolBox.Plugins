@@ -19,7 +19,13 @@
             var query = new QueryExpression(Constants.Crm.Entities.PLUGIN_ASSEMBLY);
             query.Criteria = new FilterExpression();
             query.Criteria.AddCondition(Constants.Crm.Attributes.IS_HIDDEN, ConditionOperator.Equal, false);
-            query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.NAME, Constants.Crm.Attributes.VERSION, Constants.Crm.Attributes.CULTURE, Constants.Crm.Attributes.PUBLIC_KEY_TOKEN });
+            query.ColumnSet = new ColumnSet(new string[] { 
+                Constants.Crm.Attributes.CULTURE, 
+                Constants.Crm.Attributes.ISOLATION_MODE,
+                Constants.Crm.Attributes.NAME, 
+                Constants.Crm.Attributes.PUBLIC_KEY_TOKEN,
+                Constants.Crm.Attributes.VERSION
+            });
 
             return query;
         }
@@ -35,7 +41,7 @@
         {
             var cell = new ListViewItem.ListViewSubItem();
 
-            // Reference solution
+            // Reference item
             if (reference == null)
             {
                 cell.Text = current.Version.ToString();
@@ -44,26 +50,27 @@
             }
             else
             {
-                // Solution is not present on target system
+                // Item is not present on target system
                 if (current == null)
                 {
                     cell.Text = Constants.U_ITEM_NA;
                     cell.ForeColor = Color.LightGray;
                     cell.BackColor = Color.White;
-                    cell.Tag = "Item is unavailable on the target organization";
+                    cell.Tag = "Item is unavailable on the reference organization";
                 }
                 else
                 {
                     cell.Text = current.Version.ToString();
-                    // Solutioin is the same on both systems
+                    // Item is the same on both systems
                     if (reference.Exists(x => x.Version == current.Version))
                     {
                         cell.BackColor = Color.YellowGreen;
-                        cell.Tag = "Item is unavailable on the target organization";
+                        cell.Tag = "Item has the same version as the one on the reference organization";
                     }
                     else
                     {
                         cell.BackColor = Color.Orange;
+                        cell.Tag = "Item has different version as the one on the reference organization";
                     }
                 }
             }

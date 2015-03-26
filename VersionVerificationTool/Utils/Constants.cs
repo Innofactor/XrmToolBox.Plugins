@@ -39,6 +39,7 @@
 
                 internal const string CULTURE = "culture";
                 internal const string FRIENDLY_NAME = "friendlyname";
+                internal const string ISOLATION_MODE = "isolationmode";
                 internal const string IS_HIDDEN = "ishidden";
                 internal const string IS_MANAGED = "ismanaged";
                 internal const string IS_VISIBLE = "isvisible";

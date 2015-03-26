@@ -1,0 +1,30 @@
+version: '{build}'
+branches:
+  only:
+  - master
+skip_tags: true
+configuration: Release
+platform: Any CPU
+shallow_clone: true
+init:
+- SET /A "year=%Date:~10,4%"
+- SET /A "month=%Date:~4,2%"
+assembly_info:
+  patch: true
+  file: VersionInfo.cs
+  assembly_version: 1.$(year).$(month).{build}
+  assembly_file_version: 1.$(year).$(month).{build}
+  assembly_informational_version: $(APPVEYOR_REPO_COMMIT)
+build:
+  project: XrmToolBox.Plugins.sln
+  parallel: true
+  verbosity: normal
+after_build:
+- 7z a XrmToolBox.Plugins-%APPVEYOR_REPO_COMMIT:~0,7%.zip %APPVEYOR_BUILD_FOLDER%\Output\%CONFIGURATION%\Cinteros.Xrm.*.dll
+- appveyor PushArtifact XrmToolBox.Plugins-%APPVEYOR_REPO_COMMIT:~0,7%.zip
+deploy:
+- provider: GitHub
+  tag: 1.$(year).$(month).{build}
+  auth_token:
+    secure: 93a1a2Zfpvh/BMCM/kyXS/shMcTeSWdv4uRffo2UPAuO4+hq7qSX9bwoYbj9sv5W 
+  prerelease: true

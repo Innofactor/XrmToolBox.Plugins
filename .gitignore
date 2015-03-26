@@ -190,3 +190,8 @@ Cinteros Utils/lib
 
 # VIM specific
 *.swp
+*.orig
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*

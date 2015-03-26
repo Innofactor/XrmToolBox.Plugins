@@ -22,13 +22,16 @@
         public PluginAssembly(Entity entity)
         {
             this.FriendlyName = (string)entity.Attributes[Constants.Crm.Attributes.NAME];
-            this.Version = new Version((string)entity.Attributes[Constants.Crm.Attributes.VERSION]);
+
+            this.IsolationMode = (IsolationMode)((OptionSetValue)entity.Attributes[Constants.Crm.Attributes.ISOLATION_MODE]).Value;
 
             this.UniqueName = string.Format("{0}, Version={1}, Culture={2}, PublicKeyToken={3}",
                 this.FriendlyName,
                 this.Version,
                 (string)entity.Attributes[Constants.Crm.Attributes.CULTURE],
                 (string)entity.Attributes[Constants.Crm.Attributes.PUBLIC_KEY_TOKEN]);
+
+            this.Version = new Version((string)entity.Attributes[Constants.Crm.Attributes.VERSION]);
         }
 
         #endregion Public Constructors
@@ -39,6 +42,15 @@
         /// Gets or sets assembly's friendly name
         /// </summary>
         public string FriendlyName
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets assembly's Isolation Mode
+        /// </summary>
+        public IsolationMode IsolationMode
         {
             get;
             set;
