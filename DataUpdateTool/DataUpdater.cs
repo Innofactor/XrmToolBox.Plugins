@@ -17,10 +17,11 @@ using Cinteros.Xrm.DataUpdateTool.AppCode;
 using System.Configuration;
 using System.Reflection;
 using System.Xml;
+using XrmToolBox;
 
 namespace Cinteros.Xrm.DataUpdateTool
 {
-    public partial class DataUpdater : XrmToolBox.PluginBase, XrmToolBox.IGitHubPlugin, XrmToolBox.IPayPalPlugin
+    public partial class DataUpdater : PluginBase, IGitHubPlugin, IPayPalPlugin, IMessageBusHost
     {
         const string settingfile = "Cinteros.Xrm.DataUpdater.Settings.xml";
         private static string fetchTemplate = "<fetch><entity name=\"\"/></fetch>";
@@ -73,6 +74,17 @@ namespace Cinteros.Xrm.DataUpdateTool
         public string EmailAccount
         {
             get { return "jonas@rappen.net"; }
+        }
+
+        public event EventHandler<MessageBusEventArgs> OnOutgoingMessage;
+
+        public void OnIncomingMessage(MessageBusEventArgs message)
+        {
+            if (message.SourcePlugin == "FetchXML Builder" &&
+                message.TargetArgument != null && message.TargetArgument is string)
+            {
+                FetchUpdated((string)message.TargetArgument);
+            }
         }
 
         #endregion interface implementation
@@ -304,9 +316,6 @@ namespace Cinteros.Xrm.DataUpdateTool
             {
                 try
                 {
-                    tsbOpen.Enabled = enabled;
-                    tsmiOpenFile.Enabled = enabled;
-                    tsmiOpenView.Enabled = enabled && Service != null;
                     gb1select.Enabled = enabled && Service != null;
                     gb2attribute.Enabled = gb1select.Enabled && records != null && records.Entities.Count > 0;
                     gb3value.Enabled = gb2attribute.Enabled && cmbAttribute.SelectedItem is AttributeItem;
@@ -327,8 +336,9 @@ namespace Cinteros.Xrm.DataUpdateTool
             }
         }
 
-        private void OpenFile()
+        private string OpenFile()
         {
+            var result = "";
             var ofd = new OpenFileDialog
             {
                 Title = "Select an XML file containing FetchXML",
@@ -350,10 +360,11 @@ namespace Cinteros.Xrm.DataUpdateTool
                 }
                 else
                 {
-                    fetchXml = fetchDoc.OuterXml;
+                    result = fetchDoc.OuterXml;
                     EnableControls(true);
                 }
             }
+            return result;
         }
 
         private void OpenView()
@@ -370,19 +381,49 @@ namespace Cinteros.Xrm.DataUpdateTool
             {
                 view = viewselector.View;
                 var fetchDoc = new XmlDocument();
-                fetchDoc.LoadXml(view["fetchxml"].ToString());
-                fetchXml = fetchDoc.OuterXml;
+                if (view.Contains("fetchxml"))
+                {
+                    fetchDoc.LoadXml(view["fetchxml"].ToString());
+                    FetchUpdated(fetchDoc.OuterXml);
+                }
             }
             EnableControls(true);
         }
 
         private void GetRecords()
         {
-            var fetchwin = new XmlContentDisplayDialog(fetchXml, "Enter FetchXML to retrieve records to update", true, true);
-            fetchwin.StartPosition = FormStartPosition.CenterParent;
-            if (fetchwin.ShowDialog() == DialogResult.OK)
+            switch (cmbSource.SelectedIndex)
             {
-                fetchXml = fetchwin.txtXML.Text;
+                case 0: // Edit
+                    var fetchwin = new XmlContentDisplayDialog(fetchXml, "Enter FetchXML to retrieve records to update", true, true);
+                    fetchwin.StartPosition = FormStartPosition.CenterParent;
+                    if (fetchwin.ShowDialog() == DialogResult.OK)
+                    {
+                        FetchUpdated(fetchwin.txtXML.Text);
+                    }
+                    break;
+                case 1: // FXB
+                    var mbargs = new MessageBusEventArgs("FetchXML Builder");
+                    mbargs.TargetArgument = fetchXml;
+                    OnOutgoingMessage(this, mbargs);
+                    break;
+                case 2: // File
+                    FetchUpdated(OpenFile());
+                    break;
+                case 3: // View
+                    OpenView();
+                    break;
+                default:
+                    MessageBox.Show("Select record source.", "Get Records", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    break;
+            }
+        }
+
+        private void FetchUpdated(string fetch)
+        {
+            if (!string.IsNullOrWhiteSpace(fetch))
+            {
+                fetchXml = fetch;
                 RetrieveRecords(fetchXml, RetrieveRecordsReady);
             }
         }

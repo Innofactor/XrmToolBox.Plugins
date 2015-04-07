@@ -35,11 +35,6 @@
             this.tsbCloseThisTab = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbAbout = new System.Windows.Forms.ToolStripButton();
-            this.tsbOpen = new System.Windows.Forms.ToolStripDropDownButton();
-            this.tsmiOpenFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiOpenView = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiOpenCWP = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbOptions = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsmiFriendly = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
@@ -67,6 +62,7 @@
             this.cmbValue = new System.Windows.Forms.ComboBox();
             this.chkOnlyChange = new System.Windows.Forms.CheckBox();
             this.gb1select = new System.Windows.Forms.GroupBox();
+            this.cmbSource = new System.Windows.Forms.ComboBox();
             this.gb2attribute = new System.Windows.Forms.GroupBox();
             this.gb3value = new System.Windows.Forms.GroupBox();
             this.gb4update = new System.Windows.Forms.GroupBox();
@@ -101,7 +97,6 @@
             this.tsbCloseThisTab,
             this.toolStripSeparator4,
             this.tsbAbout,
-            this.tsbOpen,
             this.tsbOptions});
             this.toolStripMain.Location = new System.Drawing.Point(0, 0);
             this.toolStripMain.Name = "toolStripMain";
@@ -133,47 +128,6 @@
             this.tsbAbout.Size = new System.Drawing.Size(60, 22);
             this.tsbAbout.Text = "About";
             this.tsbAbout.Click += new System.EventHandler(this.tsbAbout_Click);
-            // 
-            // tsbOpen
-            // 
-            this.tsbOpen.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiOpenFile,
-            this.toolStripSeparator1,
-            this.tsmiOpenView,
-            this.tsmiOpenCWP});
-            this.tsbOpen.Image = ((System.Drawing.Image)(resources.GetObject("tsbOpen.Image")));
-            this.tsbOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbOpen.Name = "tsbOpen";
-            this.tsbOpen.Size = new System.Drawing.Size(65, 22);
-            this.tsbOpen.Text = "Open";
-            this.tsbOpen.ToolTipText = "Open FetchXML file";
-            // 
-            // tsmiOpenFile
-            // 
-            this.tsmiOpenFile.Name = "tsmiOpenFile";
-            this.tsmiOpenFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.tsmiOpenFile.Size = new System.Drawing.Size(176, 22);
-            this.tsmiOpenFile.Text = "Open File...";
-            this.tsmiOpenFile.Click += new System.EventHandler(this.tsmiOpenFile_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(173, 6);
-            // 
-            // tsmiOpenView
-            // 
-            this.tsmiOpenView.Name = "tsmiOpenView";
-            this.tsmiOpenView.Size = new System.Drawing.Size(176, 22);
-            this.tsmiOpenView.Text = "Open View...";
-            this.tsmiOpenView.Click += new System.EventHandler(this.tsmiOpenView_Click);
-            // 
-            // tsmiOpenCWP
-            // 
-            this.tsmiOpenCWP.Name = "tsmiOpenCWP";
-            this.tsmiOpenCWP.Size = new System.Drawing.Size(176, 22);
-            this.tsmiOpenCWP.Text = "Open CWP Feed...";
-            this.tsmiOpenCWP.Visible = false;
             // 
             // tsbOptions
             // 
@@ -332,9 +286,9 @@
             // 
             // btnGetRecords
             // 
-            this.btnGetRecords.Location = new System.Drawing.Point(18, 29);
+            this.btnGetRecords.Location = new System.Drawing.Point(196, 29);
             this.btnGetRecords.Name = "btnGetRecords";
-            this.btnGetRecords.Size = new System.Drawing.Size(118, 23);
+            this.btnGetRecords.Size = new System.Drawing.Size(95, 23);
             this.btnGetRecords.TabIndex = 24;
             this.btnGetRecords.Text = "Get records";
             this.btnGetRecords.UseVisualStyleBackColor = true;
@@ -435,6 +389,7 @@
             // 
             this.gb1select.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gb1select.Controls.Add(this.cmbSource);
             this.gb1select.Controls.Add(this.btnGetRecords);
             this.gb1select.Controls.Add(this.lblRecords);
             this.gb1select.Location = new System.Drawing.Point(6, 16);
@@ -443,6 +398,20 @@
             this.gb1select.TabIndex = 34;
             this.gb1select.TabStop = false;
             this.gb1select.Text = "1. Select records to update";
+            // 
+            // cmbSource
+            // 
+            this.cmbSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSource.FormattingEnabled = true;
+            this.cmbSource.Items.AddRange(new object[] {
+            "Edit FetchXML",
+            "Use FetchXML Builder",
+            "Open File",
+            "Open View"});
+            this.cmbSource.Location = new System.Drawing.Point(21, 30);
+            this.cmbSource.Name = "cmbSource";
+            this.cmbSource.Size = new System.Drawing.Size(169, 21);
+            this.cmbSource.TabIndex = 26;
             // 
             // gb2attribute
             // 
@@ -636,11 +605,7 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label label2;
-        internal System.Windows.Forms.ToolStripDropDownButton tsbOpen;
-        private System.Windows.Forms.ToolStripMenuItem tsmiOpenFile;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem tsmiOpenView;
-        private System.Windows.Forms.ToolStripMenuItem tsmiOpenCWP;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.ComboBox cmbSource;
     }
 }
