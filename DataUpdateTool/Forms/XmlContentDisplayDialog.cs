@@ -1,6 +1,7 @@
 ﻿using Cinteros.Xrm.XmlEditorUtils;
 using System;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -99,7 +100,8 @@ namespace Cinteros.Xrm.DataUpdateTool.Forms
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://fxb.xrmtoolbox.com");
+            var currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            System.Diagnostics.Process.Start("http://fxb.xrmtoolbox.com/?src=DBU." + currentVersion);
         }
     }
 }

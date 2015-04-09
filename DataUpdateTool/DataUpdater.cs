@@ -18,6 +18,7 @@ using System.Configuration;
 using System.Reflection;
 using System.Xml;
 using XrmToolBox;
+using XrmToolBox.Forms;
 
 namespace Cinteros.Xrm.DataUpdateTool
 {
@@ -95,6 +96,11 @@ namespace Cinteros.Xrm.DataUpdateTool
         {
             EnableControls(false);
             LoadSetting();
+            var tasks = new List<Task>
+            {
+                this.LaunchVersionCheck("Cinteros", "XrmToolBox.Plugins", "http://cinteros.xrmtoolbox.com/?src=DBU.{0}")
+            };
+            tasks.ForEach(x => x.Start());
             EnableControls(true);
         }
 
@@ -654,6 +660,26 @@ namespace Cinteros.Xrm.DataUpdateTool
                 }
             }
             EnableControls(true);
+        }
+
+        private Task LaunchVersionCheck(string ghUser, string ghRepo, string dlUrl)
+        {
+            return new Task(() =>
+            {
+                var currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                var cvc = new XrmToolBox.AppCode.GithubVersionChecker(currentVersion, ghUser, ghRepo);
+
+                cvc.Run();
+
+                if (cvc.Cpi != null && !string.IsNullOrEmpty(cvc.Cpi.Version))
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        var nvForm = new NewVersionForm(currentVersion, cvc.Cpi.Version, cvc.Cpi.Description, ghUser, ghRepo, new Uri(string.Format(dlUrl, currentVersion)));
+                        nvForm.ShowDialog(this);
+                    }));
+                }
+            });
         }
 
         #endregion Methods
