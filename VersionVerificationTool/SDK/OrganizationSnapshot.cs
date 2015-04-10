@@ -6,8 +6,6 @@
     using System.Xml;
     using Cinteros.Xrm.Utils;
     using McTools.Xrm.Connection;
-    using Microsoft.Xrm.Client;
-    using Microsoft.Xrm.Client.Services;
     using Microsoft.Xrm.Sdk;
 
     public class OrganizationSnapshot

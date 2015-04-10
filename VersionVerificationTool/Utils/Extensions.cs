@@ -82,7 +82,6 @@
             }
 
             return document;
-
         }
 
         #endregion Public Methods
