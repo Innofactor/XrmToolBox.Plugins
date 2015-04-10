@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using Cinteros.Xrm.Utils;
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Query;
 
@@ -19,7 +20,7 @@
             var query = new QueryExpression();
 
             query.EntityName = "pluginassembly";
-            query.ColumnSet = new ColumnSet(new string[] { "name", "version", "culture", "publickeytoken" });
+            query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.NAME, Constants.Crm.Attributes.VERSION, Constants.Crm.Attributes.CULTURE, Constants.Crm.Attributes.PUBLIC_KEY_TOKEN });
             query.Criteria = new FilterExpression();
             query.Criteria.AddCondition("ishidden", ConditionOperator.Equal, false);
 
@@ -78,11 +79,6 @@
             query.Criteria = new FilterExpression(LogicalOperator.Or);
             query.Criteria.AddCondition("ishidden", ConditionOperator.Equal, false);
             
-            if (pluginAssemblyId != null)
-            {
-                query.Criteria.AddCondition("plugintype.pluginassemblyid", ConditionOperator.Equal, pluginAssemblyId);
-            }
-
             query.Orders.Add(new OrderExpression("name", OrderType.Ascending));
 
             var link = new LinkEntity
@@ -91,10 +87,15 @@
                 LinkToEntityName = "plugintype",
                 LinkFromAttributeName = "plugintypeid",
                 LinkToAttributeName = "plugintypeid",
-                JoinOperator = JoinOperator.LeftOuter,
+                JoinOperator = JoinOperator.Natural,
                 EntityAlias = "plugintype",
-                Columns = new ColumnSet(new string[] { "friendlyname", "typename", "pluginassemblyid" })
+                Columns = new ColumnSet(new string[] { "friendlyname", "typename", "pluginassemblyid" }),
             };
+            
+            if (pluginAssemblyId != null)
+            {
+                link.LinkCriteria.AddCondition("pluginassemblyid", ConditionOperator.Equal, pluginAssemblyId);
+            }
 
             query.LinkEntities.Add(link);
 

@@ -69,16 +69,28 @@
                 });
         }
 
-        public void RetrieveSteps()
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void cbAssemblies_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var selectedItem = ((ComboBox)sender).SelectedItem;
+
+            var previousGroups = this.lvSteps.Groups;
+            var previousItems = this.lvSteps.Items;
+
             this.WorkAsync("Loading steps...",
-                e =>
+                a =>
                 {
-                    e.Result = this.Service.GetSdkMessageProcessingSteps();
+                    a.Result = this.Service.GetSdkMessageProcessingSteps(((PluginAssembly)selectedItem).Id);
                 },
-                e =>
+                a =>
                 {
-                    var steps = (Entity[])e.Result;
+                    this.lvSteps.Items.Clear();
+                    this.lvSteps.Groups.Clear();
+
+                    var steps = (Entity[])a.Result;
                     var types = steps.GroupBy(x => x["plugintypeid"]).Select(y => y.First()).ToArray();
 
                     var groups = new Dictionary<Guid, int>();
@@ -105,14 +117,6 @@
                         this.lvSteps.Items.Add(item);
                     }
                 });
-        }
-
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private void cbAssemblies_SelectedIndexChanged(object sender, EventArgs e)
-        {
         }
 
         private void MainControl_Enter(object sender, EventArgs e)
