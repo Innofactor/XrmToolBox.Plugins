@@ -5,8 +5,8 @@
     using System.ComponentModel;
     using System.Linq;
     using System.Windows.Forms;
-    using Cinteros.Xrm.VersionVerificationTool.SDK;
-    using Cinteros.Xrm.VersionVerificationTool.Utils;
+    using Cinteros.Xrm.SDK;
+    using Cinteros.Xrm.Utils;
     using McTools.Xrm.Connection;
     using XrmToolBox;
 

@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
-    using Cinteros.Xrm.VersionVerificationTool.SDK;
+    using Cinteros.Xrm.SDK;
     using Microsoft.Xrm.Sdk;
     using XrmToolBox;
 
