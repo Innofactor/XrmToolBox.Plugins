@@ -35,8 +35,8 @@
             this.lvSteps = new System.Windows.Forms.ListView();
             this.chName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lAssemblies = new System.Windows.Forms.Label();
             this.cbAssemblies = new System.Windows.Forms.ComboBox();
+            this.lAssemblies = new System.Windows.Forms.Label();
             this.tsMenu.SuspendLayout();
             this.gbSteps.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -63,7 +63,7 @@
             // 
             // gbSteps
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.gbSteps, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.gbSteps, 4);
             this.gbSteps.Controls.Add(this.lvSteps);
             this.gbSteps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbSteps.Location = new System.Drawing.Point(3, 29);
@@ -95,9 +95,11 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.gbSteps, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.cbAssemblies, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lAssemblies, 0, 0);
@@ -110,6 +112,18 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(600, 375);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
+            // cbAssemblies
+            // 
+            this.cbAssemblies.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbAssemblies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAssemblies.FormattingEnabled = true;
+            this.cbAssemblies.Location = new System.Drawing.Point(103, 3);
+            this.cbAssemblies.Name = "cbAssemblies";
+            this.cbAssemblies.Size = new System.Drawing.Size(194, 21);
+            this.cbAssemblies.Sorted = true;
+            this.cbAssemblies.TabIndex = 3;
+            this.cbAssemblies.SelectedIndexChanged += new System.EventHandler(this.cbAssemblies_SelectedIndexChanged);
+            // 
             // lAssemblies
             // 
             this.lAssemblies.AutoSize = true;
@@ -120,18 +134,6 @@
             this.lAssemblies.Size = new System.Drawing.Size(91, 20);
             this.lAssemblies.TabIndex = 2;
             this.lAssemblies.Text = "Select Assembly:";
-            // 
-            // cbAssemblies
-            // 
-            this.cbAssemblies.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbAssemblies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAssemblies.FormattingEnabled = true;
-            this.cbAssemblies.Location = new System.Drawing.Point(103, 3);
-            this.cbAssemblies.Name = "cbAssemblies";
-            this.cbAssemblies.Size = new System.Drawing.Size(494, 21);
-            this.cbAssemblies.Sorted = true;
-            this.cbAssemblies.TabIndex = 3;
-            this.cbAssemblies.SelectedIndexChanged += new System.EventHandler(this.cbAssemblies_SelectedIndexChanged);
             // 
             // MainControl
             // 
