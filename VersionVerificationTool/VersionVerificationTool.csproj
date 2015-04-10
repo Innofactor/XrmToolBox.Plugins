@@ -33,15 +33,6 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug All Cinteros XTB|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\CintXTB\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="McTools.Xrm.Connection">
       <HintPath>..\Dependencies\McTools.Xrm.Connection.dll</HintPath>
@@ -70,15 +61,39 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Common\SDK\IComparableEntity.cs">
+      <Link>SDK\IComparableEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\SDK\IsolationMode.cs">
+      <Link>SDK\IsolationMode.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\SDK\OrganizationSnapshot.cs">
+      <Link>SDK\OrganizationSnapshot.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\SDK\PluginAssembly.cs">
+      <Link>SDK\PluginAssembly.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\SDK\Solution.cs">
+      <Link>SDK\Solution.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Utils\Constants.cs">
+      <Link>Utils\Constants.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Utils\Extensions.cs">
+      <Link>Utils\Extensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Utils\Helpers.cs">
+      <Link>Utils\Helpers.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Utils\IUpdateToolStrip.cs">
+      <Link>Utils\IUpdateToolStrip.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Utils\UpdateToolStripEventArgs.cs">
+      <Link>Utils\UpdateToolStripEventArgs.cs</Link>
+    </Compile>
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="SDK\IComparableEntity.cs" />
-    <Compile Include="SDK\IsolationMode.cs" />
-    <Compile Include="Utils\IUpdateToolStrip.cs" />
-    <Compile Include="SDK\OrganizationSnapshot.cs" />
-    <Compile Include="SDK\PluginAssembly.cs" />
-    <Compile Include="Utils\UpdateToolStripEventArgs.cs" />
     <Compile Include="Controls\ViewResults.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -103,10 +118,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utils\Constants.cs" />
-    <Compile Include="Utils\Extensions.cs" />
-    <Compile Include="Utils\Helpers.cs" />
-    <Compile Include="SDK\Solution.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\ViewResults.resx">

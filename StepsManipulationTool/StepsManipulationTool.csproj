@@ -67,20 +67,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\VersionInfo.cs">
-      <Link>Properties\VersionInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\VersionVerificationTool\SDK\IComparableEntity.cs">
+    <Compile Include="..\Common\SDK\IComparableEntity.cs">
       <Link>SDK\IComparableEntity.cs</Link>
     </Compile>
-    <Compile Include="..\VersionVerificationTool\SDK\IsolationMode.cs">
+    <Compile Include="..\Common\SDK\IsolationMode.cs">
       <Link>SDK\IsolationMode.cs</Link>
     </Compile>
-    <Compile Include="..\VersionVerificationTool\SDK\PluginAssembly.cs">
+    <Compile Include="..\Common\SDK\PluginAssembly.cs">
       <Link>SDK\PluginAssembly.cs</Link>
     </Compile>
-    <Compile Include="..\VersionVerificationTool\Utils\Constants.cs">
+    <Compile Include="..\Common\Utils\Constants.cs">
       <Link>Utils\Constants.cs</Link>
+    </Compile>
+    <Compile Include="..\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="MainControl.cs">

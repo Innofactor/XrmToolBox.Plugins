@@ -139,13 +139,13 @@
             this.lAssemblies.TabIndex = 2;
             this.lAssemblies.Text = "Select Assembly:";
             // 
-            // cdTypes
+            // cbTypes
             // 
             this.cbTypes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTypes.FormattingEnabled = true;
             this.cbTypes.Location = new System.Drawing.Point(403, 3);
-            this.cbTypes.Name = "cdTypes";
+            this.cbTypes.Name = "cbTypes";
             this.cbTypes.Size = new System.Drawing.Size(194, 21);
             this.cbTypes.TabIndex = 4;
             // 
