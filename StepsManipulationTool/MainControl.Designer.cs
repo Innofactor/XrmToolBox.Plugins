@@ -37,6 +37,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cbAssemblies = new System.Windows.Forms.ComboBox();
             this.lAssemblies = new System.Windows.Forms.Label();
+            this.cdTypes = new System.Windows.Forms.ComboBox();
+            this.lTypes = new System.Windows.Forms.Label();
             this.tsMenu.SuspendLayout();
             this.gbSteps.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -103,6 +105,8 @@
             this.tableLayoutPanel1.Controls.Add(this.gbSteps, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.cbAssemblies, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lAssemblies, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cdTypes, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lTypes, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 25);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -135,6 +139,27 @@
             this.lAssemblies.TabIndex = 2;
             this.lAssemblies.Text = "Select Assembly:";
             // 
+            // cdTypes
+            // 
+            this.cdTypes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cdTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cdTypes.FormattingEnabled = true;
+            this.cdTypes.Location = new System.Drawing.Point(403, 3);
+            this.cdTypes.Name = "cdTypes";
+            this.cdTypes.Size = new System.Drawing.Size(194, 21);
+            this.cdTypes.TabIndex = 4;
+            // 
+            // lTypes
+            // 
+            this.lTypes.AutoSize = true;
+            this.lTypes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lTypes.Location = new System.Drawing.Point(309, 6);
+            this.lTypes.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
+            this.lTypes.Name = "lTypes";
+            this.lTypes.Size = new System.Drawing.Size(91, 20);
+            this.lTypes.TabIndex = 5;
+            this.lTypes.Text = "Select Type:";
+            // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -163,5 +188,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label lAssemblies;
         private System.Windows.Forms.ComboBox cbAssemblies;
+        private System.Windows.Forms.ComboBox cdTypes;
+        private System.Windows.Forms.Label lTypes;
     }
 }
