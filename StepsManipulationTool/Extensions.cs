@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xrm.Sdk;
-using Microsoft.Xrm.Sdk.Query;
-
-namespace Cinteros.Xrm.StepsManipulator
+﻿namespace Cinteros.Xrm.StepsManipulator
 {
+    using System;
+    using System.Linq;
+    using Microsoft.Xrm.Sdk;
+    using Microsoft.Xrm.Sdk.Query;
+
     public static class Extensions
     {
         public static Entity[] GetSdkMessageProcessingStepImages(this IOrganizationService service, Entity[] steps)
@@ -73,6 +70,19 @@ namespace Cinteros.Xrm.StepsManipulator
             return service.RetrieveMultiple(query).Entities.FirstOrDefault();
         }
 
+        /// <summary>
+        /// Gets all registered plugin assemblies in the current organization
+        /// </summary>
+        /// <param name="service"></param>
+        /// <returns>Array of entitiies</returns>
+        public static Entity[] GetPluginAssemblies(this IOrganizationService service)
+        {
+            var query = new QueryExpression();
 
+            query.EntityName = "pluginassembly";
+            query.ColumnSet = new ColumnSet(true);
+
+            return service.RetrieveMultiple(query).Entities.ToArray<Entity>();
+        }
     }
 }
