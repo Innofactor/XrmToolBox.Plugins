@@ -124,11 +124,14 @@
             // cbAssemblies
             // 
             this.cbAssemblies.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbAssemblies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAssemblies.FormattingEnabled = true;
             this.cbAssemblies.Location = new System.Drawing.Point(103, 3);
             this.cbAssemblies.Name = "cbAssemblies";
             this.cbAssemblies.Size = new System.Drawing.Size(494, 21);
+            this.cbAssemblies.Sorted = true;
             this.cbAssemblies.TabIndex = 3;
+            this.cbAssemblies.SelectedIndexChanged += new System.EventHandler(this.cbAssemblies_SelectedIndexChanged);
             // 
             // MainControl
             // 

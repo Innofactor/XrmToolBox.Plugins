@@ -1,19 +1,13 @@
 ﻿namespace Cinteros.Xrm.StepsManipulator
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Data;
-    using System.Drawing;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Windows.Forms;
     using Microsoft.Xrm.Sdk;
     using XrmToolBox;
 
     public partial class MainControl : PluginBase, IGitHubPlugin
     {
+        #region Public Constructors
+
         public MainControl()
         {
             InitializeComponent();
@@ -21,69 +15,103 @@
             this.Enter += MainControl_Enter;
         }
 
-        void MainControl_Enter(object sender, EventArgs e)
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public Entity[] PluginAsseblies
         {
-            this.ExecuteMethod(RetrieveSteps);
+            get;
+            private set;
         }
+
+        public string RepositoryName
+        {
+            get
+            {
+                return "StepsManipulator";
+            }
+        }
+
+        public string UserName
+        {
+            get
+            {
+                return "Cinteros";
+            }
+        }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         public void RetrieveSteps()
         {
-            this.WorkAsync("Loading steps...",
+            this.WorkAsync("Loading assemblies...",
                 e =>
                 {
-                    e.Result = this.Service.GetSdkMessageProcessingSteps();
+                    e.Result = this.Service.GetPluginAssemblies();
                 },
                 e =>
                 {
-                    var steps = (Entity[])e.Result;
-                    var types = steps.GroupBy(x => x["plugintypeid"]).Select(y => y.First()).ToArray();
+                    this.PluginAsseblies = (Entity[])e.Result;
 
-                    var groups = new Dictionary<Guid, int>();
-                    var i = 0;
-
-                    foreach (var type in types)
+                    foreach (var assembly in (Entity[])e.Result)
                     {
-                        var item = new ListViewGroup
+                        if (assembly.Attributes.Contains("name"))
                         {
-                            Header = ((AliasedValue)type.Attributes["plugintype.typename"]).Value.ToString(),
-                        };
-                        this.lvSteps.Groups.Add(item);
-                        groups.Add(((EntityReference)type["plugintypeid"]).Id, i++);
+                            var name = assembly.Attributes["name"];
+                            this.cbAssemblies.Items.Add(name);
+                        }
                     }
 
-                    foreach (var step in steps)
-                    {
-                        var item = new ListViewItem
-                        {
-                            Text = (string)step["name"],
-                            Group = this.lvSteps.Groups[groups[((EntityReference)step["plugintypeid"]).Id]]
-                        };
-                        
-                        this.lvSteps.Items.Add(item);
-                    }
+                    //var steps = (Entity[])e.Result;
+                    //var types = steps.GroupBy(x => x["plugintypeid"]).Select(y => y.First()).ToArray();
+
+                    //var groups = new Dictionary<Guid, int>();
+                    //var i = 0;
+
+                    //foreach (var type in types)
+                    //{
+                    //    var item = new ListViewGroup
+                    //    {
+                    //        Header = ((AliasedValue)type.Attributes["plugintype.typename"]).Value.ToString(),
+                    //    };
+                    //    this.lvSteps.Groups.Add(item);
+                    //    groups.Add(((EntityReference)type["plugintypeid"]).Id, i++);
+                    //}
+
+                    //foreach (var step in steps)
+                    //{
+                    //    var item = new ListViewItem
+                    //    {
+                    //        Text = (string)step["name"],
+                    //        Group = this.lvSteps.Groups[groups[((EntityReference)step["plugintypeid"]).Id]]
+                    //    };
+
+                    //    this.lvSteps.Items.Add(item);
+                    //}
                 });
         }
 
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void cbAssemblies_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void MainControl_Enter(object sender, EventArgs e)
+        {
+            this.ExecuteMethod(RetrieveSteps);
+        }
 
         private void tsbClose_Click(object sender, EventArgs e)
         {
             this.CloseTool();
         }
 
-        public string UserName
-        {
-            get 
-            { 
-                return "Cinteros"; 
-            }
-        }
-
-        public string RepositoryName
-        {
-            get 
-            {
-                return "StepsManipulator";
-            }
-        }
+        #endregion Private Methods
     }
 }
