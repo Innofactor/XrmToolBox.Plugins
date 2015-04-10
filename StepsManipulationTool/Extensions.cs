@@ -13,7 +13,7 @@
         /// Gets all registered plugin assemblies in the current organization
         /// </summary>
         /// <param name="service"></param>
-        /// <returns>Array of entitiies</returns>
+        /// <returns>Array of entitiies representing plugin assemblies</returns>
         public static Entity[] GetPluginAssemblies(this IOrganizationService service)
         {
             var query = new QueryExpression();
@@ -26,6 +26,12 @@
             return service.RetrieveMultiple(query).Entities.ToArray<Entity>();
         }
 
+        /// <summary>
+        /// Gets plugin assembly registered in current organization
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="name">Name of the plugin assembly to rertrieve</param>
+        /// <returns>Plugin assembly entity</returns>
         public static Entity GetPluginAssembly(this IOrganizationService service, string name)
         {
             var query = new QueryExpression();
@@ -38,13 +44,13 @@
             return service.RetrieveMultiple(query).Entities.FirstOrDefault();
         }
 
-        public static Entity[] GetPluginTypes(this IOrganizationService service, Entity plugin)
+        public static Entity[] GetPluginTypes(this IOrganizationService service, Guid pluginAssemblyId)
         {
             var query = new QueryExpression();
             query.EntityName = "plugintype";
             query.ColumnSet = new ColumnSet(true);
             query.Criteria = new FilterExpression(LogicalOperator.Or);
-            query.Criteria.AddCondition("pluginassemblyid", ConditionOperator.Equal, (Guid)plugin["pluginassemblyid"]);
+            query.Criteria.AddCondition("pluginassemblyid", ConditionOperator.Equal, pluginAssemblyId);
 
             return service.RetrieveMultiple(query).Entities.ToArray<Entity>();
         }
@@ -64,25 +70,31 @@
             return service.RetrieveMultiple(query).Entities.ToArray<Entity>();
         }
 
-        public static Entity[] GetSdkMessageProcessingSteps(this IOrganizationService service)
+        public static Entity[] GetSdkMessageProcessingSteps(this IOrganizationService service, Guid? pluginAssemblyId = null)
         {
             var query = new QueryExpression();
             query.EntityName = "sdkmessageprocessingstep";
             query.ColumnSet = new ColumnSet(new string[] { "name", "sdkmessageprocessingstepid", "plugintypeid", "eventhandler" });
             query.Criteria = new FilterExpression(LogicalOperator.Or);
             query.Criteria.AddCondition("ishidden", ConditionOperator.Equal, false);
+            
+            if (pluginAssemblyId != null)
+            {
+                query.Criteria.AddCondition("plugintype.pluginassemblyid", ConditionOperator.Equal, pluginAssemblyId);
+            }
+
             query.Orders.Add(new OrderExpression("name", OrderType.Ascending));
 
             var link = new LinkEntity
-                {
-                    LinkFromEntityName = "sdkmessageprocessingstep",
-                    LinkToEntityName = "plugintype",
-                    LinkFromAttributeName = "plugintypeid",
-                    LinkToAttributeName = "plugintypeid",
-                    JoinOperator = JoinOperator.LeftOuter,
-                    EntityAlias = "plugintype",
-                    Columns = new ColumnSet(new string[] { "friendlyname", "typename" })
-                };
+            {
+                LinkFromEntityName = "sdkmessageprocessingstep",
+                LinkToEntityName = "plugintype",
+                LinkFromAttributeName = "plugintypeid",
+                LinkToAttributeName = "plugintypeid",
+                JoinOperator = JoinOperator.LeftOuter,
+                EntityAlias = "plugintype",
+                Columns = new ColumnSet(new string[] { "friendlyname", "typename", "pluginassemblyid" })
+            };
 
             query.LinkEntities.Add(link);
 
