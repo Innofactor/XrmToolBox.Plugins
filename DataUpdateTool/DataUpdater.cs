@@ -19,6 +19,7 @@ using System.Reflection;
 using System.Xml;
 using XrmToolBox;
 using XrmToolBox.Forms;
+using Cinteros.Xrm.FetchXmlBuilder;
 
 namespace Cinteros.Xrm.DataUpdateTool
 {
@@ -82,9 +83,10 @@ namespace Cinteros.Xrm.DataUpdateTool
         public void OnIncomingMessage(MessageBusEventArgs message)
         {
             if (message.SourcePlugin == "FetchXML Builder" &&
-                message.TargetArgument != null && message.TargetArgument is string)
+                message.TargetArgument != null &&
+                message.TargetArgument is FXBMessageBusArgument)
             {
-                FetchUpdated((string)message.TargetArgument);
+                FetchUpdated(((FXBMessageBusArgument)message.TargetArgument).FetchXML);
             }
         }
 
@@ -409,9 +411,13 @@ namespace Cinteros.Xrm.DataUpdateTool
                     }
                     break;
                 case 1: // FXB
-                    var mbargs = new MessageBusEventArgs("FetchXML Builder");
-                    mbargs.TargetArgument = fetchXml;
-                    OnOutgoingMessage(this, mbargs);
+                    var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder");
+                    var fXBMessageBusArgument = new FXBMessageBusArgument(FXBMessageBusRequest.FetchXML)
+                    {
+                        FetchXML = fetchXml
+                    };
+                    messageBusEventArgs.TargetArgument = fXBMessageBusArgument;
+                    OnOutgoingMessage(this, messageBusEventArgs);
                     break;
                 case 2: // File
                     FetchUpdated(OpenFile());
