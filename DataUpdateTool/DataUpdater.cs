@@ -86,7 +86,8 @@ namespace Cinteros.Xrm.DataUpdateTool
                 message.TargetArgument != null &&
                 message.TargetArgument is FXBMessageBusArgument)
             {
-                FetchUpdated(((FXBMessageBusArgument)message.TargetArgument).FetchXML);
+                var fxbArg = (FXBMessageBusArgument)message.TargetArgument;
+                FetchUpdated(fxbArg.FetchXML);
             }
         }
 
@@ -403,21 +404,29 @@ namespace Cinteros.Xrm.DataUpdateTool
             switch (cmbSource.SelectedIndex)
             {
                 case 0: // Edit
-                    var fetchwin = new XmlContentDisplayDialog(fetchXml, "Enter FetchXML to retrieve records to update", true, true);
-                    fetchwin.StartPosition = FormStartPosition.CenterParent;
-                    if (fetchwin.ShowDialog() == DialogResult.OK)
-                    {
-                        FetchUpdated(fetchwin.txtXML.Text);
-                    }
+                    GetFromEditor();
                     break;
                 case 1: // FXB
-                    var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder");
-                    var fXBMessageBusArgument = new FXBMessageBusArgument(FXBMessageBusRequest.FetchXML)
+                    try
                     {
-                        FetchXML = fetchXml
-                    };
-                    messageBusEventArgs.TargetArgument = fXBMessageBusArgument;
-                    OnOutgoingMessage(this, messageBusEventArgs);
+                        GetFromFXB();
+                    }
+                    catch (System.IO.FileNotFoundException)
+                    {
+                        if (MessageBox.Show("FetchXML Builder is not installed.\nDownload latest version from\n\nhttp://fxb.xrmtoolbox.com", "FetchXML Builder",
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
+                        {
+                            DownloadFXB();
+                        }
+                    }
+                    catch (PluginNotFoundException)
+                    {
+                        if (MessageBox.Show("FetchXML Builder was not found.\nDownload latest version from\n\nhttp://fxb.xrmtoolbox.com", "FetchXML Builder",
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
+                        {
+                            DownloadFXB();
+                        }
+                    }
                     break;
                 case 2: // File
                     FetchUpdated(OpenFile());
@@ -429,6 +438,27 @@ namespace Cinteros.Xrm.DataUpdateTool
                     MessageBox.Show("Select record source.", "Get Records", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     break;
             }
+        }
+
+        private void GetFromEditor()
+        {
+            var fetchwin = new XmlContentDisplayDialog(fetchXml, "Enter FetchXML to retrieve records to update", true, true);
+            fetchwin.StartPosition = FormStartPosition.CenterParent;
+            if (fetchwin.ShowDialog() == DialogResult.OK)
+            {
+                FetchUpdated(fetchwin.txtXML.Text);
+            }
+        }
+
+        private void GetFromFXB()
+        {
+            var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder");
+            var fXBMessageBusArgument = new FXBMessageBusArgument(FXBMessageBusRequest.FetchXML)
+            {
+                FetchXML = fetchXml
+            };
+            messageBusEventArgs.TargetArgument = fXBMessageBusArgument;
+            OnOutgoingMessage(this, messageBusEventArgs);
         }
 
         private void FetchUpdated(string fetch)
@@ -686,6 +716,12 @@ namespace Cinteros.Xrm.DataUpdateTool
                     }));
                 }
             });
+        }
+
+        internal static void DownloadFXB()
+        {
+            var currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            System.Diagnostics.Process.Start("http://fxb.xrmtoolbox.com/?src=DBU." + currentVersion);
         }
 
         #endregion Methods

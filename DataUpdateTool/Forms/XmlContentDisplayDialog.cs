@@ -100,8 +100,7 @@ namespace Cinteros.Xrm.DataUpdateTool.Forms
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            System.Diagnostics.Process.Start("http://fxb.xrmtoolbox.com/?src=DBU." + currentVersion);
+            DataUpdater.DownloadFXB();
         }
     }
 }

@@ -40,9 +40,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cinteros.Xrm.FetchXmlBuilder, Version=1.2015.4.14, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cinteros.Xrm.FetchXmlBuilder, Version=1.2015.4.15, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\FetchXMLBuilder\FetchXmlBuilder\bin\Debug\Cinteros.Xrm.FetchXmlBuilder.dll</HintPath>
+      <HintPath>..\Dependencies\Cinteros.Xrm.FetchXmlBuilder.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Cinteros.Xrm.XmlEditorUtils">
       <HintPath>..\Dependencies\Cinteros.Xrm.XmlEditorUtils.dll</HintPath>
