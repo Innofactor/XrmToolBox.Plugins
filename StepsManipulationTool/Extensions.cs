@@ -19,7 +19,7 @@
         {
             var query = new QueryExpression();
 
-            query.EntityName = "pluginassembly";
+            query.EntityName = Constants.Crm.Entities.PLUGIN_ASSEMBLY;
             query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.NAME, Constants.Crm.Attributes.VERSION, Constants.Crm.Attributes.CULTURE, Constants.Crm.Attributes.PUBLIC_KEY_TOKEN });
             query.Criteria = new FilterExpression();
             query.Criteria.AddCondition("ishidden", ConditionOperator.Equal, false);
@@ -37,10 +37,10 @@
         {
             var query = new QueryExpression();
 
-            query.EntityName = "pluginassembly";
+            query.EntityName = Constants.Crm.Entities.PLUGIN_ASSEMBLY;
             query.ColumnSet = new ColumnSet(true);
             query.Criteria = new FilterExpression();
-            query.Criteria.AddCondition("name", ConditionOperator.Equal, name);
+            query.Criteria.AddCondition(Constants.Crm.Attributes.NAME, ConditionOperator.Equal, name);
 
             return service.RetrieveMultiple(query).Entities.FirstOrDefault();
         }
@@ -48,7 +48,7 @@
         public static Entity[] GetPluginTypes(this IOrganizationService service, Guid pluginAssemblyId)
         {
             var query = new QueryExpression();
-            query.EntityName = "plugintype";
+            query.EntityName = Constants.Crm.Entities.PLUGIN_TYPE;
             query.ColumnSet = new ColumnSet(true);
             query.Criteria = new FilterExpression(LogicalOperator.Or);
             query.Criteria.AddCondition("pluginassemblyid", ConditionOperator.Equal, pluginAssemblyId);
@@ -74,8 +74,8 @@
         public static Entity[] GetSdkMessageProcessingSteps(this IOrganizationService service, Guid? pluginAssemblyId = null, Guid? pluginTypeId = null)
         {
             var query = new QueryExpression();
-            query.EntityName = "sdkmessageprocessingstep";
-            query.ColumnSet = new ColumnSet(new string[] { "name", "sdkmessageprocessingstepid", "plugintypeid", "eventhandler" });
+            query.EntityName = Constants.Crm.Entities.PROCESSING_STEP;
+            query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.NAME, "sdkmessageprocessingstepid", "plugintypeid", "eventhandler" });
             query.Criteria = new FilterExpression(LogicalOperator.And);
             query.Criteria.AddCondition("ishidden", ConditionOperator.Equal, false);
             
@@ -83,12 +83,12 @@
             {
                 query.Criteria.AddCondition("plugintypeid", ConditionOperator.Equal, pluginTypeId);
             }
-            query.Orders.Add(new OrderExpression("name", OrderType.Ascending));
+            query.Orders.Add(new OrderExpression(Constants.Crm.Attributes.NAME, OrderType.Ascending));
 
             var link = new LinkEntity
             {
-                LinkFromEntityName = "sdkmessageprocessingstep",
-                LinkToEntityName = "plugintype",
+                LinkFromEntityName = Constants.Crm.Entities.PROCESSING_STEP,
+                LinkToEntityName = Constants.Crm.Entities.PLUGIN_TYPE,
                 LinkFromAttributeName = "plugintypeid",
                 LinkToAttributeName = "plugintypeid",
                 JoinOperator = JoinOperator.Natural,

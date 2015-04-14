@@ -65,6 +65,16 @@
                 internal const string PLUGIN_ASSEMBLY = "pluginassembly";
 
                 /// <summary>
+                /// Name of the 'plugintype' entity
+                /// </summary>
+                internal const string PLUGIN_TYPE = "plugintype";
+
+                /// <summary>
+                /// Name of the 'sdkmessageprocessingstep' entity
+                /// </summary>
+                internal const string PROCESSING_STEP = "sdkmessageprocessingstep";
+
+                /// <summary>
                 /// Name of the 'solution' entity
                 /// </summary>
                 internal const string SOLUTION = "solution";
