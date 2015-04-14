@@ -40,7 +40,7 @@
                 e =>
                 {
                     this.PluginAsseblies = (Entity[])e.Result;
-
+                    this.cbAssemblies.Items.Clear();
                     foreach (var entity in this.PluginAsseblies)
                     {
                         var item = new PluginAssembly(entity);
@@ -66,7 +66,7 @@
                 a =>
                 {
                     this.PluginTypes = (Entity[])a.Result;
-
+                    this.cbTypes.Items.Clear();
                     foreach (var entity in this.PluginTypes)
                     {
                         var item = new PluginType(entity, pluginAssembly);
