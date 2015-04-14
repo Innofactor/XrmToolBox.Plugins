@@ -8,7 +8,44 @@
 
     public partial class MainControl : PluginBase, IGitHubPlugin
     {
+        #region Private Methods
+
+        private void MainControl_Enter(object sender, EventArgs e)
+        {
+            this.ExecuteMethod(RetrieveAssemblies);
+        }
+
+        private void tsbClose_Click(object sender, EventArgs e)
+        {
+            this.CloseTool();
+        }
+
+        #endregion Private Methods
+
+        #region Public Constructors
+
+        public MainControl()
+        {
+            InitializeComponent();
+
+            this.Enter += MainControl_Enter;
+        }
+
+        #endregion Public Constructors
+
         #region Public Properties
+
+        public Entity[] PluginAsseblies
+        {
+            get;
+            private set;
+        }
+
+        public Entity[] PluginTypes
+        {
+            get;
+            private set;
+        }
 
         public string RepositoryName
         {
@@ -50,15 +87,13 @@
                 });
         }
 
-        #endregion Public Methods
-
-        #region Private Methods
-
-        private void cbAssemblies_SelectedIndexChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Retrieves all types available in given assembly
+        /// </summary>
+        /// <param name="pluginAssembly"><see cref="PluginAssembly"/> for which there types should be retrieved</param>
+        public void RetrieveTypes(PluginAssembly pluginAssembly)
         {
-            var pluginAssembly = (PluginAssembly)((ComboBox)sender).SelectedItem;
-
-            this.WorkAsync("Loading steps...",
+            this.WorkAsync("Loading types...",
                 a =>
                 {
                     a.Result = this.Service.GetPluginTypes(pluginAssembly.Id);
@@ -67,6 +102,7 @@
                 {
                     this.PluginTypes = (Entity[])a.Result;
                     this.cbTypes.Items.Clear();
+                    this.cbTypes.Items.Add("All types avaliable");
                     foreach (var entity in this.PluginTypes)
                     {
                         var item = new PluginType(entity, pluginAssembly);
@@ -74,69 +110,49 @@
                         this.cbTypes.Items.Add(item);
                     }
                 });
-
-            //var selectedItem = ((ComboBox)sender).SelectedItem;
-
-            //var previousGroups = this.lvSteps.Groups;
-            //var previousItems = this.lvSteps.Items;
-
-            //this.WorkAsync("Loading steps...",
-            //    a =>
-            //    {
-            //        a.Result = this.Service.GetSdkMessageProcessingSteps(((PluginAssembly)selectedItem).Id);
-            //    },
-            //    a =>
-            //    {
-            //        this.lvSteps.Items.Clear();
-            //        this.lvSteps.Groups.Clear();
-
-            // var steps = (Entity[])a.Result; var types = steps.GroupBy(x =>
-            // x["plugintypeid"]).Select(y => y.First()).ToArray();
-
-            // var groups = new Dictionary<Guid, int>(); var i = 0;
-
-            // foreach (var type in types) { var item = new ListViewGroup { Header =
-            // ((AliasedValue)type.Attributes["plugintype.typename"]).Value.ToString(), };
-            // this.lvSteps.Groups.Add(item); groups.Add(((EntityReference)type["plugintypeid"]).Id,
-            // i++); }
-
-            // foreach (var step in steps) { var item = new ListViewItem { Text =
-            // (string)step["name"], Group =
-            // this.lvSteps.Groups[groups[((EntityReference)step["plugintypeid"]).Id]] };
-
-            // this.lvSteps.Items.Add(item); } });
         }
 
-        private void MainControl_Enter(object sender, EventArgs e)
+        #endregion Public Methods
+
+        private void cbAssemblies_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.ExecuteMethod(RetrieveAssemblies);
+            this.lvSteps.Items.Clear();
+            RetrieveTypes((PluginAssembly)((ComboBox)sender).SelectedItem);
         }
 
-        private void tsbClose_Click(object sender, EventArgs e)
+        private void cbTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.CloseTool();
+            var pluginAssembly = (PluginAssembly)this.cbAssemblies.SelectedItem;
+            var pluginType = ((ComboBox)sender).SelectedItem as PluginType;
+
+            RetrieveSteps(pluginAssembly, pluginType);
         }
 
-        #endregion Private Methods
-
-        #region Public Constructors
-
-        public MainControl()
+        private void RetrieveSteps(PluginAssembly pluginAssembly, PluginType pluginType)
         {
-            InitializeComponent();
+            this.WorkAsync("Loading steps...",
+                a =>
+                {
+                    a.Result = (pluginType != null) ? this.Service.GetSdkMessageProcessingSteps(pluginAssembly.Id, pluginType.Id) : this.Service.GetSdkMessageProcessingSteps(pluginAssembly.Id);
+                },
+                a =>
+                {
+                    this.ProcessingSteps = (Entity[])a.Result;
+                    this.lvSteps.Items.Clear();
 
-            this.Enter += MainControl_Enter;
+                    foreach (var step in this.ProcessingSteps)
+                    {
+                        var item = new ListViewItem
+                        {
+                            Text = (string)step["name"],
+                        };
+
+                        this.lvSteps.Items.Add(item);
+                    }
+                });
         }
 
-        #endregion Public Constructors
-
-        public Entity[] PluginAsseblies
-        {
-            get;
-            private set;
-        }
-
-        public Entity[] PluginTypes 
+        public Entity[] ProcessingSteps 
         { 
             get; 
             private set; 

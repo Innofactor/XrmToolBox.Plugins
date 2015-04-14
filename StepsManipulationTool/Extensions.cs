@@ -71,14 +71,18 @@
             return service.RetrieveMultiple(query).Entities.ToArray<Entity>();
         }
 
-        public static Entity[] GetSdkMessageProcessingSteps(this IOrganizationService service, Guid? pluginAssemblyId = null)
+        public static Entity[] GetSdkMessageProcessingSteps(this IOrganizationService service, Guid? pluginAssemblyId = null, Guid? pluginTypeId = null)
         {
             var query = new QueryExpression();
             query.EntityName = "sdkmessageprocessingstep";
             query.ColumnSet = new ColumnSet(new string[] { "name", "sdkmessageprocessingstepid", "plugintypeid", "eventhandler" });
-            query.Criteria = new FilterExpression(LogicalOperator.Or);
+            query.Criteria = new FilterExpression(LogicalOperator.And);
             query.Criteria.AddCondition("ishidden", ConditionOperator.Equal, false);
             
+            if (pluginTypeId != null)
+            {
+                query.Criteria.AddCondition("plugintypeid", ConditionOperator.Equal, pluginTypeId);
+            }
             query.Orders.Add(new OrderExpression("name", OrderType.Ascending));
 
             var link = new LinkEntity
@@ -91,7 +95,7 @@
                 EntityAlias = "plugintype",
                 Columns = new ColumnSet(new string[] { "friendlyname", "typename", "pluginassemblyid" }),
             };
-            
+
             if (pluginAssemblyId != null)
             {
                 link.LinkCriteria.AddCondition("pluginassemblyid", ConditionOperator.Equal, pluginAssemblyId);
