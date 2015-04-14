@@ -76,6 +76,9 @@
     <Compile Include="..\Common\SDK\PluginAssembly.cs">
       <Link>SDK\PluginAssembly.cs</Link>
     </Compile>
+    <Compile Include="..\Common\SDK\PluginType.cs">
+      <Link>SDK\PluginType.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Utils\Constants.cs">
       <Link>Utils\Constants.cs</Link>
     </Compile>

@@ -56,12 +56,12 @@
 
         private void cbAssemblies_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedItem = ((ComboBox)sender).SelectedItem;
+            var pluginAssembly = (PluginAssembly)((ComboBox)sender).SelectedItem;
 
             this.WorkAsync("Loading steps...",
                 a =>
                 {
-                    a.Result = this.Service.GetPluginTypes(((PluginAssembly)selectedItem).Id);
+                    a.Result = this.Service.GetPluginTypes(pluginAssembly.Id);
                 },
                 a =>
                 {
@@ -69,9 +69,9 @@
 
                     foreach (var entity in this.PluginTypes)
                     {
-                        // var item = new PluginAssembly(entity);
+                        var item = new PluginType(entity, pluginAssembly);
 
-                        // this.cbTypes.Items.Add(item);
+                        this.cbTypes.Items.Add(item);
                     }
                 });
 
