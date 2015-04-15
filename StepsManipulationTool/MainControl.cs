@@ -25,6 +25,10 @@
         {
             InitializeComponent();
 
+            this.PluginAsseblies = new List<PluginAssembly>();
+            this.PluginTypes = new List<PluginType>();
+            this.ProcessingSteps = new List<ProcessingStep>();
+
             this.Enter += MainControl_Enter;
         }
 
@@ -32,19 +36,19 @@
 
         #region Public Properties
 
-        public Entity[] PluginAsseblies
+        public List<PluginAssembly> PluginAsseblies
         {
             get;
             private set;
         }
 
-        public Entity[] PluginTypes
+        public List<PluginType> PluginTypes
         {
             get;
             private set;
         }
 
-        public Entity[] ProcessingSteps
+        public List<ProcessingStep> ProcessingSteps
         {
             get;
             private set;
@@ -70,6 +74,9 @@
 
         #region Public Methods
 
+        /// <summary>
+        /// Retrieves all plugin assemblies available in given environment
+        /// </summary>
         public void RetrieveAssemblies()
         {
             this.WorkAsync("Loading assemblies...",
@@ -79,17 +86,23 @@
                 },
                 e =>
                 {
-                    this.PluginAsseblies = (Entity[])e.Result;
+                    this.PluginAsseblies.Clear();
                     this.cbAssemblies.Items.Clear();
-                    foreach (var entity in this.PluginAsseblies)
+                    foreach (var entity in (Entity[])e.Result)
                     {
                         var item = new PluginAssembly(entity);
 
+                        this.PluginAsseblies.Add(item);
                         this.cbAssemblies.Items.Add(item);
                     }
                 });
         }
 
+        /// <summary>
+        /// Retrieves all steps available in given assembly and selected type
+        /// </summary>
+        /// <param name="pluginAssembly"><see cref="PluginAssembly"/> for which steps should be retrieved</param>
+        /// <param name="pluginType"<see cref="PluginType"/> for which steps should be retrieved</param>
         public void RetrieveSteps(PluginAssembly pluginAssembly, PluginType pluginType)
         {
             this.WorkAsync("Loading steps...",
@@ -99,7 +112,7 @@
                 },
                 a =>
                 {
-                    this.ProcessingSteps = (Entity[])a.Result;
+                    this.ProcessingSteps.Clear();
                     this.lvSteps.Items.Clear();
 
                     var groups = new Dictionary<Guid, int>();
@@ -109,19 +122,20 @@
                     {
                         var item = new ListViewGroup
                         {
-                            Header = (string)type.Attributes["name"],
+                            Header = type.FriendlyName,
                         };
 
                         this.lvSteps.Groups.Add(item);
                         groups.Add(type.Id, i++);
                     }
 
-                    foreach (var step in this.ProcessingSteps)
+                    foreach (var entity in (Entity[])a.Result)
                     {
                         var item = new ListViewItem
                         {
-                            Text = (string)step["name"],
-                            Group = this.lvSteps.Groups[groups[((EntityReference)step["plugintypeid"]).Id]]
+                            Text = (string)entity["name"],
+                            Group = this.lvSteps.Groups[groups[((EntityReference)entity["plugintypeid"]).Id]],
+                            Tag = new ProcessingStep(entity, pluginAssembly, pluginType)
                         };
 
                         this.lvSteps.Items.Add(item);
@@ -144,10 +158,11 @@
                 },
                 a =>
                 {
-                    this.PluginTypes = (Entity[])a.Result;
+                    this.PluginTypes.Clear();
                     this.cbTypes.Items.Clear();
+
                     this.cbTypes.Items.Add("All types");
-                    foreach (var entity in this.PluginTypes)
+                    foreach (var entity in (Entity[])a.Result)
                     {
                         var item = new PluginType(entity, pluginAssembly);
 
