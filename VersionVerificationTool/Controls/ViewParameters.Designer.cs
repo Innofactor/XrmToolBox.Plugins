@@ -103,7 +103,6 @@
             this.lvOrganizations.UseCompatibleStateImageBehavior = false;
             this.lvOrganizations.View = System.Windows.Forms.View.Details;
             this.lvOrganizations.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvOrganizations_ItemChecked);
-            this.lvOrganizations.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvOrganizations_ItemSelectionChanged);
             // 
             // chOrgName
             // 
@@ -156,7 +155,6 @@
             this.lvSnapshot.UseCompatibleStateImageBehavior = false;
             this.lvSnapshot.View = System.Windows.Forms.View.Details;
             this.lvSnapshot.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvSnapshot_ItemChecked);
-            this.lvSnapshot.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvSnapshot_ItemSelectionChanged);
             // 
             // chItemName
             // 

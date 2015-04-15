@@ -177,35 +177,6 @@
         }
 
         /// <summary>
-        /// Event handler capturing changes in organization selections
-        /// </summary>
-        /// <param name="sender">Organizations list view</param>
-        /// <param name="e">Event arguments</param>
-        private void lvOrganizations_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-            if (e != null)
-            {
-                var list = ((ListView)sender);
-                var item = list.Items[e.ItemIndex];
-                
-                this.lvOrganizations.ItemChecked -= this.lvOrganizations_ItemChecked;
-                this.lvOrganizations.ItemSelectionChanged -= this.lvOrganizations_ItemSelectionChanged;
-                
-                item.Checked = !item.Checked;
-                item.Selected = !item.Selected;
-                this.UpdateSwitcher((ListView)sender, this.cbToggleOrganizations, list.Items.Count == list.CheckedItems.Count);
-
-                this.lvOrganizations.ItemChecked -= this.lvOrganizations_ItemChecked;
-                this.lvOrganizations.ItemSelectionChanged -= this.lvOrganizations_ItemSelectionChanged;
-                
-                this.lvOrganizations.ItemSelectionChanged += this.lvOrganizations_ItemSelectionChanged;
-                this.lvOrganizations.ItemChecked += this.lvOrganizations_ItemChecked;
-            }
-
-            this.JustifyToolStrip();
-        }
-
-        /// <summary>
         /// Event handler capturing changes in solution selections
         /// </summary>
         /// <param name="sender">Solutions list view</param>
@@ -215,23 +186,6 @@
             this.cbToggleItems.CheckedChanged -= this.cbToggleItems_CheckedChanged;
             this.UpdateSwitcher((ListView)sender, this.cbToggleItems, e.Item.Checked);
             this.cbToggleItems.CheckedChanged += this.cbToggleItems_CheckedChanged;
-
-            this.JustifyToolStrip();
-        }
-
-        /// <summary>
-        /// Event handler capturing changes in solution selections
-        /// </summary>
-        /// <param name="sender">Solutions list view</param>
-        /// <param name="e">Event arguments</param>
-        private void lvSnapshot_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-            var list = (ListView)sender;
-
-            foreach (var item in list.Items.Cast<ListViewItem>().Where(x => x.Selected == true))
-            {
-                item.Checked = !item.Checked;
-            }
 
             this.JustifyToolStrip();
         }
@@ -329,8 +283,6 @@
                     this.Organizations = (ConnectionManager.Instance.ConnectionsList.Connections.ToArray<ConnectionDetail>());
                 }
 
-                this.lvOrganizations_ItemSelectionChanged(this.lvOrganizations, null);
-                this.lvSnapshot_ItemSelectionChanged(this.lvSnapshot, null);
                 if (parent.ConnectionDetail != null)
                 {
                     this.gbSnapshot.Text = string.Format("{0} on {1}", parent.ConnectionDetail.OrganizationFriendlyName, parent.ConnectionDetail.ServerName);
