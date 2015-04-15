@@ -145,29 +145,27 @@
                     this.ProcessingSteps = (Entity[])a.Result;
                     this.lvSteps.Items.Clear();
 
-                    //var groups = new Dictionary<Guid, int>(); 
-                    //var i = 0;
+                    var groups = new Dictionary<Guid, int>();
+                    var i = 0;
 
-                    //foreach (var type in this.PluginTypes)
-                    //{
-                    //    var item = new ListViewGroup
-                    //    {
-                    //        Header = (string)type.Attributes["name"],
-                    //    };
+                    foreach (var type in this.PluginTypes)
+                    {
+                        var item = new ListViewGroup
+                        {
+                            Header = (string)type.Attributes["name"],
+                        };
 
-                    //    this.lvSteps.Groups.Add(item); 
-                    //    groups.Add(type.Id, i++);
-                    //}
+                        this.lvSteps.Groups.Add(item);
+                        groups.Add(type.Id, i++);
+                    }
 
                     foreach (var step in this.ProcessingSteps)
                     {
-                        //var item = new ListViewItem
-                        //{
-                        //    Text = (string)step["name"],
-                        //    // Group = this.lvSteps.Groups[groups[((EntityReference)step["plugintypeid"]).Id]]
-                        //};
-
-                        var item = new ListViewItem(new string[] { (string)step["name"],  this.PluginTypes.FirstOrDefault(x => x.Id == ((EntityReference)step["plugintypeid"]).Id).Attributes["name"].ToString() });
+                        var item = new ListViewItem
+                        {
+                            Text = (string)step["name"],
+                            Group = this.lvSteps.Groups[groups[((EntityReference)step["plugintypeid"]).Id]]
+                        };
 
                         this.lvSteps.Items.Add(item);
                     }

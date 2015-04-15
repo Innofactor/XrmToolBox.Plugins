@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainControl));
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
@@ -39,10 +40,12 @@
             this.lAssemblies = new System.Windows.Forms.Label();
             this.cbTypes = new System.Windows.Forms.ComboBox();
             this.lTypes = new System.Windows.Forms.Label();
-            this.chType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cmStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.moveToAnotherAssemblyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenu.SuspendLayout();
             this.gbSteps.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.cmStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsMenu
@@ -80,8 +83,8 @@
             // 
             this.lvSteps.CheckBoxes = true;
             this.lvSteps.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chName,
-            this.chType});
+            this.chName});
+            this.lvSteps.ContextMenuStrip = this.cmStrip;
             this.lvSteps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvSteps.FullRowSelect = true;
             this.lvSteps.GridLines = true;
@@ -163,10 +166,18 @@
             this.lTypes.TabIndex = 5;
             this.lTypes.Text = "Select Type:";
             // 
-            // chType
+            // cmStrip
             // 
-            this.chType.Text = "Type";
-            this.chType.Width = 200;
+            this.cmStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.moveToAnotherAssemblyToolStripMenuItem});
+            this.cmStrip.Name = "cmStrip";
+            this.cmStrip.Size = new System.Drawing.Size(215, 26);
+            // 
+            // moveToAnotherAssemblyToolStripMenuItem
+            // 
+            this.moveToAnotherAssemblyToolStripMenuItem.Name = "moveToAnotherAssemblyToolStripMenuItem";
+            this.moveToAnotherAssemblyToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.moveToAnotherAssemblyToolStripMenuItem.Text = "Move to another assembly";
             // 
             // MainControl
             // 
@@ -181,6 +192,7 @@
             this.gbSteps.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.cmStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,6 +210,7 @@
         private System.Windows.Forms.ComboBox cbAssemblies;
         private System.Windows.Forms.ComboBox cbTypes;
         private System.Windows.Forms.Label lTypes;
-        private System.Windows.Forms.ColumnHeader chType;
+        private System.Windows.Forms.ContextMenuStrip cmStrip;
+        private System.Windows.Forms.ToolStripMenuItem moveToAnotherAssemblyToolStripMenuItem;
     }
 }
