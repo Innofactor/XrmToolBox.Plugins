@@ -39,6 +39,7 @@
             this.lAssemblies = new System.Windows.Forms.Label();
             this.cbTypes = new System.Windows.Forms.ComboBox();
             this.lTypes = new System.Windows.Forms.Label();
+            this.chType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tsMenu.SuspendLayout();
             this.gbSteps.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -79,7 +80,8 @@
             // 
             this.lvSteps.CheckBoxes = true;
             this.lvSteps.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chName});
+            this.chName,
+            this.chType});
             this.lvSteps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvSteps.FullRowSelect = true;
             this.lvSteps.GridLines = true;
@@ -161,6 +163,11 @@
             this.lTypes.TabIndex = 5;
             this.lTypes.Text = "Select Type:";
             // 
+            // chType
+            // 
+            this.chType.Text = "Type";
+            this.chType.Width = 200;
+            // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -191,5 +198,6 @@
         private System.Windows.Forms.ComboBox cbAssemblies;
         private System.Windows.Forms.ComboBox cbTypes;
         private System.Windows.Forms.Label lTypes;
+        private System.Windows.Forms.ColumnHeader chType;
     }
 }

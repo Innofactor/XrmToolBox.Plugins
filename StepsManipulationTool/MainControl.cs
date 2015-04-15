@@ -1,6 +1,8 @@
 ﻿namespace Cinteros.Xrm.StepsManipulator
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Windows.Forms;
     using Cinteros.Xrm.SDK;
     using Microsoft.Xrm.Sdk;
@@ -102,13 +104,16 @@
                 {
                     this.PluginTypes = (Entity[])a.Result;
                     this.cbTypes.Items.Clear();
-                    this.cbTypes.Items.Add("All types avaliable");
+                    this.cbTypes.Items.Add("All types");
                     foreach (var entity in this.PluginTypes)
                     {
                         var item = new PluginType(entity, pluginAssembly);
 
                         this.cbTypes.Items.Add(item);
                     }
+
+                    // Select all types
+                    this.cbTypes.SelectedIndex = 0;
                 });
         }
 
@@ -117,7 +122,7 @@
         private void cbAssemblies_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.lvSteps.Items.Clear();
-            RetrieveTypes((PluginAssembly)((ComboBox)sender).SelectedItem);
+            this.RetrieveTypes((PluginAssembly)((ComboBox)sender).SelectedItem);
         }
 
         private void cbTypes_SelectedIndexChanged(object sender, EventArgs e)
@@ -125,7 +130,7 @@
             var pluginAssembly = (PluginAssembly)this.cbAssemblies.SelectedItem;
             var pluginType = ((ComboBox)sender).SelectedItem as PluginType;
 
-            RetrieveSteps(pluginAssembly, pluginType);
+            this.RetrieveSteps(pluginAssembly, pluginType);
         }
 
         private void RetrieveSteps(PluginAssembly pluginAssembly, PluginType pluginType)
@@ -140,12 +145,29 @@
                     this.ProcessingSteps = (Entity[])a.Result;
                     this.lvSteps.Items.Clear();
 
+                    //var groups = new Dictionary<Guid, int>(); 
+                    //var i = 0;
+
+                    //foreach (var type in this.PluginTypes)
+                    //{
+                    //    var item = new ListViewGroup
+                    //    {
+                    //        Header = (string)type.Attributes["name"],
+                    //    };
+
+                    //    this.lvSteps.Groups.Add(item); 
+                    //    groups.Add(type.Id, i++);
+                    //}
+
                     foreach (var step in this.ProcessingSteps)
                     {
-                        var item = new ListViewItem
-                        {
-                            Text = (string)step["name"],
-                        };
+                        //var item = new ListViewItem
+                        //{
+                        //    Text = (string)step["name"],
+                        //    // Group = this.lvSteps.Groups[groups[((EntityReference)step["plugintypeid"]).Id]]
+                        //};
+
+                        var item = new ListViewItem(new string[] { (string)step["name"],  this.PluginTypes.FirstOrDefault(x => x.Id == ((EntityReference)step["plugintypeid"]).Id).Attributes["name"].ToString() });
 
                         this.lvSteps.Items.Add(item);
                     }

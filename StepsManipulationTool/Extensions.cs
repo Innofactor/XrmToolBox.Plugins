@@ -83,25 +83,26 @@
             {
                 query.Criteria.AddCondition("plugintypeid", ConditionOperator.Equal, pluginTypeId);
             }
-            query.Orders.Add(new OrderExpression(Constants.Crm.Attributes.NAME, OrderType.Ascending));
 
-            var link = new LinkEntity
-            {
-                LinkFromEntityName = Constants.Crm.Entities.PROCESSING_STEP,
-                LinkToEntityName = Constants.Crm.Entities.PLUGIN_TYPE,
-                LinkFromAttributeName = "plugintypeid",
-                LinkToAttributeName = "plugintypeid",
-                JoinOperator = JoinOperator.Natural,
-                EntityAlias = "plugintype",
-                Columns = new ColumnSet(new string[] { "friendlyname", "typename", "pluginassemblyid" }),
-            };
+            query.Orders.Add(new OrderExpression(Constants.Crm.Attributes.NAME, OrderType.Ascending));
 
             if (pluginAssemblyId != null)
             {
-                link.LinkCriteria.AddCondition("pluginassemblyid", ConditionOperator.Equal, pluginAssemblyId);
-            }
+                var link = new LinkEntity
+                {
+                    LinkFromEntityName = Constants.Crm.Entities.PROCESSING_STEP,
+                    LinkToEntityName = Constants.Crm.Entities.PLUGIN_TYPE,
+                    LinkFromAttributeName = "plugintypeid",
+                    LinkToAttributeName = "plugintypeid",
+                    JoinOperator = JoinOperator.Natural,
+                    EntityAlias = "plugintype",
+                    Columns = new ColumnSet(new string[] { "friendlyname", "typename", "pluginassemblyid" }),
+                };
 
-            query.LinkEntities.Add(link);
+                link.LinkCriteria.AddCondition("pluginassemblyid", ConditionOperator.Equal, pluginAssemblyId);
+
+                query.LinkEntities.Add(link);
+            }
 
             return service.RetrieveMultiple(query).Entities.ToArray<Entity>();
         }
