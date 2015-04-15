@@ -12,11 +12,6 @@
     {
         #region Private Methods
 
-        private void MainControl_Enter(object sender, EventArgs e)
-        {
-            this.ExecuteMethod(RetrieveAssemblies);
-        }
-
         private void tsbClose_Click(object sender, EventArgs e)
         {
             this.CloseTool();
@@ -44,6 +39,12 @@
         }
 
         public Entity[] PluginTypes
+        {
+            get;
+            private set;
+        }
+
+        public Entity[] ProcessingSteps
         {
             get;
             private set;
@@ -89,10 +90,51 @@
                 });
         }
 
+        public void RetrieveSteps(PluginAssembly pluginAssembly, PluginType pluginType)
+        {
+            this.WorkAsync("Loading steps...",
+                a =>
+                {
+                    a.Result = (pluginType != null) ? this.Service.GetSdkMessageProcessingSteps(pluginAssembly.Id, pluginType.Id) : this.Service.GetSdkMessageProcessingSteps(pluginAssembly.Id);
+                },
+                a =>
+                {
+                    this.ProcessingSteps = (Entity[])a.Result;
+                    this.lvSteps.Items.Clear();
+
+                    var groups = new Dictionary<Guid, int>();
+                    var i = 0;
+
+                    foreach (var type in this.PluginTypes)
+                    {
+                        var item = new ListViewGroup
+                        {
+                            Header = (string)type.Attributes["name"],
+                        };
+
+                        this.lvSteps.Groups.Add(item);
+                        groups.Add(type.Id, i++);
+                    }
+
+                    foreach (var step in this.ProcessingSteps)
+                    {
+                        var item = new ListViewItem
+                        {
+                            Text = (string)step["name"],
+                            Group = this.lvSteps.Groups[groups[((EntityReference)step["plugintypeid"]).Id]]
+                        };
+
+                        this.lvSteps.Items.Add(item);
+                    }
+                });
+        }
+
         /// <summary>
         /// Retrieves all types available in given assembly
         /// </summary>
-        /// <param name="pluginAssembly"><see cref="PluginAssembly"/> for which there types should be retrieved</param>
+        /// <param name="pluginAssembly">
+        /// <see cref="PluginAssembly"/> for which there types should be retrieved
+        /// </param>
         public void RetrieveTypes(PluginAssembly pluginAssembly)
         {
             this.WorkAsync("Loading types...",
@@ -133,49 +175,19 @@
             this.RetrieveSteps(pluginAssembly, pluginType);
         }
 
-        private void RetrieveSteps(PluginAssembly pluginAssembly, PluginType pluginType)
+        /// <summary>
+        /// Dropping selection for all steps available
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dropSelectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.WorkAsync("Loading steps...",
-                a =>
-                {
-                    a.Result = (pluginType != null) ? this.Service.GetSdkMessageProcessingSteps(pluginAssembly.Id, pluginType.Id) : this.Service.GetSdkMessageProcessingSteps(pluginAssembly.Id);
-                },
-                a =>
-                {
-                    this.ProcessingSteps = (Entity[])a.Result;
-                    this.lvSteps.Items.Clear();
-
-                    var groups = new Dictionary<Guid, int>();
-                    var i = 0;
-
-                    foreach (var type in this.PluginTypes)
-                    {
-                        var item = new ListViewGroup
-                        {
-                            Header = (string)type.Attributes["name"],
-                        };
-
-                        this.lvSteps.Groups.Add(item);
-                        groups.Add(type.Id, i++);
-                    }
-
-                    foreach (var step in this.ProcessingSteps)
-                    {
-                        var item = new ListViewItem
-                        {
-                            Text = (string)step["name"],
-                            Group = this.lvSteps.Groups[groups[((EntityReference)step["plugintypeid"]).Id]]
-                        };
-
-                        this.lvSteps.Items.Add(item);
-                    }
-                });
+            this.SelectAndCheckAll(false);
         }
 
-        public Entity[] ProcessingSteps 
-        { 
-            get; 
-            private set; 
+        private void MainControl_Enter(object sender, EventArgs e)
+        {
+            this.ExecuteMethod(RetrieveAssemblies);
         }
 
         /// <summary>
@@ -186,16 +198,6 @@
         private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.SelectAndCheckAll(true);
-        }
-
-        /// <summary>
-        /// Dropping selection for all steps available
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dropSelectionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.SelectAndCheckAll(false);
         }
 
         private void SelectAndCheckAll(bool status)
