@@ -75,7 +75,7 @@
         {
             var query = new QueryExpression();
             query.EntityName = Constants.Crm.Entities.PROCESSING_STEP;
-            query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.NAME, "sdkmessageprocessingstepid", "plugintypeid", "eventhandler" });
+            query.ColumnSet = new ColumnSet(new string[] { Constants.Crm.Attributes.NAME, Constants.Crm.Attributes.STATE_CODE, Constants.Crm.Attributes.STATUS_CODE, "sdkmessageprocessingstepid", "plugintypeid", "eventhandler" });
             query.Criteria = new FilterExpression(LogicalOperator.And);
             query.Criteria.AddCondition("ishidden", ConditionOperator.Equal, false);
             

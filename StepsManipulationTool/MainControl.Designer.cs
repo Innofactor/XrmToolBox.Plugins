@@ -43,6 +43,9 @@
             this.lTypes = new System.Windows.Forms.Label();
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.activateAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deactivateAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dropSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenu.SuspendLayout();
             this.gbSteps.SuspendLayout();
             this.cmStrip.SuspendLayout();
@@ -105,9 +108,12 @@
             // 
             this.cmStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.selectAllToolStripMenuItem,
-            this.toolStripSeparator1});
+            this.dropSelectionToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.activateAllToolStripMenuItem,
+            this.deactivateAllToolStripMenuItem});
             this.cmStrip.Name = "cmStrip";
-            this.cmStrip.Size = new System.Drawing.Size(165, 54);
+            this.cmStrip.Size = new System.Drawing.Size(221, 120);
             // 
             // tableLayoutPanel1
             // 
@@ -188,6 +194,30 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
             // 
+            // activateAllToolStripMenuItem
+            // 
+            this.activateAllToolStripMenuItem.Name = "activateAllToolStripMenuItem";
+            this.activateAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.A)));
+            this.activateAllToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.activateAllToolStripMenuItem.Text = "Activate All";
+            // 
+            // deactivateAllToolStripMenuItem
+            // 
+            this.deactivateAllToolStripMenuItem.Name = "deactivateAllToolStripMenuItem";
+            this.deactivateAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.D)));
+            this.deactivateAllToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.deactivateAllToolStripMenuItem.Text = "Deactivate All";
+            // 
+            // dropSelectionToolStripMenuItem
+            // 
+            this.dropSelectionToolStripMenuItem.Name = "dropSelectionToolStripMenuItem";
+            this.dropSelectionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.dropSelectionToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.dropSelectionToolStripMenuItem.Text = "Drop Selection";
+            this.dropSelectionToolStripMenuItem.Click += new System.EventHandler(this.dropSelectionToolStripMenuItem_Click);
+            // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -222,5 +252,8 @@
         private System.Windows.Forms.ContextMenuStrip cmStrip;
         private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem dropSelectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem activateAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deactivateAllToolStripMenuItem;
     }
 }

@@ -46,6 +46,8 @@
                 internal const string NAME = "name";
                 internal const string PUBLIC_KEY_TOKEN = "publickeytoken";
                 internal const string SOLUTION_ID = "solutionid";
+                internal const string STATE_CODE = "statecode";
+                internal const string STATUS_CODE = "statuscode";                
                 internal const string UNIQUE_NAME = "uniquename";
                 internal const string VERSION = "version";
 

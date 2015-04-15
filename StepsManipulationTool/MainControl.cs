@@ -178,10 +178,30 @@
             private set; 
         }
 
+        /// <summary>
+        /// Selecting and checking all the steps available
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.lvSteps.Items.Cast<ListViewItem>().ToList().ForEach(x => x.Selected = true);
-            this.lvSteps.SelectedItems.Cast<ListViewItem>().ToList().ForEach(x => x.Checked = true);
+            this.SelectAndCheckAll(true);
+        }
+
+        /// <summary>
+        /// Dropping selection for all steps available
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dropSelectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.SelectAndCheckAll(false);
+        }
+
+        private void SelectAndCheckAll(bool status)
+        {
+            this.lvSteps.Items.Cast<ListViewItem>().ToList().ForEach(x => x.Selected = status);
+            this.lvSteps.Items.Cast<ListViewItem>().ToList().ForEach(x => x.Checked = status);
         }
     }
 }
