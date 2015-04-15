@@ -177,5 +177,11 @@
             get; 
             private set; 
         }
+
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.lvSteps.Items.Cast<ListViewItem>().ToList().ForEach(x => x.Selected = true);
+            this.lvSteps.SelectedItems.Cast<ListViewItem>().ToList().ForEach(x => x.Checked = true);
+        }
     }
 }

@@ -35,17 +35,18 @@
             this.gbSteps = new System.Windows.Forms.GroupBox();
             this.lvSteps = new System.Windows.Forms.ListView();
             this.chName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cmStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cbAssemblies = new System.Windows.Forms.ComboBox();
             this.lAssemblies = new System.Windows.Forms.Label();
             this.cbTypes = new System.Windows.Forms.ComboBox();
             this.lTypes = new System.Windows.Forms.Label();
-            this.cmStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.moveToAnotherAssemblyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsMenu.SuspendLayout();
             this.gbSteps.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.cmStrip.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsMenu
@@ -99,6 +100,14 @@
             // 
             this.chName.Text = "Name";
             this.chName.Width = 450;
+            // 
+            // cmStrip
+            // 
+            this.cmStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.selectAllToolStripMenuItem,
+            this.toolStripSeparator1});
+            this.cmStrip.Name = "cmStrip";
+            this.cmStrip.Size = new System.Drawing.Size(165, 54);
             // 
             // tableLayoutPanel1
             // 
@@ -166,18 +175,18 @@
             this.lTypes.TabIndex = 5;
             this.lTypes.Text = "Select Type:";
             // 
-            // cmStrip
+            // selectAllToolStripMenuItem
             // 
-            this.cmStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.moveToAnotherAssemblyToolStripMenuItem});
-            this.cmStrip.Name = "cmStrip";
-            this.cmStrip.Size = new System.Drawing.Size(215, 26);
+            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
+            this.selectAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.selectAllToolStripMenuItem.Text = "Select All";
+            this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
             // 
-            // moveToAnotherAssemblyToolStripMenuItem
+            // toolStripSeparator1
             // 
-            this.moveToAnotherAssemblyToolStripMenuItem.Name = "moveToAnotherAssemblyToolStripMenuItem";
-            this.moveToAnotherAssemblyToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            this.moveToAnotherAssemblyToolStripMenuItem.Text = "Move to another assembly";
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
             // 
             // MainControl
             // 
@@ -190,9 +199,9 @@
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.gbSteps.ResumeLayout(false);
+            this.cmStrip.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.cmStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -211,6 +220,7 @@
         private System.Windows.Forms.ComboBox cbTypes;
         private System.Windows.Forms.Label lTypes;
         private System.Windows.Forms.ContextMenuStrip cmStrip;
-        private System.Windows.Forms.ToolStripMenuItem moveToAnotherAssemblyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
