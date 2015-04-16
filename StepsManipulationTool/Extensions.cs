@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.StepsManipulator
+﻿namespace Cinteros.Xrm.StepsManipulationTool
 {
     using System;
     using System.Linq;

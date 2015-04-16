@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.StepsManipulator
+﻿namespace Cinteros.Xrm.StepsManipulationTool
 {
     using System;
     using System.Collections.Generic;
@@ -114,7 +114,7 @@
                 },
                 a =>
                 {
-                    this.ProcessingSteps = ((Entity[])a.Result).Select<Entity, ProcessingStep>(x => 
+                    this.ProcessingSteps = ((Entity[])a.Result).Select<Entity, ProcessingStep>(x =>
                         {
                             return new ProcessingStep(x, pluginAssembly, this.PluginTypes.Where(y => y.Id == ((EntityReference)x.Attributes["plugintypeid"]).Id).FirstOrDefault());
                         }).ToArray();
@@ -138,8 +138,8 @@
 
                     foreach (var step in this.ProcessingSteps)
                     {
-                        var item = new ListViewItem(new string[] {step.FriendlyName, step.StateCode.ToString() });
-                        
+                        var item = new ListViewItem(new string[] { step.FriendlyName, step.StateCode.ToString() });
+
                         item.Tag = step;
                         item.Group = this.lvSteps.Groups[groups[step.ParentType.Id]];
 
@@ -181,8 +181,15 @@
 
         private void cbAssemblies_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var selectedAssembly = (PluginAssembly)((ComboBox)sender).SelectedItem;
+
             this.lvSteps.Items.Clear();
-            this.RetrieveTypes((PluginAssembly)((ComboBox)sender).SelectedItem);
+            this.tscAssemblies.Items.Clear();
+            foreach (var assembly in this.PluginAsseblies.Where(x => x.Id != selectedAssembly.Id))
+            {
+                this.tscAssemblies.Items.Add(assembly);
+            }
+            this.RetrieveTypes(selectedAssembly);
         }
 
         private void cbTypes_SelectedIndexChanged(object sender, EventArgs e)
