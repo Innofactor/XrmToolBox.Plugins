@@ -47,6 +47,9 @@
             this.cbTypes = new System.Windows.Forms.ComboBox();
             this.lTypes = new System.Windows.Forms.Label();
             this.chState = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.activateSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deactivateSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenu.SuspendLayout();
             this.gbSteps.SuspendLayout();
             this.cmStrip.SuspendLayout();
@@ -112,10 +115,13 @@
             this.selectAllToolStripMenuItem,
             this.dropSelectionToolStripMenuItem,
             this.toolStripSeparator1,
+            this.activateSelectedToolStripMenuItem,
+            this.deactivateSelectedToolStripMenuItem,
+            this.toolStripSeparator2,
             this.activateAllToolStripMenuItem,
             this.deactivateAllToolStripMenuItem});
             this.cmStrip.Name = "cmStrip";
-            this.cmStrip.Size = new System.Drawing.Size(221, 98);
+            this.cmStrip.Size = new System.Drawing.Size(221, 170);
             // 
             // selectAllToolStripMenuItem
             // 
@@ -225,6 +231,23 @@
             this.chState.Text = "State";
             this.chState.Width = 100;
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(217, 6);
+            // 
+            // activateSelectedToolStripMenuItem
+            // 
+            this.activateSelectedToolStripMenuItem.Name = "activateSelectedToolStripMenuItem";
+            this.activateSelectedToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.activateSelectedToolStripMenuItem.Text = "Activate Selected";
+            // 
+            // deactivateSelectedToolStripMenuItem
+            // 
+            this.deactivateSelectedToolStripMenuItem.Name = "deactivateSelectedToolStripMenuItem";
+            this.deactivateSelectedToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.deactivateSelectedToolStripMenuItem.Text = "Deactivate Selected";
+            // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -263,5 +286,8 @@
         private System.Windows.Forms.ToolStripMenuItem activateAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deactivateAllToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader chState;
+        private System.Windows.Forms.ToolStripMenuItem activateSelectedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deactivateSelectedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
