@@ -35,6 +35,7 @@
             this.ParentType = parentType;
 
             this.FriendlyName = (string)entity.Attributes[Constants.Crm.Attributes.NAME];
+            this.StateCode = (StateCode)((OptionSetValue)entity.Attributes[Constants.Crm.Attributes.STATE_CODE]).Value;
         }
 
         #endregion Public Constructors
@@ -72,6 +73,15 @@
         /// Gets information about parent plugin type
         /// </summary>
         public PluginType ParentType
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets information about state code of the entity
+        /// </summary>
+        public StateCode StateCode
         {
             get;
             private set;

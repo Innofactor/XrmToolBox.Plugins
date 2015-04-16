@@ -36,16 +36,17 @@
             this.lvSteps = new System.Windows.Forms.ListView();
             this.chName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cmStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dropSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.activateAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deactivateAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cbAssemblies = new System.Windows.Forms.ComboBox();
             this.lAssemblies = new System.Windows.Forms.Label();
             this.cbTypes = new System.Windows.Forms.ComboBox();
             this.lTypes = new System.Windows.Forms.Label();
-            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.activateAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deactivateAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dropSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chState = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tsMenu.SuspendLayout();
             this.gbSteps.SuspendLayout();
             this.cmStrip.SuspendLayout();
@@ -87,7 +88,8 @@
             // 
             this.lvSteps.CheckBoxes = true;
             this.lvSteps.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chName});
+            this.chName,
+            this.chState});
             this.lvSteps.ContextMenuStrip = this.cmStrip;
             this.lvSteps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvSteps.FullRowSelect = true;
@@ -113,7 +115,44 @@
             this.activateAllToolStripMenuItem,
             this.deactivateAllToolStripMenuItem});
             this.cmStrip.Name = "cmStrip";
-            this.cmStrip.Size = new System.Drawing.Size(221, 120);
+            this.cmStrip.Size = new System.Drawing.Size(221, 98);
+            // 
+            // selectAllToolStripMenuItem
+            // 
+            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
+            this.selectAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.selectAllToolStripMenuItem.Text = "Select All";
+            this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
+            // 
+            // dropSelectionToolStripMenuItem
+            // 
+            this.dropSelectionToolStripMenuItem.Name = "dropSelectionToolStripMenuItem";
+            this.dropSelectionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.dropSelectionToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.dropSelectionToolStripMenuItem.Text = "Drop Selection";
+            this.dropSelectionToolStripMenuItem.Click += new System.EventHandler(this.dropSelectionToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(217, 6);
+            // 
+            // activateAllToolStripMenuItem
+            // 
+            this.activateAllToolStripMenuItem.Name = "activateAllToolStripMenuItem";
+            this.activateAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.A)));
+            this.activateAllToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.activateAllToolStripMenuItem.Text = "Activate All";
+            // 
+            // deactivateAllToolStripMenuItem
+            // 
+            this.deactivateAllToolStripMenuItem.Name = "deactivateAllToolStripMenuItem";
+            this.deactivateAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.D)));
+            this.deactivateAllToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.deactivateAllToolStripMenuItem.Text = "Deactivate All";
             // 
             // tableLayoutPanel1
             // 
@@ -181,42 +220,10 @@
             this.lTypes.TabIndex = 5;
             this.lTypes.Text = "Select Type:";
             // 
-            // selectAllToolStripMenuItem
+            // chState
             // 
-            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.selectAllToolStripMenuItem.Text = "Select All";
-            this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
-            // 
-            // activateAllToolStripMenuItem
-            // 
-            this.activateAllToolStripMenuItem.Name = "activateAllToolStripMenuItem";
-            this.activateAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.A)));
-            this.activateAllToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.activateAllToolStripMenuItem.Text = "Activate All";
-            // 
-            // deactivateAllToolStripMenuItem
-            // 
-            this.deactivateAllToolStripMenuItem.Name = "deactivateAllToolStripMenuItem";
-            this.deactivateAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.D)));
-            this.deactivateAllToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.deactivateAllToolStripMenuItem.Text = "Deactivate All";
-            // 
-            // dropSelectionToolStripMenuItem
-            // 
-            this.dropSelectionToolStripMenuItem.Name = "dropSelectionToolStripMenuItem";
-            this.dropSelectionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.dropSelectionToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.dropSelectionToolStripMenuItem.Text = "Drop Selection";
-            this.dropSelectionToolStripMenuItem.Click += new System.EventHandler(this.dropSelectionToolStripMenuItem_Click);
+            this.chState.Text = "State";
+            this.chState.Width = 100;
             // 
             // MainControl
             // 
@@ -255,5 +262,6 @@
         private System.Windows.Forms.ToolStripMenuItem dropSelectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem activateAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deactivateAllToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader chState;
     }
 }

@@ -114,10 +114,15 @@
                 },
                 a =>
                 {
-                    this.ProcessingSteps = ((Entity[])a.Result).Select<Entity, ProcessingStep>(x => new ProcessingStep(x, pluginAssembly, pluginType)).ToArray();
+                    this.ProcessingSteps = ((Entity[])a.Result).Select<Entity, ProcessingStep>(x => 
+                        {
+                            return new ProcessingStep(x, pluginAssembly, this.PluginTypes.Where(y => y.Id == ((EntityReference)x.Attributes["plugintypeid"]).Id).FirstOrDefault());
+                        }).ToArray();
                     this.lvSteps.Items.Clear();
 
                     var groups = new Dictionary<Guid, int>();
+
+                    // If pluginType is null, so all available in current assembly types are selected
                     var i = 0;
 
                     foreach (var type in this.PluginTypes)
@@ -133,12 +138,10 @@
 
                     foreach (var step in this.ProcessingSteps)
                     {
-                        var item = new ListViewItem
-                        {
-                            Text = step.FriendlyName,
-                            Tag = step,
-                            Group = this.lvSteps.Groups[groups[step.ParentType.Id]]
-                        };
+                        var item = new ListViewItem(new string[] {step.FriendlyName, step.StateCode.ToString() });
+                        
+                        item.Tag = step;
+                        item.Group = this.lvSteps.Groups[groups[step.ParentType.Id]];
 
                         this.lvSteps.Items.Add(item);
                     }

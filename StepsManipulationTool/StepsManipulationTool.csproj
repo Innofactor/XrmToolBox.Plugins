@@ -82,6 +82,9 @@
     <Compile Include="..\Common\SDK\ProcessingStep.cs">
       <Link>SDK\ProcessingStep.cs</Link>
     </Compile>
+    <Compile Include="..\Common\SDK\StateCode.cs">
+      <Link>SDK\StateCode.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Utils\Constants.cs">
       <Link>Utils\Constants.cs</Link>
     </Compile>
