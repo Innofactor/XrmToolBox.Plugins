@@ -38,16 +38,18 @@
                 #region Internal Fields
 
                 internal const string CULTURE = "culture";
+                internal const string EVENT_HANDLER = "eventhandler";
                 internal const string FRIENDLY_NAME = "friendlyname";
                 internal const string IS_HIDDEN = "ishidden";
                 internal const string IS_MANAGED = "ismanaged";
                 internal const string IS_VISIBLE = "isvisible";
                 internal const string ISOLATION_MODE = "isolationmode";
                 internal const string NAME = "name";
+                internal const string PLUGIN_TYPE_ID = "plugintypeid";
                 internal const string PUBLIC_KEY_TOKEN = "publickeytoken";
                 internal const string SOLUTION_ID = "solutionid";
                 internal const string STATE_CODE = "statecode";
-                internal const string STATUS_CODE = "statuscode";                
+                internal const string STATUS_CODE = "statuscode";
                 internal const string UNIQUE_NAME = "uniquename";
                 internal const string VERSION = "version";
 

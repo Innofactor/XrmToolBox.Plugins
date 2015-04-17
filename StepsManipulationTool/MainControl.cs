@@ -108,7 +108,7 @@
                 {
                     this.ProcessingSteps = ((Entity[])a.Result).Select<Entity, ProcessingStep>(x =>
                         {
-                            return new ProcessingStep(x, pluginAssembly, this.PluginTypes.Where(y => y.Id == ((EntityReference)x.Attributes["plugintypeid"]).Id).FirstOrDefault());
+                            return new ProcessingStep(x, pluginAssembly, this.PluginTypes.Where(y => y.Id == ((EntityReference)x.Attributes[Constants.Crm.Attributes.PLUGIN_TYPE_ID]).Id).FirstOrDefault());
                         }).ToArray();
                     this.lvSteps.Items.Clear();
 
@@ -251,9 +251,9 @@
 
                     foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
                     {
-                        var sourcePluginTypeId = (EntityReference)step["plugintypeid"];
+                        var sourcePluginTypeId = (EntityReference)step[Constants.Crm.Attributes.PLUGIN_TYPE_ID];
                         var sourceSdkMessageProcessingStepId = step.Id;
-                        var sourceType = sourceTypes.Where(x => ((Guid)x["plugintypeid"]) == sourcePluginTypeId.Id).FirstOrDefault<Entity>();
+                        var sourceType = sourceTypes.Where(x => ((Guid)x[Constants.Crm.Attributes.PLUGIN_TYPE_ID]) == sourcePluginTypeId.Id).FirstOrDefault<Entity>();
                         var targetType = targetTypes.Where(x => (string)x[Constants.Crm.Attributes.NAME] == (string)sourceType[Constants.Crm.Attributes.NAME]).FirstOrDefault<Entity>();
 
                         if (targetType != null)
