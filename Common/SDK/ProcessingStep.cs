@@ -6,14 +6,11 @@
 
     public class ProcessingStep
     {
-        #region Public Methods
+        #region Private Fields
 
-        public override string ToString()
-        {
-            return this.FriendlyName;
-        }
+        private Entity origin;
 
-        #endregion Public Methods
+        #endregion Private Fields
 
         #region Public Constructors
 
@@ -30,6 +27,8 @@
         /// <param name="entity"></param>
         public ProcessingStep(Entity entity, PluginAssembly parentAssembly, PluginType parentType)
         {
+            this.origin = entity;
+
             this.Id = entity.Id;
             this.ParentAssembly = parentAssembly;
             this.ParentType = parentType;
@@ -88,5 +87,19 @@
         }
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public Entity ToEntity()
+        {
+            return this.origin;
+        }
+
+        public override string ToString()
+        {
+            return this.FriendlyName;
+        }
+
+        #endregion Public Methods
     }
 }

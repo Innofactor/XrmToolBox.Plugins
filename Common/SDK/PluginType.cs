@@ -6,6 +6,12 @@
 
     public class PluginType
     {
+        #region Private Fields
+
+        private Entity origin;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
         /// <summary>
@@ -21,6 +27,8 @@
         /// <param name="entity"></param>
         public PluginType(Entity entity, PluginAssembly parentAssembly)
         {
+            this.origin = entity;
+
             this.Id = entity.Id;
             this.ParentAssembly = parentAssembly;
 
@@ -61,6 +69,11 @@
         #endregion Public Properties
 
         #region Public Methods
+
+        public Entity ToEntity()
+        {
+            return this.origin;
+        }
 
         public override string ToString()
         {

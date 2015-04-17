@@ -271,6 +271,7 @@
             this.tscAssemblies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tscAssemblies.Name = "tscAssemblies";
             this.tscAssemblies.Size = new System.Drawing.Size(200, 23);
+            this.tscAssemblies.SelectedIndexChanged += new System.EventHandler(this.tscAssemblies_SelectedIndexChanged);
             // 
             // MainControl
             // 

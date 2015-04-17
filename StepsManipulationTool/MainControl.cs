@@ -5,20 +5,12 @@
     using System.Linq;
     using System.Windows.Forms;
     using Cinteros.Xrm.SDK;
+    using Cinteros.Xrm.Utils;
     using Microsoft.Xrm.Sdk;
     using XrmToolBox;
 
     public partial class MainControl : PluginBase, IGitHubPlugin
     {
-        #region Private Methods
-
-        private void tsbClose_Click(object sender, EventArgs e)
-        {
-            this.CloseTool();
-        }
-
-        #endregion Private Methods
-
         #region Public Constructors
 
         public MainControl()
@@ -179,6 +171,8 @@
 
         #endregion Public Methods
 
+        #region Private Methods
+
         private void cbAssemblies_SelectedIndexChanged(object sender, EventArgs e)
         {
             var selectedAssembly = (PluginAssembly)((ComboBox)sender).SelectedItem;
@@ -230,5 +224,60 @@
             this.lvSteps.Items.Cast<ListViewItem>().ToList().ForEach(x => x.Selected = status);
             this.lvSteps.Items.Cast<ListViewItem>().ToList().ForEach(x => x.Checked = status);
         }
+
+        private void tsbClose_Click(object sender, EventArgs e)
+        {
+            this.CloseTool();
+        }
+
+        private void tscAssemblies_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Resetting selection index
+            // ((ToolStripComboBox)sender).SelectedIndex = -1;
+
+            var targetAssembly = (PluginAssembly)((ToolStripComboBox)sender).SelectedItem;
+
+            var steps = this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, ProcessingStep>(x => (ProcessingStep)x.Tag).ToArray();
+
+            this.WorkAsync("Matching types in source and target assemblies...",
+                a =>
+                {
+                    a.Result = this.Service.GetPluginTypes(targetAssembly.Id);
+                },
+                a =>
+                {
+                    var sourceTypes = this.PluginTypes.Select(x => x.ToEntity()).ToArray();
+                    var targetTypes = (Entity[])a.Result;
+
+                    foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
+                    {
+                        var sourcePluginTypeId = (EntityReference)step["plugintypeid"];
+                        var sourceSdkMessageProcessingStepId = step.Id;
+                        var sourceType = sourceTypes.Where(x => ((Guid)x["plugintypeid"]) == sourcePluginTypeId.Id).FirstOrDefault<Entity>();
+                        var targetType = targetTypes.Where(x => (string)x[Constants.Crm.Attributes.NAME] == (string)sourceType[Constants.Crm.Attributes.NAME]).FirstOrDefault<Entity>();
+
+                        if (targetType != null)
+                        {
+                            step["plugintypeid"] = targetType.ToEntityReference();
+
+                            // Reseting attributes
+                            step.Attributes.Remove("eventhandler");
+                            //step.Attributes.Remove("sdkmessageprocessingstepid");
+                            //step.Id = Guid.Empty;
+
+                            //step.Id = proxy.Create(step);
+                            try
+                            {
+                                this.Service.Update(step);
+                            }
+                            catch (Exception ex)
+                            {
+                            }
+                        }
+                    }
+                });
+        }
+
+        #endregion Private Methods
     }
 }
