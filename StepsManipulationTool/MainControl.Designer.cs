@@ -40,6 +40,7 @@
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dropSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tscAssemblies = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.activateSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deactivateSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,8 +52,7 @@
             this.lAssemblies = new System.Windows.Forms.Label();
             this.cbTypes = new System.Windows.Forms.ComboBox();
             this.lTypes = new System.Windows.Forms.Label();
-            this.matchMoveToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tscAssemblies = new System.Windows.Forms.ToolStripComboBox();
+            this.matchTypeMoveToAnotherAssemblyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenu.SuspendLayout();
             this.gbSteps.SuspendLayout();
             this.cmStrip.SuspendLayout();
@@ -123,7 +123,7 @@
             this.selectAllToolStripMenuItem,
             this.dropSelectionToolStripMenuItem,
             this.toolStripSeparator1,
-            this.matchMoveToToolStripMenuItem,
+            this.matchTypeMoveToAnotherAssemblyToolStripMenuItem,
             this.tscAssemblies,
             this.toolStripSeparator2,
             this.activateSelectedToolStripMenuItem,
@@ -132,13 +132,13 @@
             this.activateAllToolStripMenuItem,
             this.deactivateAllToolStripMenuItem});
             this.cmStrip.Name = "cmStrip";
-            this.cmStrip.Size = new System.Drawing.Size(261, 225);
+            this.cmStrip.Size = new System.Drawing.Size(311, 225);
             // 
             // selectAllToolStripMenuItem
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
             this.selectAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(310, 22);
             this.selectAllToolStripMenuItem.Text = "Select All";
             this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
             // 
@@ -146,43 +146,50 @@
             // 
             this.dropSelectionToolStripMenuItem.Name = "dropSelectionToolStripMenuItem";
             this.dropSelectionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.dropSelectionToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.dropSelectionToolStripMenuItem.Size = new System.Drawing.Size(310, 22);
             this.dropSelectionToolStripMenuItem.Text = "Drop Selection";
             this.dropSelectionToolStripMenuItem.Click += new System.EventHandler(this.dropSelectionToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(217, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(307, 6);
+            // 
+            // tscAssemblies
+            // 
+            this.tscAssemblies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tscAssemblies.Name = "tscAssemblies";
+            this.tscAssemblies.Size = new System.Drawing.Size(250, 23);
+            this.tscAssemblies.SelectedIndexChanged += new System.EventHandler(this.tscAssemblies_SelectedIndexChanged);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(217, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(307, 6);
             // 
             // activateSelectedToolStripMenuItem
             // 
             this.activateSelectedToolStripMenuItem.Name = "activateSelectedToolStripMenuItem";
-            this.activateSelectedToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.activateSelectedToolStripMenuItem.Size = new System.Drawing.Size(310, 22);
             this.activateSelectedToolStripMenuItem.Text = "Activate Selected";
             // 
             // deactivateSelectedToolStripMenuItem
             // 
             this.deactivateSelectedToolStripMenuItem.Name = "deactivateSelectedToolStripMenuItem";
-            this.deactivateSelectedToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.deactivateSelectedToolStripMenuItem.Size = new System.Drawing.Size(310, 22);
             this.deactivateSelectedToolStripMenuItem.Text = "Deactivate Selected";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(217, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(307, 6);
             // 
             // activateAllToolStripMenuItem
             // 
             this.activateAllToolStripMenuItem.Name = "activateAllToolStripMenuItem";
             this.activateAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.A)));
-            this.activateAllToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.activateAllToolStripMenuItem.Size = new System.Drawing.Size(310, 22);
             this.activateAllToolStripMenuItem.Text = "Activate All";
             // 
             // deactivateAllToolStripMenuItem
@@ -190,7 +197,7 @@
             this.deactivateAllToolStripMenuItem.Name = "deactivateAllToolStripMenuItem";
             this.deactivateAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.D)));
-            this.deactivateAllToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.deactivateAllToolStripMenuItem.Size = new System.Drawing.Size(310, 22);
             this.deactivateAllToolStripMenuItem.Text = "Deactivate All";
             // 
             // tableLayoutPanel1
@@ -259,19 +266,12 @@
             this.lTypes.TabIndex = 5;
             this.lTypes.Text = "Select Type:";
             // 
-            // matchMoveToToolStripMenuItem
+            // matchTypeMoveToAnotherAssemblyToolStripMenuItem
             // 
-            this.matchMoveToToolStripMenuItem.Enabled = false;
-            this.matchMoveToToolStripMenuItem.Name = "matchMoveToToolStripMenuItem";
-            this.matchMoveToToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.matchMoveToToolStripMenuItem.Text = "Match && Move To...";
-            // 
-            // tscAssemblies
-            // 
-            this.tscAssemblies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.tscAssemblies.Name = "tscAssemblies";
-            this.tscAssemblies.Size = new System.Drawing.Size(200, 23);
-            this.tscAssemblies.SelectedIndexChanged += new System.EventHandler(this.tscAssemblies_SelectedIndexChanged);
+            this.matchTypeMoveToAnotherAssemblyToolStripMenuItem.Enabled = false;
+            this.matchTypeMoveToAnotherAssemblyToolStripMenuItem.Name = "matchTypeMoveToAnotherAssemblyToolStripMenuItem";
+            this.matchTypeMoveToAnotherAssemblyToolStripMenuItem.Size = new System.Drawing.Size(310, 22);
+            this.matchTypeMoveToAnotherAssemblyToolStripMenuItem.Text = "Match Type && Move To Another Assembly...";
             // 
             // MainControl
             // 
@@ -315,7 +315,7 @@
         private System.Windows.Forms.ToolStripMenuItem deactivateSelectedToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem matchMoveToToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox tscAssemblies;
+        private System.Windows.Forms.ToolStripMenuItem matchTypeMoveToAnotherAssemblyToolStripMenuItem;
     }
 }
