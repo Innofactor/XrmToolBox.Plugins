@@ -178,11 +178,8 @@
             var selectedAssembly = (PluginAssembly)((ComboBox)sender).SelectedItem;
 
             this.lvSteps.Items.Clear();
-            this.tscAssemblies.Items.Clear();
-            foreach (var assembly in this.PluginAsseblies.Where(x => x.Id != selectedAssembly.Id))
-            {
-                this.tscAssemblies.Items.Add(assembly);
-            }
+            this.FillAssemblies(selectedAssembly);
+
             this.RetrieveTypes(selectedAssembly);
         }
 
@@ -194,6 +191,11 @@
             this.RetrieveSteps(pluginAssembly, pluginType);
         }
 
+        private void cmStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.FillTypes(this.cbTypes.SelectedItem as PluginType);
+        }
+
         /// <summary>
         /// Dropping selection for all steps available
         /// </summary>
@@ -202,6 +204,34 @@
         private void dropSelectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.SelectAndCheckAll(false);
+        }
+
+        /// <summary>
+        /// Fill drop-down list of assemblies in context menu
+        /// </summary>
+        /// <param name="selectedAssembly"></param>
+        private void FillAssemblies(PluginAssembly selectedAssembly)
+        {
+            this.tscAssemblies.Items.Clear();
+
+            foreach (var assembly in this.PluginAsseblies.Where(x => x.Id != selectedAssembly.Id))
+            {
+                this.tscAssemblies.Items.Add(assembly);
+            }
+        }
+
+        /// <summary>
+        /// Filling drop-down list of types in context menu
+        /// </summary>
+        /// <param name="pluginType"></param>
+        private void FillTypes(PluginType pluginType = null)
+        {
+            this.tscTypes.Items.Clear();
+
+            foreach (var type in (pluginType == null) ? this.PluginTypes : this.PluginTypes.Where(x => x.Id != pluginType.Id).ToArray())
+            {
+                tscTypes.Items.Add(type);
+            }
         }
 
         private void MainControl_Enter(object sender, EventArgs e)
@@ -232,8 +262,7 @@
 
         private void tscAssemblies_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Resetting selection index
-            // ((ToolStripComboBox)sender).SelectedIndex = -1;
+            // Resetting selection index ((ToolStripComboBox)sender).SelectedIndex = -1;
 
             var targetAssembly = (PluginAssembly)((ToolStripComboBox)sender).SelectedItem;
 
@@ -242,12 +271,10 @@
             this.WorkAsync("Matching types in source and target assemblies...",
                 a =>
                 {
-                    a.Result = this.Service.GetPluginTypes(targetAssembly.Id);
-                },
-                a =>
-                {
+                    var hits = new int[] { 0, 0, 0 };
+
                     var sourceTypes = this.PluginTypes.Select(x => x.ToEntity()).ToArray();
-                    var targetTypes = (Entity[])a.Result;
+                    var targetTypes = this.Service.GetPluginTypes(targetAssembly.Id);
 
                     foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
                     {
@@ -258,24 +285,62 @@
 
                         if (targetType != null)
                         {
-                            step["plugintypeid"] = targetType.ToEntityReference();
+                            step[Constants.Crm.Attributes.PLUGIN_TYPE_ID] = targetType.ToEntityReference();
 
-                            // Reseting attributes
                             step.Attributes.Remove("eventhandler");
-                            //step.Attributes.Remove("sdkmessageprocessingstepid");
-                            //step.Id = Guid.Empty;
 
-                            //step.Id = proxy.Create(step);
                             try
                             {
                                 this.Service.Update(step);
+                                // Matched
+                                hits[1]++;
                             }
-                            catch (Exception ex)
+                            catch (Exception)
                             {
+                                // Failed to match
+                                hits[2]++;
                             }
                         }
+                        else
+                        {
+                            // Missing
+                            hits[0]++;
+                        }
                     }
+                    a.Result = hits;
+                },
+                a =>
+                {
                 });
+        }
+
+        private void tscTypes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var targetType = (PluginType)((ToolStripComboBox)sender).SelectedItem;
+
+            foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
+            {
+                if (targetType != null)
+                {
+                    step[Constants.Crm.Attributes.PLUGIN_TYPE_ID] = targetType.ToEntity().ToEntityReference();
+
+                    step.Attributes.Remove("eventhandler");
+
+                    try
+                    {
+                        this.Service.Update(step);
+                        // Matched hits[1]++;
+                    }
+                    catch (Exception)
+                    {
+                        // Failed to match hits[2]++;
+                    }
+                }
+                else
+                {
+                    // Missing hits[0]++;
+                }
+            }
         }
 
         #endregion Private Methods

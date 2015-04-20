@@ -40,11 +40,14 @@
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dropSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.matchTypeMoveToAnotherAssemblyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tscAssemblies = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.moveToAnotherTypeInSameAssemblyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tscTypes = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.activateSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deactivateSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.activateAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deactivateAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -52,9 +55,6 @@
             this.lAssemblies = new System.Windows.Forms.Label();
             this.cbTypes = new System.Windows.Forms.ComboBox();
             this.lTypes = new System.Windows.Forms.Label();
-            this.matchTypeMoveToAnotherAssemblyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.moveToAnotherTypeInSameAssemblyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tscTypes = new System.Windows.Forms.ToolStripComboBox();
             this.tsMenu.SuspendLayout();
             this.gbSteps.SuspendLayout();
             this.cmStrip.SuspendLayout();
@@ -137,6 +137,7 @@
             this.deactivateAllToolStripMenuItem});
             this.cmStrip.Name = "cmStrip";
             this.cmStrip.Size = new System.Drawing.Size(311, 274);
+            this.cmStrip.Opening += new System.ComponentModel.CancelEventHandler(this.cmStrip_Opening);
             // 
             // selectAllToolStripMenuItem
             // 
@@ -159,6 +160,13 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(307, 6);
             // 
+            // matchTypeMoveToAnotherAssemblyToolStripMenuItem
+            // 
+            this.matchTypeMoveToAnotherAssemblyToolStripMenuItem.Enabled = false;
+            this.matchTypeMoveToAnotherAssemblyToolStripMenuItem.Name = "matchTypeMoveToAnotherAssemblyToolStripMenuItem";
+            this.matchTypeMoveToAnotherAssemblyToolStripMenuItem.Size = new System.Drawing.Size(310, 22);
+            this.matchTypeMoveToAnotherAssemblyToolStripMenuItem.Text = "Match Type && Move To Another Assembly...";
+            // 
             // tscAssemblies
             // 
             this.tscAssemblies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -171,6 +179,25 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(307, 6);
             // 
+            // moveToAnotherTypeInSameAssemblyToolStripMenuItem
+            // 
+            this.moveToAnotherTypeInSameAssemblyToolStripMenuItem.Enabled = false;
+            this.moveToAnotherTypeInSameAssemblyToolStripMenuItem.Name = "moveToAnotherTypeInSameAssemblyToolStripMenuItem";
+            this.moveToAnotherTypeInSameAssemblyToolStripMenuItem.Size = new System.Drawing.Size(310, 22);
+            this.moveToAnotherTypeInSameAssemblyToolStripMenuItem.Text = "Move To Another Type In Same Assembly...";
+            // 
+            // tscTypes
+            // 
+            this.tscTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tscTypes.Name = "tscTypes";
+            this.tscTypes.Size = new System.Drawing.Size(250, 23);
+            this.tscTypes.SelectedIndexChanged += new System.EventHandler(this.tscTypes_SelectedIndexChanged);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(307, 6);
+            // 
             // activateSelectedToolStripMenuItem
             // 
             this.activateSelectedToolStripMenuItem.Name = "activateSelectedToolStripMenuItem";
@@ -182,11 +209,6 @@
             this.deactivateSelectedToolStripMenuItem.Name = "deactivateSelectedToolStripMenuItem";
             this.deactivateSelectedToolStripMenuItem.Size = new System.Drawing.Size(310, 22);
             this.deactivateSelectedToolStripMenuItem.Text = "Deactivate Selected";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(307, 6);
             // 
             // activateAllToolStripMenuItem
             // 
@@ -269,26 +291,6 @@
             this.lTypes.Size = new System.Drawing.Size(91, 20);
             this.lTypes.TabIndex = 5;
             this.lTypes.Text = "Select Type:";
-            // 
-            // matchTypeMoveToAnotherAssemblyToolStripMenuItem
-            // 
-            this.matchTypeMoveToAnotherAssemblyToolStripMenuItem.Enabled = false;
-            this.matchTypeMoveToAnotherAssemblyToolStripMenuItem.Name = "matchTypeMoveToAnotherAssemblyToolStripMenuItem";
-            this.matchTypeMoveToAnotherAssemblyToolStripMenuItem.Size = new System.Drawing.Size(310, 22);
-            this.matchTypeMoveToAnotherAssemblyToolStripMenuItem.Text = "Match Type && Move To Another Assembly...";
-            // 
-            // moveToAnotherTypeInSameAssemblyToolStripMenuItem
-            // 
-            this.moveToAnotherTypeInSameAssemblyToolStripMenuItem.Enabled = false;
-            this.moveToAnotherTypeInSameAssemblyToolStripMenuItem.Name = "moveToAnotherTypeInSameAssemblyToolStripMenuItem";
-            this.moveToAnotherTypeInSameAssemblyToolStripMenuItem.Size = new System.Drawing.Size(310, 22);
-            this.moveToAnotherTypeInSameAssemblyToolStripMenuItem.Text = "Move To Another Type In Same Assembly...";
-            // 
-            // tscTypes
-            // 
-            this.tscTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.tscTypes.Name = "tscTypes";
-            this.tscTypes.Size = new System.Drawing.Size(250, 23);
             // 
             // MainControl
             // 
