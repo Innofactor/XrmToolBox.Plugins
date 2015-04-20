@@ -43,7 +43,7 @@
     <Reference Include="Cinteros.Xrm.FetchXmlBuilder, Version=1.2015.4.15, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\Cinteros.Xrm.FetchXmlBuilder.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Cinteros.Xrm.XmlEditorUtils">
       <HintPath>..\Dependencies\Cinteros.Xrm.XmlEditorUtils.dll</HintPath>

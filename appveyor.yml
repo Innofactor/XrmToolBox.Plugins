@@ -1,29 +1,28 @@
-version: '{build}.{branch}.$(APPVEYOR_REPO_COMMIT)'
+version: '{build}'
 branches:
   only:
   - master
-skip_tags: true
 configuration: Release
-platform: Any CPU
-shallow_clone: true
 init:
-- SET /A "year=%Date:~10,4%"
-- SET /A "month=%Date:~4,2%"
+- ps: Update-AppveyorBuild -Version "1.$(Get-Date -format yyyy.M).$env:appveyor_build_number"
 assembly_info:
   patch: true
-  file: VersionInfo.cs
-  assembly_version: 1.$(year).$(month).${build}
-  assembly_file_version: 1.$(year).$(month).${build}
-  assembly_informational_version: $(APPVEYOR_REPO_COMMIT)
+  file: '**\VersionInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
 build:
-  parallel: true
-  verbosity: normal
+  verbosity: minimal
 after_build:
-- 7z a XrmToolBox.Plugins-%APPVEYOR_REPO_COMMIT:~0,7%.zip %APPVEYOR_BUILD_FOLDER%\Output\%CONFIGURATION%\Cinteros.Xrm.*.dll
-- appveyor PushArtifact XrmToolBox.Plugins-%APPVEYOR_REPO_COMMIT:~0,7%.zip
+- 7z a Cinteros.XrmToolBox.Plugins_%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Output\%CONFIGURATION%\Cinteros.Xrm.*.dll
+- appveyor PushArtifact Cinteros.XrmToolBox.Plugins_%APPVEYOR_BUILD_VERSION%.zip
 deploy:
-- provider: GitHub
-  tag: 1.$(year).$(month).${build}
-  auth_token:
-    secure: 93a1a2Zfpvh/BMCM/kyXS/shMcTeSWdv4uRffo2UPAuO4+hq7qSX9bwoYbj9sv5W 
-  prerelease: true
+- provider: Environment
+  name: GitHubCintXTB
+- provider: FTP
+  host: rappen.net
+  protocol: ftp
+  username: Jonas
+  password:
+    secure: tlAywufGDNedgIwqqBUmsA==
+  folder: rappen/Cinteros
