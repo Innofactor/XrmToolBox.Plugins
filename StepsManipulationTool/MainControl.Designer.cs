@@ -55,6 +55,9 @@
             this.lAssemblies = new System.Windows.Forms.Label();
             this.cbTypes = new System.Windows.Forms.ComboBox();
             this.lTypes = new System.Windows.Forms.Label();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.removeSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenu.SuspendLayout();
             this.gbSteps.SuspendLayout();
             this.cmStrip.SuspendLayout();
@@ -133,10 +136,13 @@
             this.toolStripSeparator3,
             this.activateSelectedToolStripMenuItem,
             this.deactivateSelectedToolStripMenuItem,
+            this.toolStripSeparator4,
             this.activateAllToolStripMenuItem,
-            this.deactivateAllToolStripMenuItem});
+            this.deactivateAllToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.removeSelectedToolStripMenuItem});
             this.cmStrip.Name = "cmStrip";
-            this.cmStrip.Size = new System.Drawing.Size(313, 274);
+            this.cmStrip.Size = new System.Drawing.Size(313, 308);
             this.cmStrip.Opening += new System.ComponentModel.CancelEventHandler(this.cmStrip_Opening);
             // 
             // selectAllToolStripMenuItem
@@ -292,6 +298,22 @@
             this.lTypes.TabIndex = 5;
             this.lTypes.Text = "Select Type:";
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(309, 6);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(309, 6);
+            // 
+            // removeSelectedToolStripMenuItem
+            // 
+            this.removeSelectedToolStripMenuItem.Name = "removeSelectedToolStripMenuItem";
+            this.removeSelectedToolStripMenuItem.Size = new System.Drawing.Size(312, 22);
+            this.removeSelectedToolStripMenuItem.Text = "Remove Selected";
+            // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -338,5 +360,8 @@
         private System.Windows.Forms.ToolStripComboBox tscTypes;
         private System.Windows.Forms.ToolStripMenuItem matchPluginNameMoveToAssemblyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem moveToAnotherPluginInSameAssemblyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem removeSelectedToolStripMenuItem;
     }
 }
