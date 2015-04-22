@@ -269,13 +269,14 @@
             this.WorkAsync("Matching types in source and target assemblies...",
                 a =>
                 {
-                    var hits = new int[] { 0, 0, 0 };
+                    var hits = new MatchResult();
 
                     var sourceTypes = this.PluginTypes.Select(x => x.ToEntity()).ToArray();
                     var targetTypes = this.Service.GetPluginTypes(targetAssembly.Id);
 
                     this.Invoke(new Action(() =>
                         {
+                            hits.StepsTotal = this.lvSteps.SelectedItems.Count;
                             foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
                             {
                                 var sourcePluginTypeId = (EntityReference)step[Constants.Crm.Attributes.PLUGIN_TYPE_ID];
@@ -293,18 +294,18 @@
                                     {
                                         this.Service.Update(step);
                                         // Matched
-                                        hits[1]++;
+                                        hits.StepUpdatedSuccessfully++;
                                     }
                                     catch (Exception)
                                     {
                                         // Failed to match
-                                        hits[2]++;
+                                        hits.StepFailedToUpdate++;
                                     }
                                 }
                                 else
                                 {
                                     // Missing
-                                    hits[0]++;
+                                    hits.PluginMissing++;
                                 }
                             }
                         }));
@@ -312,13 +313,31 @@
                 },
                 a =>
                 {
-                    ((ToolStripComboBox)sender).DroppedDown = false;
+                    this.Invoke(new Action(() =>
+                        {
+                            ((ToolStripComboBox)sender).DroppedDown = false;
+
+                            var hits = (MatchResult)a.Result;
+                            var text = string.Format(
+@"Total number of steps processed: {0}
+Number of steps updated successully: {1}
+Number of steps failed to update: {2}
+Number of missing types: {3}",
+                              hits.StepsTotal,
+                              hits.StepUpdatedSuccessfully,
+                              hits.StepFailedToUpdate,
+                              hits.PluginMissing);
+
+                            MessageBox.Show(text, "Match & Update operation result");
+                        }));
                 });
         }
 
         private void tscTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
             var targetType = (PluginType)((ToolStripComboBox)sender).SelectedItem;
+
+            var hits = new MatchResult();
 
             foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
             {
@@ -331,16 +350,19 @@
                     try
                     {
                         this.Service.Update(step);
-                        // Matched hits[1]++;
+                        // Matched 
+                        hits.StepUpdatedSuccessfully++;
                     }
                     catch (Exception)
                     {
-                        // Failed to match hits[2]++;
+                        // Failed to match 
+                        hits.StepFailedToUpdate++;
                     }
                 }
                 else
                 {
-                    // Missing hits[0]++;
+                    // Missing 
+                    hits.PluginMissing++;
                 }
             }
         }
