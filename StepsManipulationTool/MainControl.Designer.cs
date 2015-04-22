@@ -97,7 +97,6 @@
             // 
             // lvSteps
             // 
-            this.lvSteps.CheckBoxes = true;
             this.lvSteps.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chName,
             this.chState});
@@ -142,7 +141,7 @@
             this.toolStripSeparator5,
             this.removeSelectedToolStripMenuItem});
             this.cmStrip.Name = "cmStrip";
-            this.cmStrip.Size = new System.Drawing.Size(313, 308);
+            this.cmStrip.Size = new System.Drawing.Size(313, 286);
             this.cmStrip.Opening += new System.ComponentModel.CancelEventHandler(this.cmStrip_Opening);
             // 
             // selectAllToolStripMenuItem
