@@ -263,7 +263,8 @@
         private void tscAssemblies_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Resetting selection index ((ToolStripComboBox)sender).SelectedIndex = -1;
-
+            ((ToolStripComboBox)sender).DroppedDown = false;
+            
             var targetAssembly = (PluginAssembly)((ToolStripComboBox)sender).SelectedItem;
 
             this.WorkAsync("Matching types in source and target assemblies...",
@@ -315,8 +316,6 @@
                 {
                     this.Invoke(new Action(() =>
                         {
-                            ((ToolStripComboBox)sender).DroppedDown = false;
-
                             var hits = (MatchResult)a.Result;
                             var text = string.Format(
 @"Total number of steps processed: {0}
@@ -368,5 +367,30 @@ Number of missing types: {3}",
         }
 
         #endregion Private Methods
+
+        private void removeSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.lvSteps.SelectedItems.Count > 0)
+            {
+                var result = MessageBox.Show("Confirmation", string.Format("Do you really want to delete {0} steps?", this.lvSteps.SelectedItems.Count), MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    this.WorkAsync("Matching types in source and target assemblies...",
+                        a =>
+                        {
+                            this.Invoke(new Action(() =>
+                                {
+                                    foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
+                                    {
+                                        this.Service.Delete(step.LogicalName, step.Id);
+                                    }
+                                }));
+                        },
+                        a => { }
+                    );
+                }
+            }
+        }
     }
 }
