@@ -266,8 +266,6 @@
 
             var targetAssembly = (PluginAssembly)((ToolStripComboBox)sender).SelectedItem;
 
-            var steps = this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, ProcessingStep>(x => (ProcessingStep)x.Tag).ToArray();
-
             this.WorkAsync("Matching types in source and target assemblies...",
                 a =>
                 {
@@ -276,41 +274,45 @@
                     var sourceTypes = this.PluginTypes.Select(x => x.ToEntity()).ToArray();
                     var targetTypes = this.Service.GetPluginTypes(targetAssembly.Id);
 
-                    foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
-                    {
-                        var sourcePluginTypeId = (EntityReference)step[Constants.Crm.Attributes.PLUGIN_TYPE_ID];
-                        var sourceSdkMessageProcessingStepId = step.Id;
-                        var sourceType = sourceTypes.Where(x => ((Guid)x[Constants.Crm.Attributes.PLUGIN_TYPE_ID]) == sourcePluginTypeId.Id).FirstOrDefault<Entity>();
-                        var targetType = targetTypes.Where(x => (string)x[Constants.Crm.Attributes.NAME] == (string)sourceType[Constants.Crm.Attributes.NAME]).FirstOrDefault<Entity>();
-
-                        if (targetType != null)
+                    this.Invoke(new Action(() =>
                         {
-                            step[Constants.Crm.Attributes.PLUGIN_TYPE_ID] = targetType.ToEntityReference();
-
-                            step.Attributes.Remove("eventhandler");
-
-                            try
+                            foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
                             {
-                                this.Service.Update(step);
-                                // Matched
-                                hits[1]++;
+                                var sourcePluginTypeId = (EntityReference)step[Constants.Crm.Attributes.PLUGIN_TYPE_ID];
+                                var sourceSdkMessageProcessingStepId = step.Id;
+                                var sourceType = sourceTypes.Where(x => ((Guid)x[Constants.Crm.Attributes.PLUGIN_TYPE_ID]) == sourcePluginTypeId.Id).FirstOrDefault<Entity>();
+                                var targetType = targetTypes.Where(x => (string)x[Constants.Crm.Attributes.NAME] == (string)sourceType[Constants.Crm.Attributes.NAME]).FirstOrDefault<Entity>();
+
+                                if (targetType != null)
+                                {
+                                    step[Constants.Crm.Attributes.PLUGIN_TYPE_ID] = targetType.ToEntityReference();
+
+                                    step.Attributes.Remove("eventhandler");
+
+                                    try
+                                    {
+                                        this.Service.Update(step);
+                                        // Matched
+                                        hits[1]++;
+                                    }
+                                    catch (Exception)
+                                    {
+                                        // Failed to match
+                                        hits[2]++;
+                                    }
+                                }
+                                else
+                                {
+                                    // Missing
+                                    hits[0]++;
+                                }
                             }
-                            catch (Exception)
-                            {
-                                // Failed to match
-                                hits[2]++;
-                            }
-                        }
-                        else
-                        {
-                            // Missing
-                            hits[0]++;
-                        }
-                    }
+                        }));
                     a.Result = hits;
                 },
                 a =>
                 {
+                    ((ToolStripComboBox)sender).DroppedDown = false;
                 });
         }
 
