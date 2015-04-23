@@ -58,10 +58,18 @@
             this.lAssemblies = new System.Windows.Forms.Label();
             this.cbTypes = new System.Windows.Forms.ComboBox();
             this.lTypes = new System.Windows.Forms.Label();
+            this.gbActions = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.tsMenu.SuspendLayout();
             this.gbSteps.SuspendLayout();
             this.cmStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.gbActions.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsMenu
@@ -90,7 +98,7 @@
             this.gbSteps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbSteps.Location = new System.Drawing.Point(3, 29);
             this.gbSteps.Name = "gbSteps";
-            this.gbSteps.Size = new System.Drawing.Size(594, 343);
+            this.gbSteps.Size = new System.Drawing.Size(594, 443);
             this.gbSteps.TabIndex = 1;
             this.gbSteps.TabStop = false;
             this.gbSteps.Text = "SDK Message Processing Steps";
@@ -106,7 +114,7 @@
             this.lvSteps.GridLines = true;
             this.lvSteps.Location = new System.Drawing.Point(3, 16);
             this.lvSteps.Name = "lvSteps";
-            this.lvSteps.Size = new System.Drawing.Size(588, 324);
+            this.lvSteps.Size = new System.Drawing.Size(588, 424);
             this.lvSteps.TabIndex = 0;
             this.lvSteps.UseCompatibleStateImageBehavior = false;
             this.lvSteps.View = System.Windows.Forms.View.Details;
@@ -260,13 +268,15 @@
             this.tableLayoutPanel1.Controls.Add(this.lAssemblies, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.cbTypes, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.lTypes, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.gbActions, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 25);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(600, 375);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(600, 575);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // cbAssemblies
@@ -314,6 +324,82 @@
             this.lTypes.TabIndex = 5;
             this.lTypes.Text = "Select Type:";
             // 
+            // gbActions
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.gbActions, 4);
+            this.gbActions.Controls.Add(this.tableLayoutPanel2);
+            this.gbActions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbActions.Location = new System.Drawing.Point(3, 478);
+            this.gbActions.Name = "gbActions";
+            this.gbActions.Size = new System.Drawing.Size(594, 94);
+            this.gbActions.TabIndex = 6;
+            this.gbActions.TabStop = false;
+            this.gbActions.Text = "Actions";
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 4;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.comboBox2, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.comboBox1, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label2, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(588, 75);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(9, 6);
+            this.label1.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(91, 21);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Select Assembly:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Location = new System.Drawing.Point(303, 6);
+            this.label2.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(91, 21);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Select Type:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(397, 3);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(188, 21);
+            this.comboBox1.Sorted = true;
+            this.comboBox1.TabIndex = 7;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(103, 3);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(188, 21);
+            this.comboBox2.TabIndex = 8;
+            // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -321,13 +407,16 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tsMenu);
             this.Name = "MainControl";
-            this.Size = new System.Drawing.Size(600, 400);
+            this.Size = new System.Drawing.Size(600, 600);
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.gbSteps.ResumeLayout(false);
             this.cmStrip.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.gbActions.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -363,5 +452,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem removeSelectedToolStripMenuItem;
+        private System.Windows.Forms.GroupBox gbActions;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label2;
     }
 }
