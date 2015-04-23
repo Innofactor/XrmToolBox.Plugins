@@ -85,10 +85,12 @@
                 {
                     this.PluginAsseblies = ((Entity[])e.Result).Select<Entity, PluginAssembly>(x => new PluginAssembly(x)).ToArray();
                     this.cbSourceAssembly.Items.Clear();
+                    this.cbTargetAssembly.Items.Clear();
 
                     foreach (var assembly in this.PluginAsseblies)
                     {
                         this.cbSourceAssembly.Items.Add(assembly);
+                        this.cbTargetAssembly.Items.Add(assembly);
                     }
                 });
         }
@@ -157,11 +159,13 @@
                 {
                     this.PluginTypes = ((Entity[])a.Result).Select<Entity, PluginType>(x => new PluginType(x, pluginAssembly)).ToArray();
                     this.cbSourcePlugin.Items.Clear();
+                    this.cbTargetPlugin.Items.Clear();
 
                     this.cbSourcePlugin.Items.Add("All types");
                     foreach (var type in this.PluginTypes)
                     {
                         this.cbSourcePlugin.Items.Add(type);
+                        this.cbTargetPlugin.Items.Add(type);
                     }
 
                     // Select all types

@@ -259,9 +259,9 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.gbSteps, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.cbSourceAssembly, 1, 0);
@@ -284,9 +284,9 @@
             this.cbSourceAssembly.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbSourceAssembly.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSourceAssembly.FormattingEnabled = true;
-            this.cbSourceAssembly.Location = new System.Drawing.Point(103, 3);
+            this.cbSourceAssembly.Location = new System.Drawing.Point(113, 3);
             this.cbSourceAssembly.Name = "cbSourceAssembly";
-            this.cbSourceAssembly.Size = new System.Drawing.Size(194, 21);
+            this.cbSourceAssembly.Size = new System.Drawing.Size(184, 21);
             this.cbSourceAssembly.Sorted = true;
             this.cbSourceAssembly.TabIndex = 3;
             this.cbSourceAssembly.SelectedIndexChanged += new System.EventHandler(this.cbAssemblies_SelectedIndexChanged);
@@ -298,7 +298,7 @@
             this.lSourceAssembly.Location = new System.Drawing.Point(9, 6);
             this.lSourceAssembly.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
             this.lSourceAssembly.Name = "lSourceAssembly";
-            this.lSourceAssembly.Size = new System.Drawing.Size(91, 20);
+            this.lSourceAssembly.Size = new System.Drawing.Size(101, 20);
             this.lSourceAssembly.TabIndex = 2;
             this.lSourceAssembly.Text = "Source Assembly:";
             // 
@@ -307,9 +307,9 @@
             this.cbSourcePlugin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbSourcePlugin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSourcePlugin.FormattingEnabled = true;
-            this.cbSourcePlugin.Location = new System.Drawing.Point(403, 3);
+            this.cbSourcePlugin.Location = new System.Drawing.Point(413, 3);
             this.cbSourcePlugin.Name = "cbSourcePlugin";
-            this.cbSourcePlugin.Size = new System.Drawing.Size(194, 21);
+            this.cbSourcePlugin.Size = new System.Drawing.Size(184, 21);
             this.cbSourcePlugin.TabIndex = 4;
             this.cbSourcePlugin.SelectedIndexChanged += new System.EventHandler(this.cbTypes_SelectedIndexChanged);
             // 
@@ -320,7 +320,7 @@
             this.lSourcePlugin.Location = new System.Drawing.Point(309, 6);
             this.lSourcePlugin.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
             this.lSourcePlugin.Name = "lSourcePlugin";
-            this.lSourcePlugin.Size = new System.Drawing.Size(91, 20);
+            this.lSourcePlugin.Size = new System.Drawing.Size(101, 20);
             this.lSourcePlugin.TabIndex = 5;
             this.lSourcePlugin.Text = "Source Plugin:";
             // 
@@ -339,9 +339,9 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 4;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.cbTargetAssembly, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.cbTargetPlugin, 3, 0);
@@ -364,7 +364,7 @@
             this.lTargetAssembly.Location = new System.Drawing.Point(9, 6);
             this.lTargetAssembly.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
             this.lTargetAssembly.Name = "lTargetAssembly";
-            this.lTargetAssembly.Size = new System.Drawing.Size(91, 21);
+            this.lTargetAssembly.Size = new System.Drawing.Size(101, 21);
             this.lTargetAssembly.TabIndex = 3;
             this.lTargetAssembly.Text = "Target Assembly:";
             // 
@@ -375,7 +375,7 @@
             this.lTargetPlugin.Location = new System.Drawing.Point(303, 6);
             this.lTargetPlugin.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
             this.lTargetPlugin.Name = "lTargetPlugin";
-            this.lTargetPlugin.Size = new System.Drawing.Size(91, 21);
+            this.lTargetPlugin.Size = new System.Drawing.Size(101, 21);
             this.lTargetPlugin.TabIndex = 6;
             this.lTargetPlugin.Text = "Target Pluign:";
             // 
@@ -384,9 +384,9 @@
             this.cbTargetPlugin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbTargetPlugin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTargetPlugin.FormattingEnabled = true;
-            this.cbTargetPlugin.Location = new System.Drawing.Point(397, 3);
+            this.cbTargetPlugin.Location = new System.Drawing.Point(407, 3);
             this.cbTargetPlugin.Name = "cbTargetPlugin";
-            this.cbTargetPlugin.Size = new System.Drawing.Size(188, 21);
+            this.cbTargetPlugin.Size = new System.Drawing.Size(178, 21);
             this.cbTargetPlugin.Sorted = true;
             this.cbTargetPlugin.TabIndex = 7;
             // 
@@ -395,9 +395,9 @@
             this.cbTargetAssembly.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbTargetAssembly.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTargetAssembly.FormattingEnabled = true;
-            this.cbTargetAssembly.Location = new System.Drawing.Point(103, 3);
+            this.cbTargetAssembly.Location = new System.Drawing.Point(113, 3);
             this.cbTargetAssembly.Name = "cbTargetAssembly";
-            this.cbTargetAssembly.Size = new System.Drawing.Size(188, 21);
+            this.cbTargetAssembly.Size = new System.Drawing.Size(178, 21);
             this.cbTargetAssembly.TabIndex = 8;
             // 
             // MainControl
