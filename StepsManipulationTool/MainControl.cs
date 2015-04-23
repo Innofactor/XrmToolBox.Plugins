@@ -84,11 +84,11 @@
                 e =>
                 {
                     this.PluginAsseblies = ((Entity[])e.Result).Select<Entity, PluginAssembly>(x => new PluginAssembly(x)).ToArray();
-                    this.cbAssemblies.Items.Clear();
+                    this.cbSourceAssembly.Items.Clear();
 
                     foreach (var assembly in this.PluginAsseblies)
                     {
-                        this.cbAssemblies.Items.Add(assembly);
+                        this.cbSourceAssembly.Items.Add(assembly);
                     }
                 });
         }
@@ -156,16 +156,16 @@
                 a =>
                 {
                     this.PluginTypes = ((Entity[])a.Result).Select<Entity, PluginType>(x => new PluginType(x, pluginAssembly)).ToArray();
-                    this.cbTypes.Items.Clear();
+                    this.cbSourcePlugin.Items.Clear();
 
-                    this.cbTypes.Items.Add("All types");
+                    this.cbSourcePlugin.Items.Add("All types");
                     foreach (var type in this.PluginTypes)
                     {
-                        this.cbTypes.Items.Add(type);
+                        this.cbSourcePlugin.Items.Add(type);
                     }
 
                     // Select all types
-                    this.cbTypes.SelectedIndex = 0;
+                    this.cbSourcePlugin.SelectedIndex = 0;
                 });
         }
 
@@ -185,7 +185,7 @@
 
         private void cbTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var pluginAssembly = (PluginAssembly)this.cbAssemblies.SelectedItem;
+            var pluginAssembly = (PluginAssembly)this.cbSourceAssembly.SelectedItem;
             var pluginType = ((ComboBox)sender).SelectedItem as PluginType;
 
             this.RetrieveSteps(pluginAssembly, pluginType);
@@ -193,7 +193,7 @@
 
         private void cmStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            this.FillTypes(this.cbTypes.SelectedItem as PluginType);
+            this.FillTypes(this.cbSourcePlugin.SelectedItem as PluginType);
         }
 
         /// <summary>

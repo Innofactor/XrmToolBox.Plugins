@@ -54,16 +54,16 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.removeSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cbAssemblies = new System.Windows.Forms.ComboBox();
-            this.lAssemblies = new System.Windows.Forms.Label();
-            this.cbTypes = new System.Windows.Forms.ComboBox();
-            this.lTypes = new System.Windows.Forms.Label();
+            this.cbSourceAssembly = new System.Windows.Forms.ComboBox();
+            this.lSourceAssembly = new System.Windows.Forms.Label();
+            this.cbSourcePlugin = new System.Windows.Forms.ComboBox();
+            this.lSourcePlugin = new System.Windows.Forms.Label();
             this.gbActions = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.lTargetAssembly = new System.Windows.Forms.Label();
+            this.lTargetPlugin = new System.Windows.Forms.Label();
+            this.cbTargetPlugin = new System.Windows.Forms.ComboBox();
+            this.cbTargetAssembly = new System.Windows.Forms.ComboBox();
             this.tsMenu.SuspendLayout();
             this.gbSteps.SuspendLayout();
             this.cmStrip.SuspendLayout();
@@ -264,10 +264,10 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.gbSteps, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.cbAssemblies, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lAssemblies, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.cbTypes, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lTypes, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cbSourceAssembly, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lSourceAssembly, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cbSourcePlugin, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lSourcePlugin, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.gbActions, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 25);
@@ -279,50 +279,50 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(600, 575);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
-            // cbAssemblies
+            // cbSourceAssembly
             // 
-            this.cbAssemblies.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbAssemblies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAssemblies.FormattingEnabled = true;
-            this.cbAssemblies.Location = new System.Drawing.Point(103, 3);
-            this.cbAssemblies.Name = "cbAssemblies";
-            this.cbAssemblies.Size = new System.Drawing.Size(194, 21);
-            this.cbAssemblies.Sorted = true;
-            this.cbAssemblies.TabIndex = 3;
-            this.cbAssemblies.SelectedIndexChanged += new System.EventHandler(this.cbAssemblies_SelectedIndexChanged);
+            this.cbSourceAssembly.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbSourceAssembly.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSourceAssembly.FormattingEnabled = true;
+            this.cbSourceAssembly.Location = new System.Drawing.Point(103, 3);
+            this.cbSourceAssembly.Name = "cbSourceAssembly";
+            this.cbSourceAssembly.Size = new System.Drawing.Size(194, 21);
+            this.cbSourceAssembly.Sorted = true;
+            this.cbSourceAssembly.TabIndex = 3;
+            this.cbSourceAssembly.SelectedIndexChanged += new System.EventHandler(this.cbAssemblies_SelectedIndexChanged);
             // 
-            // lAssemblies
+            // lSourceAssembly
             // 
-            this.lAssemblies.AutoSize = true;
-            this.lAssemblies.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lAssemblies.Location = new System.Drawing.Point(9, 6);
-            this.lAssemblies.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
-            this.lAssemblies.Name = "lAssemblies";
-            this.lAssemblies.Size = new System.Drawing.Size(91, 20);
-            this.lAssemblies.TabIndex = 2;
-            this.lAssemblies.Text = "Select Assembly:";
+            this.lSourceAssembly.AutoSize = true;
+            this.lSourceAssembly.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lSourceAssembly.Location = new System.Drawing.Point(9, 6);
+            this.lSourceAssembly.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
+            this.lSourceAssembly.Name = "lSourceAssembly";
+            this.lSourceAssembly.Size = new System.Drawing.Size(91, 20);
+            this.lSourceAssembly.TabIndex = 2;
+            this.lSourceAssembly.Text = "Source Assembly:";
             // 
-            // cbTypes
+            // cbSourcePlugin
             // 
-            this.cbTypes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTypes.FormattingEnabled = true;
-            this.cbTypes.Location = new System.Drawing.Point(403, 3);
-            this.cbTypes.Name = "cbTypes";
-            this.cbTypes.Size = new System.Drawing.Size(194, 21);
-            this.cbTypes.TabIndex = 4;
-            this.cbTypes.SelectedIndexChanged += new System.EventHandler(this.cbTypes_SelectedIndexChanged);
+            this.cbSourcePlugin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbSourcePlugin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSourcePlugin.FormattingEnabled = true;
+            this.cbSourcePlugin.Location = new System.Drawing.Point(403, 3);
+            this.cbSourcePlugin.Name = "cbSourcePlugin";
+            this.cbSourcePlugin.Size = new System.Drawing.Size(194, 21);
+            this.cbSourcePlugin.TabIndex = 4;
+            this.cbSourcePlugin.SelectedIndexChanged += new System.EventHandler(this.cbTypes_SelectedIndexChanged);
             // 
-            // lTypes
+            // lSourcePlugin
             // 
-            this.lTypes.AutoSize = true;
-            this.lTypes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lTypes.Location = new System.Drawing.Point(309, 6);
-            this.lTypes.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
-            this.lTypes.Name = "lTypes";
-            this.lTypes.Size = new System.Drawing.Size(91, 20);
-            this.lTypes.TabIndex = 5;
-            this.lTypes.Text = "Select Type:";
+            this.lSourcePlugin.AutoSize = true;
+            this.lSourcePlugin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lSourcePlugin.Location = new System.Drawing.Point(309, 6);
+            this.lSourcePlugin.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
+            this.lSourcePlugin.Name = "lSourcePlugin";
+            this.lSourcePlugin.Size = new System.Drawing.Size(91, 20);
+            this.lSourcePlugin.TabIndex = 5;
+            this.lSourcePlugin.Text = "Source Plugin:";
             // 
             // gbActions
             // 
@@ -343,10 +343,10 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.comboBox2, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.comboBox1, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label2, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.cbTargetAssembly, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.cbTargetPlugin, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lTargetPlugin, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lTargetAssembly, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -357,48 +357,48 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(588, 75);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // label1
+            // lTargetAssembly
             // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(9, 6);
-            this.label1.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 21);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Select Assembly:";
+            this.lTargetAssembly.AutoSize = true;
+            this.lTargetAssembly.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lTargetAssembly.Location = new System.Drawing.Point(9, 6);
+            this.lTargetAssembly.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
+            this.lTargetAssembly.Name = "lTargetAssembly";
+            this.lTargetAssembly.Size = new System.Drawing.Size(91, 21);
+            this.lTargetAssembly.TabIndex = 3;
+            this.lTargetAssembly.Text = "Target Assembly:";
             // 
-            // label2
+            // lTargetPlugin
             // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(303, 6);
-            this.label2.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 21);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Select Type:";
+            this.lTargetPlugin.AutoSize = true;
+            this.lTargetPlugin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lTargetPlugin.Location = new System.Drawing.Point(303, 6);
+            this.lTargetPlugin.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
+            this.lTargetPlugin.Name = "lTargetPlugin";
+            this.lTargetPlugin.Size = new System.Drawing.Size(91, 21);
+            this.lTargetPlugin.TabIndex = 6;
+            this.lTargetPlugin.Text = "Target Pluign:";
             // 
-            // comboBox1
+            // cbTargetPlugin
             // 
-            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(397, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(188, 21);
-            this.comboBox1.Sorted = true;
-            this.comboBox1.TabIndex = 7;
+            this.cbTargetPlugin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbTargetPlugin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTargetPlugin.FormattingEnabled = true;
+            this.cbTargetPlugin.Location = new System.Drawing.Point(397, 3);
+            this.cbTargetPlugin.Name = "cbTargetPlugin";
+            this.cbTargetPlugin.Size = new System.Drawing.Size(188, 21);
+            this.cbTargetPlugin.Sorted = true;
+            this.cbTargetPlugin.TabIndex = 7;
             // 
-            // comboBox2
+            // cbTargetAssembly
             // 
-            this.comboBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(103, 3);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(188, 21);
-            this.comboBox2.TabIndex = 8;
+            this.cbTargetAssembly.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbTargetAssembly.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTargetAssembly.FormattingEnabled = true;
+            this.cbTargetAssembly.Location = new System.Drawing.Point(103, 3);
+            this.cbTargetAssembly.Name = "cbTargetAssembly";
+            this.cbTargetAssembly.Size = new System.Drawing.Size(188, 21);
+            this.cbTargetAssembly.TabIndex = 8;
             // 
             // MainControl
             // 
@@ -430,10 +430,10 @@
         private System.Windows.Forms.ListView lvSteps;
         private System.Windows.Forms.ColumnHeader chName;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label lAssemblies;
-        private System.Windows.Forms.ComboBox cbAssemblies;
-        private System.Windows.Forms.ComboBox cbTypes;
-        private System.Windows.Forms.Label lTypes;
+        private System.Windows.Forms.Label lSourceAssembly;
+        private System.Windows.Forms.ComboBox cbSourceAssembly;
+        private System.Windows.Forms.ComboBox cbSourcePlugin;
+        private System.Windows.Forms.Label lSourcePlugin;
         private System.Windows.Forms.ContextMenuStrip cmStrip;
         private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -454,9 +454,9 @@
         private System.Windows.Forms.ToolStripMenuItem removeSelectedToolStripMenuItem;
         private System.Windows.Forms.GroupBox gbActions;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lTargetAssembly;
+        private System.Windows.Forms.ComboBox cbTargetAssembly;
+        private System.Windows.Forms.ComboBox cbTargetPlugin;
+        private System.Windows.Forms.Label lTargetPlugin;
     }
 }
