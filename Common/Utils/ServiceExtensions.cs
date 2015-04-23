@@ -1,12 +1,11 @@
-﻿namespace Cinteros.Xrm.StepsManipulationTool
+﻿namespace Cinteros.Xrm.Utils
 {
     using System;
     using System.Linq;
-    using Cinteros.Xrm.Utils;
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Query;
 
-    public static class Extensions
+    public static class ServiceExtensions
     {
         #region Public Methods
 
@@ -73,14 +72,14 @@
 
         public static Entity[] GetSdkMessageProcessingSteps(this IOrganizationService service, Guid? pluginAssemblyId = null, Guid? pluginTypeId = null)
         {
-            var attributes = new string[] 
-            { 
-                Constants.Crm.Attributes.NAME, 
-                Constants.Crm.Attributes.STATE_CODE, 
-                Constants.Crm.Attributes.STATUS_CODE, 
-                "sdkmessageprocessingstepid", 
-                Constants.Crm.Attributes.PLUGIN_TYPE_ID, 
-                Constants.Crm.Attributes.EVENT_HANDLER 
+            var attributes = new string[]
+            {
+                Constants.Crm.Attributes.NAME,
+                Constants.Crm.Attributes.STATE_CODE,
+                Constants.Crm.Attributes.STATUS_CODE,
+                "sdkmessageprocessingstepid",
+                Constants.Crm.Attributes.PLUGIN_TYPE_ID,
+                Constants.Crm.Attributes.EVENT_HANDLER
             };
 
             var query = new QueryExpression();
@@ -88,15 +87,15 @@
             query.ColumnSet = new ColumnSet(attributes);
             query.Criteria = new FilterExpression(LogicalOperator.And);
             query.Criteria.AddCondition("ishidden", ConditionOperator.Equal, false);
-            
-            if (pluginTypeId != null)
+
+            if (pluginTypeId != null && pluginTypeId != Guid.Empty)
             {
                 query.Criteria.AddCondition(Constants.Crm.Attributes.PLUGIN_TYPE_ID, ConditionOperator.Equal, pluginTypeId);
             }
 
             query.Orders.Add(new OrderExpression(Constants.Crm.Attributes.NAME, OrderType.Ascending));
 
-            if (pluginAssemblyId != null)
+            if (pluginAssemblyId != null && pluginAssemblyId != Guid.Empty)
             {
                 var link = new LinkEntity
                 {

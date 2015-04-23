@@ -108,6 +108,8 @@
                 },
                 a =>
                 {
+                    this.PluginTypes = this.cbSourcePlugin.Items.Cast<PluginType>().ToArray();
+
                     this.ProcessingSteps = ((Entity[])a.Result).Select<Entity, ProcessingStep>(x =>
                         {
                             return new ProcessingStep(x, pluginAssembly, this.PluginTypes.Where(y => y.Id == ((EntityReference)x.Attributes[Constants.Crm.Attributes.PLUGIN_TYPE_ID]).Id).FirstOrDefault());
@@ -159,13 +161,11 @@
                 {
                     this.PluginTypes = ((Entity[])a.Result).Select<Entity, PluginType>(x => new PluginType(x, pluginAssembly)).ToArray();
                     this.cbSourcePlugin.Items.Clear();
-                    this.cbTargetPlugin.Items.Clear();
 
                     this.cbSourcePlugin.Items.Add("All types");
                     foreach (var type in this.PluginTypes)
                     {
                         this.cbSourcePlugin.Items.Add(type);
-                        this.cbTargetPlugin.Items.Add(type);
                     }
 
                     // Select all types
@@ -179,12 +179,13 @@
 
         private void cbAssemblies_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedAssembly = (PluginAssembly)((ComboBox)sender).SelectedItem;
+            // var selectedAssembly = (PluginAssembly)((ComboBox)sender).SelectedItem;
 
             this.lvSteps.Items.Clear();
-            this.FillAssemblies(selectedAssembly);
+            // this.FillAssemblies(selectedAssembly);
 
-            this.RetrieveTypes(selectedAssembly);
+            this.cbSourcePlugin.RetrieveTypes(this, (PluginAssembly)((ComboBox)sender).SelectedItem, true);
+            // this.RetrieveTypes(selectedAssembly);
         }
 
         private void cbTypes_SelectedIndexChanged(object sender, EventArgs e)
@@ -395,6 +396,11 @@ Number of missing types: {3}",
                     );
                 }
             }
+        }
+
+        private void cbTargetAssembly_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.cbTargetPlugin.RetrieveTypes(this, (PluginAssembly)((ComboBox)sender).SelectedItem);
         }
     }
 }

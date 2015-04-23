@@ -88,10 +88,13 @@
     <Compile Include="..\Common\Utils\Constants.cs">
       <Link>Utils\Constants.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Utils\ServiceExtensions.cs">
+      <Link>Utils\ServiceExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="Extensions.cs" />
+    <Compile Include="OperationExtensions.cs" />
     <Compile Include="MainControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

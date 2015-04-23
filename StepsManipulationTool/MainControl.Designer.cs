@@ -60,10 +60,10 @@
             this.lSourcePlugin = new System.Windows.Forms.Label();
             this.gbActions = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.lTargetAssembly = new System.Windows.Forms.Label();
-            this.lTargetPlugin = new System.Windows.Forms.Label();
-            this.cbTargetPlugin = new System.Windows.Forms.ComboBox();
             this.cbTargetAssembly = new System.Windows.Forms.ComboBox();
+            this.cbTargetPlugin = new System.Windows.Forms.ComboBox();
+            this.lTargetPlugin = new System.Windows.Forms.Label();
+            this.lTargetAssembly = new System.Windows.Forms.Label();
             this.tsMenu.SuspendLayout();
             this.gbSteps.SuspendLayout();
             this.cmStrip.SuspendLayout();
@@ -357,27 +357,16 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(588, 75);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // lTargetAssembly
+            // cbTargetAssembly
             // 
-            this.lTargetAssembly.AutoSize = true;
-            this.lTargetAssembly.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lTargetAssembly.Location = new System.Drawing.Point(9, 6);
-            this.lTargetAssembly.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
-            this.lTargetAssembly.Name = "lTargetAssembly";
-            this.lTargetAssembly.Size = new System.Drawing.Size(101, 21);
-            this.lTargetAssembly.TabIndex = 3;
-            this.lTargetAssembly.Text = "Target Assembly:";
-            // 
-            // lTargetPlugin
-            // 
-            this.lTargetPlugin.AutoSize = true;
-            this.lTargetPlugin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lTargetPlugin.Location = new System.Drawing.Point(303, 6);
-            this.lTargetPlugin.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
-            this.lTargetPlugin.Name = "lTargetPlugin";
-            this.lTargetPlugin.Size = new System.Drawing.Size(101, 21);
-            this.lTargetPlugin.TabIndex = 6;
-            this.lTargetPlugin.Text = "Target Pluign:";
+            this.cbTargetAssembly.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbTargetAssembly.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTargetAssembly.FormattingEnabled = true;
+            this.cbTargetAssembly.Location = new System.Drawing.Point(113, 3);
+            this.cbTargetAssembly.Name = "cbTargetAssembly";
+            this.cbTargetAssembly.Size = new System.Drawing.Size(178, 21);
+            this.cbTargetAssembly.TabIndex = 8;
+            this.cbTargetAssembly.SelectedIndexChanged += new System.EventHandler(this.cbTargetAssembly_SelectedIndexChanged);
             // 
             // cbTargetPlugin
             // 
@@ -390,15 +379,27 @@
             this.cbTargetPlugin.Sorted = true;
             this.cbTargetPlugin.TabIndex = 7;
             // 
-            // cbTargetAssembly
+            // lTargetPlugin
             // 
-            this.cbTargetAssembly.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbTargetAssembly.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTargetAssembly.FormattingEnabled = true;
-            this.cbTargetAssembly.Location = new System.Drawing.Point(113, 3);
-            this.cbTargetAssembly.Name = "cbTargetAssembly";
-            this.cbTargetAssembly.Size = new System.Drawing.Size(178, 21);
-            this.cbTargetAssembly.TabIndex = 8;
+            this.lTargetPlugin.AutoSize = true;
+            this.lTargetPlugin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lTargetPlugin.Location = new System.Drawing.Point(303, 6);
+            this.lTargetPlugin.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
+            this.lTargetPlugin.Name = "lTargetPlugin";
+            this.lTargetPlugin.Size = new System.Drawing.Size(101, 21);
+            this.lTargetPlugin.TabIndex = 6;
+            this.lTargetPlugin.Text = "Target Pluign:";
+            // 
+            // lTargetAssembly
+            // 
+            this.lTargetAssembly.AutoSize = true;
+            this.lTargetAssembly.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lTargetAssembly.Location = new System.Drawing.Point(9, 6);
+            this.lTargetAssembly.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
+            this.lTargetAssembly.Name = "lTargetAssembly";
+            this.lTargetAssembly.Size = new System.Drawing.Size(101, 21);
+            this.lTargetAssembly.TabIndex = 3;
+            this.lTargetAssembly.Text = "Target Assembly:";
             // 
             // MainControl
             // 
