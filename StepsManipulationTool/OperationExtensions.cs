@@ -1,10 +1,6 @@
 ﻿namespace Cinteros.Xrm.StepsManipulationTool
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
     using Cinteros.Xrm.SDK;
     using Cinteros.Xrm.Utils;
@@ -29,7 +25,8 @@
                 },
                 a =>
                 {
-                    // this.PluginTypes = ((Entity[])a.Result).Select<Entity, PluginType>(x => new PluginType(x, pluginAssembly)).ToArray();
+                    // this.PluginTypes = ((Entity[])a.Result).Select<Entity, PluginType>(x => new
+                    // PluginType(x, pluginAssembly)).ToArray();
                     comboBox.Items.Clear();
 
                     if (allTypesOption)
