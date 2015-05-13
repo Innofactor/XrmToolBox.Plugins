@@ -1,9 +1,9 @@
-﻿namespace Cinteros.Xrm.VersionVerificationTool.Utils
+﻿namespace Cinteros.Xrm.Utils
 {
     using System;
     using System.Collections.Generic;
     using System.Xml;
-    using Cinteros.Xrm.VersionVerificationTool.SDK;
+    using Cinteros.Xrm.SDK;
 
     public static class Extensions
     {
@@ -82,7 +82,6 @@
             }
 
             return document;
-
         }
 
         #endregion Public Methods

@@ -1,7 +1,7 @@
-﻿namespace Cinteros.Xrm.VersionVerificationTool.SDK
+﻿namespace Cinteros.Xrm.SDK
 {
     using System;
-    using Cinteros.Xrm.VersionVerificationTool.Utils;
+    using Cinteros.Xrm.Utils;
     using Microsoft.Xrm.Sdk;
 
     public class PluginAssembly : IComparableEntity
@@ -21,9 +21,14 @@
         /// <param name="entity"></param>
         public PluginAssembly(Entity entity)
         {
+            this.Id = entity.Id;
+
             this.FriendlyName = (string)entity.Attributes[Constants.Crm.Attributes.NAME];
 
-            this.IsolationMode = (IsolationMode)((OptionSetValue)entity.Attributes[Constants.Crm.Attributes.ISOLATION_MODE]).Value;
+            if (entity.Attributes.Contains(Constants.Crm.Attributes.ISOLATION_MODE))
+            {
+                this.IsolationMode = (IsolationMode)((OptionSetValue)entity.Attributes[Constants.Crm.Attributes.ISOLATION_MODE]).Value;
+            }
 
             this.UniqueName = string.Format("{0}, Version={1}, Culture={2}, PublicKeyToken={3}",
                 this.FriendlyName,
@@ -45,6 +50,15 @@
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// Gets assembly's id
+        /// </summary>
+        public Guid Id
+        {
+            get;
+            private set;
         }
 
         /// <summary>

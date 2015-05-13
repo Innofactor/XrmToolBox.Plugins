@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.VersionVerificationTool.Utils
+﻿namespace Cinteros.Xrm.Utils
 {
     using System;
 

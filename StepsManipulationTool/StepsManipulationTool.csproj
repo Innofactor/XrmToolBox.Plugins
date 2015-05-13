@@ -30,15 +30,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug All Cinteros XTB|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\CintXTB\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="McTools.Xrm.Connection, Version=1.0.3315.606, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -76,6 +67,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Common\SDK\IComparableEntity.cs">
+      <Link>SDK\IComparableEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\SDK\IsolationMode.cs">
+      <Link>SDK\IsolationMode.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\SDK\PluginAssembly.cs">
+      <Link>SDK\PluginAssembly.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\SDK\PluginType.cs">
+      <Link>SDK\PluginType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\SDK\ProcessingStep.cs">
+      <Link>SDK\ProcessingStep.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\SDK\StateCode.cs">
+      <Link>SDK\StateCode.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Utils\Constants.cs">
+      <Link>Utils\Constants.cs</Link>
+    </Compile>
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>

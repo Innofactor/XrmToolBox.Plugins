@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersionVerificationTool", "VersionVerificationTool\VersionVerificationTool.csproj", "{2834BDB0-802C-4C6F-AA3B-A344FD21A206}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamlMigrationTool", "XamlMigrationTool\XamlMigrationTool.csproj", "{CF2B4877-2505-4966-B630-8C89800030A5}"
@@ -24,8 +22,8 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2834BDB0-802C-4C6F-AA3B-A344FD21A206}.Debug All Cinteros XTB|Any CPU.ActiveCfg = Debug All Cinteros XTB|Any CPU
-		{2834BDB0-802C-4C6F-AA3B-A344FD21A206}.Debug All Cinteros XTB|Any CPU.Build.0 = Debug All Cinteros XTB|Any CPU
+		{2834BDB0-802C-4C6F-AA3B-A344FD21A206}.Debug All Cinteros XTB|Any CPU.ActiveCfg = Debug|Any CPU
+		{2834BDB0-802C-4C6F-AA3B-A344FD21A206}.Debug All Cinteros XTB|Any CPU.Build.0 = Debug|Any CPU
 		{2834BDB0-802C-4C6F-AA3B-A344FD21A206}.Debug Without GemBox|Any CPU.ActiveCfg = Debug|Any CPU
 		{2834BDB0-802C-4C6F-AA3B-A344FD21A206}.Debug Without GemBox|Any CPU.Build.0 = Debug|Any CPU
 		{2834BDB0-802C-4C6F-AA3B-A344FD21A206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -40,8 +38,8 @@ Global
 		{CF2B4877-2505-4966-B630-8C89800030A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF2B4877-2505-4966-B630-8C89800030A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF2B4877-2505-4966-B630-8C89800030A5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}.Debug All Cinteros XTB|Any CPU.ActiveCfg = Debug All Cinteros XTB|Any CPU
-		{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}.Debug All Cinteros XTB|Any CPU.Build.0 = Debug All Cinteros XTB|Any CPU
+		{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}.Debug All Cinteros XTB|Any CPU.ActiveCfg = Debug|Any CPU
+		{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}.Debug All Cinteros XTB|Any CPU.Build.0 = Debug|Any CPU
 		{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}.Debug Without GemBox|Any CPU.ActiveCfg = Debug|Any CPU
 		{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}.Debug Without GemBox|Any CPU.Build.0 = Debug|Any CPU
 		{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

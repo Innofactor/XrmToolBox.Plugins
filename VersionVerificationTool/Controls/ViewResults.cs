@@ -6,8 +6,8 @@
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
-    using Cinteros.Xrm.VersionVerificationTool.SDK;
-    using Cinteros.Xrm.VersionVerificationTool.Utils;
+    using Cinteros.Xrm.SDK;
+    using Cinteros.Xrm.Utils;
 
     public partial class ViewResults : UserControl, IUpdateToolStrip
     {
