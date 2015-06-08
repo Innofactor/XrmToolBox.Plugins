@@ -95,23 +95,30 @@
 
         private void Plugin_Changed(object sender, FileSystemEventArgs e)
         {
-            var lastWriteTime = File.GetLastWriteTime(this.lPlugin.Text);
-            if (lastWriteTime != LastRead)
+            try
             {
-                tbLog.Text += string.Format("{0}: Assembly '{1}' was changed.\r\n", DateTime.Now, Path.GetFileName(this.lPlugin.Text));
-
-                var plugin = new Entity("pluginassembly")
+                var lastWriteTime = File.GetLastWriteTime(this.lPlugin.Text);
+                if (lastWriteTime != LastRead)
                 {
-                    Id = this.PluginId
-                };
+                    tbLog.Text += string.Format("{0}: Assembly '{1}' was changed.\r\n", DateTime.Now, Path.GetFileName(this.lPlugin.Text));
 
-                plugin["content"] = Convert.ToBase64String(this.ReadFile());
+                    var plugin = new Entity("pluginassembly")
+                    {
+                        Id = this.PluginId
+                    };
 
-                this.Service.Update(plugin);
-                
-                tbLog.Text += string.Format("{0}: Assembly '{1}' was updated on the server.\r\n", DateTime.Now, Path.GetFileName(this.lPlugin.Text));
+                    plugin["content"] = Convert.ToBase64String(this.ReadFile());
 
-                LastRead = lastWriteTime;
+                    this.Service.Update(plugin);
+
+                    tbLog.Text += string.Format("{0}: Assembly '{1}' was updated on the server.\r\n", DateTime.Now, Path.GetFileName(this.lPlugin.Text));
+
+                    LastRead = lastWriteTime;
+                }
+            }
+            catch (Exception ex)
+            {
+                tbLog.Text += string.Format("{0}: Assembly '{1}' was not updated. The reason is exception raised: '{2}'.\r\n", DateTime.Now, Path.GetFileName(this.lPlugin.Text), ex.Message);
             }
         }
 
