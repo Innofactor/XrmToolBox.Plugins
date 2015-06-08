@@ -37,19 +37,19 @@
             }
         }
 
-        public DateTime LastRead
+        internal DateTime LastRead
         {
             get;
             private set;
         }
 
-        public Guid PluginId
+        internal Guid PluginId
         {
             get;
             private set;
         }
 
-        public FileSystemWatcher Watcher
+        internal FileSystemWatcher Watcher
         {
             get;
             private set;
@@ -98,7 +98,8 @@
             var lastWriteTime = File.GetLastWriteTime(this.lPlugin.Text);
             if (lastWriteTime != LastRead)
             {
-                tbLog.Text += string.Format("{0}: Assembly '{1}' was updated on the server.\r\n", DateTime.Now, Path.GetFileName(this.lPlugin.Text));
+                tbLog.Text += string.Format("{0}: Assembly '{1}' was changed.\r\n", DateTime.Now, Path.GetFileName(this.lPlugin.Text));
+
                 var plugin = new Entity("pluginassembly")
                 {
                     Id = this.PluginId
@@ -107,6 +108,8 @@
                 plugin["content"] = Convert.ToBase64String(this.ReadFile());
 
                 this.Service.Update(plugin);
+                
+                tbLog.Text += string.Format("{0}: Assembly '{1}' was updated on the server.\r\n", DateTime.Now, Path.GetFileName(this.lPlugin.Text));
 
                 LastRead = lastWriteTime;
             }
