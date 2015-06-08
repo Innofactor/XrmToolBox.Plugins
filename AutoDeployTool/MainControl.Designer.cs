@@ -28,10 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.tsMenu = new System.Windows.Forms.ToolStrip();
+            this.SuspendLayout();
+            // 
+            // tsMenu
+            // 
+            this.tsMenu.Location = new System.Drawing.Point(0, 0);
+            this.tsMenu.Name = "tsMenu";
+            this.tsMenu.Size = new System.Drawing.Size(600, 25);
+            this.tsMenu.TabIndex = 0;
+            this.tsMenu.Text = "toolStrip1";
+            // 
+            // MainControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tsMenu);
+            this.Name = "MainControl";
+            this.Size = new System.Drawing.Size(600, 400);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.ToolStrip tsMenu;
     }
 }
