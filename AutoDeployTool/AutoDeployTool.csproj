@@ -7,8 +7,8 @@
     <ProjectGuid>{9DFD7954-7889-4486-A14D-CDA027CD776A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AutoDeployTool</RootNamespace>
-    <AssemblyName>AutoDeployTool</AssemblyName>
+    <RootNamespace>Cinteros.Xrm.AutoDeployTool</RootNamespace>
+    <AssemblyName>Cinteros.Xrm.AutoDeployTool</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -69,6 +69,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>mkdir "Plugins"
+move /y "$(TargetName).dll" "Plugins"
+move /y "$(TargetName).pdb" "Plugins"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
