@@ -1,36 +1,63 @@
 ﻿namespace AutoDeployTool
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Drawing;
-    using System.Data;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Windows.Forms;
-    using XrmToolBox;
     using System.IO;
+    using System.Linq;
     using System.Reflection;
-    using Microsoft.Xrm.Sdk.Query;
     using Microsoft.Xrm.Sdk;
+    using Microsoft.Xrm.Sdk.Query;
+    using XrmToolBox;
 
     public partial class MainControl : PluginBase, IGitHubPlugin
     {
+        #region Public Constructors
+
         public MainControl()
         {
             InitializeComponent();
         }
 
+        #endregion Public Constructors
+
+        #region Public Properties
+
         string IGitHubPlugin.RepositoryName
         {
-            get { throw new NotImplementedException(); }
+            get 
+            {
+                return "XrmToolBox.Plugins"; 
+            }
         }
 
         string IGitHubPlugin.UserName
         {
-            get { throw new NotImplementedException(); }
+            get 
+            {
+                return "Cinteros";
+            }
         }
+
+        public DateTime LastRead
+        {
+            get;
+            private set;
+        }
+
+        public Guid PluginId 
+        { 
+            get;
+            private set; 
+        }
+
+        public FileSystemWatcher Watcher
+        {
+            get;
+            private set;
+        }
+
+        #endregion Public Properties
+
+        #region Private Methods
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -39,77 +66,63 @@
                 {
                     this.lPlugin.Text = ofdPlugin.FileName;
 
-                    watcher = new FileSystemWatcher();
-                    watcher.Path = Path.GetDirectoryName(this.lPlugin.Text);
-                    watcher.Filter = Path.GetFileName(this.lPlugin.Text);
+                    this.PluginId = this.GetAssemblyId();
 
-                    watcher.NotifyFilter = NotifyFilters.LastWrite;
-                    watcher.EnableRaisingEvents = true;
+                    this.Watcher = new FileSystemWatcher();
+                    this.Watcher.Path = Path.GetDirectoryName(this.lPlugin.Text);
+                    this.Watcher.Filter = Path.GetFileName(this.lPlugin.Text);
 
-                    watcher.Changed += watcher_Changed;
+                    this.Watcher.NotifyFilter = NotifyFilters.LastWrite;
+                    this.Watcher.EnableRaisingEvents = true;
+
+                    this.Watcher.Changed += Plugin_Changed;
                 };
             ofdPlugin.ShowDialog();
         }
 
-        void watcher_Changed(object sender, FileSystemEventArgs e)
+        private Guid GetAssemblyId()
+        {
+            var chunks = Assembly.Load(this.ReadFile()).FullName.Split(new string[] { ", ", "Version=", "Culture=", "PublicKeyToken=" }, StringSplitOptions.RemoveEmptyEntries);
+
+            var query = new QueryExpression("pluginassembly");
+            query.Criteria.AddCondition("name", ConditionOperator.Equal, chunks[0]);
+            query.Criteria.AddCondition("version", ConditionOperator.Equal, chunks[1]);
+            query.Criteria.AddCondition("culture", ConditionOperator.Equal, chunks[2]);
+            query.Criteria.AddCondition("publickeytoken", ConditionOperator.Equal, chunks[3]);
+
+            return this.Service.RetrieveMultiple(query).Entities.FirstOrDefault().Id;
+        }
+
+        private void Plugin_Changed(object sender, FileSystemEventArgs e)
         {
             var lastWriteTime = File.GetLastWriteTime(this.lPlugin.Text);
-            if (lastWriteTime != lastRead)
+            if (lastWriteTime != LastRead)
             {
-                this.Invoke(new Action(() =>
-                    {
-                        this.WorkAsync("Deploying plugin",
-                            a =>
-                            {
-                                //var tempDirectory = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-                                //Directory.CreateDirectory(tempDirectory);
+                tbLog.Text += string.Format("{0}: Assembly '{1}' was updated on the server.\r\n", DateTime.Now, Path.GetFileName(this.lPlugin.Text));
+                var plugin = new Entity("pluginassembly")
+                {
+                    Id = this.PluginId
+                };
 
-                                //var resultFile = Path.Combine(tempDirectory, Path.GetFileName(this.lPlugin.Text));
+                plugin["content"] = Convert.ToBase64String(this.ReadFile());
 
-                                //File.Copy(fileName, resultFile);
+                this.Service.Update(plugin);
 
-                                byte[] buffer = null;
-                                using (var fs = new FileStream(this.lPlugin.Text, FileMode.Open, FileAccess.Read))
-                                {
-                                    buffer = new byte[fs.Length];
-                                    fs.Read(buffer, 0, (int)fs.Length);
-                                }
-
-                                var assembly = Assembly.Load(buffer);
-                                var chunks = assembly.FullName.Split(new string[] { ", ", "Version=", "Culture=", "PublicKeyToken=" }, StringSplitOptions.RemoveEmptyEntries);
-
-                                var query = new QueryExpression("pluginassembly");
-                                query.Criteria.AddCondition("name", ConditionOperator.Equal, chunks[0]);
-                                query.Criteria.AddCondition("version", ConditionOperator.Equal, chunks[1]);
-                                query.Criteria.AddCondition("culture", ConditionOperator.Equal, chunks[2]);
-                                query.Criteria.AddCondition("publickeytoken", ConditionOperator.Equal, chunks[3]);
-
-                                var plugin = new Entity("pluginassembly");
-                                plugin.Id = this.Service.RetrieveMultiple(query).Entities.FirstOrDefault().Id;
-
-                                plugin["content"] = Convert.ToBase64String(buffer);
-
-                                this.Service.Update(plugin);
-                            },
-                            a =>
-                            {
-                            });
-                    }));
-
-                lastRead = lastWriteTime;
+                LastRead = lastWriteTime;
             }
         }
 
-        public static FileSystemWatcher watcher 
-        { 
-            get; 
-            set; 
+        private byte[] ReadFile()
+        {
+            byte[] buffer = null;
+            using (var fs = new FileStream(this.lPlugin.Text, FileMode.Open, FileAccess.Read))
+            {
+                buffer = new byte[fs.Length];
+                fs.Read(buffer, 0, (int)fs.Length);
+            }
+            return buffer;
         }
 
-        public DateTime lastRead 
-        { 
-            get;
-            set; 
-        }
+        #endregion Private Methods
     }
 }

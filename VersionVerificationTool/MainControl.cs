@@ -79,7 +79,7 @@
         {
             get
             {
-                return "VersionVerifier";
+                return "XrmToolBox.Plugins";
             }
         }
 

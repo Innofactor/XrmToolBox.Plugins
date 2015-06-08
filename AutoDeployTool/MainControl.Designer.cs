@@ -31,9 +31,10 @@
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.bPlugin = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.ofdPlugin = new System.Windows.Forms.OpenFileDialog();
             this.gbPlugin = new System.Windows.Forms.GroupBox();
             this.lPlugin = new System.Windows.Forms.Label();
+            this.ofdPlugin = new System.Windows.Forms.OpenFileDialog();
+            this.tbLog = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.gbPlugin.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +64,7 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.gbPlugin, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tbLog, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 25);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -71,10 +73,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(600, 375);
             this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // ofdPlugin
-            // 
-            this.ofdPlugin.FileName = "openFileDialog1";
             // 
             // gbPlugin
             // 
@@ -97,6 +95,20 @@
             this.lPlugin.Size = new System.Drawing.Size(0, 13);
             this.lPlugin.TabIndex = 2;
             // 
+            // ofdPlugin
+            // 
+            this.ofdPlugin.FileName = "openFileDialog1";
+            // 
+            // tbLog
+            // 
+            this.tbLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbLog.Enabled = false;
+            this.tbLog.Location = new System.Drawing.Point(3, 53);
+            this.tbLog.Multiline = true;
+            this.tbLog.Name = "tbLog";
+            this.tbLog.Size = new System.Drawing.Size(594, 319);
+            this.tbLog.TabIndex = 3;
+            // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -107,6 +119,7 @@
             this.Name = "MainControl";
             this.Size = new System.Drawing.Size(600, 400);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.gbPlugin.ResumeLayout(false);
             this.gbPlugin.PerformLayout();
             this.ResumeLayout(false);
@@ -122,5 +135,6 @@
         private System.Windows.Forms.GroupBox gbPlugin;
         private System.Windows.Forms.OpenFileDialog ofdPlugin;
         private System.Windows.Forms.Label lPlugin;
+        private System.Windows.Forms.TextBox tbLog;
     }
 }
