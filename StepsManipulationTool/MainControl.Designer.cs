@@ -136,7 +136,7 @@
             this.activateAllToolStripMenuItem,
             this.deactivateAllToolStripMenuItem});
             this.cmStrip.Name = "cmStrip";
-            this.cmStrip.Size = new System.Drawing.Size(311, 274);
+            this.cmStrip.Size = new System.Drawing.Size(311, 252);
             this.cmStrip.Opening += new System.ComponentModel.CancelEventHandler(this.cmStrip_Opening);
             // 
             // selectAllToolStripMenuItem
