@@ -23,15 +23,15 @@
 
         string IGitHubPlugin.RepositoryName
         {
-            get 
+            get
             {
-                return "XrmToolBox.Plugins"; 
+                return "XrmToolBox.Plugins";
             }
         }
 
         string IGitHubPlugin.UserName
         {
-            get 
+            get
             {
                 return "Cinteros";
             }
@@ -43,10 +43,10 @@
             private set;
         }
 
-        public Guid PluginId 
-        { 
+        public Guid PluginId
+        {
             get;
-            private set; 
+            private set;
         }
 
         public FileSystemWatcher Watcher
@@ -121,6 +121,11 @@
                 fs.Read(buffer, 0, (int)fs.Length);
             }
             return buffer;
+        }
+
+        private void tsbClose_Click(object sender, EventArgs e)
+        {
+            this.CloseTool();
         }
 
         #endregion Private Methods

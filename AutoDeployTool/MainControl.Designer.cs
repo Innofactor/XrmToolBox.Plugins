@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainControl));
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.bPlugin = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -35,12 +36,16 @@
             this.lPlugin = new System.Windows.Forms.Label();
             this.ofdPlugin = new System.Windows.Forms.OpenFileDialog();
             this.tbLog = new System.Windows.Forms.TextBox();
+            this.tsbClose = new System.Windows.Forms.ToolStripButton();
+            this.tsMenu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.gbPlugin.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsMenu
             // 
+            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbClose});
             this.tsMenu.Location = new System.Drawing.Point(0, 0);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Size = new System.Drawing.Size(600, 25);
@@ -109,6 +114,15 @@
             this.tbLog.Size = new System.Drawing.Size(594, 319);
             this.tbLog.TabIndex = 3;
             // 
+            // tsbClose
+            // 
+            this.tsbClose.Image = ((System.Drawing.Image)(resources.GetObject("tsbClose.Image")));
+            this.tsbClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbClose.Name = "tsbClose";
+            this.tsbClose.Size = new System.Drawing.Size(56, 22);
+            this.tsbClose.Text = "Close";
+            this.tsbClose.Click += new System.EventHandler(this.tsbClose_Click);
+            // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -118,6 +132,8 @@
             this.Controls.Add(this.tsMenu);
             this.Name = "MainControl";
             this.Size = new System.Drawing.Size(600, 400);
+            this.tsMenu.ResumeLayout(false);
+            this.tsMenu.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.gbPlugin.ResumeLayout(false);
@@ -136,5 +152,6 @@
         private System.Windows.Forms.OpenFileDialog ofdPlugin;
         private System.Windows.Forms.Label lPlugin;
         private System.Windows.Forms.TextBox tbLog;
+        private System.Windows.Forms.ToolStripButton tsbClose;
     }
 }
