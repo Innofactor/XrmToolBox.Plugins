@@ -4,6 +4,7 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Windows.Forms;
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Query;
     using XrmToolBox;
@@ -63,15 +64,24 @@
 
         #region Private Methods
 
-        private void button1_Click(object sender, EventArgs e)
+        private void bPlugin_Click(object sender, EventArgs e)
         {
             ofdPlugin.Filter = "MS CRM Plugins|*.dll";
             ofdPlugin.FileOk += (s, a) =>
                 {
+                    var id = this.GetAssemblyId(ofdPlugin.FileName);
+
+                    if (id.Equals(Guid.Empty))
+                    {
+                        MessageBox.Show("Please select valid MS Dynamics CRM plugin", "Incorrect file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        
+                        return; 
+                    }
+
+                    this.PluginId = id;
+
                     this.lPlugin.Text = ofdPlugin.FileName;
-
-                    this.PluginId = this.GetAssemblyId();
-
+                    
                     this.Watcher = new FileSystemWatcher();
                     this.Watcher.Path = Path.GetDirectoryName(this.lPlugin.Text);
                     this.Watcher.Filter = Path.GetFileName(this.lPlugin.Text);
@@ -84,9 +94,25 @@
             ofdPlugin.ShowDialog();
         }
 
-        private Guid GetAssemblyId()
+        private Guid GetAssemblyId(string fileName)
         {
-            var chunks = Assembly.Load(this.ReadFile()).FullName.Split(new string[] { ", ", "Version=", "Culture=", "PublicKeyToken=" }, StringSplitOptions.RemoveEmptyEntries);
+            var assembly = Assembly.Load(this.ReadFile(fileName));
+
+            try
+            {
+                // Check is there any CRM plugins in assembly
+                if (assembly.GetTypes().Where(x => x.GetInterfaces().Contains(typeof(IPlugin))).Count() == 0)
+                {
+                    return Guid.Empty;
+                }
+            }
+            catch (ReflectionTypeLoadException)
+            {
+                // Might happen that due to SDK version mismatch types will not be loaded correctly,
+                // execution will continue and plugin will be verified in different way
+            }
+
+            var chunks = assembly.FullName.Split(new string[] { ", ", "Version=", "Culture=", "PublicKeyToken=" }, StringSplitOptions.RemoveEmptyEntries);
 
             var query = new QueryExpression("pluginassembly");
             query.Criteria.AddCondition("name", ConditionOperator.Equal, chunks[0]);
@@ -108,37 +134,40 @@
 
         private void Plugin_Changed(object sender, FileSystemEventArgs e)
         {
-            try
-            {
-                var lastWriteTime = File.GetLastWriteTime(this.lPlugin.Text);
-                if (lastWriteTime != LastRead)
+            this.Invoke(new Action(() =>
                 {
-                    tbLog.Text += string.Format("{0}: Assembly '{1}' was changed.\r\n", DateTime.Now, Path.GetFileName(this.lPlugin.Text));
-
-                    var plugin = new Entity("pluginassembly")
+                    try
                     {
-                        Id = this.PluginId
-                    };
+                        var lastWriteTime = File.GetLastWriteTime(this.lPlugin.Text);
+                        if (lastWriteTime != LastRead)
+                        {
+                            tbLog.Text += string.Format("{0}: Assembly '{1}' was changed.\r\n", DateTime.Now, Path.GetFileName(this.lPlugin.Text));
 
-                    plugin["content"] = Convert.ToBase64String(this.ReadFile());
+                            var plugin = new Entity("pluginassembly")
+                            {
+                                Id = this.PluginId
+                            };
 
-                    this.Service.Update(plugin);
+                            plugin["content"] = Convert.ToBase64String(this.ReadFile(this.lPlugin.Text));
 
-                    tbLog.Text += string.Format("{0}: Assembly '{1}' was updated on the server.\r\n", DateTime.Now, Path.GetFileName(this.lPlugin.Text));
+                            this.Service.Update(plugin);
 
-                    LastRead = lastWriteTime;
-                }
-            }
-            catch (Exception ex)
-            {
-                tbLog.Text += string.Format("{0}: Assembly '{1}' was not updated. The reason is exception raised: '{2}'.\r\n", DateTime.Now, Path.GetFileName(this.lPlugin.Text), ex.Message);
-            }
+                            tbLog.Text += string.Format("{0}: Assembly '{1}' was updated on the server.\r\n", DateTime.Now, Path.GetFileName(this.lPlugin.Text));
+
+                            LastRead = lastWriteTime;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        tbLog.Text += string.Format("{0}: Assembly '{1}' was not updated. The reason is exception raised: '{2}'.\r\n", DateTime.Now, Path.GetFileName(this.lPlugin.Text), ex.Message);
+                    }
+                }));
         }
 
-        private byte[] ReadFile()
+        private byte[] ReadFile(string fileName)
         {
             byte[] buffer = null;
-            using (var fs = new FileStream(this.lPlugin.Text, FileMode.Open, FileAccess.Read))
+            using (var fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
             {
                 buffer = new byte[fs.Length];
                 fs.Read(buffer, 0, (int)fs.Length);

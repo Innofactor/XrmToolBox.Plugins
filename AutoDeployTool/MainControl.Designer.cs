@@ -60,7 +60,7 @@
             this.bPlugin.TabIndex = 1;
             this.bPlugin.Text = "Select";
             this.bPlugin.UseVisualStyleBackColor = true;
-            this.bPlugin.Click += new System.EventHandler(this.button1_Click);
+            this.bPlugin.Click += new System.EventHandler(this.bPlugin_Click);
             // 
             // tableLayoutPanel1
             // 
