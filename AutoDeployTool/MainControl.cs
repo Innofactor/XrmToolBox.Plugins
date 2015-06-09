@@ -37,6 +37,10 @@
             }
         }
 
+        #endregion Public Properties
+
+        #region Internal Properties
+
         internal DateTime LastRead
         {
             get;
@@ -55,7 +59,7 @@
             private set;
         }
 
-        #endregion Public Properties
+        #endregion Internal Properties
 
         #region Private Methods
 
@@ -90,7 +94,16 @@
             query.Criteria.AddCondition("culture", ConditionOperator.Equal, chunks[2]);
             query.Criteria.AddCondition("publickeytoken", ConditionOperator.Equal, chunks[3]);
 
-            return this.Service.RetrieveMultiple(query).Entities.FirstOrDefault().Id;
+            var plugin = this.Service.RetrieveMultiple(query).Entities.FirstOrDefault();
+
+            if (plugin != null)
+            {
+                return plugin.Id;
+            }
+            else
+            {
+                return Guid.Empty;
+            }
         }
 
         private void Plugin_Changed(object sender, FileSystemEventArgs e)
