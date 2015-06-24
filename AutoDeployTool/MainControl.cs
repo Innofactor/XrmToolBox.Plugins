@@ -4,6 +4,7 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Threading;
     using System.Windows.Forms;
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Query;
@@ -74,14 +75,14 @@
                     if (id.Equals(Guid.Empty))
                     {
                         MessageBox.Show("Please select valid MS Dynamics CRM plugin", "Incorrect file", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        
-                        return; 
+
+                        return;
                     }
 
                     this.PluginId = id;
 
                     this.lPlugin.Text = ofdPlugin.FileName;
-                    
+
                     this.Watcher = new FileSystemWatcher();
                     this.Watcher.Path = Path.GetDirectoryName(this.lPlugin.Text);
                     this.Watcher.Filter = Path.GetFileName(this.lPlugin.Text);
@@ -134,6 +135,32 @@
 
         private void Plugin_Changed(object sender, FileSystemEventArgs e)
         {
+            // Waiting for plugin become fully available for reading
+            while (true)
+            {
+                try
+                {
+                    using (var stream = File.Open(e.FullPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+                    {
+                        if (stream != null)
+                        {
+                            break;
+                        }
+                    }
+                }
+                catch (FileNotFoundException)
+                {
+                }
+                catch (IOException)
+                {
+                }
+                catch (UnauthorizedAccessException)
+                {
+                }
+
+                Thread.Sleep(500);
+            }
+
             this.Invoke(new Action(() =>
                 {
                     try
