@@ -90,6 +90,7 @@
                     this.Watcher.NotifyFilter = NotifyFilters.LastWrite;
                     this.Watcher.EnableRaisingEvents = true;
 
+                    this.Watcher.Changed -= Plugin_Changed;
                     this.Watcher.Changed += Plugin_Changed;
                 };
             ofdPlugin.ShowDialog();
@@ -98,20 +99,6 @@
         private Guid GetAssemblyId(string fileName)
         {
             var assembly = Assembly.Load(this.ReadFile(fileName));
-
-            try
-            {
-                // Check is there any CRM plugins in assembly
-                if (assembly.GetTypes().Where(x => x.GetInterfaces().Contains(typeof(IPlugin))).Count() == 0)
-                {
-                    return Guid.Empty;
-                }
-            }
-            catch (ReflectionTypeLoadException)
-            {
-                // Might happen that due to SDK version mismatch types will not be loaded correctly,
-                // execution will continue and plugin will be verified in different way
-            }
 
             var chunks = assembly.FullName.Split(new string[] { ", ", "Version=", "Culture=", "PublicKeyToken=" }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -204,6 +191,7 @@
 
         private void tsbClose_Click(object sender, EventArgs e)
         {
+            this.Watcher.Changed -= this.Plugin_Changed;
             this.CloseTool();
         }
 
