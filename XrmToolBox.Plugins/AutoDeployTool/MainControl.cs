@@ -8,9 +8,10 @@
     using System.Windows.Forms;
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Query;
-    using XrmToolBox;
+    using XrmToolBox.Extensibility;
+    using XrmToolBox.Extensibility.Interfaces;
 
-    public partial class MainControl : PluginBase, IGitHubPlugin
+    public partial class MainControl : PluginControlBase, IGitHubPlugin
     {
         #region Public Constructors
 

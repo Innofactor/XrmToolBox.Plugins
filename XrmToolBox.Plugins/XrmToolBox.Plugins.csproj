@@ -42,7 +42,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -84,6 +87,17 @@
     <Compile Include="..\common\utils\UpdateToolStripEventArgs.cs">
       <Link>Utils\UpdateToolStripEventArgs.cs</Link>
     </Compile>
+    <Compile Include="AutoDeployTool\MainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AutoDeployTool\MainControl.Designer.cs">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="VersionVerificationTool\Controls\ViewParameters.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -96,13 +110,23 @@
     <Compile Include="VersionVerificationTool\Controls\ViewResults.Designer.cs">
       <DependentUpon>ViewResults.cs</DependentUpon>
     </Compile>
-    <Compile Include="VersionVerificationTool\MainControl.cs" />
+    <Compile Include="VersionVerificationTool\MainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="VersionVerificationTool\MainControl.Designer.cs">
       <DependentUpon>MainControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AutoDeployTool\MainControl.resx">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="VersionVerificationTool\Controls\ViewParameters.resx">
       <DependentUpon>ViewParameters.cs</DependentUpon>
     </EmbeddedResource>

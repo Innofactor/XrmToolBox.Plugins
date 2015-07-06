@@ -16,8 +16,10 @@
     using Cinteros.Xrm.Utils;
     using McTools.Xrm.Connection;
     using XrmToolBox;
+    using XrmToolBox.Extensibility;
+    using XrmToolBox.Extensibility.Interfaces;
 
-    public partial class MainControl : PluginBase, IUpdateToolStrip, IGitHubPlugin
+    public partial class MainControl : PluginControlBase, IGitHubPlugin, IUpdateToolStrip
     {
 
         #region Private Fields

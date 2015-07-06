@@ -9,6 +9,7 @@
     using Cinteros.Xrm.Utils;
     using McTools.Xrm.Connection;
     using XrmToolBox;
+    using XrmToolBox.Extensibility;
 
     public partial class ViewParameters : UserControl, IUpdateToolStrip
     {
@@ -244,7 +245,7 @@
             }
         }
 
-        private void ViewParameters_ConnectionUpdated(object sender, PluginBase.ConnectionUpdatedEventArgs e)
+        private void ViewParameters_ConnectionUpdated(object sender, PluginControlBase.ConnectionUpdatedEventArgs e)
         {
             if (e.ConnectionDetail != null && !string.IsNullOrEmpty(e.ConnectionDetail.OrganizationServiceUrl))
             {
