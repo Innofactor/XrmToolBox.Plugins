@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataUpdateTool", "DataUpdat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoDeployTool", "AutoDeployTool\AutoDeployTool.csproj", "{9DFD7954-7889-4486-A14D-CDA027CD776A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XrmToolBox.Plugins", "XrmToolBox.Plugins\XrmToolBox.Plugins.csproj", "{3C865935-8376-4B29-BBF2-9EEEB08FA9EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinteros.Xrm", "XrmToolBox.Plugins\Cinteros.Xrm.csproj", "{3C865935-8376-4B29-BBF2-9EEEB08FA9EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

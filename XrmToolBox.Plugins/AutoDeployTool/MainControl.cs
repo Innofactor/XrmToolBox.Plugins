@@ -1,4 +1,4 @@
-﻿namespace AutoDeployTool
+﻿namespace Cinteros.Xrm.AutoDeployTool
 {
     using System;
     using System.IO;

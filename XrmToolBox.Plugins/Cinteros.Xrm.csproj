@@ -7,8 +7,8 @@
     <ProjectGuid>{3C865935-8376-4B29-BBF2-9EEEB08FA9EA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cinteros.XrmToolBox.Plugins</RootNamespace>
-    <AssemblyName>Cinteros.XrmToolBox.Plugins</AssemblyName>
+    <RootNamespace>Cinteros.Xrm.Plugins</RootNamespace>
+    <AssemblyName>Cinteros.Xrm.Plugins</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -93,6 +93,7 @@
     <Compile Include="AutoDeployTool\MainControl.Designer.cs">
       <DependentUpon>MainControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="AutoDeployTool\PluginDescription.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -117,6 +118,7 @@
       <DependentUpon>MainControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VersionVerificationTool\PluginDescription.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AutoDeployTool\MainControl.resx">

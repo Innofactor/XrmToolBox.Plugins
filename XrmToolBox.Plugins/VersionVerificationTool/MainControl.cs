@@ -11,7 +11,7 @@
     using System.Windows.Forms;
     using System.Xml;
     using Cinteros.Xrm.VersionVerificationTool.Controls;
-    using Cinteros.Xrm.VersionVerificationTool.Properties;
+    using Cinteros.Xrm.Plugins.Properties;
     using Cinteros.Xrm.SDK;
     using Cinteros.Xrm.Utils;
     using McTools.Xrm.Connection;

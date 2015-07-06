@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Cinteros.Xrm.VersionVerificationTool.Properties {
+namespace Cinteros.Xrm.Plugins.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Cinteros.Xrm.VersionVerificationTool.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Cinteros.Xrm.VersionVerificationTool.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Cinteros.Xrm.Plugins.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
