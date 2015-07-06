@@ -7,8 +7,8 @@
     <ProjectGuid>{3C865935-8376-4B29-BBF2-9EEEB08FA9EA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XrmToolBox.Plugins</RootNamespace>
-    <AssemblyName>XrmToolBox.Plugins</AssemblyName>
+    <RootNamespace>Cinteros.XrmToolBox.Plugins</RootNamespace>
+    <AssemblyName>Cinteros.XrmToolBox.Plugins</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,7 +54,66 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\common\sdk\IComparableEntity.cs">
+      <Link>SDK\IComparableEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\common\sdk\IsolationMode.cs">
+      <Link>SDK\IsolationMode.cs</Link>
+    </Compile>
+    <Compile Include="..\common\sdk\OrganizationSnapshot.cs">
+      <Link>SDK\OrganizationSnapshot.cs</Link>
+    </Compile>
+    <Compile Include="..\common\sdk\PluginAssembly.cs">
+      <Link>SDK\PluginAssembly.cs</Link>
+    </Compile>
+    <Compile Include="..\common\sdk\Solution.cs">
+      <Link>SDK\Solution.cs</Link>
+    </Compile>
+    <Compile Include="..\common\utils\Constants.cs">
+      <Link>Utils\Constants.cs</Link>
+    </Compile>
+    <Compile Include="..\common\utils\Extensions.cs">
+      <Link>Utils\Extensions.cs</Link>
+    </Compile>
+    <Compile Include="..\common\utils\Helpers.cs">
+      <Link>Utils\Helpers.cs</Link>
+    </Compile>
+    <Compile Include="..\common\utils\IUpdateToolStrip.cs">
+      <Link>Utils\IUpdateToolStrip.cs</Link>
+    </Compile>
+    <Compile Include="..\common\utils\UpdateToolStripEventArgs.cs">
+      <Link>Utils\UpdateToolStripEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="VersionVerificationTool\Controls\ViewParameters.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VersionVerificationTool\Controls\ViewParameters.Designer.cs">
+      <DependentUpon>ViewParameters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VersionVerificationTool\Controls\ViewResults.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VersionVerificationTool\Controls\ViewResults.Designer.cs">
+      <DependentUpon>ViewResults.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VersionVerificationTool\MainControl.cs" />
+    <Compile Include="VersionVerificationTool\MainControl.Designer.cs">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="VersionVerificationTool\Controls\ViewParameters.resx">
+      <DependentUpon>ViewParameters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VersionVerificationTool\Controls\ViewResults.resx">
+      <DependentUpon>ViewResults.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VersionVerificationTool\MainControl.resx">
+      <DependentUpon>MainControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -61,56 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Common\SDK\IComparableEntity.cs">
-      <Link>SDK\IComparableEntity.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\SDK\IsolationMode.cs">
-      <Link>SDK\IsolationMode.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\SDK\OrganizationSnapshot.cs">
-      <Link>SDK\OrganizationSnapshot.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\SDK\PluginAssembly.cs">
-      <Link>SDK\PluginAssembly.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\SDK\Solution.cs">
-      <Link>SDK\Solution.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\Utils\Constants.cs">
-      <Link>Utils\Constants.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\Utils\Extensions.cs">
-      <Link>Utils\Extensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\Utils\Helpers.cs">
-      <Link>Utils\Helpers.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\Utils\IUpdateToolStrip.cs">
-      <Link>Utils\IUpdateToolStrip.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\Utils\UpdateToolStripEventArgs.cs">
-      <Link>Utils\UpdateToolStripEventArgs.cs</Link>
-    </Compile>
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
-    </Compile>
-    <Compile Include="Controls\ViewResults.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ViewResults.Designer.cs">
-      <DependentUpon>ViewResults.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ViewParameters.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ViewParameters.Designer.cs">
-      <DependentUpon>ViewParameters.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MainControl.Designer.cs">
-      <DependentUpon>MainControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -120,17 +72,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\ViewResults.resx">
-      <DependentUpon>ViewResults.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ViewParameters.resx">
-      <DependentUpon>ViewParameters.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainControl.resx">
-      <DependentUpon>MainControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
