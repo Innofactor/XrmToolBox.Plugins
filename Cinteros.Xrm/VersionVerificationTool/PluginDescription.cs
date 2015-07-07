@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.Composition;
-using Cinteros.Xrm.AutoDeployTool;
+using Cinteros.Xrm.VersionVerificationTool;
 using XrmToolBox.Extensibility;
 using XrmToolBox.Extensibility.Interfaces;
 
