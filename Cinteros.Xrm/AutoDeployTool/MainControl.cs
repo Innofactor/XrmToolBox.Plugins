@@ -109,7 +109,7 @@
             query.Criteria.AddCondition("culture", ConditionOperator.Equal, chunks[2]);
             query.Criteria.AddCondition("publickeytoken", ConditionOperator.Equal, chunks[3]);
 
-            var plugin = this.Service.RetrieveMultiple(query).Entities.FirstOrDefault();
+            var plugin = this.Service == null ? null : this.Service.RetrieveMultiple(query).Entities.FirstOrDefault();
 
             if (plugin != null)
             {
@@ -192,7 +192,12 @@
 
         private void tsbClose_Click(object sender, EventArgs e)
         {
-            this.Watcher.Changed -= this.Plugin_Changed;
+            // Preparing to dispose watcher
+            if (this.Watcher != null)
+            {
+                this.Watcher.Changed -= this.Plugin_Changed;
+            }
+
             this.CloseTool();
         }
 
