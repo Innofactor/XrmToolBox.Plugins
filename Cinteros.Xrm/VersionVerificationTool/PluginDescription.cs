@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.Composition;
-using Cinteros.Xrm.VersionVerificationTool;
-using XrmToolBox.Extensibility;
-using XrmToolBox.Extensibility.Interfaces;
-
-namespace Cinteros.Xrm.Plugins.VersionVerificationTool
+﻿namespace Cinteros.Xrm.Plugins.VersionVerificationTool
 {
+    using System.ComponentModel.Composition;
+    using Cinteros.Xrm.VersionVerificationTool;
+    using XrmToolBox.Extensibility;
+    using XrmToolBox.Extensibility.Interfaces;
+
     [Export(typeof(IXrmToolBoxPlugin)),
     ExportMetadata("Name", "Version Verification Tool"),
     ExportMetadata("Description", "Tool to compare solution components versions over multiple environments"),

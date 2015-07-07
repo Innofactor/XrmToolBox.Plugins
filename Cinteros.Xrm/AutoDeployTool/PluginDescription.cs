@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.Composition;
-using Cinteros.Xrm.AutoDeployTool;
-using XrmToolBox.Extensibility;
-using XrmToolBox.Extensibility.Interfaces;
-
-namespace Cinteros.Xrm.Plugins.AutoDeployTool
+﻿namespace Cinteros.Xrm.Plugins.AutoDeployTool
 {
+    using System.ComponentModel.Composition;
+    using Cinteros.Xrm.AutoDeployTool;
+    using XrmToolBox.Extensibility;
+    using XrmToolBox.Extensibility.Interfaces;
+
     [Export(typeof(IXrmToolBoxPlugin)),
     ExportMetadata("Name", "Auto Deploy Tool"),
     ExportMetadata("Description", "Tool to automatically upload plugin asseemblies if they are changed during build process"),
