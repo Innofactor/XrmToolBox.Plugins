@@ -4,18 +4,15 @@
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Configuration;
-    using System.Drawing;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
     using System.Windows.Forms;
     using System.Xml;
-    using Cinteros.Xrm.VersionVerificationTool.Controls;
-    using Cinteros.Xrm.Plugins.Properties;
     using Cinteros.Xrm.SDK;
     using Cinteros.Xrm.Utils;
+    using Cinteros.Xrm.VersionVerificationTool.Controls;
     using McTools.Xrm.Connection;
-    using XrmToolBox;
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;
 
