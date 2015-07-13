@@ -129,6 +129,7 @@
     <Compile Include="DataUpdateTool\Forms\XmlContentDisplayDialog.designer.cs">
       <DependentUpon>XmlContentDisplayDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataUpdateTool\PluginDescription.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>

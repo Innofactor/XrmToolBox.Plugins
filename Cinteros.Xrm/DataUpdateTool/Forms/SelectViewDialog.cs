@@ -15,10 +15,10 @@
 
     public partial class SelectViewDialog : Form
     {
-        DataUpdater Caller;
+        MainControl Caller;
         public Entity View;
 
-        public SelectViewDialog(DataUpdater caller)
+        public SelectViewDialog(MainControl caller)
         {
             InitializeComponent();
             Caller = caller;
@@ -28,12 +28,12 @@
         private void PopulateForm()
         {
             cmbEntity.Items.Clear();
-            var entities = DataUpdater.GetDisplayEntities();
+            var entities = MainControl.GetDisplayEntities();
             if (entities != null)
             {
                 foreach (var entity in entities)
                 {
-                    if (entity.Value.IsIntersect != true && DataUpdater.views.ContainsKey(entity.Value.LogicalName + "|S"))
+                    if (entity.Value.IsIntersect != true && MainControl.views.ContainsKey(entity.Value.LogicalName + "|S"))
                     {
                         cmbEntity.Items.Add(new EntityItem(entity.Value));
                     }
@@ -54,18 +54,18 @@
             txtFetch.Text = "";
             btnOk.Enabled = false;
             var entity = ControlUtils.GetValueFromControl(cmbEntity);
-            if (DataUpdater.views.ContainsKey(entity + "|S"))
+            if (MainControl.views.ContainsKey(entity + "|S"))
             {
-                var views = DataUpdater.views[entity + "|S"];
+                var views = MainControl.views[entity + "|S"];
                 cmbView.Items.Add("-- System Views --");
                 foreach (var view in views)
                 {
                     cmbView.Items.Add(new ViewItem(view));
                 }
             }
-            if (DataUpdater.views.ContainsKey(entity + "|U"))
+            if (MainControl.views.ContainsKey(entity + "|U"))
             {
-                var views = DataUpdater.views[entity + "|U"];
+                var views = MainControl.views[entity + "|U"];
                 cmbView.Items.Add("-- Personal Views --");
                 foreach (var view in views)
                 {
@@ -107,7 +107,7 @@
             cmbView.SelectedIndex = -1;
             cmbEntity.SelectedIndex = -1;
             txtFetch.Text = "";
-            DataUpdater.views = null;
+            MainControl.views = null;
             Caller.LoadViews(PopulateForm);
         }
     }

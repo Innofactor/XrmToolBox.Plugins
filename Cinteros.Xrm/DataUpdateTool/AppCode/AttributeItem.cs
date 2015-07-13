@@ -21,7 +21,7 @@
 
         public override string ToString()
         {
-            var result = DataUpdater.GetAttributeDisplayName(meta);
+            var result = MainControl.GetAttributeDisplayName(meta);
             //if (meta.IsValidForRead != true) result += " NoRead";
             //if (meta.IsManaged == true) result += " MGD";
             if (meta.IsPrimaryId == true) result += " (id)";
@@ -40,7 +40,7 @@
         public static void AddAttributeToComboBox(ComboBox cmb, AttributeMetadata meta, bool allowvirtual)
         {
             var add = false;
-            if (!DataUpdater.useFriendlyNames)
+            if (!MainControl.useFriendlyNames)
             {
                 add = true;
             }

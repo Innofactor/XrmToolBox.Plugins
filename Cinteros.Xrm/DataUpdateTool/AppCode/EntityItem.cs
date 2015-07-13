@@ -14,7 +14,7 @@
 
         public override string ToString()
         {
-            return DataUpdater.GetEntityDisplayName(meta);
+            return MainControl.GetEntityDisplayName(meta);
         }
 
         public string GetValue()

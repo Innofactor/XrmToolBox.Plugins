@@ -20,7 +20,7 @@
     using XrmToolBox.Extensibility.Interfaces;
     using XrmToolBox.Forms;
 
-    public partial class DataUpdater : PluginControlBase, IGitHubPlugin, IPayPalPlugin, IMessageBusHost
+    public partial class MainControl : PluginControlBase, IGitHubPlugin, IPayPalPlugin, IMessageBusHost
     {
         const string settingfile = "Cinteros.Xrm.DataUpdater.Settings.xml";
         private static string fetchTemplate = "<fetch><entity name=\"\"/></fetch>";
@@ -43,17 +43,17 @@
         private bool showAttributesOnlyValidAF = true;
         private Dictionary<string, string> entityAttributes = new Dictionary<string, string>();
 
-        public DataUpdater()
+        public MainControl()
         {
             InitializeComponent();
         }
 
         #region interface implementation
 
-        //public override void ClosingPlugin(XrmToolBox.PluginCloseInfo info)
-        //{
-        //    SaveSetting();
-        //}
+        public override void ClosingPlugin(PluginCloseInfo info)
+        {
+            SaveSetting();
+        }
 
         public string RepositoryName
         {
