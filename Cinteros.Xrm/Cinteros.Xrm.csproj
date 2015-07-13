@@ -111,11 +111,11 @@
     <Compile Include="DataUpdateTool\AppCode\EntityItem.cs" />
     <Compile Include="DataUpdateTool\AppCode\OptionsetItem.cs" />
     <Compile Include="DataUpdateTool\AppCode\ViewItem.cs" />
-    <Compile Include="DataUpdateTool\DataUpdater.cs">
+    <Compile Include="DataUpdateTool\MainControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DataUpdateTool\DataUpdater.Designer.cs">
-      <DependentUpon>DataUpdater.cs</DependentUpon>
+    <Compile Include="DataUpdateTool\MainControl.Designer.cs">
+      <DependentUpon>MainControl.cs</DependentUpon>
     </Compile>
     <Compile Include="DataUpdateTool\Forms\SelectViewDialog.cs">
       <SubType>Form</SubType>
@@ -159,8 +159,8 @@
     <EmbeddedResource Include="AutoDeployTool\MainControl.resx">
       <DependentUpon>MainControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataUpdateTool\DataUpdater.resx">
-      <DependentUpon>DataUpdater.cs</DependentUpon>
+    <EmbeddedResource Include="DataUpdateTool\MainControl.resx">
+      <DependentUpon>MainControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataUpdateTool\Forms\SelectViewDialog.resx">
       <DependentUpon>SelectViewDialog.cs</DependentUpon>
