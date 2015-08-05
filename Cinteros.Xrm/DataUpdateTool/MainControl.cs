@@ -19,6 +19,7 @@
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;
     using XrmToolBox.Forms;
+    using Microsoft.Crm.Sdk.Messages;
 
     public partial class MainControl : PluginControlBase, IGitHubPlugin, IPayPalPlugin, IMessageBusHost
     {
@@ -326,6 +327,8 @@
                     gb2attribute.Enabled = gb1select.Enabled && records != null && records.Entities.Count > 0;
                     gb3value.Enabled = gb2attribute.Enabled && cmbAttribute.SelectedItem is AttributeItem;
                     gb4update.Enabled = gb3value.Enabled;
+                    var attribute = (AttributeItem)cmbAttribute.SelectedItem;
+                    rbSetNull.Enabled = attribute != null && attribute.Metadata.LogicalName != "statecode" && attribute.Metadata.LogicalName != "statuscode";
                 }
                 catch
                 {
@@ -663,6 +666,7 @@
 
         private void UpdateValueField()
         {
+            cmbValue.Items.Clear();
             var attribute = (AttributeItem)cmbAttribute.SelectedItem;
             if (attribute != null)
             {
@@ -680,7 +684,6 @@
                 }
                 else
                 {
-                    cmbValue.Items.Clear();
                     cmbValue.DropDownStyle = ComboBoxStyle.Simple;
                 }
                 if (entityAttributes.ContainsKey(records.EntityName))
@@ -691,6 +694,12 @@
                 {
                     entityAttributes.Add(records.EntityName, attribute.GetValue());
                 }
+            }
+            if (attribute.Metadata.LogicalName == "statecode")
+            {
+                MessageBox.Show("You selected to update the statecode. In most cases this will probably not work.\n" +
+                    "But if you select to update the statuscode instead, the statecode will be fixed automatically!",
+                    "Statecode", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             EnableControls(true);
         }
@@ -955,9 +964,27 @@
             var attributeitem = (AttributeItem)cmbAttribute.SelectedItem;
             var onlychange = chkOnlyChange.Checked;
             var entity = records.EntityName;
-            var attribute = attributeitem.GetValue();
+            var attributes = new List<string>();
+            attributes.Add(attributeitem.GetValue());
+            if (attributes[0] == "statuscode")
+            {
+                attributes.Add("statecode");
+            }
             var touch = rbSetTouch.Checked;
             var value = rbSetValue.Checked ? GetValue(attributeitem.Metadata.AttributeType) : null;
+            OptionSetValue statevalue = null;
+            if (attributeitem.Metadata is StatusAttributeMetadata && value is OptionSetValue)
+            {
+                var statusmeta = (StatusAttributeMetadata)attributeitem.Metadata;
+                foreach (var statusoption in statusmeta.OptionSet.Options)
+                {
+                    if (statusoption is StatusOptionMetadata && statusoption.Value == ((OptionSetValue)value).Value)
+                    {
+                        statevalue = new OptionSetValue((int)((StatusOptionMetadata)statusoption).State);
+                        break;
+                    }
+                }
+            }
             working = true;
             WorkAsync("Updating records",
                 (bgworker, workargs) =>
@@ -969,37 +996,44 @@
                     {
                         current++;
                         var pct = 100 * current / total;
-                        if (onlychange && !record.Contains(attribute))
+                        var attributesexists = true;
+                        foreach (var attribute in attributes)
+                        {
+                            if (!record.Contains(attribute))
+                            {
+                                attributesexists = false;
+                                break;
+                            }
+                        }
+                        if ((onlychange || touch) && !attributesexists)
                         {
                             bgworker.ReportProgress(pct, "Reloading record " + current.ToString());
-                            var newrecord = Service.Retrieve(entity, record.Id, new ColumnSet(attribute));
-                            if (newrecord.Contains(attribute))
+                            var newcols = new ColumnSet(attributes.ToArray());
+                            var newrecord = Service.Retrieve(entity, record.Id, newcols);
+                            foreach (var attribute in attributes)
                             {
-                                record.Attributes.Add(attribute, newrecord[attribute]);
+                                if (newrecord.Contains(attribute) && !record.Contains(attribute))
+                                {
+                                    record.Attributes.Add(attribute, newrecord[attribute]);
+                                }
                             }
                         }
                         bgworker.ReportProgress(pct, "Updating record " + current.ToString());
-                        var currentvalue = record.Contains(attribute) ? record[attribute] : null;
-                        var updaterecord = new Entity(entity);
-                        updaterecord.Id = record.Id;
-                        if (touch)
+                        if (attributeitem.Metadata is StatusAttributeMetadata)
                         {
-                            value = currentvalue;
+                            UpdateState(touch, onlychange, (OptionSetValue)value, statevalue, record);
                         }
-                        if (!onlychange || !ValuesEqual(value, currentvalue))
+                        else
                         {
-                            updaterecord.Attributes.Add(attribute, value);
-                            Service.Update(updaterecord);
-                            if (record.Contains(attribute))
+                            // This currently only supports ONE attribute being updated, can be expanded to set/touch several attributes in the future
+                            var currentvalue = record.Contains(attributes[0]) ? record[attributes[0]] : null;
+                            if (touch)
                             {
-                                record[attribute] = value;
+                                value = currentvalue;
                             }
-                            else
-                            {
-                                record.Attributes.Add(attribute, value);
-                            }
-                            updated++;
+                            UpdateAttributes(onlychange, entity, attributes, value, record, currentvalue);
                         }
+                        updated++;
                     }
                     workargs.Result = updated;
                 },
@@ -1019,6 +1053,66 @@
                 {
                     SetWorkingMessage(changeargs.UserState.ToString());
                 });
+        }
+
+        // This currently only supports ONE attribute being updated, can be expanded to set/touch several attributes in the future
+        private void UpdateAttributes(bool onlychange, string entity, List<string> attributes, object value, Entity record, object currentvalue)
+        {
+            if (!onlychange || !ValuesEqual(value, currentvalue))
+            {
+                var updaterecord = new Entity(entity);
+                updaterecord.Id = record.Id;
+                foreach (var attribute in attributes)
+                {
+                    updaterecord.Attributes.Add(attribute, value);
+                }
+                Service.Update(updaterecord);
+                if (record.Contains(attributes[0]))
+                {
+                    record[attributes[0]] = value;
+                }
+                else
+                {
+                    record.Attributes.Add(attributes[0], value);
+                }
+            }
+        }
+
+        private void UpdateState(bool touch, bool onlychange, OptionSetValue statusvalue, OptionSetValue statevalue, Entity record)
+        {
+            var currentstate = record.Contains("statecode") ? record["statecode"] : new OptionSetValue(-1);
+            var currentstatus = record.Contains("statuscode") ? record["statuscode"] : new OptionSetValue(-1);
+            if (touch)
+            {
+                statevalue = (OptionSetValue)currentstate;
+                statusvalue = (OptionSetValue)currentstatus;
+            }
+            if (!onlychange || !ValuesEqual(currentstate, statevalue) || !ValuesEqual(currentstatus, statusvalue))
+            {
+                var req = new SetStateRequest()
+                {
+                    EntityMoniker = record.ToEntityReference(),
+                    State = statevalue,
+                    Status = statusvalue
+                };
+                var resp = Service.Execute(req);
+                if (record.Contains("statecode"))
+                {
+                    record["statecode"] = statevalue;
+                }
+                else
+                {
+                    record.Attributes.Add("statecode", statevalue);
+                }
+                if (record.Contains("statuscode"))
+                {
+                    record["statuscode"] = statusvalue;
+                }
+                else
+                {
+                    record.Attributes.Add("statuscode", statusvalue);
+                }
+            }
         }
 
         #endregion Async SDK methods
