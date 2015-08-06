@@ -100,6 +100,8 @@
             // 
             // cbView
             // 
+            this.cbView.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbView.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbView.FormattingEnabled = true;
             this.cbView.Location = new System.Drawing.Point(353, 3);
