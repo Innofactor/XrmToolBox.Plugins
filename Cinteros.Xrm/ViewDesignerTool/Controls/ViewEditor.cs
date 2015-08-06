@@ -13,6 +13,7 @@
     using XrmToolBox.Extensibility;
     using Microsoft.Xrm.Sdk.Messages;
     using Microsoft.Xrm.Sdk.Query;
+    using Cinteros.Xrm.ViewDesignerTool.AppCode;
 
     public partial class ViewEditor : UserControl
     {
@@ -83,10 +84,15 @@
 
         private void cbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            gbDesign.Controls.Clear();
+
             var views = (ComboBox)sender;
-            var view = ((Entity[])views.Tag)[views.SelectedIndex];
+            var view = new LayoutDesigner(((Entity[])views.Tag)[views.SelectedIndex]);
 
+            view.Size = gbDesign.Size;
+            view.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom | AnchorStyles.Left;
 
+            gbDesign.Controls.Add(view);
         }
     }
 }

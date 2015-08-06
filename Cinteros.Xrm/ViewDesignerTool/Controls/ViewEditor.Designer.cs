@@ -30,13 +30,11 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.gbDesign = new System.Windows.Forms.GroupBox();
-            this.lvDesign = new System.Windows.Forms.ListView();
             this.cbEntity = new System.Windows.Forms.ComboBox();
             this.cbView = new System.Windows.Forms.ComboBox();
             this.lEntity = new System.Windows.Forms.Label();
             this.lView = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
-            this.gbDesign.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -66,7 +64,6 @@
             // gbDesign
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.gbDesign, 4);
-            this.gbDesign.Controls.Add(this.lvDesign);
             this.gbDesign.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbDesign.Location = new System.Drawing.Point(3, 28);
             this.gbDesign.Name = "gbDesign";
@@ -74,19 +71,6 @@
             this.gbDesign.TabIndex = 0;
             this.gbDesign.TabStop = false;
             this.gbDesign.Text = "Design";
-            // 
-            // lvDesign
-            // 
-            this.lvDesign.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvDesign.GridLines = true;
-            this.lvDesign.Location = new System.Drawing.Point(6, 19);
-            this.lvDesign.Name = "lvDesign";
-            this.lvDesign.Size = new System.Drawing.Size(579, 310);
-            this.lvDesign.TabIndex = 0;
-            this.lvDesign.UseCompatibleStateImageBehavior = false;
-            this.lvDesign.View = System.Windows.Forms.View.Details;
             // 
             // cbEntity
             // 
@@ -140,7 +124,6 @@
             this.Load += new System.EventHandler(this.ViewEditor_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.gbDesign.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -149,7 +132,6 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox gbDesign;
-        private System.Windows.Forms.ListView lvDesign;
         private System.Windows.Forms.Label lView;
         private System.Windows.Forms.ComboBox cbEntity;
         private System.Windows.Forms.ComboBox cbView;
