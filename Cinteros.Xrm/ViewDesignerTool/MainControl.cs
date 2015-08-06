@@ -12,6 +12,8 @@
     using XrmToolBox.Extensibility.Interfaces;
     using XrmToolBox.Extensibility;
     using Cinteros.Xrm.ViewDesignerTool.Controls;
+    using Microsoft.Xrm.Sdk.Query;
+    using Microsoft.Xrm.Sdk;
 
     public partial class MainControl : PluginControlBase, IGitHubPlugin, IMessageBusHost
     {
@@ -38,10 +40,6 @@
                 this.Controls.Add(value);
 
                 this.control = value;
-
-                //((IUpdateToolStrip)this.control).UpdateToolStrip += this.MainControl_UpdateToolStrip;
-                //((IUpdateToolStrip)this.control).JustifyToolStrip();
-                //this.JustifyToolStrip();
             }
         }
 
@@ -76,7 +74,53 @@
 
         private void MainControl_Load(object sender, EventArgs e)
         {
-            this.CurrentPage = new ViewEditor();
+            if (sender != null)
+            {
+                if (sender is MainControl)
+                {
+                    var plugin = ((MainControl)sender);
+                    // In case if connection updated on main application, update assemblies list inside the plugin
+                    // plugin.ConnectionUpdated += MainControl_ConnectionUpdated;
+
+                    // this.ExecuteMethod(this.RetrieveViews);
+
+                    //if (plugin.Service != null)
+                    //{
+                    //    // Execute assemblies retrieve only if Service object is set for correct sender.
+                    //    // This will help plugin act predicatable when it was loaded in offline mode;
+                    //    // Plugin will not insist on connecting to server. Will scinetly obey instead.
+                    //    this.ExecuteMethod(this.RetrieveViews);
+                    //}
+                }
+
+                this.ExecuteMethod(() =>
+                    {
+                        this.CurrentPage = new ViewEditor();
+                    });
+                
+            }
         }
+
+        //private void RetrieveViews()
+        //{
+        //    this.WorkAsync("Getting solutions information from organizations...",
+        //        (a) => // Work To Do Asynchronously
+        //        {
+        //            var query = new QueryExpression("savedquery");
+        //            query.ColumnSet = new ColumnSet(new string[] { "layoutxml", "fetchxml", "name" });
+
+        //            a.Result = this.Service.RetrieveMultiple(query).Entities.ToArray<Entity>();
+        //        },
+        //        (a) =>  // Cleanup when work has completed
+        //        {
+        //            if (a.Result != null)
+        //            {
+        //                this.CurrentPage = new ViewEditor((Entity[])a.Result);
+
+        //                // this.CurrentPage = new ViewResults((OrganizationSnapshot[])e.Result);
+        //            }
+        //        }
+        //    );
+        //}
     }
 }
