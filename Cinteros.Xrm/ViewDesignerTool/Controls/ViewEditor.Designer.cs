@@ -80,11 +80,13 @@
             this.lvDesign.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvDesign.GridLines = true;
             this.lvDesign.Location = new System.Drawing.Point(6, 19);
             this.lvDesign.Name = "lvDesign";
             this.lvDesign.Size = new System.Drawing.Size(579, 310);
             this.lvDesign.TabIndex = 0;
             this.lvDesign.UseCompatibleStateImageBehavior = false;
+            this.lvDesign.View = System.Windows.Forms.View.Details;
             // 
             // cbEntity
             // 
@@ -108,6 +110,7 @@
             this.cbView.Name = "cbView";
             this.cbView.Size = new System.Drawing.Size(244, 21);
             this.cbView.TabIndex = 2;
+            this.cbView.SelectedIndexChanged += new System.EventHandler(this.cbView_SelectedIndexChanged);
             // 
             // lEntity
             // 

@@ -59,9 +59,10 @@
                     var query = new QueryExpression("savedquery");
                     query.Distinct = true;
 
-                    query.ColumnSet.AddColumns("name");
-                    query.ColumnSet.AddColumns("fetchxml");
-                    query.ColumnSet.AddColumns("layoutxml");
+                    query.ColumnSet.AddColumn("savedqueryid");
+                    query.ColumnSet.AddColumn("name");
+                    query.ColumnSet.AddColumn("fetchxml");
+                    query.ColumnSet.AddColumn("layoutxml");
 
                     query.Criteria = new FilterExpression();
                     query.Criteria.AddCondition("returnedtypecode", ConditionOperator.Equal, name);
@@ -78,6 +79,12 @@
                         cbView.Items.Add(entity.Attributes["name"]);
                     }
                 });
+        }
+
+        private void cbView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var views = (ComboBox)sender;
+            var view = ((Entity[])views.Tag)[views.SelectedIndex];
         }
     }
 }
