@@ -85,6 +85,8 @@
         {
             var views = (ComboBox)sender;
             var view = ((Entity[])views.Tag)[views.SelectedIndex];
+
+
         }
     }
 }
