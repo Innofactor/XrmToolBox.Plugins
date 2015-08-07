@@ -31,9 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainControl));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
+            this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbPublish = new System.Windows.Forms.ToolStripButton();
-            this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,7 +43,9 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbClose,
+            this.toolStripSeparator1,
             this.tsbEditFetch,
+            this.toolStripSeparator2,
             this.tsbSave,
             this.tsbPublish});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -58,6 +62,15 @@
             this.tsbClose.Size = new System.Drawing.Size(56, 22);
             this.tsbClose.Text = "Close";
             this.tsbClose.Click += new System.EventHandler(this.tsbClose_Click);
+            // 
+            // tsbEditFetch
+            // 
+            this.tsbEditFetch.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditFetch.Image")));
+            this.tsbEditFetch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbEditFetch.Name = "tsbEditFetch";
+            this.tsbEditFetch.Size = new System.Drawing.Size(82, 22);
+            this.tsbEditFetch.Text = "Edit Query";
+            this.tsbEditFetch.Click += new System.EventHandler(this.tsbEditFetch_Click);
             // 
             // tsbSave
             // 
@@ -77,14 +90,15 @@
             this.tsbPublish.Text = "Publish";
             this.tsbPublish.Click += new System.EventHandler(this.tsbPublish_Click);
             // 
-            // tsbEditFetch
+            // toolStripSeparator1
             // 
-            this.tsbEditFetch.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditFetch.Image")));
-            this.tsbEditFetch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbEditFetch.Name = "tsbEditFetch";
-            this.tsbEditFetch.Size = new System.Drawing.Size(82, 22);
-            this.tsbEditFetch.Text = "Edit Query";
-            this.tsbEditFetch.Click += new System.EventHandler(this.tsbEditFetch_Click);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // MainControl
             // 
@@ -108,6 +122,8 @@
         private System.Windows.Forms.ToolStripButton tsbSave;
         private System.Windows.Forms.ToolStripButton tsbPublish;
         private System.Windows.Forms.ToolStripButton tsbEditFetch;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 
 
     }

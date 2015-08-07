@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Windows.Forms;
     using System.Xml;
+    using System.Xml.Linq;
     using Microsoft.Xrm.Sdk;
 
     public class LayoutDesigner : ListView
@@ -24,6 +25,9 @@
             this.View = View.Details;
             this.FullRowSelect = true;
             this.GridLines = true;
+            this.AllowColumnReorder = true;
+
+            ColumnReordered += LayoutDesigner_ColumnReordered;
         }
 
         public LayoutDesigner(Entity view)
@@ -55,6 +59,7 @@
         }
 
         public string LogicalName { get; set; }
+
         public string Title { get; set; }
 
         #endregion Public Properties
@@ -120,6 +125,31 @@
         #endregion Internal Methods
 
         #region Private Methods
+
+        private void LayoutDesigner_ColumnReordered(object sender, ColumnReorderedEventArgs e)
+        {
+            var layout = XDocument.Parse(this.LayoutXml.OuterXml);
+
+            var cells = layout.Descendants().First().Descendants().First().Descendants();
+
+            var source = cells.ElementAt(e.OldDisplayIndex);
+            var target = cells.ElementAt(e.NewDisplayIndex);
+
+            if (e.OldDisplayIndex > e.NewDisplayIndex)
+            {
+                target.AddAfterSelf(source);
+            }
+            else
+            {
+                target.AddBeforeSelf(source);
+            }
+
+            source.Remove();
+
+            this.LayoutXml.LoadXml(layout.ToString());
+
+            this.isLayoutXmlChanged = true;
+        }
 
         private void LayoutDesigner_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
         {

@@ -133,16 +133,13 @@
   </data>
   <data name="tsbEditFetch.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAG3SURBVFhH1ZU7dsIwEEVduqSkpUzJVthKSraQMlug9BJo
-        KSkpaV1SUip6Y43zGMay5HxOcs95RzB/Wf40/4mQ1h8BxUtkmbIvghtNicn5FlFTSGLbJP0Px1coLSJx
-        3Pi7huAiVor8Nw092yK4AGtgvQ7QOmq1Wj3FtW0rPo2Ltmq0mMfYqFJVuEmvXRf6+z2cz2fR5XKRVXYb
-        47FzrPv9PvR9P8Yh5y2uUqQQb4DQxAZoyqABfDgKPg6L2qNm4WBNeLAdj8dUdmC32z34b7db8gywL6kK
-        ScKdjUusl9k22Ww2YselZzTfURES/PCcpwEgSxfvEUbjMsoiQe5znobAOoXNychFnF5zVeENVyqD7vA5
-        cJQOgBvQgqOw8TNyyAyRa64cDoenvAllcIbQ899ut6nVgPoZtWVUAA2hO8ebjzmdTmNR+6JSu6MK0hAq
-        Bg3ZB1W8C6Biwou57AB2TxYvhlTG+/UarvENOH5k4k6j2ZV+jHA8+N19xjKcUwwnLZFlyp6FC5YIeHZW
-        NV4RT4rnUy3GK8ZicjZrr4KLsCy19iq0SK6Y55vLqWKuEDez+hW8xtBfoWk+AH71QHV7/sLjAAAAAElF
-        TkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEtSURBVDhPjVOxjYNAEMQII4Q+cEojLwsRIELLERkFIESI
+        BJmDL8AhDlwAJRAggkvphoAC9pk1h+6xeRhpdMOyM7ccoK3An9ZdQDMt+DMSEBM3AdMSwhjrIPSrtA51
+        d187ncSXbc8127IItVGvAo2M/H4XSZJQmqZkmibpuk5RFBFqt8fjY4g8A6zi+3ymvu9pGAZyHIcMw6C2
+        bQnwfR99q5PwM2NXz/PY0HUdVVXFejJLvoWweVyZCAmCgI3AwiyphByPfwKs8dBwBhJlWapGycUUUwh2
+        D8OQjVmWUVEUrLce4YXDQVyuVzbUdT0bmqbh2q6Q2/PJr9F13bkZOo5jivMc1+pXKvUbcHMOmCgNau3f
+        f0YNkeMiYNcEEmiSZgAGadyc4BNgkFOMWtN+AQse0Wj1GWbbAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tsbSave.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
