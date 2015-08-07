@@ -137,11 +137,11 @@
 
             if (e.OldDisplayIndex > e.NewDisplayIndex)
             {
-                target.AddAfterSelf(source);
+                target.AddBeforeSelf(source);
             }
             else
             {
-                target.AddBeforeSelf(source);
+                target.AddAfterSelf(source);
             }
 
             source.Remove();
