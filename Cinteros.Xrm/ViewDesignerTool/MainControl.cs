@@ -14,6 +14,7 @@
     using Cinteros.Xrm.ViewDesignerTool.Controls;
     using Microsoft.Xrm.Sdk.Query;
     using Microsoft.Xrm.Sdk;
+    using Cinteros.Xrm.ViewDesignerTool.AppCode;
 
     public partial class MainControl : PluginControlBase, IGitHubPlugin, IMessageBusHost
     {
@@ -99,6 +100,14 @@
                     });
                 
             }
+        }
+
+        private void tsbSave_Click(object sender, EventArgs e)
+        {
+            var view = (LayoutDesigner)this.CurrentPage.Controls.Find("lvDesign", true).FirstOrDefault();
+            var result = view.LayoutXml.OuterXml;
+
+            this.Service.Update(view.ToEntity());
         }
 
         //private void RetrieveViews()

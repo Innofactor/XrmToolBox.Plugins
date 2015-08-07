@@ -1,19 +1,12 @@
 ﻿namespace Cinteros.Xrm.ViewDesignerTool.Controls
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Drawing;
-    using System.Data;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
-    using Microsoft.Xrm.Sdk;
-    using XrmToolBox.Extensibility;
-    using Microsoft.Xrm.Sdk.Messages;
-    using Microsoft.Xrm.Sdk.Query;
     using Cinteros.Xrm.ViewDesignerTool.AppCode;
+    using Microsoft.Xrm.Sdk;
+    using Microsoft.Xrm.Sdk.Query;
+    using XrmToolBox.Extensibility;
 
     public partial class ViewEditor : UserControl
     {
@@ -72,7 +65,12 @@
                 },
                 a =>
                 {
+                    gbDesign.Controls.Clear();
+
                     cbView.Items.Clear();
+                    cbView.SelectedItem = null;
+                    cbView.SelectedText = string.Empty;
+                    cbView.SelectedIndex = -1;
                     cbView.Tag = (Entity[])a.Result;
 
                     foreach (var entity in (Entity[])a.Result)
@@ -87,8 +85,10 @@
             gbDesign.Controls.Clear();
 
             var views = (ComboBox)sender;
-            var view = new LayoutDesigner(((Entity[])views.Tag)[views.SelectedIndex]);
+            var view = new LayoutDesigner();
 
+            view.Load(((Entity[])views.Tag)[views.SelectedIndex]);
+            view.Name = "lvDesign";
             view.Size = gbDesign.Size;
             view.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom | AnchorStyles.Left;
 
