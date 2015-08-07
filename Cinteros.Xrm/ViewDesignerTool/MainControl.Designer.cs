@@ -33,6 +33,7 @@
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbPublish = new System.Windows.Forms.ToolStripButton();
+            this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,6 +41,7 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbClose,
+            this.tsbEditFetch,
             this.tsbSave,
             this.tsbPublish});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -75,6 +77,15 @@
             this.tsbPublish.Text = "Publish";
             this.tsbPublish.Click += new System.EventHandler(this.tsbPublish_Click);
             // 
+            // tsbEditFetch
+            // 
+            this.tsbEditFetch.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditFetch.Image")));
+            this.tsbEditFetch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbEditFetch.Name = "tsbEditFetch";
+            this.tsbEditFetch.Size = new System.Drawing.Size(82, 22);
+            this.tsbEditFetch.Text = "Edit Query";
+            this.tsbEditFetch.Click += new System.EventHandler(this.tsbEditFetch_Click);
+            // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -96,6 +107,7 @@
         private System.Windows.Forms.ToolStripButton tsbClose;
         private System.Windows.Forms.ToolStripButton tsbSave;
         private System.Windows.Forms.ToolStripButton tsbPublish;
+        private System.Windows.Forms.ToolStripButton tsbEditFetch;
 
 
     }

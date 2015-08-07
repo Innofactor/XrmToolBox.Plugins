@@ -16,6 +16,8 @@
     using Microsoft.Xrm.Sdk;
     using Microsoft.Crm.Sdk.Messages;
     using Cinteros.Xrm.ViewDesignerTool.AppCode;
+    using Cinteros.Xrm.FetchXmlBuilder;
+    using System.Xml;
 
     public partial class MainControl : PluginControlBase, IGitHubPlugin, IMessageBusHost
     {
@@ -63,7 +65,22 @@
 
         public void OnIncomingMessage(MessageBusEventArgs message)
         {
-            throw new NotImplementedException();
+            if (message.SourcePlugin == "FetchXML Builder" &&
+                message.TargetArgument != null &&
+                message.TargetArgument is FXBMessageBusArgument)
+            {
+                var fxbArg = (FXBMessageBusArgument)message.TargetArgument;
+                UpdateFetch(fxbArg.FetchXML);
+            }
+        }
+
+        private void UpdateFetch(string fetchxml)
+        {
+            var view = (LayoutDesigner)this.CurrentPage.Controls.Find("lvDesign", true).FirstOrDefault();
+            if (view != null)
+            {
+                view.FetchXml.LoadXml(fetchxml);
+            }
         }
 
         public event EventHandler<MessageBusEventArgs> OnOutgoingMessage;
@@ -99,7 +116,7 @@
                     {
                         this.CurrentPage = new ViewEditor();
                     });
-                
+
             }
         }
 
@@ -128,6 +145,21 @@
                 a =>
                 {
                 });
+        }
+
+        private void tsbEditFetch_Click(object sender, EventArgs e)
+        {
+            var view = (LayoutDesigner)this.Controls.Find("lvDesign", true).FirstOrDefault();
+            if (view != null)
+            {
+                var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder");
+                var fXBMessageBusArgument = new FXBMessageBusArgument(FXBMessageBusRequest.FetchXML)
+                {
+                    FetchXML = view.FetchXml.OuterXml
+                };
+                messageBusEventArgs.TargetArgument = fXBMessageBusArgument;
+                OnOutgoingMessage(this, messageBusEventArgs);
+            }
         }
     }
 }
