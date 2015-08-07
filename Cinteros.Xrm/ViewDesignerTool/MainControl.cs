@@ -108,7 +108,14 @@
             var view = (LayoutDesigner)this.CurrentPage.Controls.Find("lvDesign", true).FirstOrDefault();
             var result = view.LayoutXml.OuterXml;
 
-            this.Service.Update(view.ToEntity());
+            this.WorkAsync("Saving changes",
+                a =>
+                {
+                    this.Service.Update(view.ToEntity());
+                },
+                a =>
+                {
+                });
         }
 
         private void tsbPublish_Click(object sender, EventArgs e)
@@ -122,27 +129,5 @@
                 {
                 });
         }
-
-        //private void RetrieveViews()
-        //{
-        //    this.WorkAsync("Getting solutions information from organizations...",
-        //        (a) => // Work To Do Asynchronously
-        //        {
-        //            var query = new QueryExpression("savedquery");
-        //            query.ColumnSet = new ColumnSet(new string[] { "layoutxml", "fetchxml", "name" });
-
-        //            a.Result = this.Service.RetrieveMultiple(query).Entities.ToArray<Entity>();
-        //        },
-        //        (a) =>  // Cleanup when work has completed
-        //        {
-        //            if (a.Result != null)
-        //            {
-        //                this.CurrentPage = new ViewEditor((Entity[])a.Result);
-
-        //                // this.CurrentPage = new ViewResults((OrganizationSnapshot[])e.Result);
-        //            }
-        //        }
-        //    );
-        //}
     }
 }
