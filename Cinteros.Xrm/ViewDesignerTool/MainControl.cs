@@ -14,6 +14,7 @@
     using Cinteros.Xrm.ViewDesignerTool.Controls;
     using Microsoft.Xrm.Sdk.Query;
     using Microsoft.Xrm.Sdk;
+    using Microsoft.Crm.Sdk.Messages;
     using Cinteros.Xrm.ViewDesignerTool.AppCode;
 
     public partial class MainControl : PluginControlBase, IGitHubPlugin, IMessageBusHost
@@ -108,6 +109,18 @@
             var result = view.LayoutXml.OuterXml;
 
             this.Service.Update(view.ToEntity());
+        }
+
+        private void tsbPublish_Click(object sender, EventArgs e)
+        {
+            this.WorkAsync("Publishing changes",
+                a =>
+                {
+                    this.Service.Execute(new PublishAllXmlRequest());
+                },
+                a =>
+                {
+                });
         }
 
         //private void RetrieveViews()
