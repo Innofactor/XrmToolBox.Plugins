@@ -32,14 +32,15 @@
         {
             InitializeComponent();
             this.host = sender;
-            PopulateForm();
+
+            this.LoadViews(this.PopulateForm);
         }
 
         #endregion Public Constructors
 
         #region Internal Methods
 
-        internal void LoadViews(Action viewsLoaded)
+        internal void LoadViews(Action action)
         {
             this.host.WorkAsync("Loading views...",
                 (a) =>
@@ -87,6 +88,8 @@
                     }
 
                     this.entities = this.views.Keys.Select(x => x.Split('|')[0]).ToList();
+
+                    action();
                 });
         }
 
@@ -130,7 +133,7 @@
             }
             else
             {
-                txtFetch.Text = "";
+                txtFetch.Text = string.Empty;
                 btnOk.Enabled = false;
             }
         }
@@ -156,20 +159,17 @@
 
         private void PopulateForm()
         {
-            cmbEntity.Items.Clear();
-            this.LoadViews(() => { });
+            cmbView.Items.Clear();
+            cmbView.Text = string.Empty;
+            txtFetch.Text = string.Empty;
 
-            //if (entities != null)
-            //{
-            //    foreach (var entity in entities)
-            //    {
-            //        if (entity.Value.IsIntersect != true && this.Views.ContainsKey(entity.Value.LogicalName + "|S"))
-            //        {
-            //            cmbEntity.Items.Add(new EntityItem(entity.Value));
-            //        }
-            //    }
-            //}
-            //Enabled = true;
+            if (entities != null)
+            {
+                foreach (var entity in entities)
+                {
+                    cmbEntity.Items.Add(entity);
+                }
+            }
         }
 
         private void UpdateViews()
