@@ -121,16 +121,16 @@
     <Compile Include="DataUpdateTool\MainControl.Designer.cs">
       <DependentUpon>MainControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataUpdateTool\Forms\SelectViewDialog.cs">
+    <Compile Include="Common\Forms\SelectViewDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataUpdateTool\Forms\SelectViewDialog.designer.cs">
+    <Compile Include="Common\Forms\SelectViewDialog.designer.cs">
       <DependentUpon>SelectViewDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataUpdateTool\Forms\XmlContentDisplayDialog.cs">
+    <Compile Include="Common\Forms\XmlContentDisplayDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataUpdateTool\Forms\XmlContentDisplayDialog.designer.cs">
+    <Compile Include="Common\Forms\XmlContentDisplayDialog.designer.cs">
       <DependentUpon>XmlContentDisplayDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="DataUpdateTool\PluginDescription.cs" />
@@ -183,10 +183,10 @@
     <EmbeddedResource Include="DataUpdateTool\MainControl.resx">
       <DependentUpon>MainControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataUpdateTool\Forms\SelectViewDialog.resx">
+    <EmbeddedResource Include="Common\Forms\SelectViewDialog.resx">
       <DependentUpon>SelectViewDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataUpdateTool\Forms\XmlContentDisplayDialog.resx">
+    <EmbeddedResource Include="Common\Forms\XmlContentDisplayDialog.resx">
       <DependentUpon>XmlContentDisplayDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
