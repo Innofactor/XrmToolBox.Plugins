@@ -40,7 +40,7 @@
             this.panOk = new System.Windows.Forms.Panel();
             this.btnOk = new System.Windows.Forms.Button();
             this.panCancel = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtFetch = new CSRichTextBoxSyntaxHighlighting.XMLViewer();
             this.panel1.SuspendLayout();
@@ -150,22 +150,22 @@
             // 
             // panCancel
             // 
-            this.panCancel.Controls.Add(this.button2);
+            this.panCancel.Controls.Add(this.btnCancel);
             this.panCancel.Dock = System.Windows.Forms.DockStyle.Right;
             this.panCancel.Location = new System.Drawing.Point(475, 0);
             this.panCancel.Name = "panCancel";
             this.panCancel.Size = new System.Drawing.Size(91, 38);
             this.panCancel.TabIndex = 5;
             // 
-            // button2
+            // btnCancel
             // 
-            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Location = new System.Drawing.Point(3, 8);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(3, 8);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 5;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // panel3
             // 
@@ -195,8 +195,10 @@
             // 
             // SelectViewDialog
             // 
+            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(566, 422);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -226,7 +228,7 @@
         private System.Windows.Forms.Panel panOk;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Panel panCancel;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnCancel;
         internal CSRichTextBoxSyntaxHighlighting.XMLViewer txtFetch;
         private System.Windows.Forms.Button btnRefresh;
 
