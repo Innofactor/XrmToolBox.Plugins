@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.Utils
+﻿namespace Cinteros.Xrm.Common.Utils
 {
     /// <summary>
     /// Structure holding constants

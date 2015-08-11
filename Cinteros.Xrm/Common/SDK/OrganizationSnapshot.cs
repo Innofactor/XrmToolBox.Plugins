@@ -1,10 +1,10 @@
-﻿namespace Cinteros.Xrm.SDK
+﻿namespace Cinteros.Xrm.Common.SDK
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Xml;
-    using Cinteros.Xrm.Utils;
+    using Cinteros.Xrm.Common.Utils;
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Sdk;
 

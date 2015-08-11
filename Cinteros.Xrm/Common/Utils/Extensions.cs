@@ -1,9 +1,9 @@
-﻿namespace Cinteros.Xrm.Utils
+﻿namespace Cinteros.Xrm.Common.Utils
 {
     using System;
     using System.Collections.Generic;
     using System.Xml;
-    using Cinteros.Xrm.SDK;
+    using Cinteros.Xrm.Common.SDK;
 
     public static class Extensions
     {

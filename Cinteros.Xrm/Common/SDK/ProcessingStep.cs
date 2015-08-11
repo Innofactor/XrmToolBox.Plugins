@@ -1,7 +1,7 @@
-﻿namespace Cinteros.Xrm.SDK
+﻿namespace Cinteros.Xrm.Common.SDK
 {
     using System;
-    using Cinteros.Xrm.Utils;
+    using Cinteros.Xrm.Common.Utils;
     using Microsoft.Xrm.Sdk;
 
     public class ProcessingStep

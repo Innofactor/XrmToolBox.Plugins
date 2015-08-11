@@ -5,8 +5,8 @@
     using System.ComponentModel;
     using System.Linq;
     using System.Windows.Forms;
-    using Cinteros.Xrm.SDK;
-    using Cinteros.Xrm.Utils;
+    using Cinteros.Xrm.Common.SDK;
+    using Cinteros.Xrm.Common.Utils;
     using McTools.Xrm.Connection;
     using XrmToolBox;
     using XrmToolBox.Extensibility;

@@ -71,36 +71,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\common\sdk\IComparableEntity.cs">
-      <Link>SDK\IComparableEntity.cs</Link>
-    </Compile>
-    <Compile Include="..\common\sdk\IsolationMode.cs">
-      <Link>SDK\IsolationMode.cs</Link>
-    </Compile>
-    <Compile Include="..\common\sdk\OrganizationSnapshot.cs">
-      <Link>SDK\OrganizationSnapshot.cs</Link>
-    </Compile>
-    <Compile Include="..\common\sdk\PluginAssembly.cs">
-      <Link>SDK\PluginAssembly.cs</Link>
-    </Compile>
-    <Compile Include="..\common\sdk\Solution.cs">
-      <Link>SDK\Solution.cs</Link>
-    </Compile>
-    <Compile Include="..\common\utils\Constants.cs">
-      <Link>Utils\Constants.cs</Link>
-    </Compile>
-    <Compile Include="..\common\utils\Extensions.cs">
-      <Link>Utils\Extensions.cs</Link>
-    </Compile>
-    <Compile Include="..\common\utils\Helpers.cs">
-      <Link>Utils\Helpers.cs</Link>
-    </Compile>
-    <Compile Include="..\common\utils\IUpdateToolStrip.cs">
-      <Link>Utils\IUpdateToolStrip.cs</Link>
-    </Compile>
-    <Compile Include="..\common\utils\UpdateToolStripEventArgs.cs">
-      <Link>Utils\UpdateToolStripEventArgs.cs</Link>
-    </Compile>
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
