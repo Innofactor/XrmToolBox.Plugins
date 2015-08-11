@@ -119,6 +119,11 @@
     <Compile Include="Common\SDK\ProcessingStep.cs" />
     <Compile Include="Common\SDK\Solution.cs" />
     <Compile Include="Common\SDK\StateCode.cs" />
+    <Compile Include="Common\Utils\Constants.cs" />
+    <Compile Include="Common\Utils\Extensions.cs" />
+    <Compile Include="Common\Utils\Helpers.cs" />
+    <Compile Include="Common\Utils\IUpdateToolStrip.cs" />
+    <Compile Include="Common\Utils\UpdateToolStripEventArgs.cs" />
     <Compile Include="DataUpdateTool\AppCode\AttributeItem.cs" />
     <Compile Include="DataUpdateTool\AppCode\EntityItem.cs" />
     <Compile Include="DataUpdateTool\AppCode\OptionsetItem.cs" />
