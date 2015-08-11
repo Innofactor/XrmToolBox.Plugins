@@ -28,7 +28,7 @@
 
         private void PopulateForm()
         {
-            cbEntity.Items.Clear();
+            cmbEntity.Items.Clear();
             this.LoadViews(() => { });
             
             //if (entities != null)
@@ -55,7 +55,7 @@
             cmbView.Text = string.Empty;
             txtFetch.Text = string.Empty;
             btnOk.Enabled = false;
-            var entity = ControlUtils.GetValueFromControl(cbEntity);
+            var entity = ControlUtils.GetValueFromControl(cmbEntity);
 
             if (this.views.ContainsKey(entity + "|S"))
             {
@@ -109,7 +109,7 @@
         {
             //Enabled = false;
             cmbView.SelectedIndex = -1;
-            cbEntity.SelectedIndex = -1;
+            cmbEntity.SelectedIndex = -1;
             txtFetch.Text = string.Empty;
             this.LoadViews(PopulateForm);
         }
