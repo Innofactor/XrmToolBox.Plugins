@@ -31,16 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainControl));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbOpen = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbPublish = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbOpen = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,15 +49,15 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbClose,
             this.toolStripSeparator1,
-            this.tsbEditFetch,
-            this.toolStripSeparator2,
             this.tsbOpen,
             this.toolStripSeparator5,
             this.tsbSave,
             this.tsbPublish,
             this.toolStripSeparator3,
             this.tsbRefresh,
-            this.toolStripSeparator4});
+            this.toolStripSeparator4,
+            this.tsbEditFetch,
+            this.toolStripSeparator2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(600, 25);
@@ -73,6 +73,11 @@
             this.tsbClose.Text = "Close";
             this.tsbClose.Click += new System.EventHandler(this.tsbClose_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // tsbEditFetch
             // 
             this.tsbEditFetch.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditFetch.Image")));
@@ -81,6 +86,24 @@
             this.tsbEditFetch.Size = new System.Drawing.Size(82, 22);
             this.tsbEditFetch.Text = "Edit Query";
             this.tsbEditFetch.Click += new System.EventHandler(this.tsbEditFetch_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsbOpen
+            // 
+            this.tsbOpen.Image = ((System.Drawing.Image)(resources.GetObject("tsbOpen.Image")));
+            this.tsbOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbOpen.Name = "tsbOpen";
+            this.tsbOpen.Size = new System.Drawing.Size(65, 22);
+            this.tsbOpen.Text = "Open...";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
             // tsbSave
             // 
@@ -100,16 +123,6 @@
             this.tsbPublish.Text = "Publish";
             this.tsbPublish.Click += new System.EventHandler(this.tsbPublish_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -128,19 +141,6 @@
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
-            // tsbOpen
-            // 
-            this.tsbOpen.Image = ((System.Drawing.Image)(resources.GetObject("tsbOpen.Image")));
-            this.tsbOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbOpen.Name = "tsbOpen";
-            this.tsbOpen.Size = new System.Drawing.Size(65, 22);
-            this.tsbOpen.Text = "Open...";
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
             // MainControl
             // 
