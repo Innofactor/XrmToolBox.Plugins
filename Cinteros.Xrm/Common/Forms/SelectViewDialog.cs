@@ -1,8 +1,8 @@
 ﻿namespace Cinteros.Xrm.Common.Forms
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Windows.Forms;
     using Cinteros.Xrm.DataUpdateTool.AppCode;
     using Cinteros.Xrm.XmlEditorUtils;
@@ -12,12 +12,21 @@
 
     public partial class SelectViewDialog : Form
     {
-        private PluginControlBase host;
+        #region Public Fields
 
         public Entity View;
 
-        private Dictionary<string, List<Entity>> views;
+        #endregion Public Fields
+
+        #region Private Fields
+
         private List<string> entities;
+        private PluginControlBase host;
+        private Dictionary<string, List<Entity>> views;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public SelectViewDialog(PluginControlBase sender)
         {
@@ -26,11 +35,130 @@
             PopulateForm();
         }
 
+        #endregion Public Constructors
+
+        #region Internal Methods
+
+        internal void LoadViews(Action viewsLoaded)
+        {
+            this.host.WorkAsync("Loading views...",
+                (a) =>
+                {
+                    this.views = new Dictionary<string, List<Entity>>();
+
+                    if (views.Count == 0)
+                    {
+                        if (this.host.Service == null)
+                        {
+                            throw new Exception("Need a connection to load views.");
+                        }
+
+                        var combinedResult = new Dictionary<string, DataCollection<Entity>>();
+                        DataCollection<Entity> singleResult;
+
+                        var qex = new QueryExpression();
+
+                        qex.ColumnSet = new ColumnSet("name", "returnedtypecode", "fetchxml", "layoutxml");
+                        qex.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+                        qex.Criteria.AddCondition("querytype", ConditionOperator.In, 0, 32);
+                        qex.AddOrder("name", OrderType.Ascending);
+
+                        foreach (var entity in new string[] { "savedquery", "userquery" })
+                        {
+                            qex.EntityName = entity;
+
+                            singleResult = this.host.Service.RetrieveMultiple(qex).Entities;
+                            if (singleResult.Count > 0)
+                            {
+                                combinedResult.Add(qex.EntityName, singleResult);
+                            }
+                        }
+
+                        a.Result = combinedResult;
+                    }
+                },
+                (a) =>
+                {
+                    var allViews = (Dictionary<string, DataCollection<Entity>>)a.Result;
+
+                    foreach (var key in allViews.Keys)
+                    {
+                        this.ExtractViews(allViews[key]);
+                    }
+
+                    this.entities = this.views.Keys.Select(x => x.Split('|')[0]).ToList();
+                });
+        }
+
+        #endregion Internal Methods
+
+        #region Private Methods
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            if (cmbView.SelectedItem is ViewItem)
+            {
+                this.View = ((ViewItem)cmbView.SelectedItem).GetView();
+            }
+            else
+            {
+                this.View = null;
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            //Enabled = false;
+            cmbView.SelectedIndex = -1;
+            cmbEntity.SelectedIndex = -1;
+            txtFetch.Text = string.Empty;
+            this.LoadViews(PopulateForm);
+        }
+
+        private void cmbEntity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateViews();
+        }
+
+        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbView.SelectedItem is ViewItem)
+            {
+                txtFetch.Text = ((ViewItem)cmbView.SelectedItem).GetFetch();
+                txtFetch.Process();
+                btnOk.Enabled = true;
+            }
+            else
+            {
+                txtFetch.Text = "";
+                btnOk.Enabled = false;
+            }
+        }
+
+        private void ExtractViews(DataCollection<Entity> views)
+        {
+            var suffix = (views.FirstOrDefault().LogicalName == "savedquery") ? "|S" : "|U";
+
+            foreach (var view in views)
+            {
+                var entityname = view["returnedtypecode"].ToString();
+
+                if (!string.IsNullOrWhiteSpace(entityname))
+                {
+                    if (!this.views.ContainsKey(entityname + suffix))
+                    {
+                        this.views.Add(entityname + suffix, new List<Entity>());
+                    }
+                    this.views[entityname + suffix].Add(view);
+                }
+            }
+        }
+
         private void PopulateForm()
         {
             cmbEntity.Items.Clear();
             this.LoadViews(() => { });
-            
+
             //if (entities != null)
             //{
             //    foreach (var entity in entities)
@@ -42,11 +170,6 @@
             //    }
             //}
             //Enabled = true;
-        }
-
-        private void cmbEntity_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateViews();
         }
 
         private void UpdateViews()
@@ -78,118 +201,6 @@
             }
         }
 
-        private void btnOk_Click(object sender, EventArgs e)
-        {
-            if (cmbView.SelectedItem is ViewItem)
-            {
-                this.View = ((ViewItem)cmbView.SelectedItem).GetView();
-            }
-            else
-            {
-                this.View = null;
-            }
-        }
-
-        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbView.SelectedItem is ViewItem)
-            {
-                txtFetch.Text = ((ViewItem)cmbView.SelectedItem).GetFetch();
-                txtFetch.Process();
-                btnOk.Enabled = true;
-            }
-            else
-            {
-                txtFetch.Text = "";
-                btnOk.Enabled = false;
-            }
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            //Enabled = false;
-            cmbView.SelectedIndex = -1;
-            cmbEntity.SelectedIndex = -1;
-            txtFetch.Text = string.Empty;
-            this.LoadViews(PopulateForm);
-        }
-
-        internal void LoadViews(Action viewsLoaded)
-        {
-            //if (working)
-            //{
-            //    return;
-            //}
-            //if (entities == null || entities.Count == 0)
-            //{
-            //    LoadEntities(viewsLoaded);
-            //    return;
-            //}
-            //working = true;
-            this.host.WorkAsync("Loading views...",
-                (bgworker, workargs) =>
-                {
-                    this.views = new Dictionary<string, List<Entity>>();
-
-                    // EnableControls(false);
-                    if (views.Count == 0)
-                    {
-                        if (this.host.Service == null)
-                        {
-                            throw new Exception("Need a connection to load views.");
-                        }
-                        var qex = new QueryExpression("savedquery");
-
-                        qex.ColumnSet = new ColumnSet("name", "returnedtypecode", "fetchxml", "layoutxml");
-                        qex.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
-                        qex.Criteria.AddCondition("querytype", ConditionOperator.In, 0, 32);
-                        qex.AddOrder("name", OrderType.Ascending);
-                        // bgworker.ReportProgress(33, "Loading system views...");
-
-                        var result = new Dictionary<string, EntityCollection>();
-                        result.Add("sysviews", this.host.Service.RetrieveMultiple(qex));
-                        
-                        qex.EntityName = "userquery";
-                        // bgworker.ReportProgress(66, "Loading user views...");
-
-                        result.Add("userviews", this.host.Service.RetrieveMultiple(qex));
-                        //bgworker.ReportProgress(100, "Finalizing...");
-
-                        workargs.Result = result;
-                    }
-                },
-                (completedargs) =>
-                {
-                    var allViews = (Dictionary<string, EntityCollection>)completedargs.Result;
-                    
-                    this.ExtractViews(allViews["sysviews"].Entities);
-                    this.ExtractViews(allViews["userviews"].Entities);
-
-                    this.entities = this.views.Keys.Select(x => x.Split('|')[0]).ToList();
-                },
-                (changeargs) =>
-                {
-                    // SetWorkingMessage(changeargs.UserState.ToString());
-                });
-        }
-
-        private void ExtractViews(DataCollection<Entity> views)
-        {
-            var suffix = (views.FirstOrDefault().LogicalName == "savedquery") ? "|S" : "|U";
-            
-            foreach (var view in views)
-            {
-                var entityname = view["returnedtypecode"].ToString();
-                
-                if (!string.IsNullOrWhiteSpace(entityname))
-                {
-                    if (!this.views.ContainsKey(entityname + suffix))
-                    {
-                        this.views.Add(entityname + suffix, new List<Entity>());
-                    }
-                    this.views[entityname + suffix].Add(view);
-                }
-            }
-        }
+        #endregion Private Methods
     }
 }
