@@ -111,6 +111,14 @@
       <DependentUpon>MainControl.cs</DependentUpon>
     </Compile>
     <Compile Include="AutoDeployTool\PluginDescription.cs" />
+    <Compile Include="Common\SDK\IComparableEntity.cs" />
+    <Compile Include="Common\SDK\IsolationMode.cs" />
+    <Compile Include="Common\SDK\OrganizationSnapshot.cs" />
+    <Compile Include="Common\SDK\PluginAssembly.cs" />
+    <Compile Include="Common\SDK\PluginType.cs" />
+    <Compile Include="Common\SDK\ProcessingStep.cs" />
+    <Compile Include="Common\SDK\Solution.cs" />
+    <Compile Include="Common\SDK\StateCode.cs" />
     <Compile Include="DataUpdateTool\AppCode\AttributeItem.cs" />
     <Compile Include="DataUpdateTool\AppCode\EntityItem.cs" />
     <Compile Include="DataUpdateTool\AppCode\OptionsetItem.cs" />
