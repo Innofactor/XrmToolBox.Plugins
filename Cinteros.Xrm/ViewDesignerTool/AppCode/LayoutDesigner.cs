@@ -14,6 +14,7 @@
         private bool isFetchXmlChanged;
         private bool isLayoutXmlChanged;
         private bool isNameChanged;
+        private bool isSnapped;
 
         #endregion Private Fields
 
@@ -26,6 +27,7 @@
             this.FullRowSelect = true;
             this.GridLines = true;
             this.AllowColumnReorder = true;
+            this.isSnapped = true;
 
             ColumnReordered += LayoutDesigner_ColumnReordered;
         }
@@ -65,6 +67,23 @@
         #endregion Public Properties
 
         #region Public Methods
+
+        public void Snap(bool allow)
+        {
+            if (allow)
+            {
+                this.isSnapped = true;
+
+                for (var i = 0; i < this.Columns.Count; i++)
+                {
+                    OnColumnWidthChanged(new ColumnWidthChangedEventArgs(i));
+                }
+            }
+            else
+            {
+                this.isSnapped = false;
+            }
+        }
 
         public void Load(Entity view)
         {
@@ -160,7 +179,10 @@
             var column = layout.Columns[e.ColumnIndex];
             var definition = (XmlNode)column.Tag;
 
-            column.Width = this.NormalizeWidth(column.Width);
+            if (this.isSnapped)
+            {
+                column.Width = this.NormalizeWidth(column.Width);
+            }
 
             var attribute = definition.Attributes["width"];
             var width = column.Width.ToString();

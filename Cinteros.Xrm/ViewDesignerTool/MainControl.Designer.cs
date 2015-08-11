@@ -41,6 +41,7 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbSnap = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +55,7 @@
             this.tsbSave,
             this.tsbPublish,
             this.toolStripSeparator3,
+            this.tsbSnap,
             this.tsbRefresh,
             this.toolStripSeparator4,
             this.tsbEditFetch,
@@ -142,6 +144,19 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
+            // tsbSnap
+            // 
+            this.tsbSnap.Checked = true;
+            this.tsbSnap.CheckOnClick = true;
+            this.tsbSnap.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsbSnap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbSnap.Image = ((System.Drawing.Image)(resources.GetObject("tsbSnap.Image")));
+            this.tsbSnap.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSnap.Name = "tsbSnap";
+            this.tsbSnap.Size = new System.Drawing.Size(23, 22);
+            this.tsbSnap.Text = "Snap to Grid";
+            this.tsbSnap.Click += new System.EventHandler(this.tsbSnap_Click);
+            // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -171,6 +186,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton tsbOpen;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripButton tsbSnap;
 
 
     }

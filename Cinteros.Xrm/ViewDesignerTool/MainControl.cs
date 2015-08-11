@@ -161,5 +161,11 @@
                 OnOutgoingMessage(this, messageBusEventArgs);
             }
         }
+
+        private void tsbSnap_Click(object sender, EventArgs e)
+        {
+            var view = (LayoutDesigner)this.Controls.Find("lvDesign", true).FirstOrDefault();
+            view.Snap(((ToolStripButton)sender).Checked);
+        }
     }
 }
