@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.DataUpdateTool.Forms
+﻿namespace Cinteros.Xrm.Common.Forms
 {
     partial class SelectViewDialog
     {

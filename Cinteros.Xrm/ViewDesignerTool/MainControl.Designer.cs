@@ -101,6 +101,7 @@
             this.tsbOpen.Name = "tsbOpen";
             this.tsbOpen.Size = new System.Drawing.Size(65, 22);
             this.tsbOpen.Text = "Open...";
+            this.tsbOpen.Click += new System.EventHandler(this.tsbOpen_Click);
             // 
             // toolStripSeparator5
             // 

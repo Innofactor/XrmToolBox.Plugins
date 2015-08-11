@@ -18,6 +18,7 @@
     using Cinteros.Xrm.ViewDesignerTool.AppCode;
     using Cinteros.Xrm.FetchXmlBuilder;
     using System.Xml;
+    using Cinteros.Xrm.Common.Forms;
 
     public partial class MainControl : PluginControlBase, IGitHubPlugin, IMessageBusHost
     {
@@ -166,6 +167,12 @@
         {
             var view = (LayoutDesigner)this.Controls.Find("lvDesign", true).FirstOrDefault();
             view.Snap(((ToolStripButton)sender).Checked);
+        }
+
+        private void tsbOpen_Click(object sender, EventArgs e)
+        {
+            var views = new SelectViewDialog(this);
+            views.ShowDialog();
         }
     }
 }
