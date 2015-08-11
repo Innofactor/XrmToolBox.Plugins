@@ -1,6 +1,7 @@
 ﻿namespace Cinteros.Xrm.Common.Forms
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Windows.Forms;
     using Cinteros.Xrm.DataUpdateTool.AppCode;
@@ -11,25 +12,25 @@
 
     public partial class SelectViewDialog : Form
     {
-        PluginControlBase Caller;
-        public Entity View;
-        public Dictionary<string, List<Entity>> Views
-        {
-            get;
-            private set;
-        }
+        private PluginControlBase host;
 
-        public SelectViewDialog(PluginControlBase caller)
+        public Entity View;
+
+        private Dictionary<string, List<Entity>> views;
+        private List<string> entities;
+
+        public SelectViewDialog(PluginControlBase sender)
         {
             InitializeComponent();
-            Caller = caller;
+            this.host = sender;
             PopulateForm();
         }
 
         private void PopulateForm()
         {
-            cmbEntity.Items.Clear();
-            //var entities = MainControl.GetDisplayEntities();
+            cbEntity.Items.Clear();
+            this.LoadViews(() => { });
+            
             //if (entities != null)
             //{
             //    foreach (var entity in entities)
@@ -54,11 +55,11 @@
             cmbView.Text = string.Empty;
             txtFetch.Text = string.Empty;
             btnOk.Enabled = false;
-            var entity = ControlUtils.GetValueFromControl(cmbEntity);
+            var entity = ControlUtils.GetValueFromControl(cbEntity);
 
-            if (this.Views.ContainsKey(entity + "|S"))
+            if (this.views.ContainsKey(entity + "|S"))
             {
-                var views = this.Views[entity + "|S"];
+                var views = this.views[entity + "|S"];
                 cmbView.Items.Add("-- System Views --");
                 foreach (var view in views)
                 {
@@ -66,9 +67,9 @@
                 }
             }
 
-            if (this.Views.ContainsKey(entity + "|U"))
+            if (this.views.ContainsKey(entity + "|U"))
             {
-                var views = this.Views[entity + "|U"];
+                var views = this.views[entity + "|U"];
                 cmbView.Items.Add("-- Personal Views --");
                 foreach (var view in views)
                 {
@@ -81,11 +82,11 @@
         {
             if (cmbView.SelectedItem is ViewItem)
             {
-                View = ((ViewItem)cmbView.SelectedItem).GetView();
+                this.View = ((ViewItem)cmbView.SelectedItem).GetView();
             }
             else
             {
-                View = null;
+                this.View = null;
             }
         }
 
@@ -108,9 +109,8 @@
         {
             //Enabled = false;
             cmbView.SelectedIndex = -1;
-            cmbEntity.SelectedIndex = -1;
+            cbEntity.SelectedIndex = -1;
             txtFetch.Text = string.Empty;
-            this.Views = new Dictionary<string, List<Entity>>();
             this.LoadViews(PopulateForm);
         }
 
@@ -126,73 +126,70 @@
             //    return;
             //}
             //working = true;
-            this.Caller.WorkAsync("Loading views...",
+            this.host.WorkAsync("Loading views...",
                 (bgworker, workargs) =>
                 {
+                    this.views = new Dictionary<string, List<Entity>>();
+
                     // EnableControls(false);
-                    if (this.Views == null || Views.Count == 0)
+                    if (views.Count == 0)
                     {
-                        if (this.Caller.Service == null)
+                        if (this.host.Service == null)
                         {
                             throw new Exception("Need a connection to load views.");
                         }
                         var qex = new QueryExpression("savedquery");
+
                         qex.ColumnSet = new ColumnSet("name", "returnedtypecode", "fetchxml", "layoutxml");
                         qex.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
                         qex.Criteria.AddCondition("querytype", ConditionOperator.In, 0, 32);
                         qex.AddOrder("name", OrderType.Ascending);
-                        bgworker.ReportProgress(33, "Loading system views...");
-                        
-                        var sysviews = this.Caller.Service.RetrieveMultiple(qex);
-                        foreach (var view in sysviews.Entities)
-                        {
-                            var entityname = view["returnedtypecode"].ToString();
-                            if (!string.IsNullOrWhiteSpace(entityname) /*&& entities.ContainsKey(entityname)*/)
-                            {
-                                if (!this.Views.ContainsKey(entityname + "|S"))
-                                {
-                                    this.Views.Add(entityname + "|S", new List<Entity>());
-                                }
-                                this.Views[entityname + "|S"].Add(view);
-                            }
-                        }
+                        // bgworker.ReportProgress(33, "Loading system views...");
+
+                        var result = new Dictionary<string, EntityCollection>();
+                        result.Add("sysviews", this.host.Service.RetrieveMultiple(qex));
                         
                         qex.EntityName = "userquery";
-                        bgworker.ReportProgress(66, "Loading user views...");
+                        // bgworker.ReportProgress(66, "Loading user views...");
 
-                        var userviews = this.Caller.Service.RetrieveMultiple(qex);
-                        foreach (var view in userviews.Entities)
-                        {
-                            var entityname = view["returnedtypecode"].ToString();
-                            if (!string.IsNullOrWhiteSpace(entityname) /*&& entities.ContainsKey(entityname)*/)
-                            {
-                                if (!this.Views.ContainsKey(entityname + "|U"))
-                                {
-                                    this.Views.Add(entityname + "|U", new List<Entity>());
-                                }
-                                this.Views[entityname + "|U"].Add(view);
-                            }
-                        }
-                        bgworker.ReportProgress(100, "Finalizing...");
+                        result.Add("userviews", this.host.Service.RetrieveMultiple(qex));
+                        //bgworker.ReportProgress(100, "Finalizing...");
+
+                        workargs.Result = result;
                     }
                 },
                 (completedargs) =>
                 {
-                    //working = false;
-                    //EnableControls(true);
-                    if (completedargs.Error != null)
-                    {
-                        MessageBox.Show(completedargs.Error.Message);
-                    }
-                    else
-                    {
-                        viewsLoaded();
-                    }
+                    var allViews = (Dictionary<string, EntityCollection>)completedargs.Result;
+                    
+                    this.ExtractViews(allViews["sysviews"].Entities);
+                    this.ExtractViews(allViews["userviews"].Entities);
+
+                    this.entities = this.views.Keys.Select(x => x.Split('|')[0]).ToList();
                 },
                 (changeargs) =>
                 {
                     // SetWorkingMessage(changeargs.UserState.ToString());
                 });
+        }
+
+        private void ExtractViews(DataCollection<Entity> views)
+        {
+            var suffix = (views.FirstOrDefault().LogicalName == "savedquery") ? "|S" : "|U";
+            
+            foreach (var view in views)
+            {
+                var entityname = view["returnedtypecode"].ToString();
+                
+                if (!string.IsNullOrWhiteSpace(entityname))
+                {
+                    if (!this.views.ContainsKey(entityname + suffix))
+                    {
+                        this.views.Add(entityname + suffix, new List<Entity>());
+                    }
+                    this.views[entityname + suffix].Add(view);
+                }
+            }
         }
     }
 }

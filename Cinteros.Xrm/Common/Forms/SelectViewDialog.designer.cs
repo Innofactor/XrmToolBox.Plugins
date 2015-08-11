@@ -34,7 +34,7 @@
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.cmbEntity = new System.Windows.Forms.ComboBox();
+            this.cbEntity = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.panOk = new System.Windows.Forms.Panel();
@@ -55,7 +55,7 @@
             this.panel1.Controls.Add(this.cmbView);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.cmbEntity);
+            this.panel1.Controls.Add(this.cbEntity);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -94,17 +94,17 @@
             // 
             // cmbEntity
             // 
-            this.cmbEntity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.cbEntity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbEntity.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbEntity.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbEntity.FormattingEnabled = true;
-            this.cmbEntity.Location = new System.Drawing.Point(112, 12);
-            this.cmbEntity.Name = "cmbEntity";
-            this.cmbEntity.Size = new System.Drawing.Size(442, 21);
-            this.cmbEntity.Sorted = true;
-            this.cmbEntity.TabIndex = 1;
-            this.cmbEntity.SelectedIndexChanged += new System.EventHandler(this.cmbEntity_SelectedIndexChanged);
+            this.cbEntity.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbEntity.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbEntity.FormattingEnabled = true;
+            this.cbEntity.Location = new System.Drawing.Point(112, 12);
+            this.cbEntity.Name = "cmbEntity";
+            this.cbEntity.Size = new System.Drawing.Size(442, 21);
+            this.cbEntity.Sorted = true;
+            this.cbEntity.TabIndex = 1;
+            this.cbEntity.SelectedIndexChanged += new System.EventHandler(this.cmbEntity_SelectedIndexChanged);
             // 
             // panel2
             // 
@@ -220,7 +220,7 @@
         private System.Windows.Forms.ComboBox cmbView;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbEntity;
+        private System.Windows.Forms.ComboBox cbEntity;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panOk;
