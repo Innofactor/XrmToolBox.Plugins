@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainControl));
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbOpen = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbPublish = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbSnap = new System.Windows.Forms.ToolStripButton();
             this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbSnap = new System.Windows.Forms.ToolStripButton();
-            this.toolStrip1.SuspendLayout();
+            this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // toolStrip1
+            // tsMenu
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbClose,
             this.toolStripSeparator1,
             this.tsbOpen,
@@ -60,11 +60,11 @@
             this.toolStripSeparator4,
             this.tsbEditFetch,
             this.toolStripSeparator2});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(600, 25);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
+            this.tsMenu.Location = new System.Drawing.Point(0, 0);
+            this.tsMenu.Name = "tsMenu";
+            this.tsMenu.Size = new System.Drawing.Size(600, 25);
+            this.tsMenu.TabIndex = 1;
+            this.tsMenu.Text = "toolStrip1";
             // 
             // tsbClose
             // 
@@ -79,20 +79,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // tsbEditFetch
-            // 
-            this.tsbEditFetch.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditFetch.Image")));
-            this.tsbEditFetch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbEditFetch.Name = "tsbEditFetch";
-            this.tsbEditFetch.Size = new System.Drawing.Size(82, 22);
-            this.tsbEditFetch.Text = "Edit Query";
-            this.tsbEditFetch.Click += new System.EventHandler(this.tsbEditFetch_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // tsbOpen
             // 
@@ -131,6 +117,19 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
+            // tsbSnap
+            // 
+            this.tsbSnap.Checked = true;
+            this.tsbSnap.CheckOnClick = true;
+            this.tsbSnap.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsbSnap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbSnap.Image = ((System.Drawing.Image)(resources.GetObject("tsbSnap.Image")));
+            this.tsbSnap.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSnap.Name = "tsbSnap";
+            this.tsbSnap.Size = new System.Drawing.Size(23, 22);
+            this.tsbSnap.Text = "Snap to Grid";
+            this.tsbSnap.Click += new System.EventHandler(this.tsbSnap_Click);
+            // 
             // tsbRefresh
             // 
             this.tsbRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -145,29 +144,30 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
-            // tsbSnap
+            // tsbEditFetch
             // 
-            this.tsbSnap.Checked = true;
-            this.tsbSnap.CheckOnClick = true;
-            this.tsbSnap.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tsbSnap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbSnap.Image = ((System.Drawing.Image)(resources.GetObject("tsbSnap.Image")));
-            this.tsbSnap.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSnap.Name = "tsbSnap";
-            this.tsbSnap.Size = new System.Drawing.Size(23, 22);
-            this.tsbSnap.Text = "Snap to Grid";
-            this.tsbSnap.Click += new System.EventHandler(this.tsbSnap_Click);
+            this.tsbEditFetch.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditFetch.Image")));
+            this.tsbEditFetch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbEditFetch.Name = "tsbEditFetch";
+            this.tsbEditFetch.Size = new System.Drawing.Size(82, 22);
+            this.tsbEditFetch.Text = "Edit Query";
+            this.tsbEditFetch.Click += new System.EventHandler(this.tsbEditFetch_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.tsMenu);
             this.Name = "MainControl";
             this.Size = new System.Drawing.Size(600, 400);
             this.Load += new System.EventHandler(this.MainControl_Load);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.tsMenu.ResumeLayout(false);
+            this.tsMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,7 +175,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip tsMenu;
         private System.Windows.Forms.ToolStripButton tsbClose;
         private System.Windows.Forms.ToolStripButton tsbSave;
         private System.Windows.Forms.ToolStripButton tsbPublish;

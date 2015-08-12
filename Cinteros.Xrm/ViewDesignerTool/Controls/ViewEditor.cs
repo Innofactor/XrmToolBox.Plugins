@@ -87,6 +87,11 @@
             var views = (ComboBox)sender;
             var view = new LayoutDesigner();
 
+            var menu = (ToolStrip)this.Parent.Controls.Find("tsMenu", true).FirstOrDefault();
+
+            var snap = (ToolStripButton)menu.Items.Find("tsbSnap", true).FirstOrDefault();
+            snap.Checked = true;
+
             view.Load(((Entity[])views.Tag)[views.SelectedIndex]);
             view.Name = "lvDesign";
             view.Size = gbDesign.Size;
