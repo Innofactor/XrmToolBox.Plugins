@@ -142,9 +142,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VersionVerificationTool\PluginDescription.cs" />
-    <Compile Include="ViewDesignerTool\AppCode\LayoutDesigner.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="ViewDesignerTool\Controls\ViewEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>

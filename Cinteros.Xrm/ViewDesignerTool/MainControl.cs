@@ -15,7 +15,6 @@
     using Microsoft.Xrm.Sdk.Query;
     using Microsoft.Xrm.Sdk;
     using Microsoft.Crm.Sdk.Messages;
-    using Cinteros.Xrm.ViewDesignerTool.AppCode;
     using Cinteros.Xrm.FetchXmlBuilder;
     using System.Xml;
     using Cinteros.Xrm.Common.Forms;
@@ -77,7 +76,7 @@
 
         private void UpdateFetch(string fetchxml)
         {
-            var view = (LayoutDesigner)this.CurrentPage.Controls.Find("lvDesign", true).FirstOrDefault();
+            var view = (ViewEditor)this.CurrentPage.Controls.Find("lvDesign", true).FirstOrDefault();
             if (view != null)
             {
                 view.FetchXml.LoadXml(fetchxml);
@@ -113,17 +112,17 @@
                     //}
                 }
 
-                this.ExecuteMethod(() =>
-                    {
-                        this.CurrentPage = new ViewEditor();
-                    });
+                //this.ExecuteMethod(() =>
+                //    {
+                //        this.CurrentPage = new ViewEditor();
+                //    });
 
             }
         }
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
-            var view = (LayoutDesigner)this.CurrentPage.Controls.Find("lvDesign", true).FirstOrDefault();
+            var view = (ViewEditor)this.CurrentPage.Controls.Find("lvDesign", true).FirstOrDefault();
             var result = view.LayoutXml.OuterXml;
 
             this.WorkAsync("Saving changes",
@@ -150,7 +149,7 @@
 
         private void tsbEditFetch_Click(object sender, EventArgs e)
         {
-            var view = (LayoutDesigner)this.Controls.Find("lvDesign", true).FirstOrDefault();
+            var view = (ViewEditor)this.Controls.Find("lvDesign", true).FirstOrDefault();
             if (view != null)
             {
                 var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder");
@@ -165,7 +164,7 @@
 
         private void tsbSnap_Click(object sender, EventArgs e)
         {
-            var view = (LayoutDesigner)this.Controls.Find("lvDesign", true).FirstOrDefault();
+            var view = (ViewEditor)this.Controls.Find("ViewEditor", true).FirstOrDefault();
             if (view != null)
             {
                 view.Snap(((ToolStripButton)sender).Checked);
@@ -174,8 +173,27 @@
 
         private void tsbOpen_Click(object sender, EventArgs e)
         {
-            var views = new SelectViewDialog(this);
-            var result = views.ShowDialog();
+            var select = new SelectViewDialog(this);
+            if (select.ShowDialog() == DialogResult.OK)
+            {
+                tsbSnap.Checked = true;
+
+                var editor = (ViewEditor)this.Controls.Find("ViewEditor", true).FirstOrDefault();
+
+                if (editor == null)
+                {
+                    editor = new ViewEditor()
+                    {
+                        Name = "ViewEditor",
+                        Size = this.Size,
+                        Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom | AnchorStyles.Left
+                    };
+
+                    this.Controls.Add(editor);
+                }
+                editor.Open(select.View);
+
+            }
         }
     }
 }
