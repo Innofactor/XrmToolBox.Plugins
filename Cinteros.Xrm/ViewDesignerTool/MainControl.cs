@@ -175,7 +175,7 @@
         private void tsbOpen_Click(object sender, EventArgs e)
         {
             var views = new SelectViewDialog(this);
-            views.ShowDialog();
+            var result = views.ShowDialog();
         }
     }
 }
