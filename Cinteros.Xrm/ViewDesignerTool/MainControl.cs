@@ -210,5 +210,10 @@
         }
 
         #endregion Private Methods
+
+        private void tsbEditColumns_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

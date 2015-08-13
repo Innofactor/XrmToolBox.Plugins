@@ -42,6 +42,7 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbSelectColumns = new System.Windows.Forms.ToolStripButton();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +59,7 @@
             this.tsbSnap,
             this.tsbRefresh,
             this.toolStripSeparator4,
+            this.tsbSelectColumns,
             this.tsbEditFetch,
             this.toolStripSeparator2});
             this.tsMenu.Location = new System.Drawing.Point(0, 0);
@@ -158,6 +160,15 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // tsbSelectColumns
+            // 
+            this.tsbSelectColumns.Image = ((System.Drawing.Image)(resources.GetObject("tsbSelectColumns.Image")));
+            this.tsbSelectColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSelectColumns.Name = "tsbSelectColumns";
+            this.tsbSelectColumns.Size = new System.Drawing.Size(109, 22);
+            this.tsbSelectColumns.Text = "Select Columns";
+            this.tsbSelectColumns.Click += new System.EventHandler(this.tsbEditColumns_Click);
+            // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -188,6 +199,7 @@
         private System.Windows.Forms.ToolStripButton tsbOpen;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton tsbSnap;
+        private System.Windows.Forms.ToolStripButton tsbSelectColumns;
 
 
     }

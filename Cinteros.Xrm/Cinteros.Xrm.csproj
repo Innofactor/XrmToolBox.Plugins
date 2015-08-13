@@ -81,6 +81,12 @@
       <DependentUpon>MainControl.cs</DependentUpon>
     </Compile>
     <Compile Include="AutoDeployTool\PluginDescription.cs" />
+    <Compile Include="Common\Forms\SelectColumnsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\Forms\SelectColumnsDialog.Designer.cs">
+      <DependentUpon>SelectColumnsDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\SDK\IComparableEntity.cs" />
     <Compile Include="Common\SDK\IsolationMode.cs" />
     <Compile Include="Common\SDK\OrganizationSnapshot.cs" />
@@ -159,6 +165,9 @@
   <ItemGroup>
     <EmbeddedResource Include="AutoDeployTool\MainControl.resx">
       <DependentUpon>MainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\Forms\SelectColumnsDialog.resx">
+      <DependentUpon>SelectColumnsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataUpdateTool\MainControl.resx">
       <DependentUpon>MainControl.cs</DependentUpon>

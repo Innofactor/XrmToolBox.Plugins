@@ -197,6 +197,18 @@
         AAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="tsbSelectColumns.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFySURBVDhPvZLLSsNAGIW7L4iiiAsR3IoiuOpGfADBleIb
+        6E53giAquBAEb1TFR3CpUNq1tKVVqbdEtFq1jU1Fmya9t6Izx3+SiriwDS4cOJBD8n2ZGX5HvTUyf4va
+        49+WbUEwGMRXJEmCAL8yNOGBa3QTsiwjHA4jEAggFAr9FAvQqADpEvBaBJI6w/BCyoLHd6EaDM95QMkC
+        j9oHVtfWfxeID9MkUUki4BTBoicJThgNBO++ATBvH6oH/Sh7BlE6nETONwZtz4XETjdiG131BczbC7zR
+        b2oxe+UFKKlAQUF0pcOegFc1ExSdF+Lg+Rh4LvpfghrMyylLkL8Dz95QrmwKxJkJ5kXF7IxglpXA9Qub
+        ArowXkzQ1h+sHRgSWOacEmksqO730G0L+N48s+hMPwPTIpRjXC62NhbE3Z24Xm6HvNSG07kWnMw242im
+        Cf5pJ/xTzvoCEZ2SKX9PpZoDnmgKFRqNupPo3to2X9iNRTocnzf+XbhazXrSAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="tsbEditFetch.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
