@@ -127,17 +127,13 @@
 
         private void tsbEditFetch_Click(object sender, EventArgs e)
         {
-            var view = (ViewEditor)this.Controls.Find("lvDesign", true).FirstOrDefault();
-            if (view != null)
+            var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder");
+            var fXBMessageBusArgument = new FXBMessageBusArgument(FXBMessageBusRequest.FetchXML)
             {
-                var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder");
-                var fXBMessageBusArgument = new FXBMessageBusArgument(FXBMessageBusRequest.FetchXML)
-                {
-                    FetchXML = view.FetchXml.OuterXml
-                };
-                messageBusEventArgs.TargetArgument = fXBMessageBusArgument;
-                OnOutgoingMessage(this, messageBusEventArgs);
-            }
+                FetchXML = ViewEditor.FetchXml.OuterXml
+            };
+            messageBusEventArgs.TargetArgument = fXBMessageBusArgument;
+            OnOutgoingMessage(this, messageBusEventArgs);
         }
 
         private void tsbOpen_Click(object sender, EventArgs e)
@@ -167,13 +163,10 @@
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
-            var view = (ViewEditor)this.Controls.Find("ViewEditor", true).FirstOrDefault();
-            var result = view.LayoutXml.OuterXml;
-
             this.WorkAsync("Saving changes",
                 a =>
                 {
-                    this.Service.Update(view.ToEntity());
+                    this.Service.Update(ViewEditor.ToEntity());
                 },
                 a =>
                 {
@@ -182,41 +175,28 @@
 
         private void tsbSnap_Click(object sender, EventArgs e)
         {
-            var view = (ViewEditor)this.Controls.Find("ViewEditor", true).FirstOrDefault();
-            if (view != null)
-            {
-                view.Snap(((ToolStripButton)sender).Checked);
-            }
+            ViewEditor.Snap(((ToolStripButton)sender).Checked);
         }
 
         private void UpdateFetch(string fetchxml)
         {
-            var view = (ViewEditor)this.Controls.Find("ViewEditor", true).FirstOrDefault();
-            if (view != null)
-            {
-                view.FetchXml.LoadXml(fetchxml);
-            }
+            ViewEditor.FetchXml.LoadXml(fetchxml);
         }
 
         #endregion Private Methods
 
         private void tsbEditColumns_Click(object sender, EventArgs e)
         {
-            var view = (ViewEditor)this.Controls.Find("ViewEditor", true).FirstOrDefault();
-
-            if (view != null)
+            var select = new SelectColumnsDialog(ViewEditor.FetchXml, ViewEditor.LayoutXml);
+            select.StartPosition = FormStartPosition.CenterParent;
+            if (select.ShowDialog() == DialogResult.OK)
             {
-                var select = new SelectColumnsDialog(view.FetchXml, view.LayoutXml);
-                select.StartPosition = FormStartPosition.CenterParent;
-                if (select.ShowDialog() == DialogResult.OK)
-                {
-                    var entity = new Entity();
-                    entity.Attributes.Add("layoutxml", select.LayoutXml.OuterXml);
+                var entity = new Entity();
+                entity.Attributes.Add("layoutxml", select.LayoutXml.OuterXml);
 
-                    tsbSnap.Checked = true;
+                tsbSnap.Checked = true;
 
-                    view.Set(entity);
-                }
+                ViewEditor.Set(entity);
             }
         }
     }
