@@ -44,7 +44,7 @@
             this.gbColumns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbColumns.Location = new System.Drawing.Point(0, 0);
             this.gbColumns.Name = "gbColumns";
-            this.gbColumns.Size = new System.Drawing.Size(284, 261);
+            this.gbColumns.Size = new System.Drawing.Size(184, 261);
             this.gbColumns.TabIndex = 10;
             this.gbColumns.TabStop = false;
             this.gbColumns.Text = "Columns";
@@ -53,7 +53,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(203, 232);
+            this.btnCancel.Location = new System.Drawing.Point(103, 232);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 8;
@@ -64,7 +64,7 @@
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(122, 232);
+            this.btnOk.Location = new System.Drawing.Point(22, 232);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 7;
@@ -76,17 +76,20 @@
             this.clbColumns.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.clbColumns.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.clbColumns.CheckOnClick = true;
             this.clbColumns.FormattingEnabled = true;
             this.clbColumns.Location = new System.Drawing.Point(3, 16);
+            this.clbColumns.MultiColumn = true;
             this.clbColumns.Name = "clbColumns";
-            this.clbColumns.Size = new System.Drawing.Size(275, 214);
+            this.clbColumns.Size = new System.Drawing.Size(175, 212);
             this.clbColumns.TabIndex = 2;
             // 
             // SelectColumnsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(184, 261);
             this.Controls.Add(this.gbColumns);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SelectColumnsDialog";

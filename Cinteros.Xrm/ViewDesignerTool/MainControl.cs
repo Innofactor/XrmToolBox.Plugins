@@ -215,10 +215,13 @@
         {
             var view = (ViewEditor)this.Controls.Find("ViewEditor", true).FirstOrDefault();
 
-            var select = new SelectColumnsDialog();
-            select.StartPosition = FormStartPosition.CenterParent;
-            if (select.ShowDialog() == DialogResult.OK)
+            if (view != null)
             {
+                var select = new SelectColumnsDialog(view.FetchXml, view.LayoutXml);
+                select.StartPosition = FormStartPosition.CenterParent;
+                if (select.ShowDialog() == DialogResult.OK)
+                {
+                }
             }
         }
     }
