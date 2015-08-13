@@ -84,6 +84,9 @@
                 lvDesign.Columns.Add(column);
             }
 
+            tbName.Text = this.Title;
+            tbId.Text = this.Id.ToString();
+
             lvDesign.ColumnReordered += ViewDesigner_ColumnReordered;
             lvDesign.ColumnWidthChanged += ViewDesigner_ColumnWidthChanged;
         }
