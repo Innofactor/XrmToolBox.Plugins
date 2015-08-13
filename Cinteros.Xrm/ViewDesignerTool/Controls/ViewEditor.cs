@@ -55,39 +55,16 @@
 
         #region Public Methods
 
-        public void Open(Entity view)
+        public void Set(Entity view)
         {
             lvDesign.ColumnWidthChanged -= lvDesign_ColumnWidthChanged;
             lvDesign.ColumnReordered -= lvDesign_ColumnReordered;
 
-            this.Id = view.Id;
-            this.LogicalName = view.LogicalName;
-            this.Title = (string)view.Attributes["name"];
-            this.FetchXml = new XmlDocument();
-            this.LayoutXml = new XmlDocument();
-
-            this.FetchXml.LoadXml((string)view.Attributes["fetchxml"]);
-            this.LayoutXml.LoadXml((string)view.Attributes["layoutxml"]);
-
-            this.isSnapped = true;
-
-            var columns = this.LayoutXml.SelectNodes("//cell");
-
-            lvDesign.Columns.Clear();
-
-            foreach (XmlNode definition in columns)
-            {
-                var column = new ColumnHeader();
-                column.Name = definition.Attributes["name"].Value;
-                column.Text = definition.Attributes["name"].Value;
-                column.Width = int.Parse(definition.Attributes["width"].Value);
-                column.Tag = definition;
-
-                lvDesign.Columns.Add(column);
-            }
-
-            tbName.Text = this.Title;
-            tbId.Text = this.Id.ToString();
+            this.UpdateTitle(view);
+            this.UpdateId(view);
+            this.UpdateLogicalName(view);
+            this.UpdateFetchXml(view);
+            this.UpdateLayoutXml(view);
 
             lvDesign.ColumnReordered += lvDesign_ColumnReordered;
             lvDesign.ColumnWidthChanged += lvDesign_ColumnWidthChanged;
@@ -223,6 +200,67 @@
             }
 
             return width;
+        }
+
+        private void UpdateFetchXml(Entity view)
+        {
+            if (view.Attributes.ContainsKey("fetchxml"))
+            {
+                this.FetchXml = new XmlDocument();
+                this.FetchXml.LoadXml((string)view.Attributes["fetchxml"]);
+            }
+        }
+
+        private void UpdateId(Entity view)
+        {
+            if (!view.Id.Equals(Guid.Empty))
+            {
+                this.Id = view.Id;
+                tbId.Text = this.Id.ToString();
+            }
+        }
+
+        private void UpdateLayoutXml(Entity view)
+        {
+            if (view.Attributes.ContainsKey("layoutxml"))
+            {
+                this.LayoutXml = new XmlDocument();
+                this.LayoutXml.LoadXml((string)view.Attributes["layoutxml"]);
+
+                // this.isSnapped = true;
+
+                var columns = this.LayoutXml.SelectNodes("//cell");
+
+                lvDesign.Columns.Clear();
+
+                foreach (XmlNode definition in columns)
+                {
+                    var column = new ColumnHeader();
+                    column.Name = definition.Attributes["name"].Value;
+                    column.Text = definition.Attributes["name"].Value;
+                    column.Width = int.Parse(definition.Attributes["width"].Value);
+                    column.Tag = definition;
+
+                    lvDesign.Columns.Add(column);
+                }
+            }
+        }
+
+        private void UpdateLogicalName(Entity view)
+        {
+            if (!view.LogicalName.Equals(string.Empty))
+            {
+                this.LogicalName = view.LogicalName;
+            }
+        }
+
+        private void UpdateTitle(Entity view)
+        {
+            if (view.Attributes.ContainsKey("name"))
+            {
+                this.Title = (string)view.Attributes["name"];
+                tbName.Text = this.Title;
+            }
         }
 
         private void ViewDesigner_TextChanged(object sender, EventArgs e)

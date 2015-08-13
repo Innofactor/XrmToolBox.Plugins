@@ -160,7 +160,7 @@
 
                     this.Controls.Add(editor);
                 }
-                editor.Open(select.View);
+                editor.Set(select.View);
             }
         }
 
@@ -221,6 +221,7 @@
                 select.StartPosition = FormStartPosition.CenterParent;
                 if (select.ShowDialog() == DialogResult.OK)
                 {
+                    //view. select.LayoutXml
                 }
             }
         }
