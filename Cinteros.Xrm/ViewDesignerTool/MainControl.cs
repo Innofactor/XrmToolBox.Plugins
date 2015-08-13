@@ -202,7 +202,7 @@
 
         private void UpdateFetch(string fetchxml)
         {
-            var view = (ViewEditor)this.CurrentPage.Controls.Find("lvDesign", true).FirstOrDefault();
+            var view = (ViewEditor)this.Controls.Find("ViewEditor", true).FirstOrDefault();
             if (view != null)
             {
                 view.FetchXml.LoadXml(fetchxml);
@@ -213,7 +213,13 @@
 
         private void tsbEditColumns_Click(object sender, EventArgs e)
         {
+            var view = (ViewEditor)this.Controls.Find("ViewEditor", true).FirstOrDefault();
 
+            var select = new SelectColumnsDialog();
+            select.StartPosition = FormStartPosition.CenterParent;
+            if (select.ShowDialog() == DialogResult.OK)
+            {
+            }
         }
     }
 }
