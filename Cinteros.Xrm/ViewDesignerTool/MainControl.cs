@@ -148,21 +148,8 @@
             {
                 tsbSnap.Checked = true;
 
-                var editor = (ViewEditor)this.Controls.Find("ViewEditor", true).FirstOrDefault();
-
-                if (editor == null)
-                {
-                    editor = new ViewEditor()
-                    {
-                        Name = "ViewEditor",
-                        Size = this.Size,
-                        Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom | AnchorStyles.Left
-                    };
-
-                    this.Controls.Add(editor);
-                }
-
-                editor.Set(select.View);
+                ViewEditor.Enabled = true;
+                ViewEditor.Set(select.View);
             }
         }
 

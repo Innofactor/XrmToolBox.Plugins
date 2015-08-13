@@ -38,11 +38,11 @@
             this.tsbPublish = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbSnap = new System.Windows.Forms.ToolStripButton();
-            this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbSelectColumns = new System.Windows.Forms.ToolStripButton();
+            this.ViewEditor = new Cinteros.Xrm.ViewDesignerTool.Controls.ViewEditor();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +57,6 @@
             this.tsbPublish,
             this.toolStripSeparator3,
             this.tsbSnap,
-            this.tsbRefresh,
             this.toolStripSeparator4,
             this.tsbSelectColumns,
             this.tsbEditFetch,
@@ -70,10 +69,11 @@
             // 
             // tsbClose
             // 
+            this.tsbClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbClose.Image = ((System.Drawing.Image)(resources.GetObject("tsbClose.Image")));
             this.tsbClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbClose.Name = "tsbClose";
-            this.tsbClose.Size = new System.Drawing.Size(56, 22);
+            this.tsbClose.Size = new System.Drawing.Size(23, 22);
             this.tsbClose.Text = "Close";
             this.tsbClose.Click += new System.EventHandler(this.tsbClose_Click);
             // 
@@ -98,10 +98,11 @@
             // 
             // tsbSave
             // 
+            this.tsbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbSave.Image = ((System.Drawing.Image)(resources.GetObject("tsbSave.Image")));
             this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSave.Name = "tsbSave";
-            this.tsbSave.Size = new System.Drawing.Size(51, 22);
+            this.tsbSave.Size = new System.Drawing.Size(23, 22);
             this.tsbSave.Text = "Save";
             this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
@@ -132,15 +133,6 @@
             this.tsbSnap.Text = "Snap to Grid";
             this.tsbSnap.Click += new System.EventHandler(this.tsbSnap_Click);
             // 
-            // tsbRefresh
-            // 
-            this.tsbRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbRefresh.Image = ((System.Drawing.Image)(resources.GetObject("tsbRefresh.Image")));
-            this.tsbRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbRefresh.Name = "tsbRefresh";
-            this.tsbRefresh.Size = new System.Drawing.Size(23, 22);
-            this.tsbRefresh.Text = "Refresh";
-            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
@@ -169,10 +161,22 @@
             this.tsbSelectColumns.Text = "Select Columns";
             this.tsbSelectColumns.Click += new System.EventHandler(this.tsbEditColumns_Click);
             // 
+            // ViewEditor
+            // 
+            this.ViewEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ViewEditor.Enabled = false;
+            this.ViewEditor.Location = new System.Drawing.Point(0, 25);
+            this.ViewEditor.LogicalName = null;
+            this.ViewEditor.Name = "ViewEditor";
+            this.ViewEditor.Size = new System.Drawing.Size(600, 375);
+            this.ViewEditor.TabIndex = 2;
+            this.ViewEditor.Title = null;
+            // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.ViewEditor);
             this.Controls.Add(this.tsMenu);
             this.Name = "MainControl";
             this.Size = new System.Drawing.Size(600, 400);
@@ -194,12 +198,12 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton tsbRefresh;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton tsbOpen;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton tsbSnap;
         private System.Windows.Forms.ToolStripButton tsbSelectColumns;
+        private Controls.ViewEditor ViewEditor;
 
 
     }

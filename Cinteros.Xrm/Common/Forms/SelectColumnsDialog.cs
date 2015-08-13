@@ -73,7 +73,7 @@
                 // Adding column to layout
                 XmlAttribute attribute;
                 cell = this.LayoutXml.CreateNode(XmlNodeType.Element, "cell", string.Empty);
-                
+
                 attribute = this.LayoutXml.CreateAttribute("name");
                 attribute.Value = (string)list.Items[e.Index];
 

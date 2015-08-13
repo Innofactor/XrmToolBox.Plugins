@@ -45,9 +45,9 @@
             this.lvDesign.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvDesign.FullRowSelect = true;
             this.lvDesign.GridLines = true;
-            this.lvDesign.Location = new System.Drawing.Point(3, 73);
+            this.lvDesign.Location = new System.Drawing.Point(3, 53);
             this.lvDesign.Name = "lvDesign";
-            this.lvDesign.Size = new System.Drawing.Size(594, 324);
+            this.lvDesign.Size = new System.Drawing.Size(594, 344);
             this.lvDesign.TabIndex = 0;
             this.lvDesign.UseCompatibleStateImageBehavior = false;
             this.lvDesign.View = System.Windows.Forms.View.Details;
@@ -58,15 +58,15 @@
             // 
             this.tlDesign.ColumnCount = 1;
             this.tlDesign.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlDesign.Controls.Add(this.lvDesign, 0, 2);
-            this.tlDesign.Controls.Add(this.gbDetails, 0, 1);
+            this.tlDesign.Controls.Add(this.lvDesign, 0, 1);
+            this.tlDesign.Controls.Add(this.gbDetails, 0, 0);
             this.tlDesign.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlDesign.Location = new System.Drawing.Point(0, 0);
             this.tlDesign.Name = "tlDesign";
-            this.tlDesign.RowCount = 3;
-            this.tlDesign.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlDesign.RowCount = 2;
             this.tlDesign.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tlDesign.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlDesign.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlDesign.Size = new System.Drawing.Size(600, 400);
             this.tlDesign.TabIndex = 1;
             // 
@@ -76,7 +76,7 @@
             this.gbDetails.Controls.Add(this.lId);
             this.gbDetails.Controls.Add(this.tbName);
             this.gbDetails.Controls.Add(this.lName);
-            this.gbDetails.Location = new System.Drawing.Point(3, 23);
+            this.gbDetails.Location = new System.Drawing.Point(3, 3);
             this.gbDetails.Name = "gbDetails";
             this.gbDetails.Size = new System.Drawing.Size(594, 44);
             this.gbDetails.TabIndex = 1;
