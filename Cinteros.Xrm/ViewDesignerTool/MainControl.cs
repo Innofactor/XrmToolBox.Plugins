@@ -1,30 +1,39 @@
 ﻿namespace Cinteros.Xrm.ViewDesignerTool
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Drawing;
-    using System.Data;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
-    using XrmToolBox.Extensibility.Interfaces;
-    using XrmToolBox.Extensibility;
-    using Cinteros.Xrm.ViewDesignerTool.Controls;
-    using Microsoft.Xrm.Sdk.Query;
-    using Microsoft.Xrm.Sdk;
-    using Microsoft.Crm.Sdk.Messages;
-    using Cinteros.Xrm.FetchXmlBuilder;
-    using System.Xml;
     using Cinteros.Xrm.Common.Forms;
+    using Cinteros.Xrm.FetchXmlBuilder;
+    using Cinteros.Xrm.ViewDesignerTool.Controls;
+    using Microsoft.Crm.Sdk.Messages;
+    using XrmToolBox.Extensibility;
+    using XrmToolBox.Extensibility.Interfaces;
 
     public partial class MainControl : PluginControlBase, IGitHubPlugin, IMessageBusHost
     {
+        #region Private Fields
+
+        private Control control;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
         public MainControl()
         {
             InitializeComponent();
         }
+
+        #endregion Public Constructors
+
+        #region Public Events
+
+        public event EventHandler<MessageBusEventArgs> OnOutgoingMessage;
+
+        #endregion Public Events
+
+        #region Public Properties
 
         /// <summary>
         /// Gets or sets control, that would be seen as current page
@@ -63,6 +72,10 @@
             }
         }
 
+        #endregion Public Properties
+
+        #region Public Methods
+
         public void OnIncomingMessage(MessageBusEventArgs message)
         {
             if (message.SourcePlugin == "FetchXML Builder" &&
@@ -74,22 +87,9 @@
             }
         }
 
-        private void UpdateFetch(string fetchxml)
-        {
-            var view = (ViewEditor)this.CurrentPage.Controls.Find("lvDesign", true).FirstOrDefault();
-            if (view != null)
-            {
-                view.FetchXml.LoadXml(fetchxml);
-            }
-        }
+        #endregion Public Methods
 
-        public event EventHandler<MessageBusEventArgs> OnOutgoingMessage;
-        private Control control;
-
-        private void tsbClose_Click(object sender, EventArgs e)
-        {
-            this.CloseTool();
-        }
+        #region Private Methods
 
         private void MainControl_Load(object sender, EventArgs e)
         {
@@ -98,8 +98,8 @@
                 if (sender is MainControl)
                 {
                     var plugin = ((MainControl)sender);
-                    // In case if connection updated on main application, update assemblies list inside the plugin
-                    // plugin.ConnectionUpdated += MainControl_ConnectionUpdated;
+                    // In case if connection updated on main application, update assemblies list
+                    // inside the plugin plugin.ConnectionUpdated += MainControl_ConnectionUpdated;
 
                     // this.ExecuteMethod(this.RetrieveViews);
 
@@ -116,35 +116,12 @@
                 //    {
                 //        this.CurrentPage = new ViewEditor();
                 //    });
-
             }
         }
 
-        private void tsbSave_Click(object sender, EventArgs e)
+        private void tsbClose_Click(object sender, EventArgs e)
         {
-            var view = (ViewEditor)this.CurrentPage.Controls.Find("lvDesign", true).FirstOrDefault();
-            var result = view.LayoutXml.OuterXml;
-
-            this.WorkAsync("Saving changes",
-                a =>
-                {
-                    this.Service.Update(view.ToEntity());
-                },
-                a =>
-                {
-                });
-        }
-
-        private void tsbPublish_Click(object sender, EventArgs e)
-        {
-            this.WorkAsync("Publishing changes",
-                a =>
-                {
-                    this.Service.Execute(new PublishAllXmlRequest());
-                },
-                a =>
-                {
-                });
+            this.CloseTool();
         }
 
         private void tsbEditFetch_Click(object sender, EventArgs e)
@@ -162,18 +139,10 @@
             }
         }
 
-        private void tsbSnap_Click(object sender, EventArgs e)
-        {
-            var view = (ViewEditor)this.Controls.Find("ViewEditor", true).FirstOrDefault();
-            if (view != null)
-            {
-                view.Snap(((ToolStripButton)sender).Checked);
-            }
-        }
-
         private void tsbOpen_Click(object sender, EventArgs e)
         {
             var select = new SelectViewDialog(this);
+            select.StartPosition = FormStartPosition.CenterParent;
             if (select.ShowDialog() == DialogResult.OK)
             {
                 tsbSnap.Checked = true;
@@ -192,8 +161,54 @@
                     this.Controls.Add(editor);
                 }
                 editor.Open(select.View);
-
             }
         }
+
+        private void tsbPublish_Click(object sender, EventArgs e)
+        {
+            this.WorkAsync("Publishing changes",
+                a =>
+                {
+                    this.Service.Execute(new PublishAllXmlRequest());
+                },
+                a =>
+                {
+                });
+        }
+
+        private void tsbSave_Click(object sender, EventArgs e)
+        {
+            var view = (ViewEditor)this.Controls.Find("ViewEditor", true).FirstOrDefault();
+            var result = view.LayoutXml.OuterXml;
+
+            this.WorkAsync("Saving changes",
+                a =>
+                {
+                    this.Service.Update(view.ToEntity());
+                },
+                a =>
+                {
+                });
+        }
+
+        private void tsbSnap_Click(object sender, EventArgs e)
+        {
+            var view = (ViewEditor)this.Controls.Find("ViewEditor", true).FirstOrDefault();
+            if (view != null)
+            {
+                view.Snap(((ToolStripButton)sender).Checked);
+            }
+        }
+
+        private void UpdateFetch(string fetchxml)
+        {
+            var view = (ViewEditor)this.CurrentPage.Controls.Find("lvDesign", true).FirstOrDefault();
+            if (view != null)
+            {
+                view.FetchXml.LoadXml(fetchxml);
+            }
+        }
+
+        #endregion Private Methods
     }
 }

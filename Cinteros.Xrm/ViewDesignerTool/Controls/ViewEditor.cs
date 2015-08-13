@@ -13,8 +13,8 @@
 
         private bool isFetchXmlChanged;
         private bool isLayoutXmlChanged;
-        private bool isNameChanged;
         private bool isSnapped;
+        private bool isTitleChanged;
 
         #endregion Private Fields
 
@@ -57,8 +57,8 @@
 
         public void Open(Entity view)
         {
-            lvDesign.ColumnWidthChanged -= ViewDesigner_ColumnWidthChanged;
-            lvDesign.ColumnReordered -= ViewDesigner_ColumnReordered;
+            lvDesign.ColumnWidthChanged -= lvDesign_ColumnWidthChanged;
+            lvDesign.ColumnReordered -= lvDesign_ColumnReordered;
 
             this.Id = view.Id;
             this.LogicalName = view.LogicalName;
@@ -72,6 +72,8 @@
             this.isSnapped = true;
 
             var columns = this.LayoutXml.SelectNodes("//cell");
+
+            lvDesign.Columns.Clear();
 
             foreach (XmlNode definition in columns)
             {
@@ -87,8 +89,8 @@
             tbName.Text = this.Title;
             tbId.Text = this.Id.ToString();
 
-            lvDesign.ColumnReordered += ViewDesigner_ColumnReordered;
-            lvDesign.ColumnWidthChanged += ViewDesigner_ColumnWidthChanged;
+            lvDesign.ColumnReordered += lvDesign_ColumnReordered;
+            lvDesign.ColumnWidthChanged += lvDesign_ColumnWidthChanged;
         }
 
         public void Snap(bool allow)
@@ -99,6 +101,8 @@
 
                 for (var i = 0; i < lvDesign.Columns.Count; i++)
                 {
+                    lvDesign.Columns[i].Width += 1;
+
                     // OnColumnWidthChanged(new ColumnWidthChangedEventArgs(i));
                 }
             }
@@ -117,7 +121,7 @@
             var entity = new Entity(this.LogicalName);
             entity.Id = this.Id;
 
-            if (this.isNameChanged)
+            if (this.isTitleChanged)
             {
                 entity.Attributes["name"] = this.Title;
             }
@@ -138,6 +142,62 @@
         #endregion Internal Methods
 
         #region Private Methods
+
+        private void lvDesign_ColumnReordered(object sender, ColumnReorderedEventArgs e)
+        {
+            var layout = XDocument.Parse(this.LayoutXml.OuterXml);
+
+            var cells = layout.Descendants().First().Descendants().First().Descendants();
+
+            var source = cells.ElementAt(e.OldDisplayIndex);
+            var target = cells.ElementAt(e.NewDisplayIndex);
+
+            if (e.OldDisplayIndex > e.NewDisplayIndex)
+            {
+                target.AddBeforeSelf(source);
+            }
+            else
+            {
+                target.AddAfterSelf(source);
+            }
+
+            source.Remove();
+
+            this.LayoutXml.LoadXml(layout.ToString());
+
+            this.isLayoutXmlChanged = true;
+        }
+
+        private void lvDesign_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+        {
+            lvDesign.ColumnWidthChanged -= lvDesign_ColumnWidthChanged;
+
+            var layout = ((ListView)sender);
+
+            var column = layout.Columns[e.ColumnIndex];
+            var definition = (XmlNode)column.Tag;
+
+            if (this.isSnapped)
+            {
+                column.Width = this.NormalizeWidth(column.Width);
+            }
+
+            var attribute = definition.Attributes["width"];
+            var width = column.Width.ToString();
+
+            if (!attribute.Value.Equals(width))
+            {
+                attribute.Value = width;
+
+                var pattern = string.Format("//cell[@name=\"{0}\"]", definition.Attributes["name"].Value);
+                var cell = this.LayoutXml.SelectNodes(pattern).Cast<XmlNode>().FirstOrDefault();
+                cell = definition;
+
+                this.isLayoutXmlChanged = true;
+            }
+
+            lvDesign.ColumnWidthChanged += lvDesign_ColumnWidthChanged;
+        }
 
         private int NormalizeWidth(int width)
         {
@@ -165,60 +225,11 @@
             return width;
         }
 
-        private void ViewDesigner_ColumnReordered(object sender, ColumnReorderedEventArgs e)
+        private void ViewDesigner_TextChanged(object sender, EventArgs e)
         {
-            var layout = XDocument.Parse(this.LayoutXml.OuterXml);
-
-            var cells = layout.Descendants().First().Descendants().First().Descendants();
-
-            var source = cells.ElementAt(e.OldDisplayIndex);
-            var target = cells.ElementAt(e.NewDisplayIndex);
-
-            if (e.OldDisplayIndex > e.NewDisplayIndex)
-            {
-                target.AddBeforeSelf(source);
-            }
-            else
-            {
-                target.AddAfterSelf(source);
-            }
-
-            source.Remove();
-
-            this.LayoutXml.LoadXml(layout.ToString());
-
-            this.isLayoutXmlChanged = true;
-        }
-
-        private void ViewDesigner_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
-        {
-            lvDesign.ColumnWidthChanged -= ViewDesigner_ColumnWidthChanged;
-
-            var layout = ((ListView)sender);
-
-            var column = layout.Columns[e.ColumnIndex];
-            var definition = (XmlNode)column.Tag;
-
-            if (this.isSnapped)
-            {
-                column.Width = this.NormalizeWidth(column.Width);
-            }
-
-            var attribute = definition.Attributes["width"];
-            var width = column.Width.ToString();
-
-            if (!attribute.Value.Equals(width))
-            {
-                attribute.Value = width;
-
-                var pattern = string.Format("//cell[@name=\"{0}\"]", definition.Attributes["name"].Value);
-                var cell = this.LayoutXml.SelectNodes(pattern).Cast<XmlNode>().FirstOrDefault();
-                cell = definition;
-
-                this.isLayoutXmlChanged = true;
-            }
-
-            lvDesign.ColumnWidthChanged += ViewDesigner_ColumnWidthChanged;
+            var title = (TextBox)sender;
+            this.Title = title.Text;
+            this.isTitleChanged = true;
         }
 
         #endregion Private Methods
