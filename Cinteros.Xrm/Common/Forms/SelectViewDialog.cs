@@ -111,11 +111,15 @@
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            //Enabled = false;
-            cmbView.SelectedIndex = -1;
             cmbEntity.SelectedIndex = -1;
+            cmbEntity.Items.Clear();
+
+            cmbView.SelectedIndex = -1;
+            cmbView.Items.Clear();
+            
             txtFetch.Text = string.Empty;
-            this.LoadViews(PopulateForm);
+            
+            this.LoadViews(this.PopulateForm);
         }
 
         private void cmbEntity_SelectedIndexChanged(object sender, EventArgs e)
