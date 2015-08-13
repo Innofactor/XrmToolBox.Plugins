@@ -11,6 +11,8 @@
         public SelectColumnsDialog(XmlDocument fetchXml, XmlDocument layoutXml)
             : this()
         {
+            clbColumns.ItemCheck -= clbColumns_ItemCheck;
+
             this.LayoutXml = layoutXml;
 
             var allowed = fetchXml.SelectNodes("//attribute").Cast<XmlNode>().Select(x => x.Attributes["name"].Value);
@@ -25,6 +27,8 @@
 
                 clbColumns.Items.Add(column, status);
             }
+
+            clbColumns.ItemCheck += clbColumns_ItemCheck;
         }
 
         #endregion Public Constructors
@@ -54,17 +58,34 @@
         {
             var list = (CheckedListBox)sender;
 
+            XmlNode cell;
+
             if (e.NewValue == CheckState.Unchecked)
             {
                 // Removing column from layout
                 var pattern = string.Format("//cell[@name='{0}']", list.Items[e.Index]);
-                var item = this.LayoutXml.SelectNodes(pattern).Cast<XmlNode>().FirstOrDefault();
+                cell = this.LayoutXml.SelectNodes(pattern).Cast<XmlNode>().FirstOrDefault();
 
-                item.ParentNode.RemoveChild(item);
+                cell.ParentNode.RemoveChild(cell);
             }
             else
             {
                 // Adding column to layout
+                XmlAttribute attribute;
+                cell = this.LayoutXml.CreateNode(XmlNodeType.Element, "cell", string.Empty);
+                
+                attribute = this.LayoutXml.CreateAttribute("name");
+                attribute.Value = (string)list.Items[e.Index];
+
+                cell.Attributes.Append(attribute);
+
+                attribute = this.LayoutXml.CreateAttribute("width");
+                attribute.Value = 100.ToString();
+
+                cell.Attributes.Append(attribute);
+
+                var row = this.LayoutXml.SelectNodes("//row").Cast<XmlNode>().FirstOrDefault();
+                row.AppendChild(cell);
             }
         }
 

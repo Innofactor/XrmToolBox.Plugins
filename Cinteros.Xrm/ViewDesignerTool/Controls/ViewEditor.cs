@@ -227,7 +227,7 @@
                 this.LayoutXml = new XmlDocument();
                 this.LayoutXml.LoadXml((string)view.Attributes["layoutxml"]);
 
-                // this.isSnapped = true;
+                this.isSnapped = true;
 
                 var columns = this.LayoutXml.SelectNodes("//cell");
 
@@ -248,7 +248,7 @@
 
         private void UpdateLogicalName(Entity view)
         {
-            if (!view.LogicalName.Equals(string.Empty))
+            if (view.LogicalName != null && !view.LogicalName.Equals(string.Empty))
             {
                 this.LogicalName = view.LogicalName;
             }

@@ -7,6 +7,7 @@
     using Cinteros.Xrm.FetchXmlBuilder;
     using Cinteros.Xrm.ViewDesignerTool.Controls;
     using Microsoft.Crm.Sdk.Messages;
+    using Microsoft.Xrm.Sdk;
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;
 
@@ -160,6 +161,7 @@
 
                     this.Controls.Add(editor);
                 }
+
                 editor.Set(select.View);
             }
         }
@@ -221,7 +223,12 @@
                 select.StartPosition = FormStartPosition.CenterParent;
                 if (select.ShowDialog() == DialogResult.OK)
                 {
-                    //view. select.LayoutXml
+                    var entity = new Entity();
+                    entity.Attributes.Add("layoutxml", select.LayoutXml.OuterXml);
+
+                    tsbSnap.Checked = true;
+
+                    view.Set(entity);
                 }
             }
         }

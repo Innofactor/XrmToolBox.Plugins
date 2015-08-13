@@ -84,7 +84,6 @@
             this.clbColumns.Name = "clbColumns";
             this.clbColumns.Size = new System.Drawing.Size(175, 212);
             this.clbColumns.TabIndex = 2;
-            this.clbColumns.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clbColumns_ItemCheck);
             // 
             // SelectColumnsDialog
             // 
