@@ -39,9 +39,9 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbSnap = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbSelectColumns = new System.Windows.Forms.ToolStripButton();
             this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbSelectColumns = new System.Windows.Forms.ToolStripButton();
             this.ViewEditor = new Cinteros.Xrm.ViewDesignerTool.Controls.ViewEditor();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
@@ -137,6 +137,15 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
+            // tsbSelectColumns
+            // 
+            this.tsbSelectColumns.Image = ((System.Drawing.Image)(resources.GetObject("tsbSelectColumns.Image")));
+            this.tsbSelectColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSelectColumns.Name = "tsbSelectColumns";
+            this.tsbSelectColumns.Size = new System.Drawing.Size(109, 22);
+            this.tsbSelectColumns.Text = "Select Columns";
+            this.tsbSelectColumns.Click += new System.EventHandler(this.tsbEditColumns_Click);
+            // 
             // tsbEditFetch
             // 
             this.tsbEditFetch.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditFetch.Image")));
@@ -150,15 +159,6 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // tsbSelectColumns
-            // 
-            this.tsbSelectColumns.Image = ((System.Drawing.Image)(resources.GetObject("tsbSelectColumns.Image")));
-            this.tsbSelectColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSelectColumns.Name = "tsbSelectColumns";
-            this.tsbSelectColumns.Size = new System.Drawing.Size(109, 22);
-            this.tsbSelectColumns.Text = "Select Columns";
-            this.tsbSelectColumns.Click += new System.EventHandler(this.tsbEditColumns_Click);
             // 
             // ViewEditor
             // 
