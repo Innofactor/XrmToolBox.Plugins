@@ -10,7 +10,6 @@
     using System.Xml;
     using Cinteros.Xrm.Common.Forms;
     using Cinteros.Xrm.DataUpdateTool.AppCode;
-    using Cinteros.Xrm.DataUpdateTool.Forms;
     using Cinteros.Xrm.FetchXmlBuilder;
     using Cinteros.Xrm.XmlEditorUtils;
     using Microsoft.Xrm.Sdk;

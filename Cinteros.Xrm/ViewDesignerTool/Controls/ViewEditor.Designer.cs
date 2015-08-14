@@ -102,7 +102,6 @@
             // 
             // tbName
             // 
-            this.tbName.Enabled = false;
             this.tbName.Location = new System.Drawing.Point(48, 17);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(272, 20);

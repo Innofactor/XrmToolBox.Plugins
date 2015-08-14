@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.DataUpdateTool.Forms
+﻿namespace Cinteros.Xrm.Common.Forms
 {
     using System;
     using System.Windows.Forms;
@@ -105,7 +105,7 @@
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MainControl.DownloadFXB();
+            // MainControl.DownloadFXB();
         }
 
         private void XmlContentDisplayDialog_FormClosing(object sender, FormClosingEventArgs e)

@@ -55,6 +55,10 @@
 
         #region Public Methods
 
+        /// <summary>
+        /// Updates view designer with most recent definition of the view
+        /// </summary>
+        /// <param name="view"></param>
         public void Set(Entity view)
         {
             lvDesign.ColumnWidthChanged -= lvDesign_ColumnWidthChanged;
@@ -70,6 +74,10 @@
             lvDesign.ColumnWidthChanged += lvDesign_ColumnWidthChanged;
         }
 
+        /// <summary>
+        /// Snaps columns width for standard values used in CRM (25..300)
+        /// </summary>
+        /// <param name="allow"></param>
         public void Snap(bool allow)
         {
             if (allow)
@@ -93,6 +101,11 @@
 
         #region Internal Methods
 
+        /// <summary>
+        /// Combines all information about design to CRM entity representation. Only changed
+        /// attributes will be added
+        /// </summary>
+        /// <returns></returns>
         internal Entity ToEntity()
         {
             var entity = new Entity(this.LogicalName);

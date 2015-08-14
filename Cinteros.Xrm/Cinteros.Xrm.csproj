@@ -113,13 +113,13 @@
     <Compile Include="Common\Forms\SelectViewDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Common\Forms\SelectViewDialog.designer.cs">
+    <Compile Include="Common\Forms\SelectViewDialog.Designer.cs">
       <DependentUpon>SelectViewDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\Forms\XmlContentDisplayDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Common\Forms\XmlContentDisplayDialog.designer.cs">
+    <Compile Include="Common\Forms\XmlContentDisplayDialog.Designer.cs">
       <DependentUpon>XmlContentDisplayDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="DataUpdateTool\PluginDescription.cs" />

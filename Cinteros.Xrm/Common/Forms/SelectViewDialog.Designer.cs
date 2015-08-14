@@ -59,7 +59,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(566, 71);
+            this.panel1.Size = new System.Drawing.Size(584, 71);
             this.panel1.TabIndex = 5;
             // 
             // cmbView
@@ -70,7 +70,7 @@
             this.cmbView.FormattingEnabled = true;
             this.cmbView.Location = new System.Drawing.Point(112, 39);
             this.cmbView.Name = "cmbView";
-            this.cmbView.Size = new System.Drawing.Size(442, 21);
+            this.cmbView.Size = new System.Drawing.Size(460, 21);
             this.cmbView.TabIndex = 2;
             this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
@@ -101,7 +101,7 @@
             this.cmbEntity.FormattingEnabled = true;
             this.cmbEntity.Location = new System.Drawing.Point(112, 12);
             this.cmbEntity.Name = "cmbEntity";
-            this.cmbEntity.Size = new System.Drawing.Size(442, 21);
+            this.cmbEntity.Size = new System.Drawing.Size(460, 21);
             this.cmbEntity.Sorted = true;
             this.cmbEntity.TabIndex = 1;
             this.cmbEntity.SelectedIndexChanged += new System.EventHandler(this.cmbEntity_SelectedIndexChanged);
@@ -112,9 +112,9 @@
             this.panel2.Controls.Add(this.panOk);
             this.panel2.Controls.Add(this.panCancel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 384);
+            this.panel2.Location = new System.Drawing.Point(0, 323);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(566, 38);
+            this.panel2.Size = new System.Drawing.Size(584, 38);
             this.panel2.TabIndex = 6;
             // 
             // btnRefresh
@@ -131,7 +131,7 @@
             // 
             this.panOk.Controls.Add(this.btnOk);
             this.panOk.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panOk.Location = new System.Drawing.Point(384, 0);
+            this.panOk.Location = new System.Drawing.Point(402, 0);
             this.panOk.Name = "panOk";
             this.panOk.Size = new System.Drawing.Size(91, 38);
             this.panOk.TabIndex = 6;
@@ -152,7 +152,7 @@
             // 
             this.panCancel.Controls.Add(this.btnCancel);
             this.panCancel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panCancel.Location = new System.Drawing.Point(475, 0);
+            this.panCancel.Location = new System.Drawing.Point(493, 0);
             this.panCancel.Name = "panCancel";
             this.panCancel.Size = new System.Drawing.Size(91, 38);
             this.panCancel.TabIndex = 5;
@@ -173,7 +173,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 71);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(566, 313);
+            this.panel3.Size = new System.Drawing.Size(584, 252);
             this.panel3.TabIndex = 7;
             // 
             // txtFetch
@@ -189,7 +189,7 @@
             xmlViewerSettings1.Tag = System.Drawing.Color.Blue;
             xmlViewerSettings1.Value = System.Drawing.Color.Black;
             this.txtFetch.Settings = xmlViewerSettings1;
-            this.txtFetch.Size = new System.Drawing.Size(566, 313);
+            this.txtFetch.Size = new System.Drawing.Size(584, 252);
             this.txtFetch.TabIndex = 3;
             this.txtFetch.Text = "";
             // 
@@ -199,7 +199,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(566, 422);
+            this.ClientSize = new System.Drawing.Size(584, 361);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
