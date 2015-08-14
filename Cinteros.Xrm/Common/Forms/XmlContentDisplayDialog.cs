@@ -1,17 +1,25 @@
 ﻿namespace Cinteros.Xrm.DataUpdateTool.Forms
 {
-    using Cinteros.Xrm.XmlEditorUtils;
     using System;
-    using System.IO;
-    using System.Reflection;
-    using System.Text;
     using System.Windows.Forms;
     using System.Xml;
+    using Cinteros.Xrm.XmlEditorUtils;
 
     public partial class XmlContentDisplayDialog : Form
     {
+        #region Public Fields
+
         public XmlNode result;
+
+        #endregion Public Fields
+
+        #region Private Fields
+
         private string findtext = "";
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public XmlContentDisplayDialog(string xmlString, string header, bool allowEdit, bool allowFormat)
         {
@@ -41,9 +49,23 @@
             FormatXML(true);
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public void UpdateXML(string xmlString)
         {
-            FormatXML(false);
+            txtXML.Text = xmlString;
+            FormatXML(true);
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -61,6 +83,11 @@
             }
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            FormatXML(false);
+        }
+
         private void FormatXML(bool silent)
         {
             try
@@ -76,10 +103,9 @@
             }
         }
 
-        private void XmlContentDisplayDialog_KeyDown(object sender, KeyEventArgs e)
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            RichTextBox textBox = txtXML;
-            findtext = FindTextHandler.HandleFindKeyPress(e, textBox, findtext);
+            MainControl.DownloadFXB();
         }
 
         private void XmlContentDisplayDialog_FormClosing(object sender, FormClosingEventArgs e)
@@ -87,20 +113,12 @@
             //FetchXmlBuilder.xmlWinSize = new System.Drawing.Size(Width, Height);
         }
 
-        public void UpdateXML(string xmlString)
+        private void XmlContentDisplayDialog_KeyDown(object sender, KeyEventArgs e)
         {
-            txtXML.Text = xmlString;
-            FormatXML(true);
+            RichTextBox textBox = txtXML;
+            findtext = FindTextHandler.HandleFindKeyPress(e, textBox, findtext);
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            MainControl.DownloadFXB();
-        }
+        #endregion Private Methods
     }
 }
