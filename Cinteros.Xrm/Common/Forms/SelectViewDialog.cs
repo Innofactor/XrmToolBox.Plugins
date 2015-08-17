@@ -32,8 +32,6 @@
         {
             InitializeComponent();
             this.host = sender;
-
-            this.LoadViews(this.PopulateForm);
         }
 
         #endregion Public Constructors
@@ -49,11 +47,6 @@
 
                     if (views.Count == 0)
                     {
-                        if (this.host.Service == null)
-                        {
-                            throw new Exception("Need a connection to load views.");
-                        }
-
                         var combinedResult = new Dictionary<string, DataCollection<Entity>>();
                         DataCollection<Entity> singleResult;
 
@@ -116,9 +109,9 @@
 
             cmbView.SelectedIndex = -1;
             cmbView.Items.Clear();
-            
+
             txtFetch.Text = string.Empty;
-            
+
             this.LoadViews(this.PopulateForm);
         }
 
@@ -174,6 +167,21 @@
                     cmbEntity.Items.Add(entity);
                 }
             }
+        }
+
+        private void SelectViewDialog_Load(object sender, EventArgs e)
+        {
+            if (this.host.Service == null)
+            {
+                MessageBox.Show("Need a connection to load views!", "Connection problem", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                this.DialogResult = System.Windows.Forms.DialogResult.Abort;
+                this.Close();
+
+                return;
+            }
+
+            this.LoadViews(this.PopulateForm);
         }
 
         private void UpdateViews()
