@@ -80,7 +80,7 @@
                         this.ExtractViews(allViews[key]);
                     }
 
-                    this.entities = this.views.Keys.Select(x => x.Split('|')[0]).ToList();
+                    this.entities = this.views.Keys.Select(x => x.Split('|')[0]).Distinct().ToList();
 
                     action();
                 });
