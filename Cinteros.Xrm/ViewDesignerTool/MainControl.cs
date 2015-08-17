@@ -139,12 +139,38 @@
         private void tsbEditFetch_Click(object sender, EventArgs e)
         {
             var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder");
-            var fXBMessageBusArgument = new FXBMessageBusArgument(FXBMessageBusRequest.FetchXML)
+            var fXBMessageBusArgument = new FXBMessageBusArgument(FXBMessageBusRequest.FetchXML);
+            if (ViewEditor != null && ViewEditor.FetchXml != null && ViewEditor.FetchXml.OuterXml != null)
             {
-                FetchXML = ViewEditor.FetchXml.OuterXml
-            };
+                fXBMessageBusArgument.FetchXML = ViewEditor.FetchXml.OuterXml;
+            }
             messageBusEventArgs.TargetArgument = fXBMessageBusArgument;
-            OnOutgoingMessage(this, messageBusEventArgs);
+            try
+            {
+                OnOutgoingMessage(this, messageBusEventArgs);
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                if (MessageBox.Show("FetchXML Builder is not installed.\nDownload latest version from\n\nhttp://fxb.xrmtoolbox.com", "FetchXML Builder",
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
+                {
+                    DownloadFXB();
+                }
+            }
+            catch (PluginNotFoundException)
+            {
+                if (MessageBox.Show("FetchXML Builder was not found.\nDownload latest version from\n\nhttp://fxb.xrmtoolbox.com", "FetchXML Builder",
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
+                {
+                    DownloadFXB();
+                }
+            }
+        }
+
+        internal static void DownloadFXB()
+        {
+            var currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            System.Diagnostics.Process.Start("http://fxb.xrmtoolbox.com/?src=VD." + currentVersion);
         }
 
         private void tsbOpen_Click(object sender, EventArgs e)
