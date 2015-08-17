@@ -71,9 +71,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\VersionInfo.cs">
-      <Link>Properties\VersionInfo.cs</Link>
-    </Compile>
     <Compile Include="AutoDeployTool\MainControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -207,10 +204,8 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>IF NOT $(ConfigurationName) == Release (
-  IF NOT EXIST Plugins (MD Plugins)
-  MOVE /Y Cinteros.Xrm.* Plugins/
-)</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Debug xcopy *.dll Plugins /Y
+if $(ConfigurationName) == Debug xcopy *.pdb Plugins /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
