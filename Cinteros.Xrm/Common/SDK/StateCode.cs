@@ -1,4 +1,4 @@
-namespace Cinteros.Xrm.SDK
+namespace Cinteros.Xrm.Common.SDK
 {
     public enum StateCode 
     {

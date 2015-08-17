@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.Utils
+﻿namespace Cinteros.Xrm.Common.Utils
 {
     using System.Collections.Generic;
     using System.Drawing;
@@ -6,7 +6,7 @@
     using System.Text;
     using System.Windows.Forms;
     using System.Xml;
-    using Cinteros.Xrm.SDK;
+    using Cinteros.Xrm.Common.SDK;
     using McTools.Xrm.Connection;
     using Microsoft.Xrm.Sdk.Query;
 

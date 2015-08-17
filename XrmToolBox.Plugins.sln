@@ -1,11 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{9F889472-F185-47A3-A40B-8737F08BE41F}"
-	ProjectSection(SolutionItems) = preProject
-		VersionInfo.cs = VersionInfo.cs
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinteros.Xrm", "Cinteros.Xrm\Cinteros.Xrm.csproj", "{3C865935-8376-4B29-BBF2-9EEEB08FA9EA}"
 EndProject
 Global

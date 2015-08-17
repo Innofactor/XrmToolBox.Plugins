@@ -71,36 +71,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\common\sdk\IComparableEntity.cs">
-      <Link>SDK\IComparableEntity.cs</Link>
-    </Compile>
-    <Compile Include="..\common\sdk\IsolationMode.cs">
-      <Link>SDK\IsolationMode.cs</Link>
-    </Compile>
-    <Compile Include="..\common\sdk\OrganizationSnapshot.cs">
-      <Link>SDK\OrganizationSnapshot.cs</Link>
-    </Compile>
-    <Compile Include="..\common\sdk\PluginAssembly.cs">
-      <Link>SDK\PluginAssembly.cs</Link>
-    </Compile>
-    <Compile Include="..\common\sdk\Solution.cs">
-      <Link>SDK\Solution.cs</Link>
-    </Compile>
-    <Compile Include="..\common\utils\Constants.cs">
-      <Link>Utils\Constants.cs</Link>
-    </Compile>
-    <Compile Include="..\common\utils\Extensions.cs">
-      <Link>Utils\Extensions.cs</Link>
-    </Compile>
-    <Compile Include="..\common\utils\Helpers.cs">
-      <Link>Utils\Helpers.cs</Link>
-    </Compile>
-    <Compile Include="..\common\utils\IUpdateToolStrip.cs">
-      <Link>Utils\IUpdateToolStrip.cs</Link>
-    </Compile>
-    <Compile Include="..\common\utils\UpdateToolStripEventArgs.cs">
-      <Link>Utils\UpdateToolStripEventArgs.cs</Link>
-    </Compile>
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
@@ -111,6 +81,25 @@
       <DependentUpon>MainControl.cs</DependentUpon>
     </Compile>
     <Compile Include="AutoDeployTool\PluginDescription.cs" />
+    <Compile Include="Common\Forms\SelectColumnsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\Forms\SelectColumnsDialog.Designer.cs">
+      <DependentUpon>SelectColumnsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\SDK\IComparableEntity.cs" />
+    <Compile Include="Common\SDK\IsolationMode.cs" />
+    <Compile Include="Common\SDK\OrganizationSnapshot.cs" />
+    <Compile Include="Common\SDK\PluginAssembly.cs" />
+    <Compile Include="Common\SDK\PluginType.cs" />
+    <Compile Include="Common\SDK\ProcessingStep.cs" />
+    <Compile Include="Common\SDK\Solution.cs" />
+    <Compile Include="Common\SDK\StateCode.cs" />
+    <Compile Include="Common\Utils\Constants.cs" />
+    <Compile Include="Common\Utils\Extensions.cs" />
+    <Compile Include="Common\Utils\Helpers.cs" />
+    <Compile Include="Common\Utils\IUpdateToolStrip.cs" />
+    <Compile Include="Common\Utils\UpdateToolStripEventArgs.cs" />
     <Compile Include="DataUpdateTool\AppCode\AttributeItem.cs" />
     <Compile Include="DataUpdateTool\AppCode\EntityItem.cs" />
     <Compile Include="DataUpdateTool\AppCode\OptionsetItem.cs" />
@@ -121,16 +110,16 @@
     <Compile Include="DataUpdateTool\MainControl.Designer.cs">
       <DependentUpon>MainControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataUpdateTool\Forms\SelectViewDialog.cs">
+    <Compile Include="Common\Forms\SelectViewDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataUpdateTool\Forms\SelectViewDialog.designer.cs">
+    <Compile Include="Common\Forms\SelectViewDialog.Designer.cs">
       <DependentUpon>SelectViewDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataUpdateTool\Forms\XmlContentDisplayDialog.cs">
+    <Compile Include="Common\Forms\XmlContentDisplayDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataUpdateTool\Forms\XmlContentDisplayDialog.designer.cs">
+    <Compile Include="Common\Forms\XmlContentDisplayDialog.Designer.cs">
       <DependentUpon>XmlContentDisplayDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="DataUpdateTool\PluginDescription.cs" />
@@ -159,18 +148,34 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VersionVerificationTool\PluginDescription.cs" />
+    <Compile Include="ViewDesignerTool\Controls\ViewEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewDesignerTool\Controls\ViewEditor.Designer.cs">
+      <DependentUpon>ViewEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewDesignerTool\MainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewDesignerTool\MainControl.Designer.cs">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewDesignerTool\PluginDescription.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AutoDeployTool\MainControl.resx">
       <DependentUpon>MainControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Common\Forms\SelectColumnsDialog.resx">
+      <DependentUpon>SelectColumnsDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataUpdateTool\MainControl.resx">
       <DependentUpon>MainControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataUpdateTool\Forms\SelectViewDialog.resx">
+    <EmbeddedResource Include="Common\Forms\SelectViewDialog.resx">
       <DependentUpon>SelectViewDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataUpdateTool\Forms\XmlContentDisplayDialog.resx">
+    <EmbeddedResource Include="Common\Forms\XmlContentDisplayDialog.resx">
       <DependentUpon>XmlContentDisplayDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -189,10 +194,17 @@
       <DependentUpon>MainControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ViewDesignerTool\Controls\ViewEditor.resx">
+      <DependentUpon>ViewEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewDesignerTool\MainControl.resx">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="DataUpdateTool\Resources\FXB-16w.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>IF NOT $(ConfigurationName) == Release (

@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.DataUpdateTool.Forms
+﻿namespace Cinteros.Xrm.Common.Forms
 {
     partial class SelectViewDialog
     {
@@ -28,20 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            CSRichTextBoxSyntaxHighlighting.XMLViewerSettings xmlViewerSettings2 = new CSRichTextBoxSyntaxHighlighting.XMLViewerSettings();
+            CSRichTextBoxSyntaxHighlighting.XMLViewerSettings xmlViewerSettings1 = new CSRichTextBoxSyntaxHighlighting.XMLViewerSettings();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectViewDialog));
             this.panel1 = new System.Windows.Forms.Panel();
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbEntity = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.panOk = new System.Windows.Forms.Panel();
             this.btnOk = new System.Windows.Forms.Button();
             this.panCancel = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtFetch = new CSRichTextBoxSyntaxHighlighting.XMLViewer();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panOk.SuspendLayout();
@@ -58,7 +59,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(566, 71);
+            this.panel1.Size = new System.Drawing.Size(584, 71);
             this.panel1.TabIndex = 5;
             // 
             // cmbView
@@ -69,7 +70,7 @@
             this.cmbView.FormattingEnabled = true;
             this.cmbView.Location = new System.Drawing.Point(112, 39);
             this.cmbView.Name = "cmbView";
-            this.cmbView.Size = new System.Drawing.Size(442, 21);
+            this.cmbView.Size = new System.Drawing.Size(460, 21);
             this.cmbView.TabIndex = 2;
             this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
@@ -100,7 +101,7 @@
             this.cmbEntity.FormattingEnabled = true;
             this.cmbEntity.Location = new System.Drawing.Point(112, 12);
             this.cmbEntity.Name = "cmbEntity";
-            this.cmbEntity.Size = new System.Drawing.Size(442, 21);
+            this.cmbEntity.Size = new System.Drawing.Size(460, 21);
             this.cmbEntity.Sorted = true;
             this.cmbEntity.TabIndex = 1;
             this.cmbEntity.SelectedIndexChanged += new System.EventHandler(this.cmbEntity_SelectedIndexChanged);
@@ -111,16 +112,26 @@
             this.panel2.Controls.Add(this.panOk);
             this.panel2.Controls.Add(this.panCancel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 384);
+            this.panel2.Location = new System.Drawing.Point(0, 323);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(566, 38);
+            this.panel2.Size = new System.Drawing.Size(584, 38);
             this.panel2.TabIndex = 6;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(12, 8);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(102, 23);
+            this.btnRefresh.TabIndex = 7;
+            this.btnRefresh.Text = "Refresh Views";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // panOk
             // 
             this.panOk.Controls.Add(this.btnOk);
             this.panOk.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panOk.Location = new System.Drawing.Point(384, 0);
+            this.panOk.Location = new System.Drawing.Point(402, 0);
             this.panOk.Name = "panOk";
             this.panOk.Size = new System.Drawing.Size(91, 38);
             this.panOk.TabIndex = 6;
@@ -139,22 +150,22 @@
             // 
             // panCancel
             // 
-            this.panCancel.Controls.Add(this.button2);
+            this.panCancel.Controls.Add(this.btnCancel);
             this.panCancel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panCancel.Location = new System.Drawing.Point(475, 0);
+            this.panCancel.Location = new System.Drawing.Point(493, 0);
             this.panCancel.Name = "panCancel";
             this.panCancel.Size = new System.Drawing.Size(91, 38);
             this.panCancel.TabIndex = 5;
             // 
-            // button2
+            // btnCancel
             // 
-            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Location = new System.Drawing.Point(3, 8);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(3, 8);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 5;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // panel3
             // 
@@ -162,7 +173,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 71);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(566, 313);
+            this.panel3.Size = new System.Drawing.Size(584, 252);
             this.panel3.TabIndex = 7;
             // 
             // txtFetch
@@ -171,34 +182,28 @@
             this.txtFetch.Location = new System.Drawing.Point(0, 0);
             this.txtFetch.Name = "txtFetch";
             this.txtFetch.ReadOnly = true;
-            xmlViewerSettings2.AttributeKey = System.Drawing.Color.Red;
-            xmlViewerSettings2.AttributeValue = System.Drawing.Color.Blue;
-            xmlViewerSettings2.Element = System.Drawing.Color.DarkRed;
-            xmlViewerSettings2.Tag = System.Drawing.Color.Blue;
-            xmlViewerSettings2.Value = System.Drawing.Color.Black;
-            this.txtFetch.Settings = xmlViewerSettings2;
-            this.txtFetch.Size = new System.Drawing.Size(566, 313);
+            xmlViewerSettings1.AttributeKey = System.Drawing.Color.Red;
+            xmlViewerSettings1.AttributeValue = System.Drawing.Color.Blue;
+            xmlViewerSettings1.Comment = System.Drawing.Color.Empty;
+            xmlViewerSettings1.Element = System.Drawing.Color.DarkRed;
+            xmlViewerSettings1.Tag = System.Drawing.Color.Blue;
+            xmlViewerSettings1.Value = System.Drawing.Color.Black;
+            this.txtFetch.Settings = xmlViewerSettings1;
+            this.txtFetch.Size = new System.Drawing.Size(584, 252);
             this.txtFetch.TabIndex = 3;
             this.txtFetch.Text = "";
             // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Location = new System.Drawing.Point(12, 8);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(102, 23);
-            this.btnRefresh.TabIndex = 7;
-            this.btnRefresh.Text = "Refresh Views";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
             // SelectViewDialog
             // 
+            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(566, 422);
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(584, 361);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SelectViewDialog";
             this.Text = "Select View";
             this.panel1.ResumeLayout(false);
@@ -223,7 +228,7 @@
         private System.Windows.Forms.Panel panOk;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Panel panCancel;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnCancel;
         internal CSRichTextBoxSyntaxHighlighting.XMLViewer txtFetch;
         private System.Windows.Forms.Button btnRefresh;
 
