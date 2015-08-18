@@ -15,7 +15,7 @@
     using System.Threading.Tasks;
     using System.Reflection;
 
-    public partial class MainControl : PluginControlBase, IGitHubPlugin, IMessageBusHost
+    public partial class MainControl : PluginControlBase, IGitHubPlugin, IMessageBusHost, IHelpPlugin
     {
         #region Private Fields
 
@@ -75,6 +75,11 @@
             {
                 return "Cinteros";
             }
+        }
+
+        public string HelpUrl
+        {
+            get { return "http://cinteros.xrmtoolbox.com/?src=VDhelp"; }
         }
 
         #endregion Public Properties
@@ -170,7 +175,13 @@
             }
             catch (PluginNotFoundException)
             {
-                if (MessageBox.Show("FetchXML Builder was not found.\nDownload latest version from\n\nhttp://fxb.xrmtoolbox.com", "FetchXML Builder",
+                var xtbver = ((System.Windows.Forms.Control)(((System.Windows.Forms.ContainerControl)(this)).ParentForm)).ProductVersion;
+                if (xtbver == "1.2015.7.6")
+                {
+                    MessageBox.Show("XrmToolBox version " + xtbver + " has a minor problem integrating plugins.\nHang in there - new version will be released soon!", "Launching FetchXML Builder",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else if (MessageBox.Show("FetchXML Builder was not found.\nDownload latest version from\n\nhttp://fxb.xrmtoolbox.com", "FetchXML Builder",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
                 {
                     DownloadFXB();
