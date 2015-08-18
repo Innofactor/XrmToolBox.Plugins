@@ -286,9 +286,10 @@
                 var entity = new Entity();
                 entity.Attributes.Add("layoutxml", select.LayoutXml.OuterXml);
 
-                tsbSnap.Checked = true;
+                //tsbSnap.Checked = true;
 
                 ViewEditor.Set(entity);
+                ViewEditor.IsLayoutXmlChanged = true;
             }
         }
     }

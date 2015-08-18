@@ -13,8 +13,6 @@
         #region Private Fields
 
         private static List<int> snapWidths = new List<int>(new int[] { 25, 50, 75, 100, 125, 150, 200, 300 });
-        public bool IsFetchXmlChanged { get; set; }
-        private bool isLayoutXmlChanged;
         private bool isTitleChanged;
 
         #endregion Private Fields
@@ -29,6 +27,9 @@
         #endregion Public Constructors
 
         #region Public Properties
+
+        public bool IsFetchXmlChanged { get; set; }
+        public bool IsLayoutXmlChanged { get; set; }
 
         public XmlDocument FetchXml
         {
@@ -124,7 +125,7 @@
                 entity.Attributes["fetchxml"] = this.FetchXml.OuterXml;
             }
 
-            if (this.isLayoutXmlChanged)
+            if (this.IsLayoutXmlChanged)
             {
                 entity.Attributes["layoutxml"] = this.LayoutXml.OuterXml;
             }
@@ -158,7 +159,7 @@
 
             this.LayoutXml.LoadXml(layout.ToString());
 
-            this.isLayoutXmlChanged = true;
+            this.IsLayoutXmlChanged = true;
         }
 
         private void lvDesign_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
@@ -186,7 +187,7 @@
                 var cell = this.LayoutXml.SelectNodes(pattern).Cast<XmlNode>().FirstOrDefault();
                 cell = definition;
 
-                this.isLayoutXmlChanged = true;
+                this.IsLayoutXmlChanged = true;
             }
 
             lvDesign.ColumnWidthChanged += lvDesign_ColumnWidthChanged;
