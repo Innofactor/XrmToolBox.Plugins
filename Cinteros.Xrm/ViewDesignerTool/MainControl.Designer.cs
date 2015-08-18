@@ -38,7 +38,6 @@
             this.tsbPublish = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbSnap = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbSelectColumns = new System.Windows.Forms.ToolStripButton();
             this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -56,9 +55,8 @@
             this.tsbSave,
             this.tsbPublish,
             this.toolStripSeparator3,
-            this.tsbSnap,
-            this.toolStripSeparator4,
             this.tsbSelectColumns,
+            this.tsbSnap,
             this.tsbEditFetch,
             this.toolStripSeparator2});
             this.tsMenu.Location = new System.Drawing.Point(0, 0);
@@ -124,18 +122,12 @@
             this.tsbSnap.Checked = true;
             this.tsbSnap.CheckOnClick = true;
             this.tsbSnap.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tsbSnap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbSnap.Image = ((System.Drawing.Image)(resources.GetObject("tsbSnap.Image")));
             this.tsbSnap.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSnap.Name = "tsbSnap";
-            this.tsbSnap.Size = new System.Drawing.Size(23, 22);
+            this.tsbSnap.Size = new System.Drawing.Size(92, 22);
             this.tsbSnap.Text = "Snap to Grid";
             this.tsbSnap.Click += new System.EventHandler(this.tsbSnap_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // tsbSelectColumns
             // 
@@ -197,7 +189,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton tsbOpen;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton tsbSnap;

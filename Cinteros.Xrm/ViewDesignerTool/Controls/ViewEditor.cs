@@ -6,14 +6,15 @@
     using System.Xml;
     using System.Xml.Linq;
     using Microsoft.Xrm.Sdk;
+    using System.Collections.Generic;
 
     public partial class ViewEditor : UserControl
     {
         #region Private Fields
 
-        private bool isFetchXmlChanged;
+        private static List<int> snapWidths = new List<int>(new int[] { 25, 50, 75, 100, 125, 150, 200, 300 });
+        public bool IsFetchXmlChanged { get; set; }
         private bool isLayoutXmlChanged;
-        private bool isSnapped;
         private bool isTitleChanged;
 
         #endregion Private Fields
@@ -47,7 +48,11 @@
             private set;
         }
 
+        public bool Snapped { get; private set; }
+
         public string LogicalName { get; set; }
+
+        public string ViewEntityName { get; set; }
 
         public string Title { get; set; }
 
@@ -82,18 +87,16 @@
         {
             if (allow)
             {
-                this.isSnapped = true;
+                this.Snapped = true;
 
                 for (var i = 0; i < lvDesign.Columns.Count; i++)
                 {
                     lvDesign.Columns[i].Width += 1;
-
-                    // OnColumnWidthChanged(new ColumnWidthChangedEventArgs(i));
                 }
             }
             else
             {
-                this.isSnapped = false;
+                this.Snapped = false;
             }
         }
 
@@ -116,7 +119,7 @@
                 entity.Attributes["name"] = this.Title;
             }
 
-            if (this.isFetchXmlChanged)
+            if (this.IsFetchXmlChanged)
             {
                 entity.Attributes["fetchxml"] = this.FetchXml.OuterXml;
             }
@@ -167,7 +170,7 @@
             var column = layout.Columns[e.ColumnIndex];
             var definition = (XmlNode)column.Tag;
 
-            if (this.isSnapped)
+            if (this.Snapped)
             {
                 column.Width = this.NormalizeWidth(column.Width);
             }
@@ -221,6 +224,8 @@
             {
                 this.FetchXml = new XmlDocument();
                 this.FetchXml.LoadXml((string)view.Attributes["fetchxml"]);
+                var entity = this.FetchXml.SelectSingleNode("fetch/entity");
+                this.ViewEntityName = entity != null && entity.Attributes["name"] != null ? entity.Attributes["name"].Value : "";
             }
         }
 
@@ -240,7 +245,7 @@
                 this.LayoutXml = new XmlDocument();
                 this.LayoutXml.LoadXml((string)view.Attributes["layoutxml"]);
 
-                this.isSnapped = true;
+                this.Snapped = true;
 
                 var columns = this.LayoutXml.SelectNodes("//cell");
 
@@ -253,6 +258,10 @@
                     column.Text = definition.Attributes["name"].Value;
                     column.Width = int.Parse(definition.Attributes["width"].Value);
                     column.Tag = definition;
+                    if (!snapWidths.Contains(column.Width))
+                    {
+                        Snapped = false;
+                    }
 
                     lvDesign.Columns.Add(column);
                 }

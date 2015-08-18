@@ -138,6 +138,17 @@
 
         private void tsbEditFetch_Click(object sender, EventArgs e)
         {
+            if (this.Service == null)
+            {
+                MessageBox.Show("Please connect to CRM.", "Edit query", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            Entity view = ViewEditor != null ? ViewEditor.ToEntity() : null;
+            if (view == null || string.IsNullOrEmpty(view.LogicalName))
+            {
+                MessageBox.Show("First select a view to design.", "Edit query", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder");
             var fXBMessageBusArgument = new FXBMessageBusArgument(FXBMessageBusRequest.FetchXML);
             if (ViewEditor != null && ViewEditor.FetchXml != null && ViewEditor.FetchXml.OuterXml != null)
@@ -175,6 +186,11 @@
 
         private void tsbOpen_Click(object sender, EventArgs e)
         {
+            if (this.Service == null)
+            {
+                MessageBox.Show("Please connect to CRM.", "Open", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var select = new SelectViewDialog(this);
             select.StartPosition = FormStartPosition.CenterParent;
             if (select.ShowDialog() == DialogResult.OK)
@@ -183,30 +199,63 @@
 
                 ViewEditor.Enabled = true;
                 ViewEditor.Set(select.View);
+                tsbSnap.Checked = ViewEditor.Snapped;
             }
         }
 
         private void tsbPublish_Click(object sender, EventArgs e)
         {
+            if (this.Service == null)
+            {
+                MessageBox.Show("Please connect to CRM.", "Publish", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string entity = ViewEditor != null ? ViewEditor.ViewEntityName : null;
+            if (string.IsNullOrEmpty(entity))
+            {
+                MessageBox.Show("First select a view to design.", "Publish", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             this.WorkAsync("Publishing changes",
                 a =>
                 {
-                    this.Service.Execute(new PublishAllXmlRequest());
+                    var pubRequest = new PublishXmlRequest();
+                    pubRequest.ParameterXml = string.Format("<importexportxml><entities><entity>{0}</entity></entities><nodes/><securityroles/><settings/><workflows/></importexportxml>", entity);
+                    this.Service.Execute(pubRequest);
                 },
                 a =>
                 {
+                    if (a.Error != null)
+                    {
+                        MessageBox.Show(a.Error.Message, "Publish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 });
         }
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
+            if (this.Service == null)
+            {
+                MessageBox.Show("Please connect to CRM.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            Entity view = ViewEditor != null ? ViewEditor.ToEntity() : null;
+            if (view == null || string.IsNullOrEmpty(view.LogicalName))
+            {
+                MessageBox.Show("First select a view to design.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             this.WorkAsync("Saving changes",
                 a =>
                 {
-                    this.Service.Update(ViewEditor.ToEntity());
+                    this.Service.Update(view);
                 },
                 a =>
                 {
+                    if (a.Error != null)
+                    {
+                        MessageBox.Show(a.Error.Message, "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 });
         }
 
@@ -218,12 +267,18 @@
         private void UpdateFetch(string fetchxml)
         {
             ViewEditor.FetchXml.LoadXml(fetchxml);
+            ViewEditor.IsFetchXmlChanged = true;
         }
 
         #endregion Private Methods
 
         private void tsbEditColumns_Click(object sender, EventArgs e)
         {
+            if (ViewEditor == null || ViewEditor.FetchXml == null)
+            {
+                MessageBox.Show("First select a view to design.", "Columns", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var select = new SelectColumnsDialog(ViewEditor.FetchXml, ViewEditor.LayoutXml);
             select.StartPosition = FormStartPosition.CenterParent;
             if (select.ShowDialog() == DialogResult.OK)

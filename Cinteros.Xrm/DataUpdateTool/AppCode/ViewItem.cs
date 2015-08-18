@@ -35,5 +35,14 @@
             }
             return "";
         }
+
+        public string GetLayout()
+        {
+            if (view.Contains("layoutxml"))
+            {
+                return view["layoutxml"].ToString();
+            }
+            return "";
+        }
     }
 }

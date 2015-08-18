@@ -1,5 +1,6 @@
 ﻿namespace Cinteros.Xrm.Common.Forms
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
     using System.Xml;
@@ -11,12 +12,8 @@
         public SelectColumnsDialog(XmlDocument fetchXml, XmlDocument layoutXml)
             : this()
         {
-            clbColumns.ItemCheck -= clbColumns_ItemCheck;
-
             this.LayoutXml = layoutXml;
-
-            var allowed = fetchXml.SelectNodes("//attribute").Cast<XmlNode>().Select(x => x.Attributes["name"].Value);
-
+            var allowed = GetAttributesFromFetch(fetchXml.SelectSingleNode("fetch/entity"));
             var selected = this.LayoutXml.SelectNodes("//cell");
 
             foreach (var column in allowed)
@@ -28,7 +25,14 @@
                 clbColumns.Items.Add(column, status);
             }
 
-            clbColumns.ItemCheck += clbColumns_ItemCheck;
+            foreach (var oldcol in selected.Cast<XmlNode>())
+            {
+                var oldcolname = oldcol.Attributes["name"].Value;
+                if (!clbColumns.Items.Contains(oldcolname))
+                {
+                    var i = clbColumns.Items.Add(oldcolname, false);
+                }
+            }
         }
 
         #endregion Public Constructors
@@ -52,43 +56,65 @@
 
         #endregion Public Properties
 
-        #region Private Methods
-
-        private void clbColumns_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void btnOk_Click(object sender, System.EventArgs e)
         {
-            var list = (CheckedListBox)sender;
-
-            XmlNode cell;
-
-            if (e.NewValue == CheckState.Unchecked)
+            var row = this.LayoutXml.SelectNodes("//row").Cast<XmlNode>().FirstOrDefault();
+            foreach (var item in clbColumns.CheckedItems)
             {
-                // Removing column from layout
-                var pattern = string.Format("//cell[@name='{0}']", list.Items[e.Index]);
-                cell = this.LayoutXml.SelectNodes(pattern).Cast<XmlNode>().FirstOrDefault();
-
-                cell.ParentNode.RemoveChild(cell);
+                var pattern = string.Format("//cell[@name='{0}']", item.ToString());
+                var cell = this.LayoutXml.SelectNodes(pattern).Cast<XmlNode>().FirstOrDefault();
+                if (cell == null)
+                {
+                    cell = this.LayoutXml.CreateNode(XmlNodeType.Element, "cell", string.Empty);
+                    var attribute = this.LayoutXml.CreateAttribute("name");
+                    attribute.Value = item.ToString();
+                    cell.Attributes.Append(attribute);
+                    attribute = this.LayoutXml.CreateAttribute("width");
+                    attribute.Value = 100.ToString();
+                    cell.Attributes.Append(attribute);
+                    row.AppendChild(cell);
+                }
             }
-            else
+            var removeNodes = new List<XmlNode>();
+            foreach (var cell in this.LayoutXml.SelectNodes("//cell").Cast<XmlNode>())
             {
-                // Adding column to layout
-                XmlAttribute attribute;
-                cell = this.LayoutXml.CreateNode(XmlNodeType.Element, "cell", string.Empty);
-
-                attribute = this.LayoutXml.CreateAttribute("name");
-                attribute.Value = (string)list.Items[e.Index];
-
-                cell.Attributes.Append(attribute);
-
-                attribute = this.LayoutXml.CreateAttribute("width");
-                attribute.Value = 100.ToString();
-
-                cell.Attributes.Append(attribute);
-
-                var row = this.LayoutXml.SelectNodes("//row").Cast<XmlNode>().FirstOrDefault();
-                row.AppendChild(cell);
+                var col = cell.Attributes["name"].Value;
+                if (!clbColumns.CheckedItems.Contains(col))
+                {
+                    removeNodes.Add(cell);
+                }
+            }
+            foreach (var node in removeNodes)
+            {
+                row.RemoveChild(node);
             }
         }
 
-        #endregion Private Methods
+        private List<string> GetAttributesFromFetch(XmlNode entity)
+        {
+            var result = new List<string>();
+            if (entity != null)
+            {
+                var alias = entity.Attributes["alias"] != null ? entity.Attributes["alias"].Value + "." : "";
+                var entityAttributes = entity.SelectNodes("attribute");
+                foreach (XmlNode attr in entityAttributes)
+                {
+                    if (attr.Attributes["alias"] != null)
+                    {
+                        result.Add(alias + attr.Attributes["alias"].Value);
+                    }
+                    else if (attr.Attributes["name"] != null)
+                    {
+                        result.Add(alias + attr.Attributes["name"].Value);
+                    }
+                }
+                var linkEntities = entity.SelectNodes("link-entity");
+                foreach (XmlNode link in linkEntities)
+                {
+                    result.AddRange(GetAttributesFromFetch(link));
+                }
+            }
+            return result;
+        }
     }
 }

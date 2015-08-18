@@ -124,7 +124,14 @@
         {
             if (cmbView.SelectedItem is ViewItem)
             {
-                txtFetch.Text = ((ViewItem)cmbView.SelectedItem).GetFetch();
+                if (host is ViewDesignerTool.MainControl)
+                {
+                    txtFetch.Text = ((ViewItem)cmbView.SelectedItem).GetLayout();
+                }
+                else
+                {
+                    txtFetch.Text = ((ViewItem)cmbView.SelectedItem).GetFetch();
+                }
                 txtFetch.Process();
                 btnOk.Enabled = true;
             }
