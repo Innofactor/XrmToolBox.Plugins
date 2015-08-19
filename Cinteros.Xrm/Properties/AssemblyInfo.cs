@@ -7,8 +7,8 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyCompany("Cinteros AB")]
 [assembly: AssemblyCopyright("Copyright © Cinteros AB 2015")]
-[assembly: AssemblyTitle("Cinteros.XrmToolBox.Plugins")]
-[assembly: AssemblyDescription("Cinteros XrmToolBox Plugins")]
+[assembly: AssemblyTitle("Cinteros XrmToolBox Plugins")]
+[assembly: AssemblyDescription("Various plugins for XrmToolBox by Cinteros AB")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("Cinteros.XrmToolBox.Plugins")]
 [assembly: AssemblyTrademark("")]
