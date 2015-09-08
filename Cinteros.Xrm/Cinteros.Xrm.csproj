@@ -124,9 +124,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="StepsManipulationTool\MainControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="StepsManipulationTool\MainControl.cs" />
     <Compile Include="StepsManipulationTool\MainControl.Designer.cs">
       <DependentUpon>MainControl.cs</DependentUpon>
     </Compile>
