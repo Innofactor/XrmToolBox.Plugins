@@ -2,16 +2,17 @@
 {
     using System.Linq;
     using System.Windows.Forms;
-    using Cinteros.Xrm.SDK;
-    using Cinteros.Xrm.Utils;
+    using Cinteros.Xrm.Common.SDK;
+    using Cinteros.Xrm.Common.Utils;
     using Microsoft.Xrm.Sdk;
     using XrmToolBox;
+    using XrmToolBox.Extensibility;
 
     public static class OperationExtensions
     {
         #region Public Methods
 
-        public static void RetrieveTypes(this ComboBox comboBox, PluginBase host, PluginAssembly pluginAssembly, bool allTypesOption = false)
+        public static void RetrieveTypes(this ComboBox comboBox, PluginControlBase host, PluginAssembly pluginAssembly, bool allTypesOption = false)
         {
             if (comboBox == null || comboBox.Parent == null)
             {
