@@ -292,7 +292,7 @@
             this.cbSourceAssembly.Size = new System.Drawing.Size(184, 21);
             this.cbSourceAssembly.Sorted = true;
             this.cbSourceAssembly.TabIndex = 3;
-            this.cbSourceAssembly.SelectedIndexChanged += new System.EventHandler(this.cbAssemblies_SelectedIndexChanged);
+            this.cbSourceAssembly.SelectedIndexChanged += new System.EventHandler(this.cbSourceAssembly_SelectedIndexChanged);
             // 
             // lSourceAssembly
             // 
@@ -314,7 +314,7 @@
             this.cbSourcePlugin.Name = "cbSourcePlugin";
             this.cbSourcePlugin.Size = new System.Drawing.Size(184, 21);
             this.cbSourcePlugin.TabIndex = 4;
-            this.cbSourcePlugin.SelectedIndexChanged += new System.EventHandler(this.cbTypes_SelectedIndexChanged);
+            this.cbSourcePlugin.SelectedIndexChanged += new System.EventHandler(this.cbSourcePlugin_SelectedIndexChanged);
             // 
             // lSourcePlugin
             // 

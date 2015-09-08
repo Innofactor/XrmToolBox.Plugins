@@ -180,7 +180,7 @@
         {
         }
 
-        private void cbAssemblies_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbSourceAssembly_SelectedIndexChanged(object sender, EventArgs e)
         {
             // var selectedAssembly = (PluginAssembly)((ComboBox)sender).SelectedItem;
 
@@ -189,6 +189,14 @@
 
             this.cbSourcePlugin.RetrieveTypes(this, (PluginAssembly)((ComboBox)sender).SelectedItem, true);
             // this.RetrieveTypes(selectedAssembly);
+        }
+
+        private void cbSourcePlugin_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var pluginAssembly = (PluginAssembly)this.cbSourceAssembly.SelectedItem;
+            var pluginType = ((ComboBox)sender).SelectedItem as PluginType;
+
+            this.RetrieveSteps(pluginAssembly, pluginType);
         }
 
         private void cbTargetAssembly_SelectedIndexChanged(object sender, EventArgs e)
@@ -200,14 +208,6 @@
         private void cbTargetPlugin_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.bMove.Enabled = true;
-        }
-
-        private void cbTypes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var pluginAssembly = (PluginAssembly)this.cbSourceAssembly.SelectedItem;
-            var pluginType = ((ComboBox)sender).SelectedItem as PluginType;
-
-            this.RetrieveSteps(pluginAssembly, pluginType);
         }
 
         private void cmStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
