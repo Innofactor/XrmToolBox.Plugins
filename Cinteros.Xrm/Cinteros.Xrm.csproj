@@ -132,6 +132,7 @@
     </Compile>
     <Compile Include="StepsManipulationTool\MatchResult.cs" />
     <Compile Include="StepsManipulationTool\OperationExtensions.cs" />
+    <Compile Include="StepsManipulationTool\PluginDescription.cs" />
     <Compile Include="VersionVerificationTool\Controls\ViewParameters.cs">
       <SubType>UserControl</SubType>
     </Compile>
