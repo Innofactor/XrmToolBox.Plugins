@@ -1,7 +1,6 @@
 ﻿namespace Cinteros.Xrm.StepsManipulationTool
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
     using Cinteros.Xrm.Common.SDK;
@@ -129,8 +128,7 @@
                         //    Header = type.FriendlyName,
                         //};
 
-                        // this.lvSteps.Groups.Add(item);
-                        // groups.Add(type.Id, i++);
+                        // this.lvSteps.Groups.Add(item); groups.Add(type.Id, i++);
                     }
 
                     foreach (var step in this.ProcessingSteps)
@@ -178,6 +176,10 @@
 
         #region Private Methods
 
+        private void bMove_Click(object sender, EventArgs e)
+        {
+        }
+
         private void cbAssemblies_SelectedIndexChanged(object sender, EventArgs e)
         {
             // var selectedAssembly = (PluginAssembly)((ComboBox)sender).SelectedItem;
@@ -192,6 +194,12 @@
         private void cbTargetAssembly_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.cbTargetPlugin.RetrieveTypes(this, (PluginAssembly)((ComboBox)sender).SelectedItem);
+            this.bMove.Enabled = false;
+        }
+
+        private void cbTargetPlugin_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.bMove.Enabled = true;
         }
 
         private void cbTypes_SelectedIndexChanged(object sender, EventArgs e)
@@ -243,6 +251,11 @@
             {
                 tscTypes.Items.Add(type);
             }
+        }
+
+        private void lvSteps_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gbActions.Enabled = (((ListView)sender).SelectedIndices.Count > 0) ? true : false;
         }
 
         private void MainControl_Enter(object sender, EventArgs e)
@@ -403,15 +416,5 @@ Number of missing types: {3}",
         }
 
         #endregion Private Methods
-
-        private void bMove_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lvSteps_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            gbActions.Enabled = (((ListView)sender).SelectedIndices.Count > 0) ? true : false;
-        }
     }
 }
