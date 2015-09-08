@@ -209,7 +209,9 @@
   <ItemGroup>
     <Content Include="DataUpdateTool\Resources\FXB-16w.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="StepsManipulationTool\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Debug mkdir "Plugins"
