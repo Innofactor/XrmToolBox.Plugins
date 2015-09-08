@@ -117,20 +117,20 @@
                         }).ToArray();
                     this.lvSteps.Items.Clear();
 
-                    var groups = new Dictionary<Guid, int>();
+                    // var groups = new Dictionary<Guid, int>();
 
                     // If pluginType is null, so all available in current assembly types are selected
                     var i = 0;
 
                     foreach (var type in this.PluginTypes)
                     {
-                        var item = new ListViewGroup
-                        {
-                            Header = type.FriendlyName,
-                        };
+                        //var item = new ListViewGroup
+                        //{
+                        //    Header = type.FriendlyName,
+                        //};
 
-                        this.lvSteps.Groups.Add(item);
-                        groups.Add(type.Id, i++);
+                        // this.lvSteps.Groups.Add(item);
+                        // groups.Add(type.Id, i++);
                     }
 
                     foreach (var step in this.ProcessingSteps)
@@ -138,7 +138,7 @@
                         var item = new ListViewItem(new string[] { step.FriendlyName, step.StateCode.ToString() });
 
                         item.Tag = step;
-                        item.Group = this.lvSteps.Groups[groups[step.ParentType.Id]];
+                        // item.Group = this.lvSteps.Groups[groups[step.ParentType.Id]];
 
                         this.lvSteps.Items.Add(item);
                     }
