@@ -124,6 +124,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="StepsManipulationTool\MainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StepsManipulationTool\MainControl.Designer.cs">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StepsManipulationTool\MatchResult.cs" />
+    <Compile Include="StepsManipulationTool\OperationExtensions.cs" />
     <Compile Include="VersionVerificationTool\Controls\ViewParameters.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -185,6 +193,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="StepsManipulationTool\MainControl.resx">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VersionVerificationTool\Controls\ViewParameters.resx">
       <DependentUpon>ViewParameters.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,9 +220,7 @@
   <ItemGroup>
     <Content Include="DataUpdateTool\Resources\FXB-16w.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="StepsManipulationTool\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Debug mkdir "Plugins"

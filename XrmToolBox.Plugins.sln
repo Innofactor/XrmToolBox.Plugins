@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinteros.Xrm", "Cinteros.Xrm\Cinteros.Xrm.csproj", "{3C865935-8376-4B29-BBF2-9EEEB08FA9EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepsManipulationTool", "StepsManipulationTool\StepsManipulationTool.csproj", "{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug All Cinteros XTB|Any CPU = Debug All Cinteros XTB|Any CPU
@@ -21,14 +19,6 @@ Global
 		{3C865935-8376-4B29-BBF2-9EEEB08FA9EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C865935-8376-4B29-BBF2-9EEEB08FA9EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C865935-8376-4B29-BBF2-9EEEB08FA9EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}.Debug All Cinteros XTB|Any CPU.ActiveCfg = Debug|Any CPU
-		{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}.Debug All Cinteros XTB|Any CPU.Build.0 = Debug|Any CPU
-		{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}.Debug Without GemBox|Any CPU.ActiveCfg = Debug|Any CPU
-		{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}.Debug Without GemBox|Any CPU.Build.0 = Debug|Any CPU
-		{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50A099FD-3A6D-4A4C-BE48-CCA0573D347B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

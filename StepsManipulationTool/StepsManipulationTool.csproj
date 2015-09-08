@@ -94,20 +94,7 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="OperationExtensions.cs" />
-    <Compile Include="MainControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MainControl.Designer.cs">
-      <DependentUpon>MainControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MatchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="MainControl.resx">
-      <DependentUpon>MainControl.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
