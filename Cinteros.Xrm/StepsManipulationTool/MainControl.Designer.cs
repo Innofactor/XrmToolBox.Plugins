@@ -408,6 +408,7 @@
             // 
             // bMove
             // 
+            this.bMove.Enabled = false;
             this.bMove.Location = new System.Drawing.Point(431, 3);
             this.bMove.Name = "bMove";
             this.bMove.Size = new System.Drawing.Size(148, 23);
@@ -418,6 +419,7 @@
             // 
             // bCopy
             // 
+            this.bCopy.Enabled = false;
             this.bCopy.Location = new System.Drawing.Point(431, 45);
             this.bCopy.Name = "bCopy";
             this.bCopy.Size = new System.Drawing.Size(148, 23);
