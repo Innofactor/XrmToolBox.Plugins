@@ -120,6 +120,7 @@
             this.lvSteps.TabIndex = 0;
             this.lvSteps.UseCompatibleStateImageBehavior = false;
             this.lvSteps.View = System.Windows.Forms.View.Details;
+            this.lvSteps.SelectedIndexChanged += new System.EventHandler(this.lvSteps_SelectedIndexChanged);
             // 
             // chName
             // 
@@ -331,6 +332,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.gbActions, 4);
             this.gbActions.Controls.Add(this.tableLayoutPanel2);
             this.gbActions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbActions.Enabled = false;
             this.gbActions.Location = new System.Drawing.Point(3, 478);
             this.gbActions.Name = "gbActions";
             this.gbActions.Size = new System.Drawing.Size(594, 94);
@@ -412,6 +414,7 @@
             this.bMove.TabIndex = 9;
             this.bMove.Text = "Move Selected Steps";
             this.bMove.UseVisualStyleBackColor = true;
+            this.bMove.Click += new System.EventHandler(this.bMove_Click);
             // 
             // bCopy
             // 

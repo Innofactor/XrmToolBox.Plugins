@@ -403,5 +403,15 @@ Number of missing types: {3}",
         }
 
         #endregion Private Methods
+
+        private void bMove_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lvSteps_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gbActions.Enabled = (((ListView)sender).SelectedIndices.Count > 0) ? true : false;
+        }
     }
 }
