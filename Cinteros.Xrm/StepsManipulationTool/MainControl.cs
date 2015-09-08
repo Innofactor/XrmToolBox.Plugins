@@ -7,7 +7,6 @@
     using Cinteros.Xrm.Common.SDK;
     using Cinteros.Xrm.Common.Utils;
     using Microsoft.Xrm.Sdk;
-    using XrmToolBox;
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;
 
@@ -57,7 +56,7 @@
         {
             get
             {
-                return "StepsManipulator";
+                return "XrmToolBox.Plugins";
             }
         }
 
@@ -190,6 +189,11 @@
             // this.RetrieveTypes(selectedAssembly);
         }
 
+        private void cbTargetAssembly_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.cbTargetPlugin.RetrieveTypes(this, (PluginAssembly)((ComboBox)sender).SelectedItem);
+        }
+
         private void cbTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
             var pluginAssembly = (PluginAssembly)this.cbSourceAssembly.SelectedItem;
@@ -246,6 +250,31 @@
             this.ExecuteMethod(RetrieveAssemblies);
         }
 
+        private void removeSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.lvSteps.SelectedItems.Count > 0)
+            {
+                var result = MessageBox.Show("Confirmation", string.Format("Do you really want to delete {0} steps?", this.lvSteps.SelectedItems.Count), MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    this.WorkAsync("Matching types in source and target assemblies...",
+                        a =>
+                        {
+                            this.Invoke(new Action(() =>
+                                {
+                                    foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
+                                    {
+                                        this.Service.Delete(step.LogicalName, step.Id);
+                                    }
+                                }));
+                        },
+                        a => { }
+                    );
+                }
+            }
+        }
+
         /// <summary>
         /// Selecting and checking all the steps available
         /// </summary>
@@ -271,7 +300,7 @@
         {
             // Resetting selection index ((ToolStripComboBox)sender).SelectedIndex = -1;
             ((ToolStripComboBox)sender).DroppedDown = false;
-            
+
             var targetAssembly = (PluginAssembly)((ToolStripComboBox)sender).SelectedItem;
 
             this.WorkAsync("Matching types in source and target assemblies...",
@@ -356,53 +385,23 @@ Number of missing types: {3}",
                     try
                     {
                         this.Service.Update(step);
-                        // Matched 
+                        // Matched
                         hits.StepUpdatedSuccessfully++;
                     }
                     catch (Exception)
                     {
-                        // Failed to match 
+                        // Failed to match
                         hits.StepFailedToUpdate++;
                     }
                 }
                 else
                 {
-                    // Missing 
+                    // Missing
                     hits.PluginMissing++;
                 }
             }
         }
 
         #endregion Private Methods
-
-        private void removeSelectedToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (this.lvSteps.SelectedItems.Count > 0)
-            {
-                var result = MessageBox.Show("Confirmation", string.Format("Do you really want to delete {0} steps?", this.lvSteps.SelectedItems.Count), MessageBoxButtons.YesNo);
-
-                if (result == DialogResult.Yes)
-                {
-                    this.WorkAsync("Matching types in source and target assemblies...",
-                        a =>
-                        {
-                            this.Invoke(new Action(() =>
-                                {
-                                    foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
-                                    {
-                                        this.Service.Delete(step.LogicalName, step.Id);
-                                    }
-                                }));
-                        },
-                        a => { }
-                    );
-                }
-            }
-        }
-
-        private void cbTargetAssembly_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.cbTargetPlugin.RetrieveTypes(this, (PluginAssembly)((ComboBox)sender).SelectedItem);
-        }
     }
 }
