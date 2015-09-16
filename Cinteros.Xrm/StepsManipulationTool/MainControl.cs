@@ -178,6 +178,33 @@
 
         private void bMove_Click(object sender, EventArgs e)
         {
+            var targetType = (PluginType)((ComboBox)cbTargetPlugin).SelectedItem;
+
+            foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
+            {
+                step[Constants.Crm.Attributes.PLUGIN_TYPE_ID] = targetType.ToEntity().ToEntityReference();
+
+                step.Attributes.Remove("eventhandler");
+
+                this.WorkAsync("Moving steps...",
+                    a =>
+                    {
+                        try
+                        {
+
+                            this.Service.Update(step);
+                        }
+                        catch (Exception)
+                        {
+                            // Failed to match
+                        }
+                    },
+                    a => 
+                    { 
+                    
+                    }
+                );
+            }
         }
 
         private void cbSourceAssembly_SelectedIndexChanged(object sender, EventArgs e)

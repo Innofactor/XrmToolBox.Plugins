@@ -383,6 +383,7 @@
             this.cbTargetPlugin.Size = new System.Drawing.Size(312, 21);
             this.cbTargetPlugin.Sorted = true;
             this.cbTargetPlugin.TabIndex = 7;
+            this.cbTargetPlugin.SelectedIndexChanged += new System.EventHandler(this.cbTargetPlugin_SelectedIndexChanged);
             // 
             // lTargetPlugin
             // 
