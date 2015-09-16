@@ -21,18 +21,18 @@
         /// <param name="entity"></param>
         public PluginAssembly(Entity entity)
         {
-            this.Id = entity.Id;
+            Id = entity.Id;
 
-            this.FriendlyName = (string)entity.Attributes[Constants.Crm.Attributes.NAME];
+            FriendlyName = (string)entity.Attributes[Constants.Crm.Attributes.NAME];
 
             if (entity.Attributes.Contains(Constants.Crm.Attributes.ISOLATION_MODE))
             {
-                this.IsolationMode = (IsolationMode)((OptionSetValue)entity.Attributes[Constants.Crm.Attributes.ISOLATION_MODE]).Value;
+                IsolationMode = (IsolationMode)((OptionSetValue)entity.Attributes[Constants.Crm.Attributes.ISOLATION_MODE]).Value;
             }
 
-            this.UniqueName = string.Format("{0}, Version={1}, Culture={2}, PublicKeyToken={3}",
-                this.FriendlyName,
-                this.Version,
+            UniqueName = string.Format("{0}, Version={1}, Culture={2}, PublicKeyToken={3}",
+                FriendlyName,
+                Version,
                 (string)entity.Attributes[Constants.Crm.Attributes.CULTURE],
                 (string)entity.Attributes[Constants.Crm.Attributes.PUBLIC_KEY_TOKEN]);
 
@@ -94,7 +94,7 @@
 
         public override string ToString()
         {
-            return this.FriendlyName;
+            return FriendlyName;
         }
 
         #endregion Public Methods

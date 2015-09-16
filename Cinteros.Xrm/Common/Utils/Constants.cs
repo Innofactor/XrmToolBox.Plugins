@@ -184,8 +184,14 @@
             internal const string FRIENDLY_NAME = "friendly-name";
             internal const string SOLUTION = "solution";
             internal const string SOLUTIONS = "solutions";
+            internal const string STEP = "step";
+            internal const string STEPS = "steps";
             internal const string UNIQUE_NAME = "unique-name";
             internal const string VERSION = "version";
+            internal const string PLUGIN = "plugin";
+            internal const string PLUGINS = "plugins";
+            internal const string ID = "id";
+            internal const string IMAGE = "image";
 
             #endregion Internal Fields
         }

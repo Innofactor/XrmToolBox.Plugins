@@ -9,6 +9,7 @@
     using System.Xml;
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;
+    using System.ComponentModel;
 
     public partial class MainControl : PluginControlBase, IGitHubPlugin
     {
@@ -60,14 +61,15 @@
             }
         }
 
-        public Entity[] SelectedSteps
+        public ProcessingStep[] SelectedSteps
         {
             get
             {
-                Entity[] steps = null;
+                ProcessingStep[] steps = null;
                 Invoke(new Action(() =>
                 {
-                    steps = lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray();
+                    //steps = lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray();
+                    steps = lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, ProcessingStep>(x => (ProcessingStep)x.Tag).ToArray();
                 }));
 
                 return steps;
@@ -191,6 +193,29 @@
 
         #region Private Methods
 
+        private static void AddString(XmlDocument document, XmlElement properties, string name, string value)
+        {
+            var property = document.CreateElement(name);
+            property.InnerText = value;
+            properties.AppendChild(property);
+        }
+
+        private static void AddEntityReference(XmlDocument document, XmlElement properties, Entity definition, string name)
+        {
+            if (definition.Attributes.ContainsKey(name))
+            {
+                AddString(document, properties, name, ((EntityReference)definition.Attributes[name]).Id.ToString());
+            }
+        }
+
+        private static void AddOptionSetValue(XmlDocument document, XmlElement properties, Entity definition, string name)
+        {
+            if (definition.Attributes.ContainsKey(name))
+            {
+                AddString(document, properties, name, ((OptionSetValue)definition.Attributes[name]).Value.ToString());
+            }
+        }
+
         private static Entity[] RemoveEarlyBound(Entity[] entities)
         {
             if (entities.FirstOrDefault().GetType() != typeof(Entity))
@@ -280,9 +305,55 @@
             WorkAsync("Exporting data...",
                 a =>
                 {
+
+
                     try
                     {
-                        a.Result = Service.GetSdkMessageProcessingStepImages(SelectedSteps);
+                        var images = Service.GetSdkMessageProcessingStepImages(SelectedSteps.Select(x => x.ToEntity()).ToArray());
+
+                        var document = new XmlDocument();
+
+                        document.AppendChild(document.CreateXmlDeclaration("1.0", "UTF-8", "yes"));
+                        document.AppendChild(document.CreateComment("Reference snapshot"));
+
+                        var root = document.CreateElement("snapshot");
+
+                        foreach (var pluginDefinition in SelectedSteps.Select(x => x.ParentType).Distinct().ToArray())
+                        {
+                            var plugin = CreateHeaderElement(document, Constants.Xml.PLUGIN, pluginDefinition.Id, pluginDefinition.FriendlyName);
+
+                            root.AppendChild(plugin);
+
+                            foreach (var stepDefinition in SelectedSteps.Where(x => x.ParentType.Id == pluginDefinition.Id).ToArray())
+                            {
+                                var step = CreateHeaderElement(document, Constants.Xml.STEP, stepDefinition.Id, stepDefinition.FriendlyName);
+                                plugin.AppendChild(step);
+
+                                var stepEntity = stepDefinition.ToEntity();
+
+                                AddEntityReference(document, step, stepEntity, "eventhandler");
+                                AddEntityReference(document, step, stepEntity, "sdkmessagefilterid");
+
+                                AddOptionSetValue(document, step, stepEntity, "mode");
+                                AddOptionSetValue(document, step, stepEntity, "stage");
+                                AddOptionSetValue(document, step, stepEntity, "statecode");
+                                AddOptionSetValue(document, step, stepEntity, "statuscode");
+
+                                foreach (var imageDefinition in images.Where(x => ((EntityReference)x.Attributes["sdkmessageprocessingstepid"]).Id == stepDefinition.Id))
+                                {
+                                    var name = (imageDefinition.Attributes.ContainsKey("name")) ? (string)imageDefinition.Attributes["name"] : string.Empty;
+                                    var image = CreateHeaderElement(document, Constants.Xml.IMAGE, imageDefinition.Id, name);
+                                    step.AppendChild(image);
+
+                                    AddOptionSetValue(document, image, imageDefinition, "imagetype");
+                                    AddString(document, image, "entityalias", (string)imageDefinition.Attributes["entityalias"]);
+                                }
+                            }
+                        }
+
+                        document.AppendChild(root);
+
+                        a.Result = document;
                     }
                     catch (Exception ex)
                     {
@@ -291,18 +362,39 @@
                 },
                 a =>
                 {
-                    var steps = RemoveEarlyBound(SelectedSteps);
-                    var images = RemoveEarlyBound((Entity[])a.Result);
+                    var save = new SaveFileDialog();
+                    save.FileOk += (s, args) =>
+                    {
+                        if (!args.Cancel)
+                        {
+                            ((XmlDocument)a.Result).Save(((SaveFileDialog)s).FileName);
+                        }
+                    }; 
 
-                    var document = new XmlDocument();
-
-                    document.AppendChild(document.CreateXmlDeclaration("1.0", "UTF-8", "yes"));
-                    document.AppendChild(document.CreateComment("Reference snapshot"));
-
-                    var root = document.CreateElement("snapshot");
-                    document.AppendChild(root);
+                    save.FileName = "reference-snapshot.xml";
+                    save.ShowDialog();
                 }
             );
+        }
+
+        private static XmlElement CreateHeaderElement(XmlDocument document, string elementName, Guid id, string friendlyName)
+        {
+            XmlAttribute attribute;
+
+            var element = document.CreateElement(elementName);
+
+            attribute = document.CreateAttribute(Constants.Xml.ID);
+            attribute.Value = id.ToString();
+            element.Attributes.Append(attribute);
+
+            if (!string.IsNullOrEmpty(friendlyName) )
+            {
+                attribute = document.CreateAttribute(Constants.Xml.FRIENDLY_NAME);
+                attribute.Value = friendlyName;
+                element.Attributes.Append(attribute);
+            }
+
+            return element;
         }
 
         /// <summary>
@@ -407,7 +499,7 @@
                     Invoke(new Action(() =>
                         {
                             hits.StepsTotal = lvSteps.SelectedItems.Count;
-                            foreach (var step in SelectedSteps)
+                            foreach (var step in SelectedSteps.Select(x => x.ToEntity()).ToArray())
                             {
                                 var sourcePluginTypeId = (EntityReference)step[Constants.Crm.Attributes.PLUGIN_TYPE_ID];
                                 var sourceSdkMessageProcessingStepId = step.Id;
@@ -467,7 +559,7 @@ Number of missing types: {3}",
 
             var hits = new MatchResult();
 
-            foreach (var step in SelectedSteps)
+            foreach (var step in SelectedSteps.Select(x => x.ToEntity()).ToArray())
             {
                 if (targetType != null)
                 {
