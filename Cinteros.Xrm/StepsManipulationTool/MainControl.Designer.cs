@@ -58,20 +58,27 @@
             this.lSourceAssembly = new System.Windows.Forms.Label();
             this.cbSourcePlugin = new System.Windows.Forms.ComboBox();
             this.lSourcePlugin = new System.Windows.Forms.Label();
-            this.gbActions = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.gbDestination = new System.Windows.Forms.GroupBox();
             this.cbTargetAssembly = new System.Windows.Forms.ComboBox();
             this.cbTargetPlugin = new System.Windows.Forms.ComboBox();
             this.lTargetPlugin = new System.Windows.Forms.Label();
             this.lTargetAssembly = new System.Windows.Forms.Label();
             this.bMove = new System.Windows.Forms.Button();
             this.bCopy = new System.Windows.Forms.Button();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.gbActions = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.exportSelected = new System.Windows.Forms.ToolStripMenuItem();
+            this.importSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenu.SuspendLayout();
             this.gbSteps.SuspendLayout();
             this.cmStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.gbActions.SuspendLayout();
+            this.gbDestination.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.gbActions.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsMenu
@@ -138,6 +145,9 @@
             this.selectAllToolStripMenuItem,
             this.dropSelectionToolStripMenuItem,
             this.toolStripSeparator1,
+            this.exportSelected,
+            this.importSelected,
+            this.toolStripSeparator6,
             this.matchPluginNameMoveToAssemblyToolStripMenuItem,
             this.tscAssemblies,
             this.toolStripSeparator2,
@@ -152,7 +162,7 @@
             this.toolStripSeparator5,
             this.removeSelectedToolStripMenuItem});
             this.cmStrip.Name = "cmStrip";
-            this.cmStrip.Size = new System.Drawing.Size(313, 286);
+            this.cmStrip.Size = new System.Drawing.Size(313, 358);
             this.cmStrip.Opening += new System.ComponentModel.CancelEventHandler(this.cmStrip_Opening);
             // 
             // selectAllToolStripMenuItem
@@ -271,7 +281,8 @@
             this.tableLayoutPanel1.Controls.Add(this.lSourceAssembly, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.cbSourcePlugin, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.lSourcePlugin, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.gbActions, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.gbDestination, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.gbActions, 3, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 25);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -327,49 +338,26 @@
             this.lSourcePlugin.TabIndex = 5;
             this.lSourcePlugin.Text = "Source Plugin:";
             // 
-            // gbActions
+            // gbDestination
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.gbActions, 4);
-            this.gbActions.Controls.Add(this.tableLayoutPanel2);
-            this.gbActions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbActions.Enabled = false;
-            this.gbActions.Location = new System.Drawing.Point(3, 478);
-            this.gbActions.Name = "gbActions";
-            this.gbActions.Size = new System.Drawing.Size(594, 94);
-            this.gbActions.TabIndex = 6;
-            this.gbActions.TabStop = false;
-            this.gbActions.Text = "Actions";
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
-            this.tableLayoutPanel2.Controls.Add(this.cbTargetAssembly, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.cbTargetPlugin, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lTargetPlugin, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lTargetAssembly, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.bMove, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.bCopy, 2, 2);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(588, 75);
-            this.tableLayoutPanel2.TabIndex = 0;
+            this.tableLayoutPanel1.SetColumnSpan(this.gbDestination, 3);
+            this.gbDestination.Controls.Add(this.tableLayoutPanel2);
+            this.gbDestination.Enabled = false;
+            this.gbDestination.Location = new System.Drawing.Point(3, 478);
+            this.gbDestination.Name = "gbDestination";
+            this.gbDestination.Size = new System.Drawing.Size(404, 94);
+            this.gbDestination.TabIndex = 6;
+            this.gbDestination.TabStop = false;
+            this.gbDestination.Text = "Destination";
             // 
             // cbTargetAssembly
             // 
             this.cbTargetAssembly.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbTargetAssembly.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTargetAssembly.FormattingEnabled = true;
-            this.cbTargetAssembly.Location = new System.Drawing.Point(113, 3);
+            this.cbTargetAssembly.Location = new System.Drawing.Point(128, 3);
             this.cbTargetAssembly.Name = "cbTargetAssembly";
-            this.cbTargetAssembly.Size = new System.Drawing.Size(312, 21);
+            this.cbTargetAssembly.Size = new System.Drawing.Size(267, 21);
             this.cbTargetAssembly.TabIndex = 8;
             this.cbTargetAssembly.SelectedIndexChanged += new System.EventHandler(this.cbTargetAssembly_SelectedIndexChanged);
             // 
@@ -378,9 +366,9 @@
             this.cbTargetPlugin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbTargetPlugin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTargetPlugin.FormattingEnabled = true;
-            this.cbTargetPlugin.Location = new System.Drawing.Point(113, 45);
+            this.cbTargetPlugin.Location = new System.Drawing.Point(128, 45);
             this.cbTargetPlugin.Name = "cbTargetPlugin";
-            this.cbTargetPlugin.Size = new System.Drawing.Size(312, 21);
+            this.cbTargetPlugin.Size = new System.Drawing.Size(267, 21);
             this.cbTargetPlugin.Sorted = true;
             this.cbTargetPlugin.TabIndex = 7;
             this.cbTargetPlugin.SelectedIndexChanged += new System.EventHandler(this.cbTargetPlugin_SelectedIndexChanged);
@@ -392,7 +380,7 @@
             this.lTargetPlugin.Location = new System.Drawing.Point(9, 48);
             this.lTargetPlugin.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
             this.lTargetPlugin.Name = "lTargetPlugin";
-            this.lTargetPlugin.Size = new System.Drawing.Size(101, 27);
+            this.lTargetPlugin.Size = new System.Drawing.Size(96, 27);
             this.lTargetPlugin.TabIndex = 6;
             this.lTargetPlugin.Text = "Target Pluign:";
             // 
@@ -403,16 +391,16 @@
             this.lTargetAssembly.Location = new System.Drawing.Point(9, 6);
             this.lTargetAssembly.Margin = new System.Windows.Forms.Padding(9, 6, 0, 0);
             this.lTargetAssembly.Name = "lTargetAssembly";
-            this.lTargetAssembly.Size = new System.Drawing.Size(101, 26);
+            this.lTargetAssembly.Size = new System.Drawing.Size(96, 26);
             this.lTargetAssembly.TabIndex = 3;
             this.lTargetAssembly.Text = "Target Assembly:";
             // 
             // bMove
             // 
             this.bMove.Enabled = false;
-            this.bMove.Location = new System.Drawing.Point(431, 3);
+            this.bMove.Location = new System.Drawing.Point(3, 3);
             this.bMove.Name = "bMove";
-            this.bMove.Size = new System.Drawing.Size(148, 23);
+            this.bMove.Size = new System.Drawing.Size(172, 23);
             this.bMove.TabIndex = 9;
             this.bMove.Text = "Move Selected Steps";
             this.bMove.UseVisualStyleBackColor = true;
@@ -421,12 +409,80 @@
             // bCopy
             // 
             this.bCopy.Enabled = false;
-            this.bCopy.Location = new System.Drawing.Point(431, 45);
+            this.bCopy.Location = new System.Drawing.Point(3, 45);
             this.bCopy.Name = "bCopy";
-            this.bCopy.Size = new System.Drawing.Size(148, 23);
+            this.bCopy.Size = new System.Drawing.Size(172, 23);
             this.bCopy.TabIndex = 10;
             this.bCopy.Text = "Copy Selected Steps";
             this.bCopy.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 105F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.lTargetPlugin, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lTargetAssembly, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.cbTargetPlugin, 2, 2);
+            this.tableLayoutPanel2.Controls.Add(this.cbTargetAssembly, 2, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(398, 75);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // gbActions
+            // 
+            this.gbActions.Controls.Add(this.tableLayoutPanel3);
+            this.gbActions.Location = new System.Drawing.Point(413, 478);
+            this.gbActions.Name = "gbActions";
+            this.gbActions.Size = new System.Drawing.Size(184, 94);
+            this.gbActions.TabIndex = 7;
+            this.gbActions.TabStop = false;
+            this.gbActions.Text = "Actions";
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.Controls.Add(this.bMove, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.bCopy, 0, 2);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 3;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(178, 75);
+            this.tableLayoutPanel3.TabIndex = 1;
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(309, 6);
+            // 
+            // exportSelected
+            // 
+            this.exportSelected.Name = "exportSelected";
+            this.exportSelected.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.exportSelected.Size = new System.Drawing.Size(312, 22);
+            this.exportSelected.Text = "Export Selected";
+            this.exportSelected.Click += new System.EventHandler(this.exportSelected_Click);
+            // 
+            // importSelected
+            // 
+            this.importSelected.Name = "importSelected";
+            this.importSelected.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
+            this.importSelected.Size = new System.Drawing.Size(312, 22);
+            this.importSelected.Text = "Import Selected";
             // 
             // MainControl
             // 
@@ -442,9 +498,11 @@
             this.cmStrip.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.gbActions.ResumeLayout(false);
+            this.gbDestination.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.gbActions.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -480,13 +538,18 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem removeSelectedToolStripMenuItem;
-        private System.Windows.Forms.GroupBox gbActions;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.GroupBox gbDestination;
         private System.Windows.Forms.Label lTargetAssembly;
         private System.Windows.Forms.ComboBox cbTargetAssembly;
         private System.Windows.Forms.ComboBox cbTargetPlugin;
         private System.Windows.Forms.Label lTargetPlugin;
         private System.Windows.Forms.Button bMove;
         private System.Windows.Forms.Button bCopy;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.GroupBox gbActions;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.ToolStripMenuItem exportSelected;
+        private System.Windows.Forms.ToolStripMenuItem importSelected;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     }
 }

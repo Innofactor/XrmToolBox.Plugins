@@ -150,19 +150,19 @@
 
         public static Entity[] GetSdkMessageProcessingSteps(this IOrganizationService service, Guid? pluginAssemblyId = null, Guid? pluginTypeId = null)
         {
-            var attributes = new string[]
-            {
-                Constants.Crm.Attributes.NAME,
-                Constants.Crm.Attributes.STATE_CODE,
-                Constants.Crm.Attributes.STATUS_CODE,
-                "sdkmessageprocessingstepid",
-                Constants.Crm.Attributes.PLUGIN_TYPE_ID,
-                Constants.Crm.Attributes.EVENT_HANDLER
-            };
+            //var attributes = new string[]
+            //{
+            //    Constants.Crm.Attributes.NAME,
+            //    Constants.Crm.Attributes.STATE_CODE,
+            //    Constants.Crm.Attributes.STATUS_CODE,
+            //    "sdkmessageprocessingstepid",
+            //    Constants.Crm.Attributes.PLUGIN_TYPE_ID,
+            //    Constants.Crm.Attributes.EVENT_HANDLER
+            //};
 
             var query = new QueryExpression();
             query.EntityName = Constants.Crm.Entities.PROCESSING_STEP;
-            query.ColumnSet = new ColumnSet(attributes);
+            query.ColumnSet = new ColumnSet(true);
             query.Criteria = new FilterExpression(LogicalOperator.And);
             query.Criteria.AddCondition("ishidden", ConditionOperator.Equal, false);
 

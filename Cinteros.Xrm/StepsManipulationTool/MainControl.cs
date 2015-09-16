@@ -1,11 +1,12 @@
 ﻿namespace Cinteros.Xrm.StepsManipulationTool
 {
+    using Common.SDK;
+    using Common.Utils;
+    using Microsoft.Xrm.Sdk;
     using System;
     using System.Linq;
     using System.Windows.Forms;
-    using Cinteros.Xrm.Common.SDK;
-    using Cinteros.Xrm.Common.Utils;
-    using Microsoft.Xrm.Sdk;
+    using System.Xml;
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;
 
@@ -59,6 +60,20 @@
             }
         }
 
+        public Entity[] SelectedSteps
+        {
+            get
+            {
+                Entity[] steps = null;
+                Invoke(new Action(() =>
+                {
+                    steps = lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray();
+                }));
+
+                return steps;
+            }
+        }
+
         public string UserName
         {
             get
@@ -101,20 +116,20 @@
         /// should be retrieved</param>
         public void RetrieveSteps(PluginAssembly pluginAssembly, PluginType pluginType)
         {
-            this.WorkAsync("Loading steps...",
+            WorkAsync("Loading steps...",
                 a =>
                 {
-                    a.Result = (pluginType != null) ? this.Service.GetSdkMessageProcessingSteps(pluginAssembly.Id, pluginType.Id) : this.Service.GetSdkMessageProcessingSteps(pluginAssembly.Id);
+                    a.Result = (pluginType != null) ? Service.GetSdkMessageProcessingSteps(pluginAssembly.Id, pluginType.Id) : this.Service.GetSdkMessageProcessingSteps(pluginAssembly.Id);
                 },
                 a =>
                 {
-                    this.PluginTypes = this.cbSourcePlugin.Items.Cast<PluginType>().ToArray();
+                    PluginTypes = this.cbSourcePlugin.Items.Cast<PluginType>().ToArray();
 
-                    this.ProcessingSteps = ((Entity[])a.Result).Select<Entity, ProcessingStep>(x =>
+                    ProcessingSteps = ((Entity[])a.Result).Select<Entity, ProcessingStep>(x =>
                         {
                             return new ProcessingStep(x, pluginAssembly, this.PluginTypes.Where(y => y.Id == ((EntityReference)x.Attributes[Constants.Crm.Attributes.PLUGIN_TYPE_ID]).Id).FirstOrDefault());
                         }).ToArray();
-                    this.lvSteps.Items.Clear();
+                    lvSteps.Items.Clear();
 
                     // var groups = new Dictionary<Guid, int>();
 
@@ -176,6 +191,16 @@
 
         #region Private Methods
 
+        private static Entity[] RemoveEarlyBound(Entity[] entities)
+        {
+            if (entities.FirstOrDefault().GetType() != typeof(Entity))
+            {
+                entities = entities.Select(x => x.ToEntity<Entity>()).ToArray();
+            }
+
+            return entities;
+        }
+
         private void bMove_Click(object sender, EventArgs e)
         {
             var targetType = (PluginType)((ComboBox)cbTargetPlugin).SelectedItem;
@@ -186,12 +211,11 @@
 
                 step.Attributes.Remove("eventhandler");
 
-                this.WorkAsync("Moving steps...",
+                WorkAsync("Moving steps...",
                     a =>
                     {
                         try
                         {
-
                             this.Service.Update(step);
                         }
                         catch (Exception)
@@ -199,9 +223,8 @@
                             // Failed to match
                         }
                     },
-                    a => 
-                    { 
-                    
+                    a =>
+                    {
                     }
                 );
             }
@@ -211,10 +234,10 @@
         {
             // var selectedAssembly = (PluginAssembly)((ComboBox)sender).SelectedItem;
 
-            this.lvSteps.Items.Clear();
+            lvSteps.Items.Clear();
             // this.FillAssemblies(selectedAssembly);
 
-            this.cbSourcePlugin.RetrieveTypes(this, (PluginAssembly)((ComboBox)sender).SelectedItem, true);
+            cbSourcePlugin.RetrieveTypes(this, (PluginAssembly)((ComboBox)sender).SelectedItem, true);
             // this.RetrieveTypes(selectedAssembly);
         }
 
@@ -223,23 +246,23 @@
             var pluginAssembly = (PluginAssembly)this.cbSourceAssembly.SelectedItem;
             var pluginType = ((ComboBox)sender).SelectedItem as PluginType;
 
-            this.RetrieveSteps(pluginAssembly, pluginType);
+            RetrieveSteps(pluginAssembly, pluginType);
         }
 
         private void cbTargetAssembly_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.cbTargetPlugin.RetrieveTypes(this, (PluginAssembly)((ComboBox)sender).SelectedItem);
-            this.bMove.Enabled = false;
+            cbTargetPlugin.RetrieveTypes(this, (PluginAssembly)((ComboBox)sender).SelectedItem);
+            bMove.Enabled = false;
         }
 
         private void cbTargetPlugin_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.bMove.Enabled = true;
+            bMove.Enabled = true;
         }
 
         private void cmStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            this.FillTypes(this.cbSourcePlugin.SelectedItem as PluginType);
+            FillTypes(this.cbSourcePlugin.SelectedItem as PluginType);
         }
 
         /// <summary>
@@ -249,7 +272,37 @@
         /// <param name="e"></param>
         private void dropSelectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.SelectAndCheckAll(false);
+            SelectAndCheckAll(false);
+        }
+
+        private void exportSelected_Click(object sender, EventArgs e)
+        {
+            WorkAsync("Exporting data...",
+                a =>
+                {
+                    try
+                    {
+                        a.Result = Service.GetSdkMessageProcessingStepImages(SelectedSteps);
+                    }
+                    catch (Exception ex)
+                    {
+                        // Failed to retrieve images
+                    }
+                },
+                a =>
+                {
+                    var steps = RemoveEarlyBound(SelectedSteps);
+                    var images = RemoveEarlyBound((Entity[])a.Result);
+
+                    var document = new XmlDocument();
+
+                    document.AppendChild(document.CreateXmlDeclaration("1.0", "UTF-8", "yes"));
+                    document.AppendChild(document.CreateComment("Reference snapshot"));
+
+                    var root = document.CreateElement("snapshot");
+                    document.AppendChild(root);
+                }
+            );
         }
 
         /// <summary>
@@ -258,11 +311,11 @@
         /// <param name="selectedAssembly"></param>
         private void FillAssemblies(PluginAssembly selectedAssembly)
         {
-            this.tscAssemblies.Items.Clear();
+            tscAssemblies.Items.Clear();
 
             foreach (var assembly in this.PluginAsseblies.Where(x => x.Id != selectedAssembly.Id))
             {
-                this.tscAssemblies.Items.Add(assembly);
+                tscAssemblies.Items.Add(assembly);
             }
         }
 
@@ -272,7 +325,7 @@
         /// <param name="pluginType"></param>
         private void FillTypes(PluginType pluginType = null)
         {
-            this.tscTypes.Items.Clear();
+            tscTypes.Items.Clear();
 
             foreach (var type in (pluginType == null) ? this.PluginTypes : this.PluginTypes.Where(x => x.Id != pluginType.Id).ToArray())
             {
@@ -282,26 +335,26 @@
 
         private void lvSteps_SelectedIndexChanged(object sender, EventArgs e)
         {
-            gbActions.Enabled = (((ListView)sender).SelectedIndices.Count > 0) ? true : false;
+            gbDestination.Enabled = (((ListView)sender).SelectedIndices.Count > 0) ? true : false;
         }
 
         private void MainControl_Enter(object sender, EventArgs e)
         {
-            this.ExecuteMethod(RetrieveAssemblies);
+            ExecuteMethod(RetrieveAssemblies);
         }
 
         private void removeSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.lvSteps.SelectedItems.Count > 0)
+            if (lvSteps.SelectedItems.Count > 0)
             {
                 var result = MessageBox.Show("Confirmation", string.Format("Do you really want to delete {0} steps?", this.lvSteps.SelectedItems.Count), MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes)
                 {
-                    this.WorkAsync("Matching types in source and target assemblies...",
+                    WorkAsync("Matching types in source and target assemblies...",
                         a =>
                         {
-                            this.Invoke(new Action(() =>
+                            Invoke(new Action(() =>
                                 {
                                     foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
                                     {
@@ -327,13 +380,13 @@
 
         private void SelectAndCheckAll(bool status)
         {
-            this.lvSteps.Items.Cast<ListViewItem>().ToList().ForEach(x => x.Selected = status);
-            this.lvSteps.Items.Cast<ListViewItem>().ToList().ForEach(x => x.Checked = status);
+            lvSteps.Items.Cast<ListViewItem>().ToList().ForEach(x => x.Selected = status);
+            lvSteps.Items.Cast<ListViewItem>().ToList().ForEach(x => x.Checked = status);
         }
 
         private void tsbClose_Click(object sender, EventArgs e)
         {
-            this.CloseTool();
+            CloseTool();
         }
 
         private void tscAssemblies_SelectedIndexChanged(object sender, EventArgs e)
@@ -343,7 +396,7 @@
 
             var targetAssembly = (PluginAssembly)((ToolStripComboBox)sender).SelectedItem;
 
-            this.WorkAsync("Matching types in source and target assemblies...",
+            WorkAsync("Matching types in source and target assemblies...",
                 a =>
                 {
                     var hits = new MatchResult();
@@ -351,10 +404,10 @@
                     var sourceTypes = this.PluginTypes.Select(x => x.ToEntity()).ToArray();
                     var targetTypes = this.Service.GetPluginTypes(targetAssembly.Id);
 
-                    this.Invoke(new Action(() =>
+                    Invoke(new Action(() =>
                         {
-                            hits.StepsTotal = this.lvSteps.SelectedItems.Count;
-                            foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
+                            hits.StepsTotal = lvSteps.SelectedItems.Count;
+                            foreach (var step in SelectedSteps)
                             {
                                 var sourcePluginTypeId = (EntityReference)step[Constants.Crm.Attributes.PLUGIN_TYPE_ID];
                                 var sourceSdkMessageProcessingStepId = step.Id;
@@ -390,7 +443,7 @@
                 },
                 a =>
                 {
-                    this.Invoke(new Action(() =>
+                    Invoke(new Action(() =>
                         {
                             var hits = (MatchResult)a.Result;
                             var text = string.Format(
@@ -414,7 +467,7 @@ Number of missing types: {3}",
 
             var hits = new MatchResult();
 
-            foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
+            foreach (var step in SelectedSteps)
             {
                 if (targetType != null)
                 {
@@ -424,7 +477,7 @@ Number of missing types: {3}",
 
                     try
                     {
-                        this.Service.Update(step);
+                        Service.Update(step);
                         // Matched
                         hits.StepUpdatedSuccessfully++;
                     }
