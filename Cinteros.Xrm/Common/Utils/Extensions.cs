@@ -166,6 +166,15 @@
             query.Criteria = new FilterExpression(LogicalOperator.And);
             query.Criteria.AddCondition("ishidden", ConditionOperator.Equal, false);
 
+            var sdkmessage = query.AddLink(Constants.Crm.Entities.MESSAGE, "sdkmessageid", "sdkmessageid");
+            var sdkmessagefilter = query.AddLink(Constants.Crm.Entities.MESSAGE_FILTER, "sdkmessageid", "sdkmessageid");
+
+            sdkmessage.Columns.AddColumns(Constants.Crm.Attributes.NAME, "sdkmessageid");
+            sdkmessage.EntityAlias = "message";
+
+            sdkmessagefilter.Columns.AddColumns(Constants.Crm.Attributes.PRIMARY_OBJECT_TYPE_CODE, "sdkmessagefilterid");
+            sdkmessagefilter.EntityAlias = "filter";
+
             if (pluginTypeId != null && pluginTypeId != Guid.Empty)
             {
                 query.Criteria.AddCondition(Constants.Crm.Attributes.PLUGIN_TYPE_ID, ConditionOperator.Equal, pluginTypeId);

@@ -83,8 +83,10 @@
     <Compile Include="Common\Forms\SelectColumnsDialog.Designer.cs">
       <DependentUpon>SelectColumnsDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\SDK\MessageFilter.cs" />
     <Compile Include="Common\SDK\IComparableEntity.cs" />
     <Compile Include="Common\SDK\IsolationMode.cs" />
+    <Compile Include="Common\SDK\Message.cs" />
     <Compile Include="Common\SDK\OrganizationSnapshot.cs" />
     <Compile Include="Common\SDK\PluginAssembly.cs" />
     <Compile Include="Common\SDK\PluginType.cs" />

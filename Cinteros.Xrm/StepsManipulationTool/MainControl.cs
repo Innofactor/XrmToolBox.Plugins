@@ -121,7 +121,7 @@
             WorkAsync("Loading steps...",
                 a =>
                 {
-                    a.Result = (pluginType != null) ? Service.GetSdkMessageProcessingSteps(pluginAssembly.Id, pluginType.Id) : this.Service.GetSdkMessageProcessingSteps(pluginAssembly.Id);
+                    a.Result = (pluginType != null) ? Service.GetSdkMessageProcessingSteps(pluginAssembly.Id, pluginType.Id) : Service.GetSdkMessageProcessingSteps(pluginAssembly.Id);
                 },
                 a =>
                 {
@@ -129,14 +129,13 @@
 
                     ProcessingSteps = ((Entity[])a.Result).Select<Entity, ProcessingStep>(x =>
                         {
-                            return new ProcessingStep(x, pluginAssembly, this.PluginTypes.Where(y => y.Id == ((EntityReference)x.Attributes[Constants.Crm.Attributes.PLUGIN_TYPE_ID]).Id).FirstOrDefault());
+                            return new ProcessingStep(x, pluginAssembly, PluginTypes.Where(y => y.Id == ((EntityReference)x.Attributes[Constants.Crm.Attributes.PLUGIN_TYPE_ID]).Id).FirstOrDefault());
                         }).ToArray();
                     lvSteps.Items.Clear();
 
                     // var groups = new Dictionary<Guid, int>();
 
                     // If pluginType is null, so all available in current assembly types are selected
-                    var i = 0;
 
                     foreach (var type in this.PluginTypes)
                     {
