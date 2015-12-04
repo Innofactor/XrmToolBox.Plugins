@@ -7,6 +7,7 @@
     using System.Xml.Linq;
     using Microsoft.Xrm.Sdk;
     using System.Collections.Generic;
+    using Plugins.ViewDesignerTool.Forms;
 
     public partial class ViewEditor : UserControl
     {
@@ -294,5 +295,20 @@
         }
 
         #endregion Private Methods
+
+        private void lvDesign_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            var column = ((ListView)sender).Columns[e.Column];
+
+            var setSizeDialog = new SetSizeDialog(column.Name, column.Width);
+            setSizeDialog.StartPosition = FormStartPosition.CenterParent;
+            setSizeDialog.OnSet += (o, size) =>
+            {
+                column.Width = size;
+            };
+
+            setSizeDialog.ShowDialog();
+        }
+        
     }
 }

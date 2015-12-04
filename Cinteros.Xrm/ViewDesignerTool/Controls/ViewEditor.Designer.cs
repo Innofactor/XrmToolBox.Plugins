@@ -51,6 +51,7 @@
             this.lvDesign.TabIndex = 0;
             this.lvDesign.UseCompatibleStateImageBehavior = false;
             this.lvDesign.View = System.Windows.Forms.View.Details;
+            this.lvDesign.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvDesign_ColumnClick);
             this.lvDesign.ColumnReordered += new System.Windows.Forms.ColumnReorderedEventHandler(this.lvDesign_ColumnReordered);
             this.lvDesign.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.lvDesign_ColumnWidthChanged);
             // 

@@ -51,6 +51,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
@@ -146,6 +147,12 @@
     <Compile Include="ViewDesignerTool\Controls\ViewEditor.Designer.cs">
       <DependentUpon>ViewEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewDesignerTool\Forms\SetSizeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewDesignerTool\Forms\SetSizeDialog.Designer.cs">
+      <DependentUpon>SetSizeDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewDesignerTool\MainControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -188,6 +195,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ViewDesignerTool\Controls\ViewEditor.resx">
       <DependentUpon>ViewEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewDesignerTool\Forms\SetSizeDialog.resx">
+      <DependentUpon>SetSizeDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewDesignerTool\MainControl.resx">
       <DependentUpon>MainControl.cs</DependentUpon>
