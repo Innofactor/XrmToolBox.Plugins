@@ -54,7 +54,6 @@
 
                         qex.ColumnSet = new ColumnSet("name", "returnedtypecode", "fetchxml", "layoutxml");
                         qex.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
-                        qex.Criteria.AddCondition("querytype", ConditionOperator.In, 0, 32);
                         qex.AddOrder("name", OrderType.Ascending);
 
                         foreach (var entity in new string[] { "savedquery", "userquery" })
