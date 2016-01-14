@@ -35,7 +35,7 @@
             PluginAssembly[] assemblies = null;
             DataCollection<Entity> entities = null;
 
-            var organizationService = connectionDetail.GetOrganizationService();
+            var organizationService = connectionDetail.GetCrmServiceClient().OrganizationServiceProxy;
 
             try
             {
@@ -63,7 +63,7 @@
         /// <param name="connectionDetail">Object holding connection details to given organization.</param>
         public OrganizationSnapshot(ConnectionDetail connectionDetail)
         {
-            var organizationService = connectionDetail.GetOrganizationService();
+            var organizationService = connectionDetail.GetCrmServiceClient().OrganizationServiceProxy;
 
             this.ConnectionDetail = connectionDetail;
             this.Solutions = organizationService.RetrieveMultiple(Helpers.CreateSolutionsQuery()).Entities.Select(x => new Solution(x)).ToArray<Solution>();
