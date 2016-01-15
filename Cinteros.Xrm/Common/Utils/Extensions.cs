@@ -167,7 +167,7 @@
             query.Criteria.AddCondition("ishidden", ConditionOperator.Equal, false);
 
             var sdkmessage = query.AddLink(Constants.Crm.Entities.MESSAGE, "sdkmessageid", "sdkmessageid");
-            var sdkmessagefilter = query.AddLink(Constants.Crm.Entities.MESSAGE_FILTER, "sdkmessageid", "sdkmessageid");
+            var sdkmessagefilter = query.AddLink(Constants.Crm.Entities.MESSAGE_FILTER, "sdkmessagefilterid", "sdkmessagefilterid");
 
             sdkmessage.Columns.AddColumns(Constants.Crm.Attributes.NAME, "sdkmessageid");
             sdkmessage.EntityAlias = "message";
