@@ -212,8 +212,10 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug xcopy *.dll Plugins /Y
-if $(ConfigurationName) == Debug xcopy *.pdb Plugins /Y</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Debug mkdir "Plugins"
+if $(ConfigurationName) == Debug move /Y $(TargetName).* "Plugins"
+if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.XmlEditorUtils.dll "Plugins"
+if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.FetchXmlBuilder.dll Plugins</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
