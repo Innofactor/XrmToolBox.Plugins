@@ -93,12 +93,13 @@
         /// </summary>
         public void RetrieveAssemblies()
         {
-            this.WorkAsync("Loading assemblies...",
+            this.WorkAsync(new WorkAsyncInfo("Loading assemblies...",
                 e =>
                 {
                     e.Result = this.Service.GetPluginAssemblies();
-                },
-                e =>
+                })
+            {
+                PostWorkCallBack = (e) =>
                 {
                     this.PluginAsseblies = ((Entity[])e.Result).Select<Entity, PluginAssembly>(x => new PluginAssembly(x)).ToArray();
                     this.cbSourceAssembly.Items.Clear();
@@ -109,7 +110,8 @@
                         this.cbSourceAssembly.Items.Add(assembly);
                         this.cbTargetAssembly.Items.Add(assembly);
                     }
-                });
+                }
+            });
         }
 
         /// <summary> Retrieves all steps available in given assembly and selected type </summary>
@@ -118,19 +120,20 @@
         /// should be retrieved</param>
         public void RetrieveSteps(PluginAssembly pluginAssembly, PluginType pluginType)
         {
-            WorkAsync("Loading steps...",
+            WorkAsync(new WorkAsyncInfo("Loading steps...",
                 a =>
                 {
                     a.Result = (pluginType != null) ? Service.GetSdkMessageProcessingSteps(pluginAssembly.Id, pluginType.Id) : Service.GetSdkMessageProcessingSteps(pluginAssembly.Id);
-                },
-                a =>
+                })
+            {
+                PostWorkCallBack = (a) =>
                 {
                     PluginTypes = this.cbSourcePlugin.Items.Cast<PluginType>().ToArray();
 
                     ProcessingSteps = ((Entity[])a.Result).Select<Entity, ProcessingStep>(x =>
-                        {
-                            return new ProcessingStep(x, pluginAssembly, PluginTypes.Where(y => y.Id == ((EntityReference)x.Attributes[Constants.Crm.Attributes.PLUGIN_TYPE_ID]).Id).FirstOrDefault());
-                        }).ToArray();
+                    {
+                        return new ProcessingStep(x, pluginAssembly, PluginTypes.Where(y => y.Id == ((EntityReference)x.Attributes[Constants.Crm.Attributes.PLUGIN_TYPE_ID]).Id).FirstOrDefault());
+                    }).ToArray();
                     lvSteps.Items.Clear();
 
                     // var groups = new Dictionary<Guid, int>();
@@ -156,7 +159,8 @@
 
                         this.lvSteps.Items.Add(item);
                     }
-                });
+                }
+            });
         }
 
         /// <summary>
@@ -167,12 +171,13 @@
         /// </param>
         public void RetrieveTypes(PluginAssembly pluginAssembly)
         {
-            this.WorkAsync("Loading types...",
+            this.WorkAsync(new WorkAsyncInfo("Loading types...",
                 a =>
                 {
                     a.Result = this.Service.GetPluginTypes(pluginAssembly.Id);
-                },
-                a =>
+                })
+            {
+                PostWorkCallBack = (a) =>
                 {
                     this.PluginTypes = ((Entity[])a.Result).Select<Entity, PluginType>(x => new PluginType(x, pluginAssembly)).ToArray();
                     this.cbSourcePlugin.Items.Clear();
@@ -185,7 +190,8 @@
 
                     // Select all types
                     this.cbSourcePlugin.SelectedIndex = 0;
-                });
+                }
+            });
         }
 
         #endregion Public Methods
@@ -368,7 +374,7 @@
                         {
                             ((XmlDocument)a.Result).Save(((SaveFileDialog)s).FileName);
                         }
-                    }; 
+                    };
 
                     save.FileName = "reference-snapshot.xml";
                     save.ShowDialog();
@@ -386,7 +392,7 @@
             attribute.Value = id.ToString();
             element.Attributes.Append(attribute);
 
-            if (!string.IsNullOrEmpty(friendlyName) )
+            if (!string.IsNullOrEmpty(friendlyName))
             {
                 attribute = document.CreateAttribute(Constants.Xml.FRIENDLY_NAME);
                 attribute.Value = friendlyName;
