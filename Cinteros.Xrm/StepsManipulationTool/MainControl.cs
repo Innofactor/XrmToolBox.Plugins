@@ -140,15 +140,15 @@
 
                     // If pluginType is null, so all available in current assembly types are selected
 
-                    foreach (var type in this.PluginTypes)
-                    {
-                        //var item = new ListViewGroup
-                        //{
-                        //    Header = type.FriendlyName,
-                        //};
+                    //foreach (var type in this.PluginTypes)
+                    //{
+                    //    var item = new ListViewGroup
+                    //    {
+                    //        Header = type.FriendlyName,
+                    //    };
 
-                        // this.lvSteps.Groups.Add(item); groups.Add(type.Id, i++);
-                    }
+                    //    this.lvSteps.Groups.Add(item); groups.Add(type.Id, i++);
+                    //}
 
                     foreach (var step in this.ProcessingSteps)
                     {
@@ -234,16 +234,16 @@
         private void bMove_Click(object sender, EventArgs e)
         {
             var targetType = (PluginType)((ComboBox)cbTargetPlugin).SelectedItem;
-
-            foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
-            {
-                step[Constants.Crm.Attributes.PLUGIN_TYPE_ID] = targetType.ToEntity().ToEntityReference();
-
-                step.Attributes.Remove("eventhandler");
-
-                WorkAsync("Moving steps...",
-                    a =>
+            var steps = this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray();
+            WorkAsync("Moving steps...",
+                a =>
+                {
+                    foreach (var step in steps)
                     {
+                        step[Constants.Crm.Attributes.PLUGIN_TYPE_ID] = targetType.ToEntity().ToEntityReference();
+
+                        step.Attributes.Remove("eventhandler");
+
                         try
                         {
                             this.Service.Update(step);
@@ -252,12 +252,13 @@
                         {
                             // Failed to match
                         }
-                    },
+                    }
+                },
                     a =>
                     {
+                        RetrieveSteps();
                     }
                 );
-            }
         }
 
         private void cbSourceAssembly_SelectedIndexChanged(object sender, EventArgs e)
@@ -273,8 +274,13 @@
 
         private void cbSourcePlugin_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var pluginAssembly = (PluginAssembly)this.cbSourceAssembly.SelectedItem;
-            var pluginType = ((ComboBox)sender).SelectedItem as PluginType;
+            RetrieveSteps();
+        }
+
+        private void RetrieveSteps()
+        {
+            var pluginAssembly = this.cbSourceAssembly.SelectedItem as PluginAssembly;
+            var pluginType = this.cbSourcePlugin.SelectedItem as PluginType;
 
             RetrieveSteps(pluginAssembly, pluginType);
         }
@@ -544,7 +550,7 @@
                         {
                             var hits = (MatchResult)a.Result;
                             var text = string.Format(
-@"Total number of steps processed: {0}
+    @"Total number of steps processed: {0}
 Number of steps updated successully: {1}
 Number of steps failed to update: {2}
 Number of missing types: {3}",

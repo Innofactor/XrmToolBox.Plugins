@@ -106,6 +106,9 @@
             // 
             // gbSteps
             // 
+            this.gbSteps.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.gbSteps, 4);
             this.gbSteps.Controls.Add(this.lvSteps);
             this.gbSteps.Location = new System.Drawing.Point(3, 55);
@@ -124,6 +127,7 @@
             this.lvSteps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvSteps.FullRowSelect = true;
             this.lvSteps.GridLines = true;
+            this.lvSteps.HideSelection = false;
             this.lvSteps.Location = new System.Drawing.Point(3, 16);
             this.lvSteps.Name = "lvSteps";
             this.lvSteps.Size = new System.Drawing.Size(588, 398);
@@ -165,14 +169,14 @@
             this.toolStripSeparator5,
             this.removeSelectedToolStripMenuItem});
             this.cmStrip.Name = "cmStrip";
-            this.cmStrip.Size = new System.Drawing.Size(313, 336);
+            this.cmStrip.Size = new System.Drawing.Size(312, 336);
             this.cmStrip.Opening += new System.ComponentModel.CancelEventHandler(this.cmStrip_Opening);
             // 
             // selectAllToolStripMenuItem
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
             this.selectAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(312, 22);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.selectAllToolStripMenuItem.Text = "Select All";
             this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
             // 
@@ -180,20 +184,20 @@
             // 
             this.dropSelectionToolStripMenuItem.Name = "dropSelectionToolStripMenuItem";
             this.dropSelectionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.dropSelectionToolStripMenuItem.Size = new System.Drawing.Size(312, 22);
+            this.dropSelectionToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.dropSelectionToolStripMenuItem.Text = "Drop Selection";
             this.dropSelectionToolStripMenuItem.Click += new System.EventHandler(this.dropSelectionToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(309, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(308, 6);
             // 
             // exportSelected
             // 
             this.exportSelected.Name = "exportSelected";
             this.exportSelected.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.exportSelected.Size = new System.Drawing.Size(312, 22);
+            this.exportSelected.Size = new System.Drawing.Size(311, 22);
             this.exportSelected.Text = "Export Selected";
             this.exportSelected.Click += new System.EventHandler(this.exportSelected_Click);
             // 
@@ -201,19 +205,19 @@
             // 
             this.importSelected.Name = "importSelected";
             this.importSelected.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.importSelected.Size = new System.Drawing.Size(312, 22);
+            this.importSelected.Size = new System.Drawing.Size(311, 22);
             this.importSelected.Text = "Import Selected";
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(309, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(308, 6);
             // 
             // matchPluginNameMoveToAssemblyToolStripMenuItem
             // 
             this.matchPluginNameMoveToAssemblyToolStripMenuItem.Enabled = false;
             this.matchPluginNameMoveToAssemblyToolStripMenuItem.Name = "matchPluginNameMoveToAssemblyToolStripMenuItem";
-            this.matchPluginNameMoveToAssemblyToolStripMenuItem.Size = new System.Drawing.Size(312, 22);
+            this.matchPluginNameMoveToAssemblyToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.matchPluginNameMoveToAssemblyToolStripMenuItem.Text = "Match Plugin Name && Move To Assembly...";
             // 
             // tscAssemblies
@@ -226,13 +230,13 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(309, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(308, 6);
             // 
             // moveToAnotherPluginInSameAssemblyToolStripMenuItem
             // 
             this.moveToAnotherPluginInSameAssemblyToolStripMenuItem.Enabled = false;
             this.moveToAnotherPluginInSameAssemblyToolStripMenuItem.Name = "moveToAnotherPluginInSameAssemblyToolStripMenuItem";
-            this.moveToAnotherPluginInSameAssemblyToolStripMenuItem.Size = new System.Drawing.Size(312, 22);
+            this.moveToAnotherPluginInSameAssemblyToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.moveToAnotherPluginInSameAssemblyToolStripMenuItem.Text = "Move To Another Plugin In Same Assembly...";
             // 
             // tscTypes
@@ -245,31 +249,31 @@
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(309, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(308, 6);
             // 
             // activateSelectedToolStripMenuItem
             // 
             this.activateSelectedToolStripMenuItem.Name = "activateSelectedToolStripMenuItem";
-            this.activateSelectedToolStripMenuItem.Size = new System.Drawing.Size(312, 22);
+            this.activateSelectedToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.activateSelectedToolStripMenuItem.Text = "Activate Selected";
             // 
             // deactivateSelectedToolStripMenuItem
             // 
             this.deactivateSelectedToolStripMenuItem.Name = "deactivateSelectedToolStripMenuItem";
-            this.deactivateSelectedToolStripMenuItem.Size = new System.Drawing.Size(312, 22);
+            this.deactivateSelectedToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.deactivateSelectedToolStripMenuItem.Text = "Deactivate Selected";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(309, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(308, 6);
             // 
             // activateAllToolStripMenuItem
             // 
             this.activateAllToolStripMenuItem.Name = "activateAllToolStripMenuItem";
             this.activateAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.A)));
-            this.activateAllToolStripMenuItem.Size = new System.Drawing.Size(312, 22);
+            this.activateAllToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.activateAllToolStripMenuItem.Text = "Activate All";
             // 
             // deactivateAllToolStripMenuItem
@@ -277,18 +281,18 @@
             this.deactivateAllToolStripMenuItem.Name = "deactivateAllToolStripMenuItem";
             this.deactivateAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.D)));
-            this.deactivateAllToolStripMenuItem.Size = new System.Drawing.Size(312, 22);
+            this.deactivateAllToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.deactivateAllToolStripMenuItem.Text = "Deactivate All";
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(309, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(308, 6);
             // 
             // removeSelectedToolStripMenuItem
             // 
             this.removeSelectedToolStripMenuItem.Name = "removeSelectedToolStripMenuItem";
-            this.removeSelectedToolStripMenuItem.Size = new System.Drawing.Size(312, 22);
+            this.removeSelectedToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.removeSelectedToolStripMenuItem.Text = "Remove Selected";
             this.removeSelectedToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedToolStripMenuItem_Click);
             // 
@@ -352,6 +356,7 @@
             this.cbSourcePlugin.Location = new System.Drawing.Point(413, 3);
             this.cbSourcePlugin.Name = "cbSourcePlugin";
             this.cbSourcePlugin.Size = new System.Drawing.Size(184, 21);
+            this.cbSourcePlugin.Sorted = true;
             this.cbSourcePlugin.TabIndex = 4;
             this.cbSourcePlugin.SelectedIndexChanged += new System.EventHandler(this.cbSourcePlugin_SelectedIndexChanged);
             // 
@@ -441,6 +446,7 @@
             this.cbTargetAssembly.Location = new System.Drawing.Point(128, 3);
             this.cbTargetAssembly.Name = "cbTargetAssembly";
             this.cbTargetAssembly.Size = new System.Drawing.Size(267, 21);
+            this.cbTargetAssembly.Sorted = true;
             this.cbTargetAssembly.TabIndex = 8;
             this.cbTargetAssembly.SelectedIndexChanged += new System.EventHandler(this.cbTargetAssembly_SelectedIndexChanged);
             // 
