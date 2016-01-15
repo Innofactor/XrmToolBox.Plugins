@@ -94,7 +94,7 @@
 
         public override string ToString()
         {
-            return FriendlyName;
+            return $"{FriendlyName} {Version}";
         }
 
         #endregion Public Methods
