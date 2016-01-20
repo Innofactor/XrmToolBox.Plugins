@@ -7,7 +7,7 @@
     using Cinteros.Xrm.Common.SDK;
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Query;
-
+    using Microsoft.Crm.Sdk.Messages;
     public static class Extensions
     {
         #region Public Methods
@@ -167,7 +167,7 @@
             query.Criteria.AddCondition("ishidden", ConditionOperator.Equal, false);
 
             var sdkmessage = query.AddLink(Constants.Crm.Entities.MESSAGE, "sdkmessageid", "sdkmessageid");
-            var sdkmessagefilter = query.AddLink(Constants.Crm.Entities.MESSAGE_FILTER, "sdkmessagefilterid", "sdkmessagefilterid");
+            var sdkmessagefilter = query.AddLink(Constants.Crm.Entities.MESSAGE_FILTER, "sdkmessagefilterid", "sdkmessagefilterid", JoinOperator.LeftOuter);
 
             sdkmessage.Columns.AddColumns(Constants.Crm.Attributes.NAME, "sdkmessageid");
             sdkmessage.EntityAlias = "message";
@@ -199,6 +199,37 @@
 
                 query.LinkEntities.Add(link);
             }
+
+            //var resp = service.Execute(new QueryExpressionToFetchXmlRequest() { Query = query }) as QueryExpressionToFetchXmlResponse;
+            /*
+            Sample query (Cinteros Utils 2013 plugin) :
+            <fetch distinct="false" no-lock="false" mapping="logical" >
+              <entity name="sdkmessageprocessingstep" >
+                <attribute name="ishidden" /> etc. etc.
+                <filter type="and" >
+                  <condition attribute="ishidden" operator="eq" value="0" />
+                  <condition attribute="plugintypeid" operator="eq" value="{DDA87658-1E6B-434E-9C31-9C4F0FA1D6C5}" />
+                </filter>
+                <order attribute="name" descending="false" />
+                <link-entity name="sdkmessage" from="sdkmessageid" to="sdkmessageid" link-type="inner" alias="message" >
+                  <attribute name="name" />
+                  <attribute name="sdkmessageid" />
+                </link-entity>
+                <link-entity name="sdkmessagefilter" from="sdkmessagefilterid" to="sdkmessagefilterid" link-type="outer" alias="filter" >
+                  <attribute name="primaryobjecttypecode" />
+                  <attribute name="sdkmessagefilterid" />
+                </link-entity>
+                <link-entity name="plugintype" to="plugintypeid" from="plugintypeid" link-type="natural" alias="plugintype" >
+                  <attribute name="friendlyname" />
+                  <attribute name="typename" />
+                  <attribute name="pluginassemblyid" />
+                  <filter type="and" >
+                    <condition attribute="pluginassemblyid" operator="eq" value="{28AB47CE-8F70-4093-A4F0-672378CB3F8B}" />
+                  </filter>
+                </link-entity>
+              </entity>
+            </fetch>
+            */
 
             return service.RetrieveMultiple(query).Entities.ToArray<Entity>();
         }
