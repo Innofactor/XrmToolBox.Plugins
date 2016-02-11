@@ -175,6 +175,7 @@
             this.tsbEditXml.Name = "tsbEditXml";
             this.tsbEditXml.Size = new System.Drawing.Size(74, 20);
             this.tsbEditXml.Text = "Edit XML";
+            this.tsbEditXml.Click += new System.EventHandler(this.tsbEditXml_Click);
             // 
             // MainControl
             // 

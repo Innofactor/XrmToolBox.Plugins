@@ -303,5 +303,24 @@
                 ViewEditor.IsLayoutXmlChanged = true;
             }
         }
+
+        private void tsbEditXml_Click(object sender, EventArgs e)
+        {
+            if (ViewEditor.LayoutXml == null)
+            {
+                return;
+            }
+
+            var xcdDialog = new XmlContentDisplayDialog(ViewEditor.LayoutXml.OuterXml, "LayoutXml", true, true);
+            xcdDialog.StartPosition = FormStartPosition.CenterParent;
+            if (xcdDialog.ShowDialog() == DialogResult.OK)
+            {
+                var entity = new Entity();
+                entity.Attributes.Add("layoutxml", xcdDialog.result.OuterXml);
+
+                ViewEditor.Set(entity);
+                ViewEditor.IsLayoutXmlChanged = true;
+            }
+        }
     }
 }
