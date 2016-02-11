@@ -86,9 +86,9 @@
             // 
             // tbId
             // 
-            this.tbId.Enabled = false;
             this.tbId.Location = new System.Drawing.Point(348, 17);
             this.tbId.Name = "tbId";
+            this.tbId.ReadOnly = true;
             this.tbId.Size = new System.Drawing.Size(240, 20);
             this.tbId.TabIndex = 1;
             // 
