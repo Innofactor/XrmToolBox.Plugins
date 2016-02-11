@@ -37,11 +37,12 @@
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbPublish = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbSnap = new System.Windows.Forms.ToolStripButton();
             this.tsbSelectColumns = new System.Windows.Forms.ToolStripButton();
+            this.tsbSnap = new System.Windows.Forms.ToolStripButton();
             this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ViewEditor = new Cinteros.Xrm.ViewDesignerTool.Controls.ViewEditor();
+            this.tsbEditXml = new System.Windows.Forms.ToolStripButton();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +59,8 @@
             this.tsbSelectColumns,
             this.tsbSnap,
             this.tsbEditFetch,
-            this.toolStripSeparator2});
+            this.toolStripSeparator2,
+            this.tsbEditXml});
             this.tsMenu.Location = new System.Drawing.Point(0, 0);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Size = new System.Drawing.Size(600, 25);
@@ -117,6 +119,15 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
+            // tsbSelectColumns
+            // 
+            this.tsbSelectColumns.Image = ((System.Drawing.Image)(resources.GetObject("tsbSelectColumns.Image")));
+            this.tsbSelectColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSelectColumns.Name = "tsbSelectColumns";
+            this.tsbSelectColumns.Size = new System.Drawing.Size(109, 22);
+            this.tsbSelectColumns.Text = "Select Columns";
+            this.tsbSelectColumns.Click += new System.EventHandler(this.tsbEditColumns_Click);
+            // 
             // tsbSnap
             // 
             this.tsbSnap.Checked = true;
@@ -128,15 +139,6 @@
             this.tsbSnap.Size = new System.Drawing.Size(92, 22);
             this.tsbSnap.Text = "Snap to Grid";
             this.tsbSnap.Click += new System.EventHandler(this.tsbSnap_Click);
-            // 
-            // tsbSelectColumns
-            // 
-            this.tsbSelectColumns.Image = ((System.Drawing.Image)(resources.GetObject("tsbSelectColumns.Image")));
-            this.tsbSelectColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSelectColumns.Name = "tsbSelectColumns";
-            this.tsbSelectColumns.Size = new System.Drawing.Size(109, 22);
-            this.tsbSelectColumns.Text = "Select Columns";
-            this.tsbSelectColumns.Click += new System.EventHandler(this.tsbEditColumns_Click);
             // 
             // tsbEditFetch
             // 
@@ -156,12 +158,23 @@
             // 
             this.ViewEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ViewEditor.Enabled = false;
+            this.ViewEditor.IsFetchXmlChanged = false;
+            this.ViewEditor.IsLayoutXmlChanged = false;
             this.ViewEditor.Location = new System.Drawing.Point(0, 25);
             this.ViewEditor.LogicalName = null;
             this.ViewEditor.Name = "ViewEditor";
             this.ViewEditor.Size = new System.Drawing.Size(600, 375);
             this.ViewEditor.TabIndex = 2;
             this.ViewEditor.Title = null;
+            this.ViewEditor.ViewEntityName = null;
+            // 
+            // tsbEditXml
+            // 
+            this.tsbEditXml.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditXml.Image")));
+            this.tsbEditXml.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbEditXml.Name = "tsbEditXml";
+            this.tsbEditXml.Size = new System.Drawing.Size(71, 20);
+            this.tsbEditXml.Text = "Edit Xml";
             // 
             // MainControl
             // 
@@ -194,7 +207,6 @@
         private System.Windows.Forms.ToolStripButton tsbSnap;
         private System.Windows.Forms.ToolStripButton tsbSelectColumns;
         private Controls.ViewEditor ViewEditor;
-
-
+        private System.Windows.Forms.ToolStripButton tsbEditXml;
     }
 }
