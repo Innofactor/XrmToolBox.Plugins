@@ -173,8 +173,8 @@
             this.tsbEditXml.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditXml.Image")));
             this.tsbEditXml.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbEditXml.Name = "tsbEditXml";
-            this.tsbEditXml.Size = new System.Drawing.Size(71, 20);
-            this.tsbEditXml.Text = "Edit Xml";
+            this.tsbEditXml.Size = new System.Drawing.Size(74, 20);
+            this.tsbEditXml.Text = "Edit XML";
             // 
             // MainControl
             // 
