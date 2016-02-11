@@ -41,8 +41,8 @@
             this.tsbSnap = new System.Windows.Forms.ToolStripButton();
             this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.ViewEditor = new Cinteros.Xrm.ViewDesignerTool.Controls.ViewEditor();
             this.tsbEditXml = new System.Windows.Forms.ToolStripButton();
+            this.ViewEditor = new Cinteros.Xrm.ViewDesignerTool.Controls.ViewEditor();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,8 +58,8 @@
             this.toolStripSeparator3,
             this.tsbSelectColumns,
             this.tsbSnap,
-            this.tsbEditFetch,
             this.toolStripSeparator2,
+            this.tsbEditFetch,
             this.tsbEditXml});
             this.tsMenu.Location = new System.Drawing.Point(0, 0);
             this.tsMenu.Name = "tsMenu";
@@ -154,6 +154,15 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // tsbEditXml
+            // 
+            this.tsbEditXml.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditXml.Image")));
+            this.tsbEditXml.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbEditXml.Name = "tsbEditXml";
+            this.tsbEditXml.Size = new System.Drawing.Size(74, 22);
+            this.tsbEditXml.Text = "Edit XML";
+            this.tsbEditXml.Click += new System.EventHandler(this.tsbEditXml_Click);
+            // 
             // ViewEditor
             // 
             this.ViewEditor.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -167,15 +176,6 @@
             this.ViewEditor.TabIndex = 2;
             this.ViewEditor.Title = null;
             this.ViewEditor.ViewEntityName = null;
-            // 
-            // tsbEditXml
-            // 
-            this.tsbEditXml.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditXml.Image")));
-            this.tsbEditXml.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbEditXml.Name = "tsbEditXml";
-            this.tsbEditXml.Size = new System.Drawing.Size(74, 20);
-            this.tsbEditXml.Text = "Edit XML";
-            this.tsbEditXml.Click += new System.EventHandler(this.tsbEditXml_Click);
             // 
             // MainControl
             // 
