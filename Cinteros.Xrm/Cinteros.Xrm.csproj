@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cinteros.Xrm.CRMWinForm, Version=1.2016.1.91, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cinteros.Xrm.CRMWinForm.2016.1.1\lib\Cinteros.Xrm.CRMWinForm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Cinteros.Xrm.FetchXmlBuilder">
       <HintPath>..\Dependencies\Cinteros.Xrm.FetchXmlBuilder.dll</HintPath>
     </Reference>
@@ -46,7 +50,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Crm.Sdk.Proxy, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.8.0.0\lib\net45\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
+      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.8.0.1\lib\net45\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=2.18.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -58,7 +62,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Xrm.Sdk, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.8.0.0\lib\net45\Microsoft.Xrm.Sdk.dll</HintPath>
+      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.8.0.1\lib\net45\Microsoft.Xrm.Sdk.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Xrm.Sdk.Deployment, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -262,10 +266,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug mkdir "Plugins"
-if $(ConfigurationName) == Debug move /Y $(TargetName).* "Plugins"
-if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.XmlEditorUtils.dll "Plugins"
-if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.FetchXmlBuilder.dll Plugins</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Debug mkdir Plugins
+if $(ConfigurationName) == Debug move /Y $(TargetName).* Plugins
+if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.XmlEditorUtils.dll Plugins
+if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.FetchXmlBuilder.dll Plugins
+if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.CRMWinForm.dll Plugins</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -107,6 +107,7 @@
 
         private void DataUpdater_ConnectionUpdated(object sender, XrmToolBox.Extensibility.PluginControlBase.ConnectionUpdatedEventArgs e)
         {
+            crmGridView1.DataSource = null;
             entities = null;
             entityShitList.Clear();
             EnableControls(true);
@@ -475,6 +476,8 @@
             if (records != null)
             {
                 lblRecords.Text = records.Entities.Count.ToString() + " records of entity " + records.EntityName;
+                crmGridView1.OrganizationService = Service;
+                crmGridView1.DataSource = records;
             }
             RefreshAttributes();
         }
@@ -518,6 +521,7 @@
                     ControlUtils.FillControl(coll, cmbAttribute);
                 }
             }
+            crmGridView1.ShowFriendlyNames = useFriendlyNames;
             EnableControls(true);
         }
 
@@ -746,7 +750,7 @@
                 return;
             }
             working = true;
-            WorkAsync("Loading views...",
+            WorkAsync(new WorkAsyncInfo("Loading views...",
                 (bgworker, workargs) =>
                 {
                     EnableControls(false);
@@ -800,8 +804,9 @@
                         }
                         bgworker.ReportProgress(100, "Finalizing...");
                     }
-                },
-                (completedargs) =>
+                })
+            {
+                PostWorkCallBack = (completedargs) =>
                 {
                     working = false;
                     EnableControls(true);
@@ -814,10 +819,11 @@
                         viewsLoaded();
                     }
                 },
-                (changeargs) =>
+                ProgressChanged = (changeargs) =>
                 {
                     SetWorkingMessage(changeargs.UserState.ToString());
-                });
+                }
+            });
         }
 
         private void LoadEntities(Action AfterLoad)
@@ -829,7 +835,7 @@
             entities = null;
             entityShitList = new List<string>();
             working = true;
-            WorkAsync("Loading entities metadata...",
+            WorkAsync(new WorkAsyncInfo("Loading entities metadata...",
                 (eventargs) =>
                 {
                     EnableControls(false);
@@ -839,8 +845,9 @@
                         RetrieveAsIfPublished = true
                     };
                     eventargs.Result = Service.Execute(req);
-                },
-                (completedargs) =>
+                })
+            {
+                PostWorkCallBack = (completedargs) =>
                 {
                     working = false;
                     if (completedargs.Error != null)
@@ -863,7 +870,8 @@
                     {
                         AfterLoad();
                     }
-                });
+                }
+            });
         }
 
         private void LoadEntityDetails(string entityName, Action detailsLoaded)
@@ -873,7 +881,7 @@
                 return;
             }
             working = true;
-            WorkAsync("Loading " + GetEntityDisplayName(entityName) + " metadata...",
+            WorkAsync(new WorkAsyncInfo("Loading " + GetEntityDisplayName(entityName) + " metadata...",
                 (eventargs) =>
                 {
                     var req = new RetrieveEntityRequest()
@@ -883,8 +891,9 @@
                         RetrieveAsIfPublished = true
                     };
                     eventargs.Result = Service.Execute(req);
-                },
-                (completedargs) =>
+                })
+            {
+                PostWorkCallBack = (completedargs) =>
                 {
                     working = false;
                     if (completedargs.Error != null)
@@ -913,7 +922,8 @@
                         detailsLoaded();
                     }
                     working = false;
-                });
+                }
+            });
         }
 
         private void RetrieveRecords(string fetch, Action AfterRetrieve)
@@ -925,12 +935,13 @@
             lblRecords.Text = "Retrieving records...";
             records = null;
             working = true;
-            WorkAsync("Retrieving records...",
+            WorkAsync(new WorkAsyncInfo("Retrieving records...",
                 (eventargs) =>
                 {
                     eventargs.Result = Service.RetrieveMultiple(new FetchExpression(fetch));
-                },
-                (completedargs) =>
+                })
+            {
+                PostWorkCallBack = (completedargs) =>
                 {
                     working = false;
                     if (completedargs.Error != null)
@@ -942,7 +953,8 @@
                         records = (EntityCollection)completedargs.Result;
                     }
                     AfterRetrieve();
-                });
+                }
+            });
         }
 
         private void UpdateRecords()
@@ -963,6 +975,7 @@
             }
             var attributeitem = (AttributeItem)cmbAttribute.SelectedItem;
             var onlychange = chkOnlyChange.Checked;
+            var ignoreerror = chkIgnoreErrors.Checked;
             var entity = records.EntityName;
             var attributes = new List<string>();
             attributes.Add(attributeitem.GetValue());
@@ -986,12 +999,13 @@
                 }
             }
             working = true;
-            WorkAsync("Updating records",
+            WorkAsync(new WorkAsyncInfo("Updating records",
                 (bgworker, workargs) =>
                 {
                     var total = records.Entities.Count;
                     var current = 0;
                     var updated = 0;
+                    var failed = 0;
                     foreach (var record in records.Entities)
                     {
                         current++;
@@ -1019,25 +1033,42 @@
                             }
                         }
                         bgworker.ReportProgress(pct, "Updating record " + current.ToString());
-                        if (attributeitem.Metadata is StatusAttributeMetadata)
+                        try
                         {
-                            UpdateState(touch, onlychange, (OptionSetValue)value, statevalue, record);
-                        }
-                        else
-                        {
-                            // This currently only supports ONE attribute being updated, can be expanded to set/touch several attributes in the future
-                            var currentvalue = record.Contains(attributes[0]) ? record[attributes[0]] : null;
-                            if (touch)
+                            if (attributeitem.Metadata is StatusAttributeMetadata)
                             {
-                                value = currentvalue;
+                                if (UpdateState(touch, onlychange, (OptionSetValue)value, statevalue, record))
+                                {
+                                    updated++;
+                                }
                             }
-                            UpdateAttributes(onlychange, entity, attributes, value, record, currentvalue);
+                            else
+                            {
+                                // This currently only supports ONE attribute being updated, can be expanded to set/touch several attributes in the future
+                                var currentvalue = record.Contains(attributes[0]) ? record[attributes[0]] : null;
+                                if (touch)
+                                {
+                                    value = currentvalue;
+                                }
+                                if (UpdateAttributes(onlychange, entity, attributes, value, record, currentvalue))
+                                {
+                                    updated++;
+                                }
+                            }
                         }
-                        updated++;
+                        catch (Exception ex)
+                        {
+                            failed++;
+                            if (!ignoreerror)
+                            {
+                                throw ex;
+                            }
+                        }
                     }
-                    workargs.Result = updated;
-                },
-                (completedargs) =>
+                    workargs.Result = new Tuple<int, int>(updated, failed);
+                })
+            {
+                PostWorkCallBack = (completedargs) =>
                 {
                     working = false;
                     if (completedargs.Error != null)
@@ -1046,17 +1077,19 @@
                     }
                     else
                     {
-                        lblUpdateStatus.Text = completedargs.Result.ToString() + " records updated";
+                        var result = completedargs.Result as Tuple<int, int>;
+                        lblUpdateStatus.Text = $"{result.Item1} records updated, {result.Item2} records failed.";
                     }
                 },
-                (changeargs) =>
+                ProgressChanged = (changeargs) =>
                 {
                     SetWorkingMessage(changeargs.UserState.ToString());
-                });
+                }
+            });
         }
 
         // This currently only supports ONE attribute being updated, can be expanded to set/touch several attributes in the future
-        private void UpdateAttributes(bool onlychange, string entity, List<string> attributes, object value, Entity record, object currentvalue)
+        private bool UpdateAttributes(bool onlychange, string entity, List<string> attributes, object value, Entity record, object currentvalue)
         {
             if (!onlychange || !ValuesEqual(value, currentvalue))
             {
@@ -1075,10 +1108,12 @@
                 {
                     record.Attributes.Add(attributes[0], value);
                 }
+                return true;
             }
+            return false;
         }
 
-        private void UpdateState(bool touch, bool onlychange, OptionSetValue statusvalue, OptionSetValue statevalue, Entity record)
+        private bool UpdateState(bool touch, bool onlychange, OptionSetValue statusvalue, OptionSetValue statevalue, Entity record)
         {
             var currentstate = record.Contains("statecode") ? record["statecode"] : new OptionSetValue(-1);
             var currentstatus = record.Contains("statuscode") ? record["statuscode"] : new OptionSetValue(-1);
@@ -1112,7 +1147,9 @@
                 {
                     record.Attributes.Add("statuscode", statusvalue);
                 }
+                return true;
             }
+            return false;
         }
 
         #endregion Async SDK methods

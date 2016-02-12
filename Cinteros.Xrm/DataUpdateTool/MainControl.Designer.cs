@@ -69,9 +69,9 @@
             this.lblUpdateStatus = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.crmGridView1 = new Cinteros.Xrm.CRMWinForm.CRMGridView();
+            this.chkIgnoreErrors = new System.Windows.Forms.CheckBox();
             this.toolStripMain.SuspendLayout();
             this.gb1select.SuspendLayout();
             this.gb2attribute.SuspendLayout();
@@ -82,6 +82,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.crmGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList1
@@ -430,6 +431,7 @@
             // 
             this.gb3value.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gb3value.Controls.Add(this.chkIgnoreErrors);
             this.gb3value.Controls.Add(this.cmbValue);
             this.gb3value.Controls.Add(this.rbSetNull);
             this.gb3value.Controls.Add(this.chkOnlyChange);
@@ -437,7 +439,7 @@
             this.gb3value.Controls.Add(this.rbSetValue);
             this.gb3value.Location = new System.Drawing.Point(6, 221);
             this.gb3value.Name = "gb3value";
-            this.gb3value.Size = new System.Drawing.Size(308, 109);
+            this.gb3value.Size = new System.Drawing.Size(308, 140);
             this.gb3value.TabIndex = 36;
             this.gb3value.TabStop = false;
             this.gb3value.Text = "3. Choose update method";
@@ -448,7 +450,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gb4update.Controls.Add(this.lblUpdateStatus);
             this.gb4update.Controls.Add(this.btnUpdate);
-            this.gb4update.Location = new System.Drawing.Point(6, 347);
+            this.gb4update.Location = new System.Drawing.Point(6, 379);
             this.gb4update.Name = "gb4update";
             this.gb4update.Size = new System.Drawing.Size(308, 89);
             this.gb4update.TabIndex = 37;
@@ -479,34 +481,13 @@
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox5.Controls.Add(this.label2);
-            this.groupBox5.Controls.Add(this.listView1);
+            this.groupBox5.Controls.Add(this.crmGridView1);
             this.groupBox5.Location = new System.Drawing.Point(11, 16);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(341, 455);
             this.groupBox5.TabIndex = 38;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Records";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.SystemColors.Window;
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.label2.Location = new System.Drawing.Point(29, 61);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(234, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Hold on. Soon... In a release in the near future...";
-            // 
-            // listView1
-            // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(3, 16);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(335, 436);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // splitContainer1
             // 
@@ -533,15 +514,43 @@
             this.splitContainer1.SplitterDistance = 328;
             this.splitContainer1.TabIndex = 39;
             // 
-            // DataUpdater
+            // crmGridView1
+            // 
+            this.crmGridView1.AllowUserToAddRows = false;
+            this.crmGridView1.AllowUserToDeleteRows = false;
+            this.crmGridView1.AllowUserToOrderColumns = true;
+            this.crmGridView1.AllowUserToResizeRows = false;
+            this.crmGridView1.AutoRefresh = true;
+            this.crmGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.crmGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.crmGridView1.Location = new System.Drawing.Point(3, 16);
+            this.crmGridView1.Name = "crmGridView1";
+            this.crmGridView1.OrganizationService = null;
+            this.crmGridView1.ReadOnly = true;
+            this.crmGridView1.ShowFriendlyNames = true;
+            this.crmGridView1.ShowIdColumn = false;
+            this.crmGridView1.Size = new System.Drawing.Size(335, 436);
+            this.crmGridView1.TabIndex = 2;
+            // 
+            // chkIgnoreErrors
+            // 
+            this.chkIgnoreErrors.AutoSize = true;
+            this.chkIgnoreErrors.Location = new System.Drawing.Point(15, 100);
+            this.chkIgnoreErrors.Name = "chkIgnoreErrors";
+            this.chkIgnoreErrors.Size = new System.Drawing.Size(85, 17);
+            this.chkIgnoreErrors.TabIndex = 34;
+            this.chkIgnoreErrors.Text = "Ignore errors";
+            this.chkIgnoreErrors.UseVisualStyleBackColor = true;
+            // 
+            // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStripMain);
-            this.Name = "DataUpdater";
+            this.Name = "MainControl";
             this.Size = new System.Drawing.Size(698, 512);
-            this.ConnectionUpdated += new ConnectionUpdatedHandler(this.DataUpdater_ConnectionUpdated);
+            this.ConnectionUpdated += new XrmToolBox.Extensibility.PluginControlBase.ConnectionUpdatedHandler(this.DataUpdater_ConnectionUpdated);
             this.Load += new System.EventHandler(this.DataUpdater_Load);
             this.toolStripMain.ResumeLayout(false);
             this.toolStripMain.PerformLayout();
@@ -554,11 +563,11 @@
             this.gb4update.ResumeLayout(false);
             this.gb4update.PerformLayout();
             this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.crmGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -603,9 +612,9 @@
         private System.Windows.Forms.Label lblUpdateStatus;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ComboBox cmbSource;
+        private CRMWinForm.CRMGridView crmGridView1;
+        private System.Windows.Forms.CheckBox chkIgnoreErrors;
     }
 }
