@@ -453,7 +453,10 @@
 
         private void GetFromFXB()
         {
-            var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder");
+            var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder")
+            {
+                //SourcePlugin = "Bulk Data Updater"
+            };
             var fXBMessageBusArgument = new FXBMessageBusArgument(FXBMessageBusRequest.FetchXML)
             {
                 FetchXML = fetchXml
