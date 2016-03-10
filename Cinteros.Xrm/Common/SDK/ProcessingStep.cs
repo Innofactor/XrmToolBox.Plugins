@@ -1,7 +1,7 @@
 ﻿namespace Cinteros.Xrm.Common.SDK
 {
     using System;
-    using Cinteros.Xrm.Common.Utils;
+    using Utils;
     using Microsoft.Xrm.Sdk;
 
     public class ProcessingStep
@@ -27,14 +27,16 @@
         /// <param name="entity"></param>
         public ProcessingStep(Entity entity, PluginAssembly parentAssembly, PluginType parentType)
         {
-            this.origin = entity;
+            origin = entity;
 
-            this.Id = entity.Id;
-            this.ParentAssembly = parentAssembly;
-            this.ParentType = parentType;
+            Id = entity.Id;
+            ParentAssembly = parentAssembly;
+            ParentType = parentType;
 
-            this.FriendlyName = (string)entity.Attributes[Constants.Crm.Attributes.NAME];
-            this.StateCode = (StateCode)((OptionSetValue)entity.Attributes[Constants.Crm.Attributes.STATE_CODE]).Value;
+            Message = Message.CreateFromStep(entity);
+                        
+            FriendlyName = (string)entity.Attributes[Constants.Crm.Attributes.NAME];
+            StateCode = (StateCode)((OptionSetValue)entity.Attributes[Constants.Crm.Attributes.STATE_CODE]).Value;
         }
 
         #endregion Public Constructors
@@ -54,6 +56,15 @@
         /// Gets id of plugin type
         /// </summary>
         public Guid Id
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets information about step to which plugin was registered
+        /// </summary>
+        public Message Message
         {
             get;
             private set;
@@ -92,12 +103,12 @@
 
         public Entity ToEntity()
         {
-            return this.origin;
+            return origin;
         }
 
         public override string ToString()
         {
-            return this.FriendlyName;
+            return FriendlyName;
         }
 
         #endregion Public Methods

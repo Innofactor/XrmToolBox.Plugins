@@ -31,42 +31,84 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cinteros.Xrm.CRMWinForm, Version=2016.3.9.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cinteros.Xrm.CRMWinForm.2016.3.09.5\lib\Cinteros.Xrm.CRMWinForm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Cinteros.Xrm.FetchXmlBuilder">
       <HintPath>..\Dependencies\Cinteros.Xrm.FetchXmlBuilder.dll</HintPath>
     </Reference>
     <Reference Include="Cinteros.Xrm.XmlEditorUtils">
       <HintPath>..\Dependencies\Cinteros.Xrm.XmlEditorUtils.dll</HintPath>
     </Reference>
-    <Reference Include="McTools.Xrm.Connection">
-      <HintPath>..\Dependencies\McTools.Xrm.Connection.dll</HintPath>
+    <Reference Include="McTools.Xrm.Connection, Version=1.2016.2.28, Culture=neutral, PublicKeyToken=96037217801d9658, processorArchitecture=MSIL">
+      <HintPath>..\packages\MscrmTools.Xrm.Connection.1.2016.2.28\lib\net\McTools.Xrm.Connection.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Crm.Sdk.Proxy, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
+    <Reference Include="McTools.Xrm.Connection.WinForms, Version=1.2016.2.28, Culture=neutral, PublicKeyToken=f1559f79cf894e27, processorArchitecture=MSIL">
+      <HintPath>..\packages\MscrmTools.Xrm.Connection.1.2016.2.28\lib\net\McTools.Xrm.Connection.WinForms.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Xrm.Sdk">
-      <HintPath>..\Dependencies\Microsoft.Xrm.Sdk.dll</HintPath>
+    <Reference Include="Microsoft.Crm.Sdk.Proxy, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.8.0.2.1\lib\net45\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Xrm.Tooling.Connector">
-      <HintPath>..\Dependencies\Microsoft.Xrm.Tooling.Connector.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=2.18.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.18.206251556\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+      <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms, Version=2.18.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.18.206251556\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.8.0.2.1\lib\net45\Microsoft.Xrm.Sdk.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk.Deployment, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.Deployment.8.0.2\lib\net45\Microsoft.Xrm.Sdk.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk.Workflow, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.Workflow.8.0.2\lib\net45\Microsoft.Xrm.Sdk.Workflow.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Tooling.Connector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.XrmTooling.CoreAssembly.8.0.2\lib\net45\Microsoft.Xrm.Tooling.Connector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Activities.Presentation" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Workflow.Activities" />
+    <Reference Include="System.Workflow.ComponentModel" />
+    <Reference Include="System.Workflow.Runtime" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
-    <Reference Include="XrmToolBox, Version=1.2015.5.6, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\XrmToolBox.exe</HintPath>
+    <Reference Include="XrmToolBox, Version=1.2016.2.28, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XrmToolBoxPackage.1.2016.2.28\lib\net\XrmToolBox.exe</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="XrmToolBox.Extensibility">
-      <HintPath>..\Dependencies\XrmToolBox.Extensibility.dll</HintPath>
+    <Reference Include="XrmToolBox.Extensibility, Version=1.2016.2.28, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XrmToolBoxPackage.1.2016.2.28\lib\net\XrmToolBox.Extensibility.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -83,8 +125,10 @@
     <Compile Include="Common\Forms\SelectColumnsDialog.Designer.cs">
       <DependentUpon>SelectColumnsDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\SDK\MessageFilter.cs" />
     <Compile Include="Common\SDK\IComparableEntity.cs" />
     <Compile Include="Common\SDK\IsolationMode.cs" />
+    <Compile Include="Common\SDK\Message.cs" />
     <Compile Include="Common\SDK\OrganizationSnapshot.cs" />
     <Compile Include="Common\SDK\PluginAssembly.cs" />
     <Compile Include="Common\SDK\PluginType.cs" />
@@ -124,6 +168,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="StepsManipulationTool\MainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StepsManipulationTool\MainControl.Designer.cs">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StepsManipulationTool\MatchResult.cs" />
+    <Compile Include="StepsManipulationTool\OperationExtensions.cs" />
+    <Compile Include="StepsManipulationTool\PluginDescription.cs" />
     <Compile Include="VersionVerificationTool\Controls\ViewParameters.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -185,6 +238,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="StepsManipulationTool\MainControl.resx">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VersionVerificationTool\Controls\ViewParameters.resx">
       <DependentUpon>ViewParameters.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,13 +265,16 @@
   <ItemGroup>
     <Content Include="DataUpdateTool\Resources\FXB-16w.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug mkdir "Plugins"
-if $(ConfigurationName) == Debug move /Y $(TargetName).* "Plugins"
-if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.XmlEditorUtils.dll "Plugins"
-if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.FetchXmlBuilder.dll Plugins</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Debug mkdir Plugins
+if $(ConfigurationName) == Debug move /Y $(TargetName).* Plugins
+if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.XmlEditorUtils.dll Plugins
+if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.FetchXmlBuilder.dll Plugins
+if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.CRMWinForm.dll Plugins</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

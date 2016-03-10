@@ -61,6 +61,7 @@
                 internal const string STATE_CODE = "statecode";
                 internal const string STATUS_CODE = "statuscode";
                 internal const string UNIQUE_NAME = "uniquename";
+                internal const string PRIMARY_OBJECT_TYPE_CODE = "primaryobjecttypecode";
                 internal const string VERSION = "version";
 
                 #endregion Internal Fields
@@ -87,6 +88,16 @@
                 /// Name of the 'sdkmessageprocessingstep' entity
                 /// </summary>
                 internal const string PROCESSING_STEP = "sdkmessageprocessingstep";
+
+                /// <summary>
+                /// Name of the 'sdkmessage' entity
+                /// </summary>
+                internal const string MESSAGE = "sdkmessage";
+
+                /// <summary>
+                /// Name of the 'sdkmessagefilter' entity
+                /// </summary>
+                internal const string MESSAGE_FILTER = "sdkmessagefilter";
 
                 /// <summary>
                 /// Name of the 'solution' entity
@@ -184,8 +195,14 @@
             internal const string FRIENDLY_NAME = "friendly-name";
             internal const string SOLUTION = "solution";
             internal const string SOLUTIONS = "solutions";
+            internal const string STEP = "step";
+            internal const string STEPS = "steps";
             internal const string UNIQUE_NAME = "unique-name";
             internal const string VERSION = "version";
+            internal const string PLUGIN = "plugin";
+            internal const string PLUGINS = "plugins";
+            internal const string ID = "id";
+            internal const string IMAGE = "image";
 
             #endregion Internal Fields
         }

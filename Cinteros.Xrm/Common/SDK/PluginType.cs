@@ -45,7 +45,7 @@
         public string FriendlyName
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
