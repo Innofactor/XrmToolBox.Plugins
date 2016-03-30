@@ -31,9 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cinteros.Xrm.CRMWinForm, Version=2016.3.9.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cinteros.Xrm.CRMWinForm.2016.3.09.5\lib\Cinteros.Xrm.CRMWinForm.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Cinteros.Xrm.CRMWinForm">
+      <HintPath>..\..\CRMWinForm\CRMWinForm\bin\Debug\Cinteros.Xrm.CRMWinForm.dll</HintPath>
     </Reference>
     <Reference Include="Cinteros.Xrm.FetchXmlBuilder">
       <HintPath>..\Dependencies\Cinteros.Xrm.FetchXmlBuilder.dll</HintPath>
@@ -163,6 +162,13 @@
       <DependentUpon>XmlContentDisplayDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="DataUpdateTool\PluginDescription.cs" />
+    <Compile Include="PluginTraceViewer\PluginDescription.cs" />
+    <Compile Include="PluginTraceViewer\PluginTraceViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PluginTraceViewer\PluginTraceViewer.Designer.cs">
+      <DependentUpon>PluginTraceViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -232,6 +238,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Common\Forms\XmlContentDisplayDialog.resx">
       <DependentUpon>XmlContentDisplayDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PluginTraceViewer\PluginTraceViewer.resx">
+      <DependentUpon>PluginTraceViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
