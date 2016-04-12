@@ -268,8 +268,15 @@ namespace Cinteros.Xrm.Plugins.PluginTraceViewer
 
         private void crmGridView_RecordEnter(object sender, CRMWinForm.CRMRecordEventArgs e)
         {
-            textMessage.Text = e.Entity != null && e.Entity.Contains("messageblock") ? e.Entity["messageblock"].ToString() : "";
-            textException.Text = e.Entity != null && e.Entity.Contains("exceptiondetails") ? e.Entity["exceptiondetails"].ToString() : "";
+            textMessage.Text = FixLineBreaks(e.Entity != null && e.Entity.Contains("messageblock") ? e.Entity["messageblock"].ToString() : "");
+            textException.Text = FixLineBreaks(e.Entity != null && e.Entity.Contains("exceptiondetails") ? e.Entity["exceptiondetails"].ToString() : "");
+        }
+
+        private string FixLineBreaks(string text)
+        {
+            text = text.Replace("\r\n", "\n");
+            text = text.Replace("\n", Environment.NewLine);
+            return text;
         }
 
         private void PluginTraceViewer_Load(object sender, EventArgs e)
