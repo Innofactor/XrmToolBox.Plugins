@@ -21,7 +21,9 @@ build:
 after_build:
 - cmd: >-
     nuget pack Cinteros.XrmToolBox.Plugins.nuspec -Version %APPVEYOR_BUILD_VERSION%
+
     7z a Cinteros.XrmToolBox.Plugins_%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Output\%CONFIGURATION%\Cinteros.Xrm.*.dll
+
     appveyor PushArtifact Cinteros.XrmToolBox.Plugins_%APPVEYOR_BUILD_VERSION%.zip
 artifacts:
 - path: '**\Cinteros.Xrm.Plugins.*.nupkg'
