@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3C865935-8376-4B29-BBF2-9EEEB08FA9EA}</ProjectGuid>
+    <ProjectGuid>{54E28306-8CA0-4683-A944-D70F6B4687C3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Cinteros.Xrm.Plugins</RootNamespace>
-    <AssemblyName>Cinteros.Xrm.Plugins</AssemblyName>
+    <AssemblyName>Cinteros.WIP.Xrm.Plugins</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -37,11 +37,9 @@
     </Reference>
     <Reference Include="Cinteros.Xrm.FetchXmlBuilder">
       <HintPath>..\Dependencies\Cinteros.Xrm.FetchXmlBuilder.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Cinteros.Xrm.XmlEditorUtils">
       <HintPath>..\Dependencies\Cinteros.Xrm.XmlEditorUtils.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="McTools.Xrm.Connection, Version=1.2016.4.27, Culture=neutral, PublicKeyToken=96037217801d9658, processorArchitecture=MSIL">
       <HintPath>..\packages\MscrmTools.Xrm.Connection.1.2016.4.27\lib\net\McTools.Xrm.Connection.dll</HintPath>
@@ -122,13 +120,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoDeployTool\MainControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="AutoDeployTool\MainControl.Designer.cs">
-      <DependentUpon>MainControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AutoDeployTool\PluginDescription.cs" />
     <Compile Include="Common\Forms\SelectColumnsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,16 +141,6 @@
     <Compile Include="Common\Utils\Helpers.cs" />
     <Compile Include="Common\Utils\IUpdateToolStrip.cs" />
     <Compile Include="Common\Utils\UpdateToolStripEventArgs.cs" />
-    <Compile Include="DataUpdateTool\AppCode\AttributeItem.cs" />
-    <Compile Include="DataUpdateTool\AppCode\EntityItem.cs" />
-    <Compile Include="DataUpdateTool\AppCode\OptionsetItem.cs" />
-    <Compile Include="DataUpdateTool\AppCode\ViewItem.cs" />
-    <Compile Include="DataUpdateTool\MainControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DataUpdateTool\MainControl.Designer.cs">
-      <DependentUpon>MainControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Common\Forms\SelectViewDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,70 +153,23 @@
     <Compile Include="Common\Forms\XmlContentDisplayDialog.Designer.cs">
       <DependentUpon>XmlContentDisplayDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataUpdateTool\PluginDescription.cs" />
+    <Compile Include="PluginTraceViewer\PluginDescription.cs" />
+    <Compile Include="PluginTraceViewer\PluginTraceViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PluginTraceViewer\PluginTraceViewer.Designer.cs">
+      <DependentUpon>PluginTraceViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="StepsManipulationTool\MainControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="StepsManipulationTool\MainControl.Designer.cs">
-      <DependentUpon>MainControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="StepsManipulationTool\MatchResult.cs" />
-    <Compile Include="StepsManipulationTool\OperationExtensions.cs" />
-    <Compile Include="StepsManipulationTool\PluginDescription.cs" />
-    <Compile Include="VersionVerificationTool\Controls\ViewParameters.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="VersionVerificationTool\Controls\ViewParameters.Designer.cs">
-      <DependentUpon>ViewParameters.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VersionVerificationTool\Controls\ViewResults.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="VersionVerificationTool\Controls\ViewResults.Designer.cs">
-      <DependentUpon>ViewResults.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VersionVerificationTool\MainControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="VersionVerificationTool\MainControl.Designer.cs">
-      <DependentUpon>MainControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VersionVerificationTool\PluginDescription.cs" />
-    <Compile Include="ViewDesignerTool\Controls\ViewEditor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ViewDesignerTool\Controls\ViewEditor.Designer.cs">
-      <DependentUpon>ViewEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewDesignerTool\Forms\SetSizeDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ViewDesignerTool\Forms\SetSizeDialog.Designer.cs">
-      <DependentUpon>SetSizeDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewDesignerTool\MainControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ViewDesignerTool\MainControl.Designer.cs">
-      <DependentUpon>MainControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewDesignerTool\PluginDescription.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AutoDeployTool\MainControl.resx">
-      <DependentUpon>MainControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Common\Forms\SelectColumnsDialog.resx">
       <DependentUpon>SelectColumnsDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DataUpdateTool\MainControl.resx">
-      <DependentUpon>MainControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Common\Forms\SelectViewDialog.resx">
       <DependentUpon>SelectViewDialog.cs</DependentUpon>
@@ -243,37 +177,14 @@
     <EmbeddedResource Include="Common\Forms\XmlContentDisplayDialog.resx">
       <DependentUpon>XmlContentDisplayDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PluginTraceViewer\PluginTraceViewer.resx">
+      <DependentUpon>PluginTraceViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="StepsManipulationTool\MainControl.resx">
-      <DependentUpon>MainControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VersionVerificationTool\Controls\ViewParameters.resx">
-      <DependentUpon>ViewParameters.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VersionVerificationTool\Controls\ViewResults.resx">
-      <DependentUpon>ViewResults.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VersionVerificationTool\MainControl.resx">
-      <DependentUpon>MainControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ViewDesignerTool\Controls\ViewEditor.resx">
-      <DependentUpon>ViewEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ViewDesignerTool\Forms\SetSizeDialog.resx">
-      <DependentUpon>SetSizeDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ViewDesignerTool\MainControl.resx">
-      <DependentUpon>MainControl.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DataUpdateTool\Resources\FXB-16w.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
