@@ -120,39 +120,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Forms\SelectColumnsDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Common\Forms\SelectColumnsDialog.Designer.cs">
-      <DependentUpon>SelectColumnsDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Common\SDK\MessageFilter.cs" />
-    <Compile Include="Common\SDK\IComparableEntity.cs" />
-    <Compile Include="Common\SDK\IsolationMode.cs" />
-    <Compile Include="Common\SDK\Message.cs" />
-    <Compile Include="Common\SDK\OrganizationSnapshot.cs" />
-    <Compile Include="Common\SDK\PluginAssembly.cs" />
-    <Compile Include="Common\SDK\PluginType.cs" />
-    <Compile Include="Common\SDK\ProcessingStep.cs" />
-    <Compile Include="Common\SDK\Solution.cs" />
-    <Compile Include="Common\SDK\StateCode.cs" />
-    <Compile Include="Common\Utils\Constants.cs" />
-    <Compile Include="Common\Utils\Extensions.cs" />
-    <Compile Include="Common\Utils\Helpers.cs" />
-    <Compile Include="Common\Utils\IUpdateToolStrip.cs" />
-    <Compile Include="Common\Utils\UpdateToolStripEventArgs.cs" />
-    <Compile Include="Common\Forms\SelectViewDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Common\Forms\SelectViewDialog.Designer.cs">
-      <DependentUpon>SelectViewDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Common\Forms\XmlContentDisplayDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Common\Forms\XmlContentDisplayDialog.Designer.cs">
-      <DependentUpon>XmlContentDisplayDialog.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Constants.cs" />
     <Compile Include="PluginTraceViewer\PluginDescription.cs" />
     <Compile Include="PluginTraceViewer\PluginTraceViewer.cs">
       <SubType>UserControl</SubType>
@@ -168,15 +136,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Common\Forms\SelectColumnsDialog.resx">
-      <DependentUpon>SelectColumnsDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Common\Forms\SelectViewDialog.resx">
-      <DependentUpon>SelectViewDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Common\Forms\XmlContentDisplayDialog.resx">
-      <DependentUpon>XmlContentDisplayDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PluginTraceViewer\PluginTraceViewer.resx">
       <DependentUpon>PluginTraceViewer.cs</DependentUpon>
     </EmbeddedResource>
