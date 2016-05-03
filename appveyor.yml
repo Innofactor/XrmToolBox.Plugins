@@ -26,7 +26,7 @@ after_build:
 
     appveyor PushArtifact Cinteros.XrmToolBox.Plugins_%APPVEYOR_BUILD_VERSION%.zip
 artifacts:
-- path: '**\Cinteros.Xrm.Plugins.*.nupkg'
+- path: '**\Cinteros.XrmToolBox.Plugins.*.nupkg'
 deploy:
 - provider: Environment
   name: GitHubCintXTB
