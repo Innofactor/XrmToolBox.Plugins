@@ -18,6 +18,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Output\Release\Cinteros.Xrm.*.dll" target="lib\net452\Plugins" />
+    <file src="Output\Release\Cinteros.Xrm.Plugins.dll" target="lib\net452\Plugins" />
+    <file src="Output\Release\Cinteros.Xrm.XmlEditorUtils.dll" target="lib\net452\Plugins" />
+    <file src="Output\Release\Cinteros.Xrm.CRMWinForm.dll" target="lib\net452\Plugins" />
   </files>
 </package>
