@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.ViewDesignerTool.Controls
+﻿namespace Cinteros.XTB.ViewDesigner.Controls
 {
     partial class ViewEditor
     {

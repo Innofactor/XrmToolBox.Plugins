@@ -1,8 +1,7 @@
-﻿namespace Cinteros.Xrm.Plugins.ViewDesignerTool
+﻿namespace Cinteros.XTB.ViewDesigner
 {
     using System.ComponentModel.Composition;
-    using Cinteros.Xrm.Common.Utils;
-    using Cinteros.Xrm.ViewDesignerTool;
+    using Utils;
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;
 

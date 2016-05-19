@@ -1,15 +1,14 @@
-﻿namespace Cinteros.Xrm.Common.Forms
+﻿namespace Cinteros.XTB.ViewDesigner.Forms
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
-    using Cinteros.Xrm.DataUpdateTool.AppCode;
-    using Cinteros.Xrm.XmlEditorUtils;
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Query;
     using XrmToolBox.Extensibility;
-
+    using AppCode;
+    using Xrm.XmlEditorUtils;
     public partial class SelectViewDialog : Form
     {
         #region Public Fields
@@ -123,7 +122,7 @@
         {
             if (cmbView.SelectedItem is ViewItem)
             {
-                txtFetch.Text = ((ViewItem)cmbView.SelectedItem).GetFetch();
+                txtFetch.Text = ((ViewItem)cmbView.SelectedItem).GetLayout();
                 txtFetch.Process();
                 btnOk.Enabled = true;
             }

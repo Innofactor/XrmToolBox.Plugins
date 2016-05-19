@@ -1,20 +1,16 @@
-﻿namespace Cinteros.Xrm.ViewDesignerTool
+﻿namespace Cinteros.XTB.ViewDesigner
 {
     using System;
-    using System.Linq;
     using System.Windows.Forms;
-    using Cinteros.Xrm.Common.Forms;
-    using Cinteros.Xrm.FetchXmlBuilder;
-    using Cinteros.Xrm.ViewDesignerTool.Controls;
     using Microsoft.Crm.Sdk.Messages;
     using Microsoft.Xrm.Sdk;
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;
     using System.Collections.Generic;
-    using Cinteros.Xrm.XmlEditorUtils;
     using System.Threading.Tasks;
     using System.Reflection;
-
+    using Forms;
+    using Xrm.FetchXmlBuilder;
     public partial class MainControl : PluginControlBase, IGitHubPlugin, IMessageBusHost, IHelpPlugin
     {
         #region Private Fields
@@ -127,13 +123,13 @@
                 //        this.CurrentPage = new ViewEditor();
                 //    });
             }
-            DateTime lastCheck = DateTime.MinValue;
-            var tasks = new List<Task>
-            {
-                VersionCheck.LaunchVersionCheck(Assembly.GetExecutingAssembly().GetName().Version.ToString(), "Cinteros", "XrmToolBox.Plugins", "http://cinteros.xrmtoolbox.com/?src=FXB.{0}", lastCheck, this),
-            };
-            tasks.ForEach(x => x.Start());
-            lastCheck = DateTime.Now;
+            //DateTime lastCheck = DateTime.MinValue;
+            //var tasks = new List<Task>
+            //{
+            //    VersionCheck.LaunchVersionCheck(Assembly.GetExecutingAssembly().GetName().Version.ToString(), "Cinteros", "XrmToolBox.Plugins", "http://cinteros.xrmtoolbox.com/?src=FXB.{0}", lastCheck, this),
+            //};
+            //tasks.ForEach(x => x.Start());
+            //lastCheck = DateTime.Now;
         }
 
         private void tsbClose_Click(object sender, EventArgs e)

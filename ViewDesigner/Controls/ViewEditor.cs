@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.ViewDesignerTool.Controls
+﻿namespace Cinteros.XTB.ViewDesigner.Controls
 {
     using System;
     using System.Linq;
@@ -7,8 +7,7 @@
     using System.Xml.Linq;
     using Microsoft.Xrm.Sdk;
     using System.Collections.Generic;
-    using Plugins.ViewDesignerTool.Forms;
-
+    using Forms;
     public partial class ViewEditor : UserControl
     {
         #region Private Fields

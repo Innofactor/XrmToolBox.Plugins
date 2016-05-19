@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.Plugins.ViewDesignerTool.Forms
+﻿namespace Cinteros.XTB.ViewDesigner.Forms
 {
     partial class SetSizeDialog
     {

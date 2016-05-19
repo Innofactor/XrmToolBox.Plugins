@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.ViewDesignerTool
+﻿namespace Cinteros.XTB.ViewDesigner
 {
     partial class MainControl
     {
@@ -42,7 +42,7 @@
             this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbEditXml = new System.Windows.Forms.ToolStripButton();
-            this.ViewEditor = new Cinteros.Xrm.ViewDesignerTool.Controls.ViewEditor();
+            this.ViewEditor = new Cinteros.XTB.ViewDesigner.Controls.ViewEditor();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 

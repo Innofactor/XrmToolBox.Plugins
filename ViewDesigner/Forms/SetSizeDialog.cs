@@ -1,4 +1,4 @@
-﻿namespace Cinteros.Xrm.Plugins.ViewDesignerTool.Forms
+﻿namespace Cinteros.XTB.ViewDesigner.Forms
 {
     using System;
     using System.Windows.Forms;
