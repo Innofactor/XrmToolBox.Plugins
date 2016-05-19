@@ -7,9 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinteros.Xrm", "Cinteros.Xr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3C24DC98-E02C-4450-89EB-239A0A304106}"
 	ProjectSection(SolutionItems) = preProject
-		appveyor.yml = appveyor.yml
 		Cinteros.XrmToolBox.Plugins.nuspec = Cinteros.XrmToolBox.Plugins.nuspec
+		Cinteros.XrmToolBox.Plugins.yml = Cinteros.XrmToolBox.Plugins.yml
 		Cinteros.XTB.ViewDesigner.nuspec = Cinteros.XTB.ViewDesigner.nuspec
+		Cinteros.XTB.ViewDesigner.yml = Cinteros.XTB.ViewDesigner.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinteros.Xrm.WIP", "Cinteros.Xrm\Cinteros.Xrm.WIP.csproj", "{54E28306-8CA0-4683-A944-D70F6B4687C3}"
