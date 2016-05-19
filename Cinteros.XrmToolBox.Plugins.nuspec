@@ -9,8 +9,8 @@
     <projectUrl>http://cinteros.xrmtoolbox.com</projectUrl>
     <iconUrl>http://rappen.net/Cinteros/cinteros.ico</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Bulk Updater, View Designer, Version Verifier, Steps Manipulator, Auto Deployer</description>
-    <summary>Bulk Updater, View Designer, Version Verifier, Steps Manipulator, Auto Deployer</summary>
+    <description>Bulk Updater, Version Verifier, Steps Manipulator, Auto Deployer</description>
+    <summary>Bulk Updater, Version Verifier, Steps Manipulator, Auto Deployer</summary>
     <copyright>Copyright 2015-2016 Cinteros AB</copyright>
     <tags>XrmToolBox Plugins Cinteros Plugins</tags>
     <dependencies>
