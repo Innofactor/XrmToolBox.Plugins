@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Cinteros.XrmToolBox.ViewDesigner</id>
+    <version>1.0.0</version>
+    <title>View Designer</title>
+    <authors>Cinteros AB</authors>
+    <owners>Cinteros</owners>
+    <projectUrl>http://cinteros.xrmtoolbox.com</projectUrl>
+    <iconUrl>http://rappen.net/Cinteros/cinteros.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Easy UI to design view layouts and alter queries using FetchXML Builder</description>
+    <summary></summary>
+    <copyright>Copyright 2015-2016 Cinteros AB</copyright>
+    <tags>XrmToolBox Plugins Cinteros ViewDesigner</tags>
+    <dependencies>
+      <dependency id="XrmToolBox" version="1.2016.3.30" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Output\Release\Cinteros.XTB.ViewDesigner.dll" target="lib\net452\Plugins" />
+    <file src="Output\Release\Cinteros.Xrm.XmlEditorUtils.dll" target="lib\net452\Plugins" />
+  </files>
+</package>
