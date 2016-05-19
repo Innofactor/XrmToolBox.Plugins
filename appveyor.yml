@@ -19,20 +19,14 @@ build:
   publish_nuget: true
   verbosity: normal
 after_build:
-- cmd: >-
-    nuget pack Cinteros.XrmToolBox.Plugins.nuspec -Version %APPVEYOR_BUILD_VERSION%
-
-    nuget pack Cinteros.XTB.ViewDesigner.nuspec -Version %APPVEYOR_BUILD_VERSION%
-
-    7z a Cinteros.XrmToolBox.Plugins_%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Output\%CONFIGURATION%\Cinteros.Xrm.*.dll
-    
-	7z a Cinteros.XTB.ViewDesigner_%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Output\%CONFIGURATION%\Cinteros.XTB.ViewDesigner.dll
-    
-	7z a Cinteros.XTB.ViewDesigner_%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Output\%CONFIGURATION%\Cinteros.Xrm.XmlEditorUtils.dll
-
-    appveyor PushArtifact Cinteros.XrmToolBox.Plugins_%APPVEYOR_BUILD_VERSION%.zip
-    
-	appveyor PushArtifact Cinteros.XTB.ViewDesigner_%APPVEYOR_BUILD_VERSION%.zip
+- cmd:
+    - nuget pack Cinteros.XrmToolBox.Plugins.nuspec -Version %APPVEYOR_BUILD_VERSION%
+    - nuget pack Cinteros.XTB.ViewDesigner.nuspec -Version %APPVEYOR_BUILD_VERSION%
+    - 7z a Cinteros.XrmToolBox.Plugins_%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Output\%CONFIGURATION%\Cinteros.Xrm.*.dll
+    - 7z a Cinteros.XTB.ViewDesigner_%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Output\%CONFIGURATION%\Cinteros.XTB.ViewDesigner.dll
+	- 7z a Cinteros.XTB.ViewDesigner_%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Output\%CONFIGURATION%\Cinteros.Xrm.XmlEditorUtils.dll
+    - appveyor PushArtifact Cinteros.XrmToolBox.Plugins_%APPVEYOR_BUILD_VERSION%.zip
+	- appveyor PushArtifact Cinteros.XTB.ViewDesigner_%APPVEYOR_BUILD_VERSION%.zip
 artifacts:
 - path: '**\Cinteros.XrmToolBox.Plugins.*.nupkg'
 - path: '**\Cinteros.XTB.ViewDesigner.*.nupkg'
