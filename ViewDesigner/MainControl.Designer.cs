@@ -185,7 +185,6 @@
             this.Controls.Add(this.tsMenu);
             this.Name = "MainControl";
             this.Size = new System.Drawing.Size(600, 400);
-            this.Load += new System.EventHandler(this.MainControl_Load);
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.ResumeLayout(false);

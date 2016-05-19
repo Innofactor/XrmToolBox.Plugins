@@ -6,8 +6,6 @@
     using Microsoft.Xrm.Sdk;
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
     using System.Reflection;
     using Forms;
     using Xrm.FetchXmlBuilder;
@@ -97,41 +95,6 @@
 
         #region Private Methods
 
-        private void MainControl_Load(object sender, EventArgs e)
-        {
-            if (sender != null)
-            {
-                if (sender is MainControl)
-                {
-                    var plugin = ((MainControl)sender);
-                    // In case if connection updated on main application, update assemblies list
-                    // inside the plugin plugin.ConnectionUpdated += MainControl_ConnectionUpdated;
-
-                    // this.ExecuteMethod(this.RetrieveViews);
-
-                    //if (plugin.Service != null)
-                    //{
-                    //    // Execute assemblies retrieve only if Service object is set for correct sender.
-                    //    // This will help plugin act predicatable when it was loaded in offline mode;
-                    //    // Plugin will not insist on connecting to server. Will scinetly obey instead.
-                    //    this.ExecuteMethod(this.RetrieveViews);
-                    //}
-                }
-
-                //this.ExecuteMethod(() =>
-                //    {
-                //        this.CurrentPage = new ViewEditor();
-                //    });
-            }
-            //DateTime lastCheck = DateTime.MinValue;
-            //var tasks = new List<Task>
-            //{
-            //    VersionCheck.LaunchVersionCheck(Assembly.GetExecutingAssembly().GetName().Version.ToString(), "Cinteros", "XrmToolBox.Plugins", "http://cinteros.xrmtoolbox.com/?src=FXB.{0}", lastCheck, this),
-            //};
-            //tasks.ForEach(x => x.Start());
-            //lastCheck = DateTime.Now;
-        }
-
         private void tsbClose_Click(object sender, EventArgs e)
         {
             this.CloseTool();
@@ -150,15 +113,15 @@
                 MessageBox.Show("First select a view to design.", "Edit query", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder");
-            var fXBMessageBusArgument = new FXBMessageBusArgument(FXBMessageBusRequest.FetchXML);
-            if (ViewEditor != null && ViewEditor.FetchXml != null && ViewEditor.FetchXml.OuterXml != null)
-            {
-                fXBMessageBusArgument.FetchXML = ViewEditor.FetchXml.OuterXml;
-            }
-            messageBusEventArgs.TargetArgument = fXBMessageBusArgument;
             try
             {
+                var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder");
+                var fXBMessageBusArgument = new FXBMessageBusArgument(FXBMessageBusRequest.FetchXML);
+                if (ViewEditor != null && ViewEditor.FetchXml != null && ViewEditor.FetchXml.OuterXml != null)
+                {
+                    fXBMessageBusArgument.FetchXML = ViewEditor.FetchXml.OuterXml;
+                }
+                messageBusEventArgs.TargetArgument = fXBMessageBusArgument;
                 OnOutgoingMessage(this, messageBusEventArgs);
             }
             catch (System.IO.FileNotFoundException)
