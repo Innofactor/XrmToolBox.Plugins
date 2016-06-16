@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Cinteros.XTB.ViewDesigner.yml = Cinteros.XTB.ViewDesigner.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinteros.Xrm.WIP", "Cinteros.Xrm\Cinteros.Xrm.WIP.csproj", "{54E28306-8CA0-4683-A944-D70F6B4687C3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug All Cinteros XTB|Any CPU = Debug All Cinteros XTB|Any CPU
@@ -31,14 +29,6 @@ Global
 		{3C865935-8376-4B29-BBF2-9EEEB08FA9EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C865935-8376-4B29-BBF2-9EEEB08FA9EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C865935-8376-4B29-BBF2-9EEEB08FA9EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54E28306-8CA0-4683-A944-D70F6B4687C3}.Debug All Cinteros XTB|Any CPU.ActiveCfg = Debug|Any CPU
-		{54E28306-8CA0-4683-A944-D70F6B4687C3}.Debug All Cinteros XTB|Any CPU.Build.0 = Debug|Any CPU
-		{54E28306-8CA0-4683-A944-D70F6B4687C3}.Debug Without GemBox|Any CPU.ActiveCfg = Debug|Any CPU
-		{54E28306-8CA0-4683-A944-D70F6B4687C3}.Debug Without GemBox|Any CPU.Build.0 = Debug|Any CPU
-		{54E28306-8CA0-4683-A944-D70F6B4687C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54E28306-8CA0-4683-A944-D70F6B4687C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54E28306-8CA0-4683-A944-D70F6B4687C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54E28306-8CA0-4683-A944-D70F6B4687C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
