@@ -3,16 +3,17 @@
   <metadata>
     <id>Cinteros.XrmToolBox.Plugins</id>
     <version>1.0.0</version>
-    <title>Innofactor Tools for XrmToolBox (formerly known as Cinteros Tools) </title>
+    <title>Innofactor Tools for XrmToolBox</title>
     <authors>Innofactor AB</authors>
     <owners>Innofactor</owners>
     <projectUrl>http://cinteros.xrmtoolbox.com</projectUrl>
     <iconUrl>http://rappen.net/Cinteros/innofactor.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Version Verifier, Steps Manipulator, Auto Deployer</description>
+    <description>Version Verifier, Steps Manipulator, Auto Deployer (formerly known as Cinteros Tools)</description>
     <summary>Version Verifier, Steps Manipulator, Auto Deployer</summary>
-    <releaseNotes>
-      Note: These plugins require the FetchXML Builder to be installed to work properly!
+    <releaseNotes>Note: These plugins require the FetchXML Builder to be installed to work properly!
+    
+    This package was previously known as Cinteros Tools for XrmToolBox.
     </releaseNotes>
     <copyright>Copyright 2016 Innofactor AB</copyright>
     <tags>XrmToolBox Plugins Innofactor Plugins</tags>
