@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyCompany("Cinteros AB")]
-[assembly: AssemblyCopyright("Copyright © Cinteros AB 2015")]
-[assembly: AssemblyTitle("Cinteros XrmToolBox Plugins")]
-[assembly: AssemblyDescription("Various plugins for XrmToolBox by Cinteros AB")]
+[assembly: AssemblyCompany("Innofactor AB")]
+[assembly: AssemblyCopyright("Copyright © Innofactor AB 2016")]
+[assembly: AssemblyTitle("Innofactor XrmToolBox Plugins")]
+[assembly: AssemblyDescription("Various plugins for XrmToolBox by Innofactor AB")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("Cinteros.XrmToolBox.Plugins")]
 [assembly: AssemblyTrademark("")]

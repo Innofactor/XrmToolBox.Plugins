@@ -4,10 +4,10 @@
     <id>Cinteros.XrmToolBox.Plugins</id>
     <version>1.0.0</version>
     <title>Cinteros Tools for XrmToolBox</title>
-    <authors>Cinteros AB</authors>
-    <owners>Cinteros</owners>
+    <authors>Innofactor AB</authors>
+    <owners>Innofactor</owners>
     <projectUrl>http://cinteros.xrmtoolbox.com</projectUrl>
-    <iconUrl>http://rappen.net/Cinteros/cinteros.ico</iconUrl>
+    <iconUrl>http://rappen.net/Cinteros/innofactor.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Version Verifier, Steps Manipulator, Auto Deployer</description>
     <summary>Version Verifier, Steps Manipulator, Auto Deployer</summary>
