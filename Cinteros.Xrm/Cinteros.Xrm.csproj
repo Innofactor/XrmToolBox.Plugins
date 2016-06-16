@@ -150,16 +150,6 @@
     <Compile Include="Common\Utils\Helpers.cs" />
     <Compile Include="Common\Utils\IUpdateToolStrip.cs" />
     <Compile Include="Common\Utils\UpdateToolStripEventArgs.cs" />
-    <Compile Include="DataUpdateTool\AppCode\AttributeItem.cs" />
-    <Compile Include="DataUpdateTool\AppCode\EntityItem.cs" />
-    <Compile Include="DataUpdateTool\AppCode\OptionsetItem.cs" />
-    <Compile Include="DataUpdateTool\AppCode\ViewItem.cs" />
-    <Compile Include="DataUpdateTool\MainControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DataUpdateTool\MainControl.Designer.cs">
-      <DependentUpon>MainControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Common\Forms\SelectViewDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,7 +162,6 @@
     <Compile Include="Common\Forms\XmlContentDisplayDialog.Designer.cs">
       <DependentUpon>XmlContentDisplayDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataUpdateTool\PluginDescription.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -215,9 +204,6 @@
     <EmbeddedResource Include="Common\Forms\SelectColumnsDialog.resx">
       <DependentUpon>SelectColumnsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataUpdateTool\MainControl.resx">
-      <DependentUpon>MainControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Common\Forms\SelectViewDialog.resx">
       <DependentUpon>SelectViewDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -245,9 +231,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataUpdateTool\Resources\FXB-16w.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
@@ -257,11 +240,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug mkdir Plugins
-if $(ConfigurationName) == Debug move /Y $(TargetName).* Plugins
-if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.XmlEditorUtils.dll Plugins
-if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.FetchXmlBuilder.dll Plugins
-if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.CRMWinForm.dll Plugins</PostBuildEvent>
+    <PostBuildEvent>rem if $(ConfigurationName) == Debug mkdir Plugins
+rem if $(ConfigurationName) == Debug move /Y $(TargetName).* Plugins
+rem if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.XmlEditorUtils.dll Plugins
+rem if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.FetchXmlBuilder.dll Plugins
+rem if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.CRMWinForm.dll Plugins</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

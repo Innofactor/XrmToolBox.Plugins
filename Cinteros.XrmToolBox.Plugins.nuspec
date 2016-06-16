@@ -9,17 +9,18 @@
     <projectUrl>http://cinteros.xrmtoolbox.com</projectUrl>
     <iconUrl>http://rappen.net/Cinteros/cinteros.ico</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Bulk Updater, Version Verifier, Steps Manipulator, Auto Deployer</description>
-    <summary>Bulk Updater, Version Verifier, Steps Manipulator, Auto Deployer</summary>
-    <copyright>Copyright 2015-2016 Cinteros AB</copyright>
-    <tags>XrmToolBox Plugins Cinteros Plugins</tags>
+    <description>Version Verifier, Steps Manipulator, Auto Deployer</description>
+    <summary>Version Verifier, Steps Manipulator, Auto Deployer</summary>
+    <releaseNotes>
+      Note: These plugins require the FetchXML Builder to be installed to work properly!
+    </releaseNotes>
+    <copyright>Copyright 2016 Innofactor AB</copyright>
+    <tags>XrmToolBox Plugins Innofactor Plugins</tags>
     <dependencies>
       <dependency id="XrmToolBox" version="1.2016.3.30" />
     </dependencies>
   </metadata>
   <files>
     <file src="Output\Release\Cinteros.Xrm.Plugins.dll" target="lib\net452\Plugins" />
-    <file src="Output\Release\Cinteros.Xrm.XmlEditorUtils.dll" target="lib\net452\Plugins" />
-    <file src="Output\Release\Cinteros.Xrm.CRMWinForm.dll" target="lib\net452\Plugins" />
   </files>
 </package>
