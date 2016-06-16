@@ -162,6 +162,7 @@
     <Compile Include="Common\Forms\XmlContentDisplayDialog.Designer.cs">
       <DependentUpon>XmlContentDisplayDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\Utils\ViewItem.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
