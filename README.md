@@ -1,4 +1,6 @@
-# Cinteros' plugins for XrmToolBox
+# Innofactor plugins for XrmToolBox
+
+http://cinteros.xrmtoolbox.com
 
 [![Join the chat at
 https://gitter.im/Cinteros/XrmToolBox.Plugins](https://img.shields.io/badge/GITTER-join%20chat-green.svg)](https://gitter.im/Cinteros/XrmToolBox.Plugins?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
