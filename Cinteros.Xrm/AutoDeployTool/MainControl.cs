@@ -11,7 +11,7 @@
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;
 
-    public partial class MainControl : PluginControlBase, IGitHubPlugin
+    public partial class MainControl : PluginControlBase, IGitHubPlugin, IWorkerHost
     {
         #region Public Constructors
 

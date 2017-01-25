@@ -16,7 +16,7 @@
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;
 
-    public partial class MainControl : PluginControlBase, IGitHubPlugin, IUpdateToolStrip
+    public partial class MainControl : PluginControlBase, IGitHubPlugin, IWorkerHost, IUpdateToolStrip
     {
 
         #region Private Fields
