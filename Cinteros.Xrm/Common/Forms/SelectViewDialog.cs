@@ -9,6 +9,7 @@
     using Microsoft.Xrm.Sdk.Query;
     using XrmToolBox.Extensibility;
     using XTB.Common.AppCode;
+
     public partial class SelectViewDialog : Form
     {
         #region Public Fields
@@ -39,49 +40,55 @@
 
         internal void LoadViews(Action action)
         {
-            this.host.WorkAsync("Loading views...",
-                (a) =>
+            var info = new WorkAsyncInfo();
+
+            info.Message = "Loading views...";
+
+            info.Work = (worker, a) => 
+            {
+                views = new Dictionary<string, List<Entity>>();
+
+                if (views.Count == 0)
                 {
-                    this.views = new Dictionary<string, List<Entity>>();
+                    var combinedResult = new Dictionary<string, DataCollection<Entity>>();
+                    DataCollection<Entity> singleResult;
 
-                    if (views.Count == 0)
+                    var qex = new QueryExpression();
+
+                    qex.ColumnSet = new ColumnSet("name", "returnedtypecode", "fetchxml", "layoutxml");
+                    qex.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+                    qex.AddOrder("name", OrderType.Ascending);
+
+                    foreach (var entity in new string[] { "savedquery", "userquery" })
                     {
-                        var combinedResult = new Dictionary<string, DataCollection<Entity>>();
-                        DataCollection<Entity> singleResult;
+                        qex.EntityName = entity;
 
-                        var qex = new QueryExpression();
-
-                        qex.ColumnSet = new ColumnSet("name", "returnedtypecode", "fetchxml", "layoutxml");
-                        qex.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
-                        qex.AddOrder("name", OrderType.Ascending);
-
-                        foreach (var entity in new string[] { "savedquery", "userquery" })
+                        singleResult = host.Service.RetrieveMultiple(qex).Entities;
+                        if (singleResult.Count > 0)
                         {
-                            qex.EntityName = entity;
-
-                            singleResult = this.host.Service.RetrieveMultiple(qex).Entities;
-                            if (singleResult.Count > 0)
-                            {
-                                combinedResult.Add(qex.EntityName, singleResult);
-                            }
+                            combinedResult.Add(qex.EntityName, singleResult);
                         }
-
-                        a.Result = combinedResult;
                     }
-                },
-                (a) =>
+
+                    a.Result = combinedResult;
+                }
+            };
+
+            info.PostWorkCallBack = (a) => 
+            {
+                var allViews = (Dictionary<string, DataCollection<Entity>>)a.Result;
+
+                foreach (var key in allViews.Keys)
                 {
-                    var allViews = (Dictionary<string, DataCollection<Entity>>)a.Result;
+                    ExtractViews(allViews[key]);
+                }
 
-                    foreach (var key in allViews.Keys)
-                    {
-                        this.ExtractViews(allViews[key]);
-                    }
+                entities = this.views.Keys.Select(x => x.Split('|')[0]).Distinct().ToList();
 
-                    this.entities = this.views.Keys.Select(x => x.Split('|')[0]).Distinct().ToList();
+                action();
+            };
 
-                    action();
-                });
+            host.WorkAsync(info);
         }
 
         #endregion Internal Methods

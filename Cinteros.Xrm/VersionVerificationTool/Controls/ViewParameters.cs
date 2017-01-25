@@ -197,23 +197,27 @@
         /// <param name="plugin">XrmToolBox plugin class</param>
         private void RetrieveSnapshot(MainControl plugin)
         {
-            plugin.WorkAsync(string.Format("Getting solutions information from '{0}'...", plugin.ConnectionDetail.OrganizationFriendlyName),
-                (e) => // Work To Do Asynchronously
+            var info = new WorkAsyncInfo();
+            info.Message = string.Format("Getting solutions information from '{0}'...", plugin.ConnectionDetail.OrganizationFriendlyName);
+
+            info.Work = (worker, a) =>
+            {
+                if (string.IsNullOrEmpty(plugin.ConnectionDetail.ServerName))
                 {
-                    if (string.IsNullOrEmpty(plugin.ConnectionDetail.ServerName))
-                    {
-                        e.Result = new OrganizationSnapshot(plugin.ConnectionDetail.OrganizationServiceUrl); //Helpers.LoadSolutionFile(plugin.ConnectionDetail.OrganizationServiceUrl);
-                    }
-                    else
-                    {
-                        e.Result = new OrganizationSnapshot(plugin.ConnectionDetail);
-                    }
-                },
-                (a) =>  // Cleanup when work has completed
-                {
-                    this.Snapshot = (OrganizationSnapshot)a.Result;
+                    a.Result = new OrganizationSnapshot(plugin.ConnectionDetail.OrganizationServiceUrl); //Helpers.LoadSolutionFile(plugin.ConnectionDetail.OrganizationServiceUrl);
                 }
-            );
+                else
+                {
+                    a.Result = new OrganizationSnapshot(plugin.ConnectionDetail);
+                }
+            };
+
+            info.PostWorkCallBack = (a) =>
+            {
+                this.Snapshot = (OrganizationSnapshot)a.Result;
+            };
+
+            plugin.WorkAsync(info);
         }
         private void tsbSave_Click(object sender, EventArgs e)
         {

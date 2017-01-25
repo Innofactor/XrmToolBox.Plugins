@@ -235,30 +235,35 @@
         {
             var targetType = (PluginType)((ComboBox)cbTargetPlugin).SelectedItem;
             var steps = this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray();
-            WorkAsync("Moving steps...",
-                a =>
+
+            var info = new WorkAsyncInfo();
+            info.Message = "Moving steps...";
+
+            info.Work = (worker, a) =>
+            {
+                foreach (var step in steps)
                 {
-                    foreach (var step in steps)
-                    {
-                        step[Constants.Crm.Attributes.PLUGIN_TYPE_ID] = targetType.ToEntity().ToEntityReference();
+                    step[Constants.Crm.Attributes.PLUGIN_TYPE_ID] = targetType.ToEntity().ToEntityReference();
 
-                        step.Attributes.Remove("eventhandler");
+                    step.Attributes.Remove("eventhandler");
 
-                        try
-                        {
-                            this.Service.Update(step);
-                        }
-                        catch (Exception)
-                        {
-                            // Failed to match
-                        }
-                    }
-                },
-                    a =>
+                    try
                     {
-                        RetrieveSteps();
+                        this.Service.Update(step);
                     }
-                );
+                    catch (Exception)
+                    {
+                        // Failed to match
+                    }
+                }
+            };
+
+            info.PostWorkCallBack = (a) =>
+            {
+                RetrieveSteps();
+            };
+
+            WorkAsync(info);
         }
 
         private void cbSourceAssembly_SelectedIndexChanged(object sender, EventArgs e)
@@ -313,79 +318,81 @@
 
         private void exportSelected_Click(object sender, EventArgs e)
         {
-            WorkAsync("Exporting data...",
-                a =>
+            var info = new WorkAsyncInfo();
+            info.Message = "Exporting data...";
+
+            info.Work = (worker, a) =>
+            {
+                try
                 {
+                    var images = Service.GetSdkMessageProcessingStepImages(SelectedSteps.Select(x => x.ToEntity()).ToArray());
 
+                    var document = new XmlDocument();
 
-                    try
+                    document.AppendChild(document.CreateXmlDeclaration("1.0", "UTF-8", "yes"));
+                    document.AppendChild(document.CreateComment("Reference snapshot"));
+
+                    var root = document.CreateElement("snapshot");
+
+                    foreach (var pluginDefinition in SelectedSteps.Select(x => x.ParentType).Distinct().ToArray())
                     {
-                        var images = Service.GetSdkMessageProcessingStepImages(SelectedSteps.Select(x => x.ToEntity()).ToArray());
+                        var plugin = CreateHeaderElement(document, Constants.Xml.PLUGIN, pluginDefinition.Id, pluginDefinition.FriendlyName);
 
-                        var document = new XmlDocument();
+                        root.AppendChild(plugin);
 
-                        document.AppendChild(document.CreateXmlDeclaration("1.0", "UTF-8", "yes"));
-                        document.AppendChild(document.CreateComment("Reference snapshot"));
-
-                        var root = document.CreateElement("snapshot");
-
-                        foreach (var pluginDefinition in SelectedSteps.Select(x => x.ParentType).Distinct().ToArray())
+                        foreach (var stepDefinition in SelectedSteps.Where(x => x.ParentType.Id == pluginDefinition.Id).ToArray())
                         {
-                            var plugin = CreateHeaderElement(document, Constants.Xml.PLUGIN, pluginDefinition.Id, pluginDefinition.FriendlyName);
+                            var step = CreateHeaderElement(document, Constants.Xml.STEP, stepDefinition.Id, stepDefinition.FriendlyName);
+                            plugin.AppendChild(step);
 
-                            root.AppendChild(plugin);
+                            var stepEntity = stepDefinition.ToEntity();
 
-                            foreach (var stepDefinition in SelectedSteps.Where(x => x.ParentType.Id == pluginDefinition.Id).ToArray())
+                            AddEntityReference(document, step, stepEntity, "eventhandler");
+                            AddEntityReference(document, step, stepEntity, "sdkmessagefilterid");
+
+                            AddOptionSetValue(document, step, stepEntity, "mode");
+                            AddOptionSetValue(document, step, stepEntity, "stage");
+                            AddOptionSetValue(document, step, stepEntity, "statecode");
+                            AddOptionSetValue(document, step, stepEntity, "statuscode");
+
+                            foreach (var imageDefinition in images.Where(x => ((EntityReference)x.Attributes["sdkmessageprocessingstepid"]).Id == stepDefinition.Id))
                             {
-                                var step = CreateHeaderElement(document, Constants.Xml.STEP, stepDefinition.Id, stepDefinition.FriendlyName);
-                                plugin.AppendChild(step);
+                                var name = (imageDefinition.Attributes.ContainsKey("name")) ? (string)imageDefinition.Attributes["name"] : string.Empty;
+                                var image = CreateHeaderElement(document, Constants.Xml.IMAGE, imageDefinition.Id, name);
+                                step.AppendChild(image);
 
-                                var stepEntity = stepDefinition.ToEntity();
-
-                                AddEntityReference(document, step, stepEntity, "eventhandler");
-                                AddEntityReference(document, step, stepEntity, "sdkmessagefilterid");
-
-                                AddOptionSetValue(document, step, stepEntity, "mode");
-                                AddOptionSetValue(document, step, stepEntity, "stage");
-                                AddOptionSetValue(document, step, stepEntity, "statecode");
-                                AddOptionSetValue(document, step, stepEntity, "statuscode");
-
-                                foreach (var imageDefinition in images.Where(x => ((EntityReference)x.Attributes["sdkmessageprocessingstepid"]).Id == stepDefinition.Id))
-                                {
-                                    var name = (imageDefinition.Attributes.ContainsKey("name")) ? (string)imageDefinition.Attributes["name"] : string.Empty;
-                                    var image = CreateHeaderElement(document, Constants.Xml.IMAGE, imageDefinition.Id, name);
-                                    step.AppendChild(image);
-
-                                    AddOptionSetValue(document, image, imageDefinition, "imagetype");
-                                    AddString(document, image, "entityalias", (string)imageDefinition.Attributes["entityalias"]);
-                                }
+                                AddOptionSetValue(document, image, imageDefinition, "imagetype");
+                                AddString(document, image, "entityalias", (string)imageDefinition.Attributes["entityalias"]);
                             }
                         }
-
-                        document.AppendChild(root);
-
-                        a.Result = document;
                     }
-                    catch (Exception ex)
-                    {
-                        // Failed to retrieve images
-                    }
-                },
-                a =>
-                {
-                    var save = new SaveFileDialog();
-                    save.FileOk += (s, args) =>
-                    {
-                        if (!args.Cancel)
-                        {
-                            ((XmlDocument)a.Result).Save(((SaveFileDialog)s).FileName);
-                        }
-                    };
 
-                    save.FileName = "reference-snapshot.xml";
-                    save.ShowDialog();
+                    document.AppendChild(root);
+
+                    a.Result = document;
                 }
-            );
+                catch (Exception ex)
+                {
+                    // Failed to retrieve images
+                }
+            };
+
+            info.PostWorkCallBack = (a) =>
+            {
+                var save = new SaveFileDialog();
+                save.FileOk += (s, args) =>
+                {
+                    if (!args.Cancel)
+                    {
+                        ((XmlDocument)a.Result).Save(((SaveFileDialog)s).FileName);
+                    }
+                };
+
+                save.FileName = "reference-snapshot.xml";
+                save.ShowDialog();
+            };
+
+            WorkAsync(info);
         }
 
         private static XmlElement CreateHeaderElement(XmlDocument document, string elementName, Guid id, string friendlyName)
@@ -454,19 +461,19 @@
 
                 if (result == DialogResult.Yes)
                 {
-                    WorkAsync("Matching types in source and target assemblies...",
-                        a =>
+                    var info = new WorkAsyncInfo();
+                    info.Message = "Matching types in source and target assemblies...";
+
+                    info.Work = (worker, a) =>
+                    {
+                        Invoke(new Action(() =>
                         {
-                            Invoke(new Action(() =>
-                                {
-                                    foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
-                                    {
-                                        this.Service.Delete(step.LogicalName, step.Id);
-                                    }
-                                }));
-                        },
-                        a => { }
-                    );
+                            foreach (var step in this.lvSteps.SelectedItems.Cast<ListViewItem>().Select<ListViewItem, Entity>(x => ((ProcessingStep)x.Tag).ToEntity()).ToArray())
+                            {
+                                this.Service.Delete(step.LogicalName, step.Id);
+                            }
+                        }));
+                    };
                 }
             }
         }
@@ -499,69 +506,74 @@
 
             var targetAssembly = (PluginAssembly)((ToolStripComboBox)sender).SelectedItem;
 
-            WorkAsync("Matching types in source and target assemblies...",
-                a =>
+            var info = new WorkAsyncInfo();
+            info.Message = "Matching types in source and target assemblies...";
+
+            info.Work = (worker, a) =>
+            {
+                var hits = new MatchResult();
+
+                var sourceTypes = this.PluginTypes.Select(x => x.ToEntity()).ToArray();
+                var targetTypes = this.Service.GetPluginTypes(targetAssembly.Id);
+
+                Invoke(new Action(() =>
                 {
-                    var hits = new MatchResult();
+                    hits.StepsTotal = lvSteps.SelectedItems.Count;
+                    foreach (var step in SelectedSteps.Select(x => x.ToEntity()).ToArray())
+                    {
+                        var sourcePluginTypeId = (EntityReference)step[Constants.Crm.Attributes.PLUGIN_TYPE_ID];
+                        var sourceSdkMessageProcessingStepId = step.Id;
+                        var sourceType = sourceTypes.Where(x => ((Guid)x[Constants.Crm.Attributes.PLUGIN_TYPE_ID]) == sourcePluginTypeId.Id).FirstOrDefault<Entity>();
+                        var targetType = targetTypes.Where(x => (string)x[Constants.Crm.Attributes.NAME] == (string)sourceType[Constants.Crm.Attributes.NAME]).FirstOrDefault<Entity>();
 
-                    var sourceTypes = this.PluginTypes.Select(x => x.ToEntity()).ToArray();
-                    var targetTypes = this.Service.GetPluginTypes(targetAssembly.Id);
-
-                    Invoke(new Action(() =>
+                        if (targetType != null)
                         {
-                            hits.StepsTotal = lvSteps.SelectedItems.Count;
-                            foreach (var step in SelectedSteps.Select(x => x.ToEntity()).ToArray())
+                            step[Constants.Crm.Attributes.PLUGIN_TYPE_ID] = targetType.ToEntityReference();
+
+                            step.Attributes.Remove("eventhandler");
+
+                            try
                             {
-                                var sourcePluginTypeId = (EntityReference)step[Constants.Crm.Attributes.PLUGIN_TYPE_ID];
-                                var sourceSdkMessageProcessingStepId = step.Id;
-                                var sourceType = sourceTypes.Where(x => ((Guid)x[Constants.Crm.Attributes.PLUGIN_TYPE_ID]) == sourcePluginTypeId.Id).FirstOrDefault<Entity>();
-                                var targetType = targetTypes.Where(x => (string)x[Constants.Crm.Attributes.NAME] == (string)sourceType[Constants.Crm.Attributes.NAME]).FirstOrDefault<Entity>();
-
-                                if (targetType != null)
-                                {
-                                    step[Constants.Crm.Attributes.PLUGIN_TYPE_ID] = targetType.ToEntityReference();
-
-                                    step.Attributes.Remove("eventhandler");
-
-                                    try
-                                    {
-                                        this.Service.Update(step);
-                                        // Matched
-                                        hits.StepUpdatedSuccessfully++;
-                                    }
-                                    catch (Exception)
-                                    {
-                                        // Failed to match
-                                        hits.StepFailedToUpdate++;
-                                    }
-                                }
-                                else
-                                {
-                                    // Missing
-                                    hits.PluginMissing++;
-                                }
+                                this.Service.Update(step);
+                                // Matched
+                                hits.StepUpdatedSuccessfully++;
                             }
-                        }));
-                    a.Result = hits;
-                },
-                a =>
-                {
-                    Invoke(new Action(() =>
+                            catch (Exception)
+                            {
+                                // Failed to match
+                                hits.StepFailedToUpdate++;
+                            }
+                        }
+                        else
                         {
-                            var hits = (MatchResult)a.Result;
-                            var text = string.Format(
-    @"Total number of steps processed: {0}
+                            // Missing
+                            hits.PluginMissing++;
+                        }
+                    }
+                }));
+                a.Result = hits;
+            };
+
+            info.PostWorkCallBack = (a) =>
+            {
+                Invoke(new Action(() =>
+                {
+                    var hits = (MatchResult)a.Result;
+                    var text = string.Format(
+@"Total number of steps processed: {0}
 Number of steps updated successully: {1}
 Number of steps failed to update: {2}
 Number of missing types: {3}",
-                              hits.StepsTotal,
-                              hits.StepUpdatedSuccessfully,
-                              hits.StepFailedToUpdate,
-                              hits.PluginMissing);
+                      hits.StepsTotal,
+                      hits.StepUpdatedSuccessfully,
+                      hits.StepFailedToUpdate,
+                      hits.PluginMissing);
 
-                            MessageBox.Show(text, "Match & Update operation result");
-                        }));
-                });
+                    MessageBox.Show(text, "Match & Update operation result");
+                }));
+            };
+
+            WorkAsync(info);
         }
 
         private void tscTypes_SelectedIndexChanged(object sender, EventArgs e)

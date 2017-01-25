@@ -19,36 +19,20 @@
                 return;
             }
 
-            host.WorkAsync("Loading types...",
-                a =>
-                {
-                    a.Result = host.Service.GetPluginTypes(pluginAssembly.Id);
-                },
-                a =>
-                {
-                    // this.PluginTypes = ((Entity[])a.Result).Select<Entity, PluginType>(x => new
-                    // PluginType(x, pluginAssembly)).ToArray();
-                    comboBox.Items.Clear();
+            var info = new WorkAsyncInfo();
+            info.Message = "Loading types...";
 
-                    if (allTypesOption)
-                    {
-                        comboBox.Items.Add(new PluginType
-                        {
-                            FriendlyName = "All types"
-                        });
-                    }
+            info.Work = (worker, a) =>
+            {
+                a.Result = host.Service.GetPluginTypes(pluginAssembly.Id);
+            };
 
-                    foreach (var type in ((Entity[])a.Result).Select<Entity, PluginType>(x => new PluginType(x, pluginAssembly)))
-                    {
-                        comboBox.Items.Add(type);
-                    }
+            info.PostWorkCallBack = (a) =>
+            {
+                comboBox.Items.Clear();
+            };
 
-                    if (allTypesOption)
-                    {
-                        // Select all types
-                        comboBox.SelectedIndex = 0;
-                    }
-                });
+            host.WorkAsync(info);
         }
 
         #endregion Public Methods

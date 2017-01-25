@@ -226,39 +226,43 @@
 
             var snapshot = ((ViewParameters)this.CurrentPage).Snapshot;
 
-            this.WorkAsync("Getting solutions information from organizations...",
-                (e) => // Work To Do Asynchronously
-                {
-                    var matrix = new List<OrganizationSnapshot>();
+            var info = new WorkAsyncInfo();
+            info.Message = "Getting solutions information from organizations...";
 
-                    matrix.Add(new OrganizationSnapshot
-                    {
-                        ConnectionDetail = this.ConnectionDetail,
-                        Solutions = snapshot.Solutions,
-                        Assemblies = snapshot.Assemblies
-                    });
+            info.Work = (worker, a) =>
+            {
+                var matrix = new List<OrganizationSnapshot>();
 
-                    Parallel.ForEach(services, service =>
-                    {
-                        try
-                        {
-                            matrix.Add(new OrganizationSnapshot(service, snapshot));
-                        }
-                        catch (InvalidOperationException)
-                        {
-                            // Hiding exception,
-                        }
-                    });
-                    e.Result = matrix.ToArray<OrganizationSnapshot>();
-                },
-                (e) =>  // Cleanup when work has completed
+                matrix.Add(new OrganizationSnapshot
                 {
-                    if (e.Result != null)
+                    ConnectionDetail = this.ConnectionDetail,
+                    Solutions = snapshot.Solutions,
+                    Assemblies = snapshot.Assemblies
+                });
+
+                Parallel.ForEach(services, service =>
+                {
+                    try
                     {
-                        this.CurrentPage = new ViewResults((OrganizationSnapshot[])e.Result);
+                        matrix.Add(new OrganizationSnapshot(service, snapshot));
                     }
+                    catch (InvalidOperationException)
+                    {
+                        // Hiding exception,
+                    }
+                });
+                a.Result = matrix.ToArray<OrganizationSnapshot>();
+            };
+
+            info.PostWorkCallBack = (a) =>
+            {
+                if (a.Result != null)
+                {
+                    this.CurrentPage = new ViewResults((OrganizationSnapshot[])e.Result);
                 }
-            );
+            };
+
+            this.WorkAsync(info);
         }
 
         private void tsbBack_Click(object sender, EventArgs e)
