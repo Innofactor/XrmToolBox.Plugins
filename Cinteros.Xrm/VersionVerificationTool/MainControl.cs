@@ -258,7 +258,7 @@
             {
                 if (a.Result != null)
                 {
-                    this.CurrentPage = new ViewResults((OrganizationSnapshot[])e.Result);
+                    this.CurrentPage = new ViewResults((OrganizationSnapshot[])a.Result);
                 }
             };
 
