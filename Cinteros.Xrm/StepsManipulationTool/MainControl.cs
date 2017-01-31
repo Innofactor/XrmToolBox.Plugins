@@ -180,7 +180,7 @@
             {
                 PostWorkCallBack = (a) =>
                 {
-                    this.PluginTypes = ((Entity[])a.Result).Select<Entity, PluginType>(x => new PluginType(x, pluginAssembly)).ToArray();
+                    this.PluginTypes = ((Entity[])a.Result).Select(x => new PluginType(x, pluginAssembly)).ToArray();
                     this.cbSourcePlugin.Items.Clear();
 
                     this.cbSourcePlugin.Items.Add("All types");
