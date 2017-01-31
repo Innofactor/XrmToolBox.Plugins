@@ -1,8 +1,10 @@
 ﻿namespace Cinteros.Xrm.StepsManipulationTool
 {
+    using System.Linq;
     using System.Windows.Forms;
     using Common.SDK;
     using Common.Utils;
+    using Microsoft.Xrm.Sdk;
     using XrmToolBox.Extensibility;
 
     public static class OperationExtensions
@@ -27,6 +29,25 @@
             info.PostWorkCallBack = (a) =>
             {
                 comboBox.Items.Clear();
+
+                if (allTypesOption)
+                {
+                    comboBox.Items.Add(new PluginType
+                    {
+                        FriendlyName = "All types"
+                    });
+                }
+
+                foreach (var type in ((Entity[])a.Result).Select(x => new PluginType(x, pluginAssembly)))
+                {
+                    comboBox.Items.Add(type);
+                }
+
+                if (allTypesOption)
+                {
+                    // Select all types
+                    comboBox.SelectedIndex = 0;
+                }
             };
 
             host.WorkAsync(info);
