@@ -269,8 +269,6 @@
 
         private void cbSourceAssembly_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Debugger.Launch();
-
             // var selectedAssembly = (PluginAssembly)((ComboBox)sender).SelectedItem;
 
             lvSteps.Items.Clear();
