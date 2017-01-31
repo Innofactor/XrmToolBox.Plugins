@@ -10,6 +10,7 @@
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;
     using System.ComponentModel;
+    using System.Diagnostics;
 
     public partial class MainControl : PluginControlBase, IGitHubPlugin, IWorkerHost
     {
@@ -268,6 +269,8 @@
 
         private void cbSourceAssembly_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Debugger.Launch();
+
             // var selectedAssembly = (PluginAssembly)((ComboBox)sender).SelectedItem;
 
             lvSteps.Items.Clear();

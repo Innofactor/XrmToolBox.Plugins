@@ -1,7 +1,7 @@
 ﻿namespace Cinteros.Xrm.Plugins.VersionVerificationTool
 {
     using System.ComponentModel.Composition;
-    using Cinteros.Xrm.Common.Utils;
+    using Common.Utils;
     using Cinteros.Xrm.VersionVerificationTool;
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;

@@ -1,11 +1,8 @@
 ﻿namespace Cinteros.Xrm.StepsManipulationTool
 {
-    using System.Linq;
     using System.Windows.Forms;
-    using Cinteros.Xrm.Common.SDK;
-    using Cinteros.Xrm.Common.Utils;
-    using Microsoft.Xrm.Sdk;
-    using XrmToolBox;
+    using Common.SDK;
+    using Common.Utils;
     using XrmToolBox.Extensibility;
 
     public static class OperationExtensions

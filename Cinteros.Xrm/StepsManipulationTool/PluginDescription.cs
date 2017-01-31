@@ -1,7 +1,7 @@
 ﻿namespace Cinteros.Xrm.Plugins.StepsManipulationTool
 {
     using System.ComponentModel.Composition;
-    using Cinteros.Xrm.Common.Utils;
+    using Common.Utils;
     using Cinteros.Xrm.StepsManipulationTool;
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;

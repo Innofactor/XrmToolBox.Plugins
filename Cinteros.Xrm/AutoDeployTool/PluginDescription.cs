@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.Composition;
     using Cinteros.Xrm.AutoDeployTool;
-    using Cinteros.Xrm.Common.Utils;
+    using Common.Utils;
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;
 

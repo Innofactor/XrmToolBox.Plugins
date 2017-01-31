@@ -9,8 +9,8 @@
     using System.Threading.Tasks;
     using System.Windows.Forms;
     using System.Xml;
-    using Cinteros.Xrm.Common.SDK;
-    using Cinteros.Xrm.Common.Utils;
+    using Common.SDK;
+    using Common.Utils;
     using Cinteros.Xrm.VersionVerificationTool.Controls;
     using McTools.Xrm.Connection;
     using XrmToolBox.Extensibility;
