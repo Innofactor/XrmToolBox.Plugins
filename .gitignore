@@ -184,10 +184,8 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
-
-# Project specific libraries
-Cinteros Utils/lib
-
+/.vs
+/tmp
 # VIM specific
 *.swp
 *.orig
@@ -196,3 +194,4 @@ Cinteros Utils/lib
 *.LOCAL.*
 *.REMOTE.*
 /Dok
+
