@@ -7,7 +7,7 @@
     <authors>Innofactor Sweden</authors>
     <owners>Innofactor</owners>
     <projectUrl>http://cinteros.xrmtoolbox.com</projectUrl>
-    <iconUrl>http://rappen.net/Cinteros/innofactor.png</iconUrl>
+    <iconUrl>https://www.innofactor.com/globalassets/other-sizes/innofactor-small-logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Version Verifier, Steps Manipulator, Auto Deployer (formerly known as Cinteros Tools)</description>
     <summary>Version Verifier, Steps Manipulator, Auto Deployer</summary>
