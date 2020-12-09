@@ -290,8 +290,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rem if $(ConfigurationName) == Debug mkdir Plugins
-rem if $(ConfigurationName) == Debug move /Y $(TargetName).* Plugins
+    <PostBuildEvent>if $(ConfigurationName) == Debug mkdir Plugins
+if $(ConfigurationName) == Debug move /Y $(TargetName).* Plugins
 rem if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.XmlEditorUtils.dll Plugins
 rem if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.FetchXmlBuilder.dll Plugins
 rem if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.CRMWinForm.dll Plugins</PostBuildEvent>
